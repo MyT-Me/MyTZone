@@ -7,11 +7,30 @@ var mongoose = require('mongoose');
  require('mongoose-type-email');
 var schema = new mongoose.Schema();
 
+
 var UserProfileSchema = new schema({
     firstName: {type: String, required:true},
     lastName: {type:String, required:true},
+    middleName: {type:String, }
     userName: {type:String, required: true},
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
+    firstYear: {type:Date},
+    education:[educationSchema],
+    workExperience:[workExperienceSchema],
+    certificates:[certificateSchema],
+    takingClasses:[takingClassesSChema],
+    conductingClasses:[conductingClassesSchema],
+    mentoring:[mentoringSchema],
+    writings:[writingSchema],
+    conferences:[conferenceSchema],
+    awards:[awardSchema],
+    recognizedExpertise:[recognizedExpertiseSchema],
+    patents:[patentsSchema],
+    languages:[languagesSchema],
+    leisureTravel:[leisureTravelSchema],
+    tools:[],
+    skills:[],
+    points:[]
 });
 
 
@@ -61,7 +80,7 @@ var writingSchema = new schema({
     year:{type:Date, required:true}
 });
 
-var confrenceSchema = new schema({
+var conferenceSchema = new schema({
     awardSponsor:{type: String, required:true},
     specificActivity:{type:Number, required:true},
     awardTitle:{type:String, required:true},
@@ -77,21 +96,21 @@ var awardSchema = new schema({
     year:{type:Date, required:true}
 });
 
-var recognizedExpertise = new schema({
+var recognizedExpertiseSchema = new schema({
     specificActivity: {type: Number, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
 });
 
-var patents = new schema({
+var patentsSchema = new schema({
     specificActivity: {type: Number, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
 });
 
-var languages = new schema({
+var languagesSchema = new schema({
     specificActivity: {type: Number, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
@@ -99,10 +118,21 @@ var languages = new schema({
 });
 
 
-var leisureTravel = new schema({
+var leisureTravelSchema = new schema({
     specificActivity: {type: Number, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
 });
+
+var workExperienceSchema = new schema({
+
+});
+
+var workSectionSchema = new schema({
+
+});
+
+
+
 
