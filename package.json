@@ -22,5 +22,8 @@
     "html": "^1.0.0",
     "mongoose": "^4.9.1",
     "mongoose-type-email": "^1.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

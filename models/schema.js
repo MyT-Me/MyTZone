@@ -11,7 +11,7 @@ var schema = new mongoose.Schema();
 var UserProfileSchema = new schema({
     firstName: {type: String, required:true},
     lastName: {type:String, required:true},
-    middleName: {type:String, }
+    middleName: {type:String, },
     userName: {type:String, required: true},
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
     firstYear: {type:Date},
