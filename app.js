@@ -24,6 +24,7 @@ app.get('/',function (req,res) {
 /*Adding Routes*/
 require('./routes')(app);
 
+
 app.listen(app.get('port'),function () {
     console.log("Started Listening @", app.get('port'));
 })
