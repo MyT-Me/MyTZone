@@ -155,9 +155,11 @@ var UserProfileSchema = new mongoose.Schema({
 
 //Creating models for schemas
 var User =  mongoose.model('userProfile',UserProfileSchema);
+var Education = mongoose.model('education',educationSchema);
 
 //Exporting users
 exports.User = User;
+exports.Education = Education;
 
 
 
