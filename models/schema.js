@@ -99,6 +99,28 @@ var leisureTravelSchema = new mongoose.Schema({
 });
 
 
+var employerSectionSchema = new mongoose.Schema({
+    employerSectionOfFocus: {type:String, required:true},
+    location:{type:String, required:true},
+    position: {type:String,required:true},
+    primaryFunction: {type:String,required:true},
+    yourRole:{type:String, required:true},
+    teamSize: {type:Number, required:true},
+    teamMultiDisciplinaryMakeup : {type:String , required:true},
+    teamMultiCulturalMakeup : {type:String , required:true},
+    startMonth:{type:Date, required:true},
+    startYear:{type:Date, required:true},
+    endMonth:{type:Date, required:true},
+    endYear : {type:Date,required:true},
+    startMonth:{type:Date, required:true},
+    paidUnPaid : {type:boolean, required:true}
+});
+
+var workExperienceSchema = new mongoose.Schema({
+    employerOrganizationName: {type: String, required:true},
+    employerSection: [employerSectionSchema]
+});
+
 
 var UserProfileSchema = new mongoose.Schema({
     firstName: {type: String, required:true},
@@ -108,7 +130,7 @@ var UserProfileSchema = new mongoose.Schema({
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
     firstYear: {type:Date},
     education:[educationSchema],
-   // workExperience:[workExperienceSchema],
+    workExperience:[workExperienceSchema],
     certificates:[certificateSchema],
     takingClasses:[takingClassesSChema],
     conductingClasses:[conductingClassesSchema],
