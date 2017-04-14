@@ -4,6 +4,8 @@
 
 var models = require('./schema');
 var User = models.User;
+var Education = models.Education;
+
 exports.createUser = function(req,callback) {
     var user = new User(req.body);
     user.save(function(err){
@@ -12,6 +14,29 @@ exports.createUser = function(req,callback) {
 }
 
 exports.addEducation = function(req,callback){
+    console.log("Education Add method");
+    var myUser = User.findOne({'userName':'revaries'},function(err,profile){
+        if(err){
+            console.log("Err Block");
+            callback(err);
+        } else if(profile== null) {
+            console.log("Profile EMpty log");
+            callback(new Error("No User Found"));
+        } else {
+            console.log(profile.userName);
+            console.log(req.body)
+            var education = new Education(req.body);
+            profile.education.push(req.body);
+            profile.save(function(err){
+            callback(err);
+            })
+            /*var education = new Education(req.body);
+            education.save(function(err){
+                callback(err);
+            })*/
+        }
+    })
+
 
 }
 

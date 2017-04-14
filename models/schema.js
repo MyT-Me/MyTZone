@@ -10,7 +10,7 @@ var schema = mongoose.Schema();
 var educationSchema = new mongoose.Schema({
    schoolName: {type:String, required:true},
    fieldOfStudy: {type:String,required:true},
-   typeOfProgram:{type:Number,required:true},
+   typeOfProgram:{type:String,required:true},
    startYear: {type: Date, required:true},
    yearAwarded:{type: Date, required:true},
    programStatus:{type: Date, required:true},

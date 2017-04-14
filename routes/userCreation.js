@@ -1,4 +1,4 @@
-var userModel = require('../models/userMethods');
+var userModel = require('../models/addMethods');
 
 module.exports = function (app) {
     app.post('/api/creteuser',function(req,res){

@@ -1,10 +1,21 @@
 var parameters = require('../strings/apiParameters');
+var adders = require('../models/addMethods')
+
 
 module.exports = function (app) {
     app.post('/api/deeds/:id',function (req,res) {
         if(!(req.params==0)){
             switch (req.params.id){
                 case parameters.EDUCATION:
+                    adders.addEducation(req,function(err){
+                        if(err) {
+                            console.log("Here");
+                            res.status(500).send(err.message);
+                        } else {
+                            res.status(201).json({"operation":"education added"});
+                        }
+                    })
+
                     break;
                 case parameters.WORK_EXPERIENCE:
                     break;
@@ -37,8 +48,6 @@ module.exports = function (app) {
                 case parameters.POINTS:
                     break;
             }
-            console.log(req.params.id);
-            res.status(204).send();
         } else {
             console.log("Inside the Error");
             res.status(404).json({"error":"Please Enter a Parameter"});
