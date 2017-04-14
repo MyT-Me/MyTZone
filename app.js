@@ -22,9 +22,8 @@ app.use(bodyParser.json({extend:true}));
 mongoose.connect(dbconfig.getMongoUrl()).then(
     () => {console.log("Connected To Database")},
     err => {
-        console.log("Error in Connection -> " + err)
-    }
-);
+    console.log("Error in Connection -> " + err)
+});
 
 
 app.get('/',function (req,res) {
