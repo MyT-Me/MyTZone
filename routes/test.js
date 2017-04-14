@@ -5,4 +5,8 @@ module.exports = function (app) {
         res.setHeader('Content-Type','application/json');
         res.send(JSON.stringify({"request":"received"}));
     })
+
+    app.get('/test',function(req,res){
+        res.send(JSON.stringify({"status":"I am working"}));
+    })
 }

@@ -113,7 +113,7 @@ var employerSectionSchema = new mongoose.Schema({
     endMonth:{type:Date, required:true},
     endYear : {type:Date,required:true},
     startMonth:{type:Date, required:true},
-    paidUnPaid : {type:boolean, required:true}
+    paidUnPaid : {type:Boolean, required:true}
 });
 
 var workExperienceSchema = new mongoose.Schema({
@@ -149,25 +149,8 @@ var UserProfileSchema = new mongoose.Schema({
 
 
 
-
-var workExperienceSchema = new mongoose.Schema({
-
-});
-
-var workSectionSchema = new mongoose.Schema({
-
-});
-
-
-
 //Methods Will be Here till we find a better way to implement it
 
-UserProfileSchema.methods.creteUser = function(req,callback) {
-    var user = new User(req.body);
-    user.save(function(err){
-        callback(err);
-    })
-}
 
 
 //Creating models for schemas
