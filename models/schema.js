@@ -13,7 +13,7 @@ var educationSchema = new mongoose.Schema({
    typeOfProgram:{type:String,required:true},
    startYear: {type: Date, required:true},
    yearAwarded:{type: Date, required:true},
-   programStatus:{type: Date, required:true},
+   programStatus:{type: String, required:true},
    honors:{type: Boolean}
 });
 
@@ -122,6 +122,18 @@ var workExperienceSchema = new mongoose.Schema({
 });
 
 
+var toolSchema = new mongoose.Schema({
+
+})
+
+var skillsSchema = new mongoose.Schema({
+
+})
+
+var pointsSchema = new mongoose.Schema({
+
+})  
+
 var UserProfileSchema = new mongoose.Schema({
     firstName: {type: String, required:true},
     lastName: {type:String, required:true},
@@ -156,10 +168,39 @@ var UserProfileSchema = new mongoose.Schema({
 //Creating models for schemas
 var User =  mongoose.model('userProfile',UserProfileSchema);
 var Education = mongoose.model('education',educationSchema);
+var WorkExperience = mongoose.model('workExperience',workExperienceSchema);
+var Certificates = mongoose.model('certificate',certificateSchema);
+var TakingClasses = mongoose.model('takingClasses',takingClassesSChema);
+var ConductingClasses = mongoose.model('conductingClasses',conductingClassesSchema);
+var Mentoring = mongoose.model('mentoring',mentoringSchema);
+var Writings = mongoose.model('writing',writingSchema);
+var Conferences = mongoose.model('confrences',conferenceSchema);
+var Awards = mongoose.model('awards',awardSchema);
+var RecognizedExpertise = mongoose.model('recognizedExpertise',recognizedExpertiseSchema);
+var Patents = mongoose.model('patents',patentsSchema);
+var Languages = mongoose.model('languages',languagesSchema);
+var LeisureTravel = mongoose.model('leisureTravel',leisureTravelSchema);
+var Tools = mongoose.model('tools',toolSchema);
+var Skills = mongoose.model('skills',skillsSchema);
+var Points = mongoose.model('points',pointsSchema);
 
 //Exporting users
 exports.User = User;
 exports.Education = Education;
-
+exports.WorkExperience = WorkExperience;
+exports.Certificates = Certificates;
+exports.TakingClasses = TakingClasses;
+exports.ConductingClasses = ConductingClasses;
+exports.Mentoring = Mentoring;
+exports.Writings = Writings;
+exports.Conferences = Conferences;
+exports.Awards = Awards;
+exports.RecognizedExpertise = RecognizedExpertise;
+exports.Patents = Patents;
+exports.Languages = Languages;
+exports.LeisureTravel = LeisureTravel;
+exports.Tools = Tools;
+exports.Skills = Skills;
+exports.Points = Points;
 
 
