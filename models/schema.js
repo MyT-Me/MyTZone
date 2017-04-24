@@ -203,4 +203,24 @@ exports.Tools = Tools;
 exports.Skills = Skills;
 exports.Points = Points;
 
+exports.Models = {
+    User:User,
+    Education:Education,
+    WorkExperience:WorkExperience,
+    Certificates:Certificates,
+    TakingClasses:TakingClasses,
+    ConductingClasses:ConductingClasses,
+    Mentoring:Mentoring,
+    Writings:Writings,
+    Conferences:Conferences,
+    Awards:Awards,
+    RecognizedExpertise:RecognizedExpertise,
+    Patents:Patents,
+    Languages:Languages,
+    LeisureTravel:LeisureTravel,
+    Tools:Tools,
+    Skills:Skills,
+    Points:Points
+}
+
 

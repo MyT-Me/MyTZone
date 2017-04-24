@@ -1,10 +1,19 @@
 var parameters = require('../strings/apiParameters');
+var removers = require('../models/removeMethods');
 module.exports = function (app) {
     app.delete('/api/deeds/:id',function (req,res) {
         console.log("I am Inside the Delete API");
         if(!req.params==0){
             switch (req.params.id){
                 case parameters.EDUCATION:
+                    removers.removeEducation(req,function(err){
+                        if(err){
+                            console.log("Inside Remove Education")
+                            res.status(500).send(err.message);
+                        } else {
+                            res.status(201).json({"operation":"education removed"})
+                        }
+                    })
                     break;
                 case parameters.WORK_EXPERIENCE:
                     break;
