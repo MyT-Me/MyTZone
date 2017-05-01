@@ -1,6 +1,8 @@
 var db = require('./db');
 var api = require('./apiParameters');
 var models = require('./modelStrings');
+var scores = require('./scoreStrings');
+
 
 module.exports = function(value){
     switch(value) {
@@ -12,6 +14,9 @@ module.exports = function(value){
             break;
         case 'models':
             return models;
+            break;
+        case 'scores':
+            return scores;
             break;
     }
 }

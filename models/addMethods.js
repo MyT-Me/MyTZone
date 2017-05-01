@@ -91,7 +91,7 @@ exports.addWorkExperience = function(req,callback){
             console.log(profile.userName);
             console.log(req.body)
             var workExperience = new WorkExperience(req.body);
-            profile.education.push(req.body);
+            profile.WorkExperience.push(req.body);
             profile.save(function(err){
             callback(err);
             })
