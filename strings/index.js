@@ -5,18 +5,14 @@ var scores = require('./scoreStrings');
 
 
 module.exports = function(value){
-    switch(value) {
-        case 'db':
-            return db;
-            break;
-        case 'api':
-            return api;
-            break;
-        case 'models':
-            return models;
-            break;
-        case 'scores':
-            return scores;
-            break;
+    switch (value) {
+    case 'db':
+        return db;
+    case 'api':
+        return api;
+    case 'models':
+        return models;
+    case 'scores':
+        return scores;
     }
 }

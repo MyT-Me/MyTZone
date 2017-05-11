@@ -52,7 +52,7 @@ module.exports = {
         INTERNAL_TECH_REPORT_INTERNAL_PROJECT_REPORT_BS_BA_TEAM_CAPSTONE_PROJECT:'Internal Tech report / Internal project report / BS-BA team capstone project'
     },
     recognizedExpertiese:{
-
+        
     },
     patents:{
 

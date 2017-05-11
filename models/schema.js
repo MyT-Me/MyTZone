@@ -3,6 +3,7 @@
  */
 
 /* Adding all the require files */
+var strings = require('../strings')('models');
 var mongoose = require('mongoose');
  require('mongoose-type-email');
 var schema = mongoose.Schema();
@@ -134,6 +135,20 @@ var pointsSchema = new mongoose.Schema({
 
 })  
 
+
+
+//With Score for Each section
+var educationScoreSchema = new mongoose.Schema({
+    education: {type:mongoose.Schema.Types.ObjectId,ref:'education',required:true},
+    educationScore :{type:Number,required:true}
+})
+
+var certificatesScoreSchema = new mongoose.model({
+    certificates: {type: mongoose.Schema.Types.ObjectId,ref:'certificate'}
+})
+
+
+//User Profile
 var UserProfileSchema = new mongoose.Schema({
     firstName: {type: String, required:true},
     lastName: {type:String, required:true},
@@ -141,7 +156,10 @@ var UserProfileSchema = new mongoose.Schema({
     userName: {type:String, required: true},
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
     firstYear: {type:Date},
-    education:[educationSchema],
+    education:{
+        education: [educationSchema],
+        eduTotalscore:{type:Number,required:true,default:0}
+    },
     workExperience:[workExperienceSchema],
     certificates:[certificateSchema],
     takingClasses:[takingClassesSChema],
@@ -166,23 +184,23 @@ var UserProfileSchema = new mongoose.Schema({
 
 
 //Creating models for schemas
-var User =  mongoose.model('userProfile',UserProfileSchema);
-var Education = mongoose.model('education',educationSchema);
-var WorkExperience = mongoose.model('workExperience',workExperienceSchema);
-var Certificates = mongoose.model('certificate',certificateSchema);
-var TakingClasses = mongoose.model('takingClasses',takingClassesSChema);
-var ConductingClasses = mongoose.model('conductingClasses',conductingClassesSchema);
-var Mentoring = mongoose.model('mentoring',mentoringSchema);
-var Writings = mongoose.model('writing',writingSchema);
-var Conferences = mongoose.model('confrences',conferenceSchema);
-var Awards = mongoose.model('awards',awardSchema);
-var RecognizedExpertise = mongoose.model('recognizedExpertise',recognizedExpertiseSchema);
-var Patents = mongoose.model('patents',patentsSchema);
-var Languages = mongoose.model('languages',languagesSchema);
-var LeisureTravel = mongoose.model('leisureTravel',leisureTravelSchema);
-var Tools = mongoose.model('tools',toolSchema);
-var Skills = mongoose.model('skills',skillsSchema);
-var Points = mongoose.model('points',pointsSchema);
+var User =  mongoose.model(strings.USER,UserProfileSchema);
+var Education = mongoose.model(strings.EDUCATION,educationSchema);
+var WorkExperience = mongoose.model(strings.WORK_EXPERIENCE,workExperienceSchema);
+var Certificates = mongoose.model(strings.CERTIFICATES,certificateSchema);
+var TakingClasses = mongoose.model(strings.TAKING_CLASSES,takingClassesSChema);
+var ConductingClasses = mongoose.model(strings.CONDUCTING_CLASSES,conductingClassesSchema);
+var Mentoring = mongoose.model(strings.MENTORING,mentoringSchema);
+var Writings = mongoose.model(strings.WRITINGS,writingSchema);
+var Conferences = mongoose.model(strings.CONFRENCES,conferenceSchema);
+var Awards = mongoose.model(strings.AWARDS,awardSchema);
+var RecognizedExpertise = mongoose.model(strings.RECOGNIZED_EXPERTIESE,recognizedExpertiseSchema);
+var Patents = mongoose.model(strings.PATENTS,patentsSchema);
+var Languages = mongoose.model(strings.LANGUAGES,languagesSchema);
+var LeisureTravel = mongoose.model(strings.LEISURE_TRAVEL,leisureTravelSchema);
+var Tools = mongoose.model(strings.TOOLS,toolSchema);
+var Skills = mongoose.model(strings.SKILLS,skillsSchema);
+var Points = mongoose.model(strings.POINTS,pointsSchema);
 
 //Exporting users
 exports.User = User;
