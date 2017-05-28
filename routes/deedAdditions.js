@@ -9,7 +9,6 @@ module.exports = function (app) {
                 case parameters.EDUCATION:
                     adders.addEducation(req,function(err){
                         if(err) {
-                            console.log("Here");
                             res.status(500).send(err.message);
                         } else {
                             res.status(201).json({"operation":"education added"});

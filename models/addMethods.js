@@ -22,6 +22,11 @@ var LeisureTravel = models.LeisureTravel;
 var Tools = models.Tools;
 var Skills = models.Skills;
 
+
+//Loading Schema with scores in it
+var EducationScore = models.EducationScore;
+
+
 /*
 var UserProfileSchema = new mongoose.Schema({
     firstName: {type: String, required:true},
@@ -59,7 +64,7 @@ exports.createUser = function(req,callback) {
 
 exports.addEducation = function(req,callback){
     console.log("Education Add method");
-    var myUser = User.findOne({'userName':'revaries'},function(err,profile){
+    var myUser = User.findOne({"email": "revanthpenugonda@gmail.com"},function(err,profile){
         if(err){
             console.log("Err Block");
             callback(err);
@@ -69,9 +74,16 @@ exports.addEducation = function(req,callback){
         } else {
             console.log(profile.userName);
             console.log(req.body)
-            var education = new Education(req.body);
-            profile.education.push(req.body);
+            console.log("I found the User");
+            var educationUser = new Education(req.body);
+            var educationScore = new EducationScore({
+                education:educationUser,
+                educationScore:scoreEducation(req.body)
+            });
+            profile.education.educationData.push(educationScore);
+            console.log("I came till here");
             profile.save(function(err){
+                console.log(err.toString())
             callback(err);
             })
         }
@@ -400,4 +412,10 @@ exports.addPoints = function(req,callback){
             })
         }
      })
+}
+
+
+
+var scoreEducation = function(body){
+    
 }

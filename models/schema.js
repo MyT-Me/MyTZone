@@ -139,16 +139,69 @@ var pointsSchema = new mongoose.Schema({
 
 //With Score for Each section
 var educationScoreSchema = new mongoose.Schema({
-    education: {type:mongoose.Schema.Types.ObjectId,ref:'education',required:true},
-    educationScore :{type:Number,required:true}
+    education: {type: mongoose.Schema.Types.ObjectId,ref:strings.EDUCATION,required:true},
+    educationScore :{type:Number,required:true,default:0}
 })
 
-var certificatesScoreSchema = new mongoose.model({
-    certificates: {type: mongoose.Schema.Types.ObjectId,ref:'certificate'}
+var certificatesScoreSchema = new mongoose.Schema({
+    certificates: {type: mongoose.Schema.Types.ObjectId,ref:strings.CERTIFICATES,required:true},
+    certificatesScore: {type:Number,required:true,default:0}
 })
+
+var takingClassesScoreSchema = new mongoose.Schema({
+    takingClasses:{type: mongoose.Schema.Types.ObjectId,ref:strings.TAKING_CLASSES,required:true},
+    takingClassesScore:{type:Number,required:true,default:0}
+})
+
+var conductingClassesScoreSchema = new mongoose.Schema({
+    conductingClasses:{type:mongoose.Schema.Types.ObjectId,ref:strings.CONDUCTING_CLASSES,required:true},
+    conductingClassesScore:{type:Number,required:true,default:0}
+})
+
+var mentoringScoreSchema= new mongoose.Schema({
+    mentoring:{type:mongoose.Schema.Types.ObjectId,ref:strings.MENTORING,required:true},
+    mentoringScore:{type:Number,required:true,default:0}    
+})
+
+var writingsScoreSchema = new mongoose.Schema({
+    writings:{type:mongoose.Schema.Types.ObjectId,ref:strings.WRITINGS,required:true},
+    writingScore: {type:Number,required:true,default:0}
+})
+
+var conferenceScoreSchema = new mongoose.Schema({
+    conferences:{type:mongoose.Schema.Types.ObjectId,ref:strings.CONFERENCES,required:true},
+    confrenceScore:{type:Number,default:0,}
+})
+
+var awardsScoreSchema = new mongoose.Schema({
+    awards:{type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.AWARDS},
+    awardsScore: {type:Number,default:0}
+})
+
+var recognizedExpertiseScoreSchema = new mongoose.Schema({
+    recognizedExpertises: {type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.RECOGNIZED_EXPERTIESE},
+    recognizedExpertiseScore:{type:Number,default:0}
+})
+
+var patentsScoreSchema = new mongoose.Schema({
+    patents:{type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.PATENTS},
+    patentsScore:{type:Number,default:0}
+})
+
+var languagesScoreSchema = new mongoose.Schema({
+    languages:{type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.LANGUAGES},
+    languagesScore:{type:Number,default:0}
+})
+
+var leisureTravelScoreSchema = new mongoose.Schema({
+    leisureTravels:{type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.LEISURE_TRAVEL},
+    leisureTravelScore:{type:Number,default:0}
+})
+
 
 
 //User Profile
+/*
 var UserProfileSchema = new mongoose.Schema({
     firstName: {type: String, required:true},
     lastName: {type:String, required:true},
@@ -157,7 +210,7 @@ var UserProfileSchema = new mongoose.Schema({
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
     firstYear: {type:Date},
     education:{
-        education: [educationSchema],
+        educationData: [educationSchema],
         eduTotalscore:{type:Number,required:true,default:0}
     },
     workExperience:[workExperienceSchema],
@@ -176,7 +229,71 @@ var UserProfileSchema = new mongoose.Schema({
     skills:[],
     points:[]
 });
+*/
 
+
+var UserProfileSchema = new mongoose.Schema({
+    firstName: {type: String, required:true},
+    lastName: {type:String, required:true},
+    middleName: {type:String, },
+    userName: {type:String, required: true},
+    email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
+    firstYear: {type:Date},
+    education:{
+        educationData: [educationScoreSchema],
+        eduTotalscore:{type:Number,required:true,default:0}
+    },
+    workExperience:{},
+
+    certificates:{
+        certificateData: [certificatesScoreSchema],
+        certificateTotalScore: {type:Number,required:true,default:0}
+    },
+
+    takingClasses:{
+        takingClassesData: [takingClassesScoreSchema],
+        takingClassesTotalScore: {type: Number,required:true, default:0}
+    },
+    conductingClasses:{
+        conductingClassesData: [conductingClassesScoreSchema],
+        conductingClassesTotalScore: {type:Number,required:true, default:0}
+    },
+    mentoring:{
+        mentoringData: [mentoringScoreSchema],
+        mentoringTotalScore: {type:Number,required:true,default:0}
+    },
+    writings:{
+        writingsData: [writingsScoreSchema],
+        writingTotalScore: {type:Number,required:true,default:0}
+    },
+    conferences:{
+        confrenceData: [conferenceScoreSchema],
+        confrenceTotalScore: {type:Number,required:true,default:0}
+    },
+    awards: {
+        awardsData: [awardsScoreSchema],
+        awardsTotalScore :{type:Number,required:true,default:0}
+    },
+    recognizedExpertise:{
+        recognizedExpertiseData: [recognizedExpertiseScoreSchema],
+        recognizedExpertiseTotalScore: {type:Number,required:true,default:0}
+    },
+    patents:{
+        patentsData: [patentsScoreSchema],
+        patentsTotalScore :{type:Number,required:true,default:0}
+    },
+    languages:{
+        languagesData: [languagesScoreSchema],
+        languagesTotalScore: {type:Number,required:true,default:0}
+    },
+    leisureTravel:{
+        leisureTravelData: [leisureTravelScoreSchema],
+        leisureTravelTotalScore: {type:Number,required:true,default:0}
+    },
+    tools:[],
+    skills:[],
+    points:[]
+});
 
 
 //Methods Will be Here till we find a better way to implement it
@@ -192,7 +309,7 @@ var TakingClasses = mongoose.model(strings.TAKING_CLASSES,takingClassesSChema);
 var ConductingClasses = mongoose.model(strings.CONDUCTING_CLASSES,conductingClassesSchema);
 var Mentoring = mongoose.model(strings.MENTORING,mentoringSchema);
 var Writings = mongoose.model(strings.WRITINGS,writingSchema);
-var Conferences = mongoose.model(strings.CONFRENCES,conferenceSchema);
+var Conferences = mongoose.model(strings.CONFERENCES,conferenceSchema);
 var Awards = mongoose.model(strings.AWARDS,awardSchema);
 var RecognizedExpertise = mongoose.model(strings.RECOGNIZED_EXPERTIESE,recognizedExpertiseSchema);
 var Patents = mongoose.model(strings.PATENTS,patentsSchema);
@@ -201,6 +318,11 @@ var LeisureTravel = mongoose.model(strings.LEISURE_TRAVEL,leisureTravelSchema);
 var Tools = mongoose.model(strings.TOOLS,toolSchema);
 var Skills = mongoose.model(strings.SKILLS,skillsSchema);
 var Points = mongoose.model(strings.POINTS,pointsSchema);
+
+//Creating models for Score Schemas
+var EducationScore = mongoose.model(strings.EDUCATION_SCORE,educationScoreSchema);
+
+
 
 //Exporting users
 exports.User = User;
@@ -220,6 +342,11 @@ exports.LeisureTravel = LeisureTravel;
 exports.Tools = Tools;
 exports.Skills = Skills;
 exports.Points = Points;
+
+
+//Exporting Schemas with Scores
+exports.EducationScore = EducationScore;
+
 
 exports.Models = {
     User:User,
