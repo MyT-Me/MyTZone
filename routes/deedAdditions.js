@@ -134,6 +134,9 @@ module.exports = function (app) {
                     break;
                 case parameters.POINTS:
                     break;
+                default:
+                    res.status(500).json({'err':'id not found'});
+                    break;
             }
         } else {
             console.log("Inside the Error");

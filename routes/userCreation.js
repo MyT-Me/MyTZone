@@ -1,7 +1,7 @@
 var userModel = require('../models/addMethods');
 
 module.exports = function (app) {
-    app.post('/api/creteuser',function(req,res){
+    app.post('/api/createuser',function(req,res){
         console.log("I am create User ");
 
         userModel.createUser(req,function(err){

@@ -19,7 +19,7 @@ var educationSchema = new mongoose.Schema({
 });
 
 var certificateSchema = new mongoose.Schema({
-    specificActivity:{type: Number, required:true},
+    specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
     year:{type:Date}
@@ -139,99 +139,109 @@ var pointsSchema = new mongoose.Schema({
 
 //With Score for Each section
 var educationScoreSchema = new mongoose.Schema({
-    education: {type: mongoose.Schema.Types.ObjectId,ref:strings.EDUCATION,required:true},
-    educationScore :{type:Number,required:true,default:0}
+    schoolName: {type:String, required:true},
+   fieldOfStudy: {type:String,required:true},
+   typeOfProgram:{type:String,required:true},
+   startYear: {type: Date, required:true},
+   yearAwarded:{type: Date, required:true},
+   programStatus:{type: String, required:true},
+   honors:{type: Boolean},
+   educationScore :{type:Number,required:true,default:0}
 })
 
 var certificatesScoreSchema = new mongoose.Schema({
-    certificates: {type: mongoose.Schema.Types.ObjectId,ref:strings.CERTIFICATES,required:true},
-    certificatesScore: {type:Number,required:true,default:0}
+    specificActivity:{type: String, required:true},
+    description:{type:String, required:true},
+    month:{type:Date},
+    year:{type:Date},
+    certificatesScore: {type:Number,default:0}
 })
 
 var takingClassesScoreSchema = new mongoose.Schema({
-    takingClasses:{type: mongoose.Schema.Types.ObjectId,ref:strings.TAKING_CLASSES,required:true},
+    specificActivity:{type: Number, required:true},
+    description:{type:String, required:true},
+    month:{type:Date},
+    year:{type:Date},
     takingClassesScore:{type:Number,required:true,default:0}
 })
 
 var conductingClassesScoreSchema = new mongoose.Schema({
-    conductingClasses:{type:mongoose.Schema.Types.ObjectId,ref:strings.CONDUCTING_CLASSES,required:true},
+    specificActivity:{type: Number, required:true},
+    description:{type:String, required:true},
+    month:{type:Date},
+    year:{type:Date},
     conductingClassesScore:{type:Number,required:true,default:0}
 })
 
 var mentoringScoreSchema= new mongoose.Schema({
-    mentoring:{type:mongoose.Schema.Types.ObjectId,ref:strings.MENTORING,required:true},
+    specificActivity:{type: Number, required:true},
+    description:{type:String, required:true},
+    month:{type:Date},
+    year:{type:Date},
     mentoringScore:{type:Number,required:true,default:0}    
 })
 
 var writingsScoreSchema = new mongoose.Schema({
-    writings:{type:mongoose.Schema.Types.ObjectId,ref:strings.WRITINGS,required:true},
+    publicationName:{type:String, required:true},
+    specificActivity:{type:Number, required:true},
+    articleTitle:{type:String, required:true},
+    month:{type:Date},
+    year:{type:Date, required:true},
     writingScore: {type:Number,required:true,default:0}
 })
 
 var conferenceScoreSchema = new mongoose.Schema({
-    conferences:{type:mongoose.Schema.Types.ObjectId,ref:strings.CONFERENCES,required:true},
-    confrenceScore:{type:Number,default:0,}
+    publicationName:{type:String, required:true},
+    specificActivity:{type:Number, required:true},
+    articleTitle:{type:String, required:true},
+    month:{type:Date},
+    year:{type:Date, required:true},
+    confrenceScore:{type:Number,default:0}
 })
 
 var awardsScoreSchema = new mongoose.Schema({
-    awards:{type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.AWARDS},
+    confrenceSponsor:{type: String, required: true},
+    specificActivity:{type:Number, required:true},
+    presentationTitle:{type:String,required:true},
+    month:{type:Date},
+    year:{type:Date, required:true},
     awardsScore: {type:Number,default:0}
 })
 
 var recognizedExpertiseScoreSchema = new mongoose.Schema({
-    recognizedExpertises: {type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.RECOGNIZED_EXPERTIESE},
+    specificActivity: {type: Number, required:true},
+    deedDescription: {type:String, required:true},
+    month:{type:Date},
+    year:{type:Date, required:true},
     recognizedExpertiseScore:{type:Number,default:0}
 })
 
 var patentsScoreSchema = new mongoose.Schema({
-    patents:{type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.PATENTS},
+    specificActivity: {type: Number, required:true},
+    deedDescription: {type:String, required:true},
+    month:{type:Date},
+    year:{type:Date, required:true},
     patentsScore:{type:Number,default:0}
 })
 
 var languagesScoreSchema = new mongoose.Schema({
-    languages:{type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.LANGUAGES},
+    specificActivity: {type: Number, required:true},
+    deedDescription: {type:String, required:true},
+    month:{type:Date},
+    year:{type:Date, required:true},
     languagesScore:{type:Number,default:0}
 })
 
 var leisureTravelScoreSchema = new mongoose.Schema({
-    leisureTravels:{type:mongoose.Schema.Types.ObjectId,required:true,ref:strings.LEISURE_TRAVEL},
+    specificActivity: {type: Number, required:true},
+    deedDescription: {type:String, required:true},
+    month:{type:Date},
+    year:{type:Date, required:true},
     leisureTravelScore:{type:Number,default:0}
 })
 
 
-
 //User Profile
-/*
-var UserProfileSchema = new mongoose.Schema({
-    firstName: {type: String, required:true},
-    lastName: {type:String, required:true},
-    middleName: {type:String, },
-    userName: {type:String, required: true},
-    email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
-    firstYear: {type:Date},
-    education:{
-        educationData: [educationSchema],
-        eduTotalscore:{type:Number,required:true,default:0}
-    },
-    workExperience:[workExperienceSchema],
-    certificates:[certificateSchema],
-    takingClasses:[takingClassesSChema],
-    conductingClasses:[conductingClassesSchema],
-    mentoring:[mentoringSchema],
-    writings:[writingSchema],
-    conferences:[conferenceSchema],
-    awards:[awardSchema],
-    recognizedExpertise:[recognizedExpertiseSchema],
-    patents:[patentsSchema],
-    languages:[languagesSchema],
-    leisureTravel:[leisureTravelSchema],
-    tools:[],
-    skills:[],
-    points:[]
-});
-*/
-
-
 var UserProfileSchema = new mongoose.Schema({
     firstName: {type: String, required:true},
     lastName: {type:String, required:true},
@@ -321,11 +331,22 @@ var Points = mongoose.model(strings.POINTS,pointsSchema);
 
 //Creating models for Score Schemas
 var EducationScore = mongoose.model(strings.EDUCATION_SCORE,educationScoreSchema);
-
-
+var CertificateScore = mongoose.model(strings.CERTIFICATE_SCORE,certificatesScoreSchema);
+var TakingClassesScore = mongoose.model(strings.TAKING_CLASSES_SCORE,takingClassesScoreSchema);
+var ConductingClassesScore = mongoose.model(strings.CONDUCTING_CLASSES_SCORE,conductingClassesScoreSchema);
+var MentoringScore = mongoose.model(strings.MENTORING_SCORE,mentoringScoreSchema);
+var WritingsScore = mongoose.model(strings.WRITINGS_SCORE,writingsScoreSchema);
+var ConfrenceScore = mongoose.model(strings.CONFERENCES_SCORE,conferenceScoreSchema);
+var AwardsScore = mongoose.model(strings.AWARDS_SCORE,awardsScoreSchema);
+var RecognizedExpertiseScore = mongoose.model(strings.RECOGNIZED_EXPERTIESE_SCORE,recognizedExpertiseScoreSchema);
+var PatentsScore = mongoose.model(strings.PATENTS_SCORE,patentsScoreSchema);
+var LanguagesScore = mongoose.model(strings.LANGUAGES_SCORE,languagesScoreSchema);
+var LeisureTravelScore = mongoose.model(strings.LEISURE_TRAVEL_SCORE,leisureTravelScoreSchema);
+//Need to Add Tools, Skills and Points Score Schema. 
 
 //Exporting users
 exports.User = User;
+/*
 exports.Education = Education;
 exports.WorkExperience = WorkExperience;
 exports.Certificates = Certificates;
@@ -342,11 +363,22 @@ exports.LeisureTravel = LeisureTravel;
 exports.Tools = Tools;
 exports.Skills = Skills;
 exports.Points = Points;
-
+*/
 
 //Exporting Schemas with Scores
 exports.EducationScore = EducationScore;
-
+exports.CertificateScore = CertificateScore;
+exports.TakingClassesScore = TakingClassesScore;
+exports.ConductingClassesScore = ConductingClassesScore;
+exports.MentoringScore = MentoringScore;
+exports.WritingsScore = WritingsScore;
+exports.ConfrenceScore = ConfrenceScore;
+exports.AwardsScore = AwardsScore;
+exports.RecognizedExpertiseScore = RecognizedExpertiseScore;
+exports.PatentsScore = PatentsScore;
+exports.LanguagesScore = LanguagesScore;
+exports.LeisureTravelScore = LeisureTravelScore;
+//Add Tool,Skills and Points Score
 
 exports.Models = {
     User:User,

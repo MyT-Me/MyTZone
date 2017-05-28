@@ -25,6 +25,7 @@ var Skills = models.Skills;
 
 //Loading Schema with scores in it
 var EducationScore = models.EducationScore;
+var CertificateScore = models.CertificateScore;
 
 
 /*
@@ -133,7 +134,7 @@ exports.addWorkSection = function(req,callback){
 
 
 exports.addCertificates = function(req,callback){
-    
+    console.log("I entered");
     var myUser = User.findOne({'userName':'revaries'},function(err,profile){
         if(err){
             console.log("Err Block");
@@ -144,8 +145,13 @@ exports.addCertificates = function(req,callback){
         } else {
             console.log(profile.userName);
             console.log(req.body)
-            var certificates = new Certificates(req.body);
-            profile.certificates.push(req.body);
+
+            //Computing and Adding a Certificate
+            var newCertificate = new CertificateScore(req.body);
+            newCertificate.certificatesScore = 10;
+            profile.certificates.certificateData.push(newCertificate);
+            profile.certificates.certificateTotalScore = profile.certificates.certificateTotalScore + 10;
+
             profile.save(function(err){
             callback(err);
             })
