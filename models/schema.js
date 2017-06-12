@@ -345,7 +345,7 @@ var LeisureTravelScore = mongoose.model(strings.LEISURE_TRAVEL_SCORE,leisureTrav
 //Need to Add Tools, Skills and Points Score Schema. 
 
 //Exporting users
-exports.User = User;
+
 /*
 exports.Education = Education;
 exports.WorkExperience = WorkExperience;
@@ -366,6 +366,7 @@ exports.Points = Points;
 */
 
 //Exporting Schemas with Scores
+exports.User = User;
 exports.EducationScore = EducationScore;
 exports.CertificateScore = CertificateScore;
 exports.TakingClassesScore = TakingClassesScore;

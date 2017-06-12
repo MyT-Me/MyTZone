@@ -14,7 +14,6 @@ module.exports = function (app) {
                             res.status(201).json({"operation":"education added"});
                         }
                     })
-
                     break;
                 case parameters.WORK_EXPERIENCE:
                     adders.addWorkExperience(req,function(err){
