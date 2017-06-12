@@ -106,7 +106,14 @@ module.exports = function (app) {
                     })
                     break;
                 case parameters.PATENTS:
-                    break;
+                    adders.addPatents(req,function(err){
+                        if(err){
+                            console.log("Error in Patents");
+                            res.status(500).send(err.message);
+                        } else {
+                            res.status(201).json({"operation":"Patents Added"});
+                        }
+                    })
                 case parameters.LANGUAGES:
                     adders.addLanguages(req,function(err){
                         if(err){
