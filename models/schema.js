@@ -6,7 +6,12 @@
 var strings = require('../strings')('models');
 var mongoose = require('mongoose');
  require('mongoose-type-email');
+var momemt = require('moment');
+var momemtTime = require('moment-timezone-all');
 var schema = mongoose.Schema();
+
+
+
 
 var educationSchema = new mongoose.Schema({
    schoolName: {type:String, required:true},
@@ -15,7 +20,8 @@ var educationSchema = new mongoose.Schema({
    startYear: {type: Date, required:true},
    yearAwarded:{type: Date, required:true},
    programStatus:{type: String, required:true},
-   honors:{type: Boolean}
+   honors:{type: Boolean},
+   timeStamp:{type:String}
 });
 
 var certificateSchema = new mongoose.Schema({
@@ -26,66 +32,66 @@ var certificateSchema = new mongoose.Schema({
 });
 
 var takingClassesSChema = new mongoose.Schema({
-    specificActivity:{type: Number, required:true},
+    specificActivity:{type: String, /*required:true*/},
     description:{type:String, required:true},
     month:{type:Date},
     year:{type:Date}
 });
 
 var conductingClassesSchema = new mongoose.Schema({
-    specificActivity:{type: Number, required:true},
+    specificActivity:{type: String, /*required:true*/},
     description:{type:String, required:true},
     month:{type:Date},
     year:{type:Date}
 });
 
 var mentoringSchema = new mongoose.Schema({
-    specificActivity:{type: Number, required:true},
+    specificActivity:{type: String, /*required:true*/},
     description:{type:String, required:true},
     month:{type:Date},
     year:{type:Date}
 });
 
 var writingSchema = new mongoose.Schema({
-    publicationName:{type:String, required:true},
-    specificActivity:{type:Number, required:true},
+    publicationName:{type:String, /*required:true*/},
+    specificActivity:{type:String, required:true},
     articleTitle:{type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
 });
 
 var conferenceSchema = new mongoose.Schema({
-    awardSponsor:{type: String, required:true},
-    specificActivity:{type:Number, required:true},
+    awardSponsor:{type: String, /*required:true*/},
+    specificActivity:{type:String, required:true},
     awardTitle:{type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
 });
 
 var awardSchema = new mongoose.Schema({
-    confrenceSponsor:{type: String, required: true},
-    specificActivity:{type:Number, required:true},
+    confrenceSponsor:{type: String, /*required:true*/},
+    specificActivity:{type:String, required:true},
     presentationTitle:{type:String,required:true},
     month:{type:Date},
     year:{type:Date, required:true}
 });
 
 var recognizedExpertiseSchema = new mongoose.Schema({
-    specificActivity: {type: Number, required:true},
+    specificActivity: {type: String, /*required:true*/},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
 });
 
 var patentsSchema = new mongoose.Schema({
-    specificActivity: {type: Number, required:true},
+    specificActivity: {type: String, /*required:true*/},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
 });
 
 var languagesSchema = new mongoose.Schema({
-    specificActivity: {type: Number, required:true},
+    specificActivity: {type: String, /*required:true*/},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
@@ -93,7 +99,7 @@ var languagesSchema = new mongoose.Schema({
 
 
 var leisureTravelSchema = new mongoose.Schema({
-    specificActivity: {type: Number, required:true},
+    specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true}
@@ -139,104 +145,122 @@ var pointsSchema = new mongoose.Schema({
 
 //With Score for Each section
 var educationScoreSchema = new mongoose.Schema({
-    schoolName: {type:String, required:true},
+   customId:{type:String},
+   schoolName: {type:String, required:true},
    fieldOfStudy: {type:String,required:true},
    typeOfProgram:{type:String,required:true},
    startYear: {type: Date, required:true},
    yearAwarded:{type: Date, required:true},
    programStatus:{type: String, required:true},
    honors:{type: Boolean},
+   timeStamp:{type:String},
    educationScore :{type:Number,required:true,default:0}
 })
+
+var workExperienceScoreSchema = new mongoose.Schema({
+    
+})
+
 
 var certificatesScoreSchema = new mongoose.Schema({
     specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
     year:{type:Date},
+    timeStamp:{type:Date},
     certificatesScore: {type:Number,default:0}
 })
 
 var takingClassesScoreSchema = new mongoose.Schema({
-    specificActivity:{type: Number, required:true},
+    specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
     year:{type:Date},
+    timeStamp:{type:Date},
     takingClassesScore:{type:Number,required:true,default:0}
 })
 
 var conductingClassesScoreSchema = new mongoose.Schema({
-    specificActivity:{type: Number, required:true},
+    specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
     year:{type:Date},
+    timeStamp:{type:Date},
     conductingClassesScore:{type:Number,required:true,default:0}
 })
 
 var mentoringScoreSchema= new mongoose.Schema({
-    specificActivity:{type: Number, required:true},
+    specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
     year:{type:Date},
+    timeStamp:{type:Date},
     mentoringScore:{type:Number,required:true,default:0}    
 })
 
 var writingsScoreSchema = new mongoose.Schema({
     publicationName:{type:String, required:true},
-    specificActivity:{type:Number, required:true},
+    specificActivity:{type:String, required:true},
     articleTitle:{type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
+    timeStamp:{type:Date},
     writingScore: {type:Number,required:true,default:0}
 })
 
 var conferenceScoreSchema = new mongoose.Schema({
     publicationName:{type:String, required:true},
-    specificActivity:{type:Number, required:true},
+    specificActivity:{type:String, required:true},
     articleTitle:{type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
+    timeStamp:{type:Date},
     confrenceScore:{type:Number,default:0}
 })
 
 var awardsScoreSchema = new mongoose.Schema({
     confrenceSponsor:{type: String, required: true},
-    specificActivity:{type:Number, required:true},
+    specificActivity:{type:String, required:true},
     presentationTitle:{type:String,required:true},
     month:{type:Date},
     year:{type:Date, required:true},
+    timeStamp:{type:Date},
     awardsScore: {type:Number,default:0}
 })
 
 var recognizedExpertiseScoreSchema = new mongoose.Schema({
-    specificActivity: {type: Number, required:true},
+    specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
+    timeStamp:{type:Date},
     recognizedExpertiseScore:{type:Number,default:0}
 })
 
 var patentsScoreSchema = new mongoose.Schema({
-    specificActivity: {type: Number, required:true},
+    specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
+    timeStamp:{type:Date},
     patentsScore:{type:Number,default:0}
 })
 
 var languagesScoreSchema = new mongoose.Schema({
-    specificActivity: {type: Number, required:true},
+    specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
+    timeStamp:{type:Date},
     languagesScore:{type:Number,default:0}
 })
 
 var leisureTravelScoreSchema = new mongoose.Schema({
-    specificActivity: {type: Number, required:true},
+    specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
+    timeStamp:{type:Date},
     leisureTravelScore:{type:Number,default:0}
 })
 
@@ -254,7 +278,6 @@ var UserProfileSchema = new mongoose.Schema({
         eduTotalscore:{type:Number,required:true,default:0}
     },
     workExperience:{},
-
     certificates:{
         certificateData: [certificatesScoreSchema],
         certificateTotalScore: {type:Number,required:true,default:0}

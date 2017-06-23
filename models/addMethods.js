@@ -4,6 +4,8 @@
 
 
 var models = require('./schema');
+var moment = require('moment-timezone');
+var stringValues = require('../strings')('models');
 var User = models.User;
 /*
 NO LONGER NEED TO THESE
@@ -91,10 +93,14 @@ exports.addEducation = function(req,callback){
             console.log(req.body)
             console.log("I found the User");
             var newEducation = new EducationScore(req.body);
-            newEducation.educationScore = 10;
             
+            newEducation.educationScore = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newEducation.customId = stringValues.EDUCATION+time;
+            newEducation.timeStamp = time;
+            profile.education.educationData.push(newEducation);
             profile.save(function(err){
-                console.log(err.toString())
+                //console.log(err.toString())
             callback(err);
             })
         }
@@ -161,7 +167,6 @@ exports.addCertificates = function(req,callback){
             newCertificate.certificatesScore = 10;
             profile.certificates.certificateData.push(newCertificate);
             profile.certificates.certificateTotalScore = profile.certificates.certificateTotalScore + 10;
-
             profile.save(function(err){
             callback(err);
             })
@@ -169,6 +174,31 @@ exports.addCertificates = function(req,callback){
     })
 
 }
+
+exports.addMentoring = function(req,callback){
+     console.log("Entered Adding Mentoring ");
+     User.findOne({'userName':'revaries'},function(err,profile){
+         if(err){
+             console.log("Err Block in conducting classes");
+             callback(err);
+         } else if(profile==null){
+            console.log("Couldn't find profile");
+            callback(new Error("User not found"));
+         } else {
+             console.log(req.body)
+            var newMentoring = new MentoringScore(req.body);
+            newMentoring.mentoringScore = 10;
+            profile.mentoring.mentoringData.push(newMentoring);       
+            profile.mentoring.mentoringTotalScore = profile.mentoring.mentoringTotalScore + 10;
+            profile.save(function(err){
+                callback(err);
+            })
+        }
+    })
+}
+
+
+
 exports.addTakingClasses = function(req,callback){
      console.log("Entered Adding Taking Classes");
      User.findOne({'userName':'revaries'},function(err,profile){
@@ -179,16 +209,14 @@ exports.addTakingClasses = function(req,callback){
              console.log("Couldnt find Profile");
              callback(new Error("User Not found"));
          } else {
+             console.log(req.body)
             //Compute Part along with new Taking Classes Block
             var newTakingClasses = new TakingClassesScore(req.body);
             newTakingClasses.TakingClassesScore = 10;
             profile.takingClasses.takingClassesData.push(newTakingClasses);
             profile.takingClasses.takingClassesTotalScore = profile.takingClasses.takingClassesTotalScore + 10;
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                callback(err);
             })
          }
      })
@@ -204,43 +232,18 @@ exports.addConductingClasses = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
+             console.log(req.body)
             var newConductingClasses = new ConductingClassesScore(req.body);
             newConductingClasses.ConductingClassesScore = 10;
             profile.conductingClasses.conductingClassesData.push(newConductingClasses);
             profile.conductingClasses.conductingClassesTotalScore = profile.conductingClasses.conductingClassesTotalScore + 10;
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                callback(err);
             })
         }
     }) 
 }
 
-exports.addMentoring = function(req,callback){
-     console.log("Entered Adding Mentoring ");
-     User.findOne({'userName':'revaries'},function(err,profile){
-         if(err){
-             console.log("Err Block in conducting classes");
-             callback(err);
-         } else if(profile==null){
-            console.log("Couldn't find profile");
-            callback(new Error("User not found"));
-         } else {
-            var newMentoring = new MentoringScore(req.body);
-            newMentoring.mentoringScore = 10;
-            profile.mentoring.mentoringData.push(newMentoring);       
-            profile.mentoring.mentoringTotalScore = profile.mentoring.mentoringTotalScore + 10;
-            profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
-            })
-        }
-    })
-}
 
 exports.addWritings = function(req,callback){
     console.log("Entered Adding Writings");
@@ -252,15 +255,13 @@ exports.addWritings = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
+             console.log(req.body)
             var newWritings = new WritingsScore(req.body);
             newWritings.writingScore = 10;
             profile.writings.writingsData.push(newWritings);
             profile.writings.writingTotalScore = profile.writings.writingTotalScore + 10; 
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                callback(err);
             })
         }
     })
@@ -275,15 +276,13 @@ exports.addConfrences = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
+             console.log(req.body)
             var newConfrences = new ConfrenceScore(req.body);
             newConfrences.confrenceScore = 10;
             profile.conferences.confrenceData.push(newConfrences);
             profile.conferences.confrenceTotalScore = profile.conferences.confrenceTotalScore + 10; 
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                callback(err);
             })
         }
     })
@@ -298,15 +297,13 @@ exports.addAwards = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
+             console.log(req.body)
             var newAwards = new AwardsScore(req.body); 
             newAwards.awardsScore = 10;
             profile.awards.awardsData.push(newAwards);
             profile.awards.awardsTotalScore = profile.awards.awardsTotalScore +10;                   
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                callback(err);
             })
         }
     })
@@ -321,15 +318,13 @@ exports.addRecognizedExperteise = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
+             console.log(req.body)
             var newRecognizedExperteise = new RecognizedExpertiseScore(req.body);        
             newRecognizedExperteise.recognizedExpertiseScore = 10;
             profile.recognizedExpertise.recognizedExpertiseData.push(newRecognizedExperteise);
             profile.recognizedExpertise.recognizedExpertiseTotalScore = profile.recognizedExpertise.recognizedExpertiseTotalScore + 10; 
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                callback(err);
             })
         }
     })
@@ -344,15 +339,13 @@ exports.addPatents = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
+             console.log(req.body)
             var newPatent = new PatentsScore(req.body);        
             newPatent.patentsScore = 10;
             profile.patents.patentsData.push(newPatent);
             profile.patents.patentsTotalScore = profile.patents.patentsTotalScore + 10; 
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                                callback(err);
             })
         }
     })
@@ -367,15 +360,13 @@ exports.addLanguages = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
+             console.log(req.body)
             var newLanguages = new LanguagesScore(req.body); 
             newLanguages.languagesScore = 10;
             profile.languages.languagesData.push(newLanguages);
             profile.languages.languagesTotalScore = profile.languages.languagesTotalScore+10;        
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                callback(err);
             })
         }
     })
@@ -390,15 +381,13 @@ exports.addLeisureTravel = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
+             console.log(req.body)
             var newLeisureTravel = new LeisureTravelScore(req.body);        
             newLeisureTravel.leisureTravelScore = 10;
             profile.leisureTravel.leisureTravelData.push(newLeisureTravel);
             profile.leisureTravel.leisureTravelTotalScore = profile.leisureTravel.leisureTravelTotalScore + 10;
             profile.save(function(err){
-                if(err){
-                    console.log(err.toString());
-                    callback(err);
-                }
+                callback(err);
             })
         }
     })

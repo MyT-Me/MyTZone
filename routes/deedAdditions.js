@@ -3,6 +3,7 @@ var adders = require('../models/addMethods')
 
 
 module.exports = function (app) {
+    console.log("Addition Ran")
     app.post('/api/deeds/:id',function (req,res) {
         if(!(req.params==0)){
             switch (req.params.id){
@@ -150,4 +151,3 @@ module.exports = function (app) {
         }
     })
 }
-

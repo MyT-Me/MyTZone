@@ -34,10 +34,7 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/',function (req,res) {
-    console.log("Request");
-    res.render('welcome');
-})
+
 
 
 /*Adding Routes*/

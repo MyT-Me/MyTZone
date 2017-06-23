@@ -9,4 +9,5 @@ module.exports = function (app) {
     app.get('/test',function(req,res){
         res.send(JSON.stringify({"status":"I am working"}));
     })
+
 }
