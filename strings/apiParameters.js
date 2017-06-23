@@ -4,7 +4,9 @@
 'use strict'
 
 module.exports = {
-    EDUCATION : 'education',
+    BASE: 'base',
+    LOGIN: 'login',
+    EDUCATION: 'education',
     WORK_EXPERIENCE: 'workExperience',
     CERTIFICATES: 'certificates',
     TAKING_CLASSES: 'takingClasses',
@@ -19,6 +21,7 @@ module.exports = {
     LEISURE_TRAVEL:'leisureTravel',
     TOOLS:'tools',
     SKILLS:'skills',
-    POINTS:'points'
+    POINTS:'points',
+    DEEDS: 'deeds'
 }
 

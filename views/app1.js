@@ -7,7 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     // route to show our basic form (/form)
         .state('base', {
             url: '/base',
-            templateUrl: 'base.html',
+            templateUrl: '/base',
             controller: 'Controller'
         })
 
@@ -16,34 +16,34 @@ app.config(function($stateProvider, $urlRouterProvider) {
         // url will be nested (/form/profile)
         .state('base.login', {
             url: '/login',
-            templateUrl: 'login.html'
+            templateUrl: '/login'
         })
 
         // url will be /form/interests
         .state('base.educate', {
             url: '/educate',
-            templateUrl: 'educate.html'
+            templateUrl: '/education'
         })
 
         // url will be /form/payment
         .state('base.work', {
             url: '/work',
-            templateUrl: 'work.html'
+            templateUrl: '/workExperience'
         })
 
         .state('base.deeds', {
             url: '/deeds',
-            templateUrl: 'deeds.html'
+            templateUrl: '/deeds'
         })
 
         .state('base.skills', {
             url: '/skills',
-            templateUrl: 'skills.html'
+            templateUrl: '/skills'
         })
 
         .state('base.tools', {
             url: '/tools',
-            templateUrl: 'tools.html'
+            templateUrl: '/tools'
         });
 
 
