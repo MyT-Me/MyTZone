@@ -6,8 +6,8 @@ var testing = require('./test');
 var getRoutes = require('./getRoutes');
 var viewHandlers = require('./viewHandlers');
 
-module.exports = function (app){
-    viewHandlers(app);
+module.exports = function (app,passport){
+    viewHandlers(app,passport);
     addDeeds(app);
     testing(app);
     createUser(app);

@@ -22,28 +22,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
         // url will be /form/interests
         .state('base.educate', {
             url: '/educate',
-            templateUrl: '/education'
+            templateUrl: '/sub/education'
         })
 
         // url will be /form/payment
         .state('base.work', {
             url: '/work',
-            templateUrl: '/workExperience'
+            templateUrl: '/sub/workExperience'
         })
 
         .state('base.deeds', {
             url: '/deeds',
-            templateUrl: '/deeds'
+            templateUrl: '/sub/deeds'
         })
 
         .state('base.skills', {
             url: '/skills',
-            templateUrl: '/skills'
+            templateUrl: '/sub/skills'
         })
 
         .state('base.tools', {
             url: '/tools',
-            templateUrl: '/tools'
+            templateUrl: '/sub/tools'
         });
 
 

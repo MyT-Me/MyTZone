@@ -33,7 +33,8 @@
     "mongoose": "^4.10.5",
     "mongoose-type-email": "^1.0.3",
     "morgan": "^1.8.2",
-    "passport": "^0.3.2"
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

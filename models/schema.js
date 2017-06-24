@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var momemt = require('moment');
 var momemtTime = require('moment-timezone-all');
 var schema = mongoose.Schema();
-
+var crypt = require('bcrypt-nodejs');
 
 
 
@@ -264,6 +264,38 @@ var leisureTravelScoreSchema = new mongoose.Schema({
     leisureTravelScore:{type:Number,default:0}
 })
 
+var skillsScoreSchema = new mongoose.Schema({
+    category:{type:String , required:true},
+    softwareDeviceName: {type:String,required:true},
+    vendorDistributor: {type:String, required:true},
+    numberOfLinkedEndorsments: {type:Number},
+    currentProficiency:{
+        basic: {type:Date},
+        intermediate: {type: Number},
+        advanced: {type: Number},
+        expert: {type: Number}    
+    },
+    formalCertification: {type:Number,required:true},
+    usagein3Years:{type:Boolean,required:true},
+    skillsScore:{type:Number}        
+})
+
+var toolsScoreSchema = new mongoose.Schema({
+    category: {type:String, required:true},
+    methodSkillName: {type:String, required:true},
+    vendorDistributor: {type:String,required:true},
+    numberOfLinkedEndorsments: {type:Number},
+    currentProficiency:{
+        basic: {type:Date},
+        intermediate: {type: Number},
+        advanced: {type: Number},
+        expert: {type: Number}    
+    },
+    formalCertification: {type:Number,required:true},
+    usagein3Years:{type:Boolean,required:true},
+    toolsScore:{type:Number}
+})
+
 
 //User Profile
 var UserProfileSchema = new mongoose.Schema({
@@ -272,6 +304,7 @@ var UserProfileSchema = new mongoose.Schema({
     middleName: {type:String, },
     userName: {type:String, required: true},
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
+    password:{type:String,required:true},
     firstYear: {type:Date},
     education:{
         educationData: [educationScoreSchema],
@@ -330,7 +363,13 @@ var UserProfileSchema = new mongoose.Schema({
 
 
 //Methods Will be Here till we find a better way to implement it
+UserProfileSchema.methods.generateHas = function(password){
+    return crypt.hashSync(password,crypt.genSaltSync(), null);
+};
 
+UserProfileSchema.methods.vaildPassword = function(password){
+    return crypt.compareSync(password, this.password);
+};
 
 
 //Creating models for schemas

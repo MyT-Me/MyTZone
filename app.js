@@ -9,6 +9,15 @@ var dbconfig = require('./strings')('db');
 var app = express();
 
 
+
+/*Setting UP for Session and Authentication*/
+var passport = require('passport');
+var flash = require('flash');
+var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
+
 /*Setting Parameters */
 app.set('port', (process.env.PORT || 8080));
 app.set('view engine', 'ejs');
@@ -35,10 +44,20 @@ app.use(function(req, res, next) {
 
 
 
+//Additional Usage Settings
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(session({secret:'myTzone'}))
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+
 
 
 /*Adding Routes*/
-require('./routes')(app);
+require('./authentication/passport')(passport);
+require('./routes')(app,passport);
 
 
 app.listen(app.get('port'),function () {
