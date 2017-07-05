@@ -38,4 +38,43 @@ module.exports = function(passport){
                 return done(null, user);
             });
         }));
+    
+    passport.use('local-signup', new localStratergy({
+        usernameField:'email',
+        passwordField:'password',
+        passReqToCallback: true
+    },
+    function(req,email,password,done) {
+        console.log("Request Hit")
+        if(email) {
+            email = email.toLowerCase();
+        }
+        process.nextTick(function(){
+            console.log("Atleaset here passport sign up");
+            User.find({$or:[{'email':email},{'userName':req.body.userName}]},function(err,user){
+                if(err){
+                    console.log("Failed Creation");
+                    return done(err);
+                }
+                if(user){
+                    return done(null,false,req.flash('signupMessage','Email is already taken'));
+                } else {
+                    var newUser = new User();
+                    newUser.email = email;
+                    newUser.password = newUser.generateHash(password);
+                    newUser.firstName   = req.body.firstName,
+                    newUser.userName = req.body.userName,
+	                newUser.firstYear = req.body.firstYear
+                    newUser.save(function(err){
+                        if(err){
+                            return done(err);
+                        }
+                        else{
+                            return done(null, newUser);
+                        }
+                    })
+                }
+            })
+        })
+    }))
 };

@@ -1,15 +1,9 @@
 var userModel = require('../models/addMethods');
 
-module.exports = function (app) {
-    app.post('/api/createuser',function(req,res){
-        console.log("I am create User ");
-
-        userModel.createUser(req,function(err){
-            if(err){
-                res.status(500).send(err.message);
-            } else {
-                res.status(201).json({'message':'user Created'});
-            }
-        })
-    })    
+module.exports = function (app,passport) {
+    app.post('/signUp',passport.authenticate('local-signup', {
+            successRedirect : '/education', // redirect to the secure profile section
+            failureRedirect : '/login', // redirect back to the signup page if there is an error
+            failureFlash : true // allow flash messages
+        }));
 }

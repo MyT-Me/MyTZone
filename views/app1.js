@@ -66,6 +66,14 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     $scope.years = range;
 
     // LOGIN
+    //Login
+    $scope.login = function()
+    {
+                
+    }
+
+
+
     $scope.loginDetails = [];
 
     $scope.addNewLogin = function(loginDetails){

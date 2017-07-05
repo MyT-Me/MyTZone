@@ -10,7 +10,7 @@ module.exports = function (app,passport){
     viewHandlers(app,passport);
     addDeeds(app);
     testing(app);
-    createUser(app);
+    createUser(app,passport);
     modifyDeeds(app);
     deleteDeeds(app);
     getRoutes(app);

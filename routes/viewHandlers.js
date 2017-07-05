@@ -2,7 +2,7 @@ var apiParameters = require('../strings')('api');
 module.exports = function(app,passport){
     
     app.get('/',function (req,res) {
-    console.log("Request");
+    console.log(" Index Request");
     res.render('index');
     })
 
@@ -22,11 +22,16 @@ module.exports = function(app,passport){
         failureFlash : true // allow flash messages
     }))
 
+    
+
 
     app.get('/sub/:id',isUserLoggedIn,function(req,res){
+        console.log("Here In Index");
         if(req.params == 0){
+            console.log("This");
             res.render('index');
         } else {
+            console.log("I am Inside this Section");
             var id = req.params.id;
             switch (id) {
                 case apiParameters.EDUCATION:
