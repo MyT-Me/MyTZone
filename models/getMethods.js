@@ -53,68 +53,156 @@ exports.getDeeds = function(req,callback){
                     deeds:[]
                 }
                 var certificateData = profile.certificates.certificateData;
-                certificateData.forEach(function(certificatesElement){
+                certificateData.forEach(function(certificatesElement){  
+                    var YearData = new Date(certificatesElement.year);
+                    var monthData = new Date(certificatesElement.month);
                     var returnJSONElement = {
+                        startYear: YearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory: "Certificates",
+                        activity: certificatesElement.specificActivity,
+                        description: certificatesElement.description,
+                        customId: certificatesElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);  
                 },this);
                 var takinClassesData = profile.takingClasses.takingClassesData;
                 takinClassesData.forEach(function(takingClassesElement){
+                    var yearData = new Date(takingClassesElement.year); 
+                    var monthData = new Date(takingClassesElement.month);
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory: "Taking Classes",
+                        activity: takingClassesElement.specificActivity,
+                        description: takingClassesElement.description,
+                        customId: takingClassesElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var conductingClassesData = profile.conductingClasses.conductingClassesData;
-                conductingClassesData.forEach(function(conductingClassesElement){
+                conductingClassesData.forEach(function(conductingClassesElement){   
+                    var yearData = new Date(conductingClassesElement.year);
+                    var monthData = new Date(conductingClassesElement.month);
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory:"Conducting Classes",
+                        activity: conductingClassesElement.specificActivity,
+                        description: conductingClassesElement.description,
+                        customId: conductingClassesElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var mentoringData = profile.mentoring.mentoringData;
                 mentoringData.forEach(function(mentoringElement){
+                    var yearData = new Date(mentoringElement.year);
+                    var monthData = new Date(mentoringElement.month);                       
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory:"Mentoring",
+                        activity: mentoringElement.specificActivity,
+                        description: mentoringElement.description,
+                        customId: mentoringElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var writingsData = profile.writings.writingsData;
-                writingsData.forEach(function(writingsElement){
+                writingsData.forEach(function(writingsElement){   
+                    var yearData = new Date(writingsElement.year);
+                    var monthData = new Date(writingsElement.month);
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory:"Writing",
+                        activity: writingsElement.specificActivity,
+                        description: writingsElement.description,
+                        customId: writingsElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var confrencesData = profile.conferences.confrenceData;
                 confrencesData.forEach(function(confrenceElement){
+                    var yearData = new Date(confrenceElement.year);
+                    var monthData = new Date(confrenceElement.month);
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory:"Conferences",
+                        activity: confrenceElement.specificActivity,
+                        description: confrenceElement.description,
+                        customId: confrenceElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var awardsData = profile.awards.awardsData;
                 awardsData.forEach(function(awardElement){
+                    var yearData = new Date(awardElement.year);
+                    var monthData = new Date(awardElement.month);
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory:"Awards",
+                        activity: awardElement.specificActivity,
+                        description: awardElement.description,
+                        customId: awardElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var recognizedExpertiseData = profile.recognizedExpertise.recognizedExpertiseData;
-                recognizedExpertiseData.forEach(function(recognizedExpertiseElement){
+                recognizedExpertiseData.forEach(function(recognizedExpertiseElement){   
+                    var yearData = new Date(recognizedExpertiseElement.year);
+                    var monthData = new Date(recognizedExpertiseElement.month);
                     var returnJSONElement = {
-                    }
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory:"Recognized Expertise",
+                        activity: recognizedExpertiseElement.specificActivity,
+                        description: recognizedExpertiseElement.description,
+                        customId: recognizedExpertiseElement.customId    
+                    }   
                     returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var patentsData = profile.patents.patentsData;
                 patentsData.forEach(function(patentsElement){
+                    var yearData = new Date(patentsElement.year);
+                    var monthData = new Date(patentsElement.month);
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory:"Patents",
+                        activity: patentsElement.specificActivity,
+                        description: patentsElement.description,
+                        customId: patentsElement.customId
                     }
-                    returnJSON.deeds.push(returnJSONElement);
+                returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var leisureTravelData = profile.leisureTravel.leisureTravelData;
                 leisureTravelData.forEach(function(leisureTravelElement){
+                    var yearData = new Date(leisureTravelElement.year);
+                    var monthData = new Date(leisureTravelElement.month);
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory:"Leisure Travel",
+                        activity: leisureTravelElement.specificActivity,
+                        description: leisureTravelElement.description,
+                        customId: leisureTravelElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);
                 },this);
                 var languagesData = profile.languages.languagesData;
-                languagesData.forEach(function(languagesDataElement){
+                languagesData.forEach(function(languagesElement){
+                    var yearData = new Date(languagesElement.year);
+                    var monthData = new Date(languagesElement.month);
                     var returnJSONElement = {
+                        startYear: yearData.getFullYear(),
+                        startMonth: monthData.getMonth(),
+                        deedCategory: "Languages",
+                        activity: languagesElement.specificActivity,
+                        description: languagesElement.description,
+                        customId:languagesElement.customId
                     }
                     returnJSON.deeds.push(returnJSONElement);
                 },this);  

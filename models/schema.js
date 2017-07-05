@@ -163,6 +163,7 @@ var workExperienceScoreSchema = new mongoose.Schema({
 
 
 var certificatesScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
@@ -172,6 +173,7 @@ var certificatesScoreSchema = new mongoose.Schema({
 })
 
 var takingClassesScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
@@ -181,6 +183,7 @@ var takingClassesScoreSchema = new mongoose.Schema({
 })
 
 var conductingClassesScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
@@ -190,6 +193,7 @@ var conductingClassesScoreSchema = new mongoose.Schema({
 })
 
 var mentoringScoreSchema= new mongoose.Schema({
+    customId:{type:String},
     specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
@@ -199,6 +203,7 @@ var mentoringScoreSchema= new mongoose.Schema({
 })
 
 var writingsScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     publicationName:{type:String, required:true},
     specificActivity:{type:String, required:true},
     articleTitle:{type:String, required:true},
@@ -209,6 +214,7 @@ var writingsScoreSchema = new mongoose.Schema({
 })
 
 var conferenceScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     publicationName:{type:String, required:true},
     specificActivity:{type:String, required:true},
     articleTitle:{type:String, required:true},
@@ -219,6 +225,7 @@ var conferenceScoreSchema = new mongoose.Schema({
 })
 
 var awardsScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     confrenceSponsor:{type: String, required: true},
     specificActivity:{type:String, required:true},
     presentationTitle:{type:String,required:true},
@@ -229,6 +236,7 @@ var awardsScoreSchema = new mongoose.Schema({
 })
 
 var recognizedExpertiseScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
@@ -238,6 +246,7 @@ var recognizedExpertiseScoreSchema = new mongoose.Schema({
 })
 
 var patentsScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
@@ -247,6 +256,7 @@ var patentsScoreSchema = new mongoose.Schema({
 })
 
 var languagesScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
@@ -256,6 +266,7 @@ var languagesScoreSchema = new mongoose.Schema({
 })
 
 var leisureTravelScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     specificActivity: {type: String, required:true},
     deedDescription: {type:String, required:true},
     month:{type:Date},
@@ -265,6 +276,7 @@ var leisureTravelScoreSchema = new mongoose.Schema({
 })
 
 var skillsScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     category:{type:String , required:true},
     softwareDeviceName: {type:String,required:true},
     vendorDistributor: {type:String, required:true},
@@ -281,6 +293,7 @@ var skillsScoreSchema = new mongoose.Schema({
 })
 
 var toolsScoreSchema = new mongoose.Schema({
+    customId:{type:String},
     category: {type:String, required:true},
     methodSkillName: {type:String, required:true},
     vendorDistributor: {type:String,required:true},
@@ -302,8 +315,8 @@ var UserProfileSchema = new mongoose.Schema({
     firstName: {type: String, required:true},
     lastName: {type:String, required:true},
     middleName: {type:String, },
-    userName: {type:String, required: true},
-    email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
+    userName: {type:String, required: true, unique:true},
+    email: {type:mongoose.SchemaTypes.Email, requiredtrue:true, unique:true},
     password:{type:String,required:true},
     firstYear: {type:Date},
     education:{
