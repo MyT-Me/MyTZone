@@ -115,10 +115,10 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
                 {
                     if(res.data.educationData != null)
                     {
+                        $scope.eduDetails = [];
                         var ourEducationData = res.data.educationData;
                         ourEducationData.forEach(function(educationElement){
                             console.log(educationElement);
-                            
                             $scope.eduDetails.push({
                                  'school': educationElement.schoolName,
                                  'field': educationElement.fieldOfStudy,
@@ -139,6 +139,10 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
         }
     
     $scope.addNewEdu = function(){
+
+        var tempSend = {
+        
+        }
 
         $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
 
