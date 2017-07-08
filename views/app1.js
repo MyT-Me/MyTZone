@@ -106,6 +106,7 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
     }
 
     $scope.educationInit = function(){
+        alert("Education Initialized");
         console.log("Education Page Initialized");
         console.log($location.url());
         $http.get('/api/education')
@@ -136,19 +137,7 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
                 console.log(err.toString());
             });
         }
-    $scope.deedsInit = function(){
-        console.log("Deeds Page Initialized");
-        $http.get('/api/deeds')
-            .then(function (res){
-                if(res.data != null)
-                {
-                    if(res.data.educationData != null)
-                    {
-                        
-                    }
-                }
-            });
-    }
+    
     $scope.addNewEdu = function(){
 
         $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
@@ -388,6 +377,30 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
     // Get the element with id="defaultOpen" and click on it
     // document.getElementById("defaultOpen").click();
 
+
+    $scope.deedsInit = function(){
+        console.log("Deeds Page Initialized");
+        $http.get('/api/deeds')
+            .then(function (res){
+                if(res.data != null)
+                {
+                    if(res.data.educationData != null)
+                    {
+                        var ourDeedData = res.data.deeds;
+                        ourDeedData.forEach(function(deedElement){
+                                $scope.model.deeds.push({
+                                'id': $scope.model.deeds.length + 1,
+                                'smonth': deedElement.startMonth,
+                                'syear': deedElement.startYear,
+                                'category': deedElement.deedCategory,
+                                'activity': deedElement.activity,
+                                'deeddes': deedElement.description
+                                });
+                        });
+                    }
+                }
+            });
+    }
 
 
     $scope.addNewdeed = function (category) {
