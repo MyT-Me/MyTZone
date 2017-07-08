@@ -108,6 +108,46 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
     $scope.educationInit = function(){
         console.log("Education Page Initialized");
         console.log($location.url());
+        $http.get('/api/education')
+            .then(function(res){
+                if(res.data != null)
+                {
+                    if(res.data.educationData != null)
+                    {
+                        var ourEducationData = res.data.educationData;
+                        ourEducationData.forEach(function(educationElement){
+                            console.log(educationElement);
+                            
+                            $scope.eduDetails.push({
+                                 'school': educationElement.schoolName,
+                                 'field': educationElement.fieldOfStudy,
+                                 'degree': educationElement.typeOfProgram,
+                                 'start': educationElement.startYear,
+                                 'end': educationElement.yearAwarded,
+                                 'status': educationElement.programStatus,
+                                  'honor': "",
+                                'ind': $scope.eduDetails.length + 1
+                             });
+                        });
+                    }
+                }
+            })
+            .catch(function (err){
+                console.log(err.toString());
+            });
+        }
+    $scope.deedsInit = function(){
+        console.log("Deeds Page Initialized");
+        $http.get('/api/deeds')
+            .then(function (res){
+                if(res.data != null)
+                {
+                    if(res.data.educationData != null)
+                    {
+                        
+                    }
+                }
+            });
     }
     $scope.addNewEdu = function(){
 
