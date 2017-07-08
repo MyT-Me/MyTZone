@@ -11,6 +11,7 @@ var app = express();
 
 
 /*Setting UP for Session and Authentication*/
+
 var passport = require('passport');
 var flash = require('flash');
 var morgan = require('morgan');
@@ -45,6 +46,7 @@ app.use(function(req, res, next) {
 
 
 //Additional Usage Settings
+
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({secret:'myTzone'}))
@@ -53,11 +55,9 @@ app.use(passport.session());
 app.use(flash());
 
 
-
-
 /*Adding Routes*/
-require('./authentication/passport')(passport);
-require('./routes')(app,passport);
+//require('./authentication/passport')(passport);
+require('./routes')(app);
 
 
 app.listen(app.get('port'),function () {

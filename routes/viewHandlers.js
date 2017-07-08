@@ -1,73 +1,42 @@
-var apiParameters = require('../strings')('api');
-module.exports = function(app,passport){
-    
-    app.get('/',function (req,res) {
-    console.log(" Index Request");
-    res.render('index');
-    })
-
-    app.get('/base',function(req,res){
-        console.log('Base request');
-        res.render('base');
-    })
-
-    /*
-        Modify After a way for Passport is set up
-        app.get('/login',function(req,res){
-        console.log("Login request");
-        res.render('login',{ message: req.flash('loginMessage')});
-    })
-
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/sub/'+apiParameters.EDUCATION, // redirect to the secure profile section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }))
-
-    */
-    
-    //Without Authentication
-    app.get('/login', function(req,res){
-        res.render('login');
+"use strict"
+var parameters = require('../strings')('api');
+module.exports = function (app) {
+    app.get('/', function(req,res){
+        res.render('index');
     });
 
-    app.get('/sub/:id',function(req,res){
-        console.log("Here In Index");
-        if(req.params == 0){
-            console.log("This");
+    app.get('/sub/:id', function(req, res){
+        if(req.params === 0)
+        {
             res.render('index');
-        } else {
-            console.log("I am Inside this Section");
-            var id = req.params.id;
-            switch (id) {
-                case apiParameters.EDUCATION:
-                    console.log("Came Education")
-                    res.render('educate');
-                    break;
-                case apiParameters.WORK_EXPERIENCE:
-                    res.render('work');
-                    break;
-                case apiParameters.DEEDS:
-                    res.render('deeds');
-                    break;
-                case apiParameters.SKILLS:
-                    res.render('skills');
-                    break;
-                case apiParameters.TOOLS:
-                    res.render('tools');
-                    break;
-                default:
-                    break;
-            }
-        }   
-    })
-
-    function isUserLoggedIn(req, res, next){
-        if(req.isAuthenticated()){
-            return next();
         }
-        res.redirect('/login');
-    }    
+        switch (req.params.id) {
+            case parameters.BASE:
+                res.render('base');
+                break;
+            case parameters.LOGIN:
+                res.render('login');
+                break;
+            case parameters.EDUCATION:
+                res.render('educate');
+                break;
+            case parameters.WORK_EXPERIENCE:
+                res.render('work');
+                break;
+            case parameters.DEEDS:
+                res.render('deeds');
+                break;
+            case parameters.SKILLS:
+                res.render('skills');
+                break;
+            case parameters.TOOLS:
+                res.render('tools');
+                break;
+            default:
+                res.render('index');
+                break;
+        }
 
+    });
 
 }

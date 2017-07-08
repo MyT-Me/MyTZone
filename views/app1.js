@@ -7,7 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     // route to show our basic form (/form)
         .state('base', {
             url: '/base',
-            templateUrl: '/base',
+            templateUrl: '/sub/base',
             controller: 'Controller'
         })
 
@@ -16,7 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         // url will be nested (/form/profile)
         .state('base.login', {
             url: '/login',
-            templateUrl: '/login'
+            templateUrl: '/sub/login'
         })
 
         // url will be /form/interests
@@ -52,7 +52,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/base/login');
 });
 
-app.controller("Controller", ['$scope','$http', function($scope,$http) {
+app.controller("Controller", ['$scope','$http','$location', function($scope,$http,$location) {
 
 
     var year = 1900;
@@ -66,14 +66,6 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     $scope.years = range;
 
     // LOGIN
-    //Login
-    $scope.login = function()
-    {
-                
-    }
-
-
-
     $scope.loginDetails = [];
 
     $scope.addNewLogin = function(loginDetails){
@@ -113,6 +105,10 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         });
     }
 
+    $scope.educationInit = function(){
+        console.log("Education Page Initialized");
+        console.log($location.url());
+    }
     $scope.addNewEdu = function(){
 
         $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
@@ -501,7 +497,15 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             $scope.formDatadeed = {};                
                         }               
         })
-            .catch(function(err){console.log(err)})
+            .catch(function(err){
+            console.log(err)
+            $scope.model.deeds.push(tmpDeed);
+
+            $scope.model.deeds = sortByKey($scope.model.deeds, "id");
+
+            this.formDatadeed = {};
+            $scope.formDatadeed = {};                            
+                                })
 
         /*
         $http.post(localUrl,toSend,{headers:{'Content-Type':'application/json'}})
