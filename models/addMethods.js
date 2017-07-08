@@ -381,7 +381,7 @@ exports.addLeisureTravel = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
-             console.log(req.body)
+            console.log(req.body)
             var newLeisureTravel = new LeisureTravelScore(req.body);        
             newLeisureTravel.leisureTravelScore = 10;
             profile.leisureTravel.leisureTravelData.push(newLeisureTravel);
@@ -390,11 +390,28 @@ exports.addLeisureTravel = function(req,callback){
                 callback(err);
             })
         }
-    })
+    });
 }
 
 exports.addTools = function(req,callback){
-    
+    User.findOne({'username': 'revaries'}, function (err, profile){
+        if(err) {
+            console.log("Err Block in Add Tools");
+            callback(err);
+        } else if(profile == null){
+            console.log("Couldn't find user profile");
+            callback(new Error("User Not found"));
+        } else {
+            console.log(req.body);
+            var newToolsScore = new newToolsScore(req.body);
+            newToolsScore.toolsScore = 10;
+            profile.tools.toolsData.push(newToolsScore);
+            profile.tools.toolsTotalScore = profile.tools.toolsTotalScore + 10;
+            profile.save(function(err){
+                callback(err);
+            }); 
+        }
+    });
 }
 
 exports.addSkills = function(req,callback){

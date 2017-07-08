@@ -283,9 +283,9 @@ var skillsScoreSchema = new mongoose.Schema({
     numberOfLinkedEndorsments: {type:Number},
     currentProficiency:{
         basic: {type:Date},
-        intermediate: {type: Number},
-        advanced: {type: Number},
-        expert: {type: Number}    
+        intermediate: {type: Date},
+        advanced: {type: Date},
+        expert: {type: Date}    
     },
     formalCertification: {type:Number,required:true},
     usagein3Years:{type:Boolean,required:true},
@@ -307,6 +307,11 @@ var toolsScoreSchema = new mongoose.Schema({
     formalCertification: {type:Number,required:true},
     usagein3Years:{type:Boolean,required:true},
     toolsScore:{type:Number}
+})
+
+var pointsScoreSchema = new mongoose.Schema({
+    customId: {type:String},
+
 })
 
 
@@ -369,9 +374,18 @@ var UserProfileSchema = new mongoose.Schema({
         leisureTravelData: [leisureTravelScoreSchema],
         leisureTravelTotalScore: {type:Number,required:true,default:0}
     },
-    tools:[],
-    skills:[],
-    points:[]
+    tools:{
+        toolsData: [toolsScoreSchema],
+        toolsTotalScore: {type: Number, required:true, default: 0}
+    },
+    skills:{
+        skillsData: [skillsScoreSchema],
+        skillsTotalScore: {type: Number, required:true, default: 0}
+    },
+    points:{
+        pointsDat: [],
+        pointsScore: {type: Number, required:true, default: 0}
+    }
 });
 
 
@@ -417,8 +431,10 @@ var RecognizedExpertiseScore = mongoose.model(strings.RECOGNIZED_EXPERTIESE_SCOR
 var PatentsScore = mongoose.model(strings.PATENTS_SCORE,patentsScoreSchema);
 var LanguagesScore = mongoose.model(strings.LANGUAGES_SCORE,languagesScoreSchema);
 var LeisureTravelScore = mongoose.model(strings.LEISURE_TRAVEL_SCORE,leisureTravelScoreSchema);
-//Need to Add Tools, Skills and Points Score Schema. 
+var ToolsScore = mongoose.model(strings.TOOLS_SCORE, toolsScoreSchema);
+var SkillsScore = mongoose.model(strings.SKILLS_SCORE, skillsScoreSchema);
 
+//Need to Add Tools, Skills and Points Score Schema
 //Exporting users
 
 /*
@@ -454,7 +470,8 @@ exports.RecognizedExpertiseScore = RecognizedExpertiseScore;
 exports.PatentsScore = PatentsScore;
 exports.LanguagesScore = LanguagesScore;
 exports.LeisureTravelScore = LeisureTravelScore;
-//Add Tool,Skills and Points Score
+exports.ToolsScore = ToolsScore;
+exports.SkillsScore = SkillsScore;
 
 exports.Models = {
     User:User,

@@ -11,7 +11,9 @@ module.exports = function(app,passport){
         res.render('base');
     })
 
-    app.get('/login',function(req,res){
+    /*
+        Modify After a way for Passport is set up
+        app.get('/login',function(req,res){
         console.log("Login request");
         res.render('login',{ message: req.flash('loginMessage')});
     })
@@ -22,10 +24,14 @@ module.exports = function(app,passport){
         failureFlash : true // allow flash messages
     }))
 
+    */
     
+    //Without Authentication
+    app.get('/login', function(req,res){
+        res.render('login');
+    });
 
-
-    app.get('/sub/:id',isUserLoggedIn,function(req,res){
+    app.get('/sub/:id',function(req,res){
         console.log("Here In Index");
         if(req.params == 0){
             console.log("This");
