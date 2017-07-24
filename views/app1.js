@@ -94,33 +94,10 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
 
     };
 
-    
-    //REGISTRATION
-    $scope.signUp = {}
-    $scope.registerUser = function(){
-        console.log("User Registered");
-        console.log($scope.signUp.username)
-        console.log($scope.signUp.password);
-        console.log($scope.signUp.email);
-        var signUpDetails = {
-            username: $scope.signUp.username,
-            password: $scope.signUp.password,
-            email: $scope.signUp.email
-        }
-        $http.post('/signUp', signUpDetails,{headers:{'Content-Type':'application/json'}})
-        .then(function(res){
-            alert("Posted");
-            console.log(res);
-        })
-        .catch(function(err){
-            console.log(err.toString());
-        })
-    }
-
     // EDUCATION
     $scope.eduDetails = [];
-    $scope.eduDetail = {}
     $scope.reverseSort = false;
+
     function sortByKey(array, key) {
         return array.sort(function(a, b) {
             var x = a[key]; var y = b[key];
@@ -130,8 +107,8 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
 
     $scope.educationInit = function(){
         alert("Education Initialized");
-        //console.log("Education Page Initialized");
-        //console.log($location.url());
+        console.log("Education Page Initialized");
+        console.log($location.url());
         $http.get('/api/education')
             .then(function(res){
                 if(res.data != null)
@@ -160,20 +137,13 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
                 console.log(err.toString());
             });
         }
-
-    //On Press of AddNew button
+    
     $scope.addNewEdu = function(){
-        console.log("I am called");
+
         var tempSend = {
-            schoolName: $scope.eduDetail.school,
-            fieldOfStudy: $scope.eduDetail.field,
-            typeOfProgram: $scope.eduDetail.degree,
-            startYear: $scope.eduDetail.start,
-            yearAwarded: $scope.eduDetail.end,
-            programStatus: $scope.eduDetail.status,
-            honors: $scope.eduDetail.honor,
-        };
-        console.log(tempSend)
+        
+        }
+
         $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
 
         $scope.eduDetails.push({
@@ -196,7 +166,7 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
         // $scope.workDataList.unshift(this.workData);
         // $scope.model.recent = this.workData;
         // this.workData = {};
-        console.log("This is Where details are being Added");
+        console.dir($scope.eduDetails);
         console.log($scope.eduDetails);
     };
 
@@ -239,9 +209,6 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
 
     // WORK
     $scope.workData = {};
-    $scope.workData.operationsResponsibilities ={};
-    $scope.workData.criticalThinking = {};
-    $scope.workData.systemAndOperationInnovation = {};
     $scope.workDataList = [];
     $scope.model = {
         user: [],
@@ -259,73 +226,12 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
     $scope.editIndexWork = null;
 
     $scope.addNewWork = function () {
-        console.log("Called")
         if ($scope.editIndexWork !== null) {
             $scope.saveWork();
         } else {
             var tmp = this.workData;
             console.log(tmp);
-            var toSend = {
-                employerSectionOfFocus: $scope.workData.esector,
-                employerOrganizationName: $scope.workData.ename,
-                locationRegion: $scope.workData.region,
-                startDate: 2017,
-                endDate: 2017,
-                positionDescription: $scope.workData.position,
-                primaryFunction: $scope.workData.primary,
-                yourRole: $scope.workData.role,
-                teamSize: $scope.workData.team,
-                multiDisciplinaryMakeup: $scope.workData.multidis,
-                multiCulturalMakeup: $scope.workData.multicul,
-                paidUnpaid: $scope.workData.paid,
-                /*operationsResponsibilities: {
-                    selectLocations: $scope.workData.operationsResponsibilities.selectLocations,
-                    selectEquipment: $scope.workData.operationsResponsibilities.selectEquipment,
-                    selectManagingLabor: $scope.workData.operationsResponsibilities.selectManagingLabor,
-                    determineProcessing: $scope.workData.operationsResponsibilities.determineProcessing
-                },
-                criticalThinking: {
-                    requiredMetoFormGoals: $scope.workData.criticalThinking.requiredMetoFormGoals,
-                    requiredSystematicApproach: $scope.workData.criticalThinking.requiredSystematicApproach,
-                    requiredInquisitive: $scope.workData.criticalThinking.requiredInquisitive,
-                    requiredPrioritize: $scope.workData.criticalThinking.requiredPrioritize,
-                    requiredConfidence: $scope.workData.criticalThinking.requiredConfidence
-                },
-                systemAndOperationInnovation: {
-                    evaluateApplications: $scope.workData.systemAndOperationInnovation.evaluateApplications,
-                    selectApplicationsAndSolutions: $scope.workData.systemAndOperationInnovation.selectApplicationsAndSolutions,
-                    specificApplicationsAndSolutions: $scope.workData.systemAndOperationInnovation.specificApplicationsAndSolutions,
-                    buildApplicationsAndSolutions: $scope.workData.systemAndOperationInnovation.buildApplicationsAndSolutions,
-                    accessBenifitCostValueSolutions: $scope.workData.systemAndOperationInnovation.accessBenifitCostValueSolutions
-                }*/
-                operationsResponsibilities: {
-                    selectLocations: "No",
-                    selectEquipment: "No",
-                    selectManagingLabor: "No",
-                    determineProcessing: "No"
-                },
-                criticalThinking: {
-                    requiredMetoFormGoals: "No",
-                    requiredSystematicApproach: "No",
-                    requiredInquisitive: "No",
-                    requiredPrioritize: "No",
-                    requiredConfidence: "No"
-                },
-                systemAndOperationInnovation: {
-                    evaluateApplications: "No",
-                    selectApplicationsAndSolutions: "No",
-                    specificApplicationsAndSolutions: "No",
-                    buildApplicationsAndSolutions: "No",
-                    accessBenifitCostValueSolutions: "No"
-                }
-            }
-            console.log(toSend)
-            $http.post('/api/deeds/workExperience', toSend ,{headers:{'Content-Type':'application/json'}})
-            .then(function(res){
-                alert(res);
-                console.log(res)
-            });
-
+            console.log($scope);
             tmp["id"] = $scope.model.user.length + 1;
             $scope.model.user.unshift(tmp);
 
