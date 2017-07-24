@@ -27,6 +27,8 @@ module.exports = function (app) {
                 }
             });
             break;
+        case parameters.WORK_EXPERIENCE:
+            break;
         case parameters.TOOLS:
             break;
         case parameters.SKILLS:
@@ -36,8 +38,6 @@ module.exports = function (app) {
         }
     });
 };
-
-
 
 module.exports = function(app){
     console.log("Education Test")

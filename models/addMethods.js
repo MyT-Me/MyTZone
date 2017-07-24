@@ -42,6 +42,7 @@ var RecognizedExpertiseScore = models.RecognizedExpertiseScore;
 var PatentsScore = models.PatentsScore;
 var LanguagesScore = models.LanguagesScore;
 var LeisureTravelScore = models.LeisureTravelScore;
+var WorkExperience = models.WorkExperience;
 // Need to Add Tools, Skills and Points Soon
 
 /*
@@ -119,9 +120,13 @@ exports.addWorkExperience = function(req,callback){
         } else {
             console.log(profile.userName);
             console.log(req.body)
-            var workExperience = new WorkExperience(req.body);
-            profile.WorkExperience.push(req.body);
+            var newWorkExperience = new WorkExperience(req.body);
+            profile.workExperience.workExperienceData.push(newWorkExperience);
             profile.save(function(err){
+            if(err)
+                {
+                    console.log(err);
+                }
             callback(err);
             })
         }

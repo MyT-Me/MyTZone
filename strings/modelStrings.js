@@ -17,6 +17,7 @@ module.exports = {
     SKILLS: 'skills',
     POINTS: 'points',
     EDUCATION_SCORE: 'educationScore',
+    WORK_EXPERIENCE_SCORE: 'workExperienceScore',
     CERTIFICATE_SCORE: 'certificateScore',
     TAKING_CLASSES_SCORE: 'takingClassesScore',
     CONDUCTING_CLASSES_SCORE: 'conductingClassesScore',

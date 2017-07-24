@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
  require('mongoose-type-email');
 var momemt = require('moment');
 var momemtTime = require('moment-timezone-all');
-var schema = mongoose.Schema();
+var schema = mongoose.Schema(); 
 var crypt = require('bcrypt-nodejs');
 
 
@@ -22,6 +22,10 @@ var educationSchema = new mongoose.Schema({
    programStatus:{type: String, required:true},
    honors:{type: Boolean},
    timeStamp:{type:String}
+});
+
+var workExperienceSchema = new mongoose.Schema({
+
 });
 
 var certificateSchema = new mongoose.Schema({
@@ -106,29 +110,6 @@ var leisureTravelSchema = new mongoose.Schema({
 });
 
 
-var employerSectionSchema = new mongoose.Schema({
-    employerSectionOfFocus: {type:String, required:true},
-    location:{type:String, required:true},
-    position: {type:String,required:true},
-    primaryFunction: {type:String,required:true},
-    yourRole:{type:String, required:true},
-    teamSize: {type:Number, required:true},
-    teamMultiDisciplinaryMakeup : {type:String , required:true},
-    teamMultiCulturalMakeup : {type:String , required:true},
-    startMonth:{type:Date, required:true},
-    startYear:{type:Date, required:true},
-    endMonth:{type:Date, required:true},
-    endYear : {type:Date,required:true},
-    startMonth:{type:Date, required:true},
-    paidUnPaid : {type:Boolean, required:true}
-});
-
-var workExperienceSchema = new mongoose.Schema({
-    employerOrganizationName: {type: String, required:true},
-    employerSection: [employerSectionSchema]
-});
-
-
 var toolSchema = new mongoose.Schema({
 
 })
@@ -158,9 +139,40 @@ var educationScoreSchema = new mongoose.Schema({
 })
 
 var workExperienceScoreSchema = new mongoose.Schema({
-    
-})
-
+    customId: {type:String},
+    employerSectionOfFocus: {type: String, required: true},
+    employerOrganizationName: {type: String, required: true},
+    locationRegion: {type: String, required: true},
+    startDate: {type: Date,required: true},
+    endDate: {type: Date, required: true},
+    positionDescription: {type: String, required: true},
+    primaryFunction: {type: String, required: true},
+    yourRole: {type: String, required: true},
+    teamSize: {type: Number, required: true},
+    multiDisciplinaryMakeup: {type: String, required: true},
+    multiCulturalMakeup: {type: String, required: true},
+    paidUnpaid: {type:String, required: true},
+    operationsResponsibilities:{
+        selectLocations: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        selectEquipment: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        selectManagingLabor: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        determineProcessing: {type: String, required: true, possibleValues: ['Yes','Some','No']}
+    },
+    criticalThinking: {
+        requiredMetoFormGoals: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        requiredSystematicApproach: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        requiredInquisitive: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        requiredPrioritize: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        requiredConfidence: {type: String, required: true, possibleValues: ['Yes','Some','No']}
+    },
+    systemAndOperationInnovation:{
+        evaluateApplications: {type: String, required: true ,possibleValues: ['Yes','Some','No']},
+        selectApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        specificApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        buildApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        accessBenifitCostValueSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']}
+    }
+});
 
 var certificatesScoreSchema = new mongoose.Schema({
     customId:{type:String},
@@ -170,7 +182,7 @@ var certificatesScoreSchema = new mongoose.Schema({
     year:{type:Date},
     timeStamp:{type:Date},
     certificatesScore: {type:Number,default:0}
-})
+});
 
 var takingClassesScoreSchema = new mongoose.Schema({
     customId:{type:String},
@@ -314,12 +326,11 @@ var pointsScoreSchema = new mongoose.Schema({
 
 })
 
-
 //User Profile
 var UserProfileSchema = new mongoose.Schema({
     firstName: {type: String, required:true},
     lastName: {type:String, required:true},
-    middleName: {type:String, },
+    middleName: {type:String },
     userName: {type:String, required: true, unique:true},
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true, unique:true},
     password:{type:String,required:true},
@@ -328,7 +339,10 @@ var UserProfileSchema = new mongoose.Schema({
         educationData: [educationScoreSchema],
         eduTotalscore:{type:Number,required:true,default:0}
     },
-    workExperience:{},
+    workExperience:{
+        workExperienceData: [workExperienceScoreSchema],
+        workExperienceTotalScore: {type: Number, required: true, default:0}
+    },
     certificates:{
         certificateData: [certificatesScoreSchema],
         certificateTotalScore: {type:Number,required:true,default:0}
@@ -400,6 +414,7 @@ UserProfileSchema.methods.vaildPassword = function(password){
 
 
 //Creating models for schemas
+
 var User =  mongoose.model(strings.USER,UserProfileSchema);
 var Education = mongoose.model(strings.EDUCATION,educationSchema);
 var WorkExperience = mongoose.model(strings.WORK_EXPERIENCE,workExperienceSchema);
@@ -419,6 +434,7 @@ var Skills = mongoose.model(strings.SKILLS,skillsSchema);
 var Points = mongoose.model(strings.POINTS,pointsSchema);
 
 //Creating models for Score Schemas
+var User =  mongoose.model(strings.USER,UserProfileSchema);
 var EducationScore = mongoose.model(strings.EDUCATION_SCORE,educationScoreSchema);
 var CertificateScore = mongoose.model(strings.CERTIFICATE_SCORE,certificatesScoreSchema);
 var TakingClassesScore = mongoose.model(strings.TAKING_CLASSES_SCORE,takingClassesScoreSchema);
@@ -433,28 +449,7 @@ var LanguagesScore = mongoose.model(strings.LANGUAGES_SCORE,languagesScoreSchema
 var LeisureTravelScore = mongoose.model(strings.LEISURE_TRAVEL_SCORE,leisureTravelScoreSchema);
 var ToolsScore = mongoose.model(strings.TOOLS_SCORE, toolsScoreSchema);
 var SkillsScore = mongoose.model(strings.SKILLS_SCORE, skillsScoreSchema);
-
-//Need to Add Tools, Skills and Points Score Schema
-//Exporting users
-
-/*
-exports.Education = Education;
-exports.WorkExperience = WorkExperience;
-exports.Certificates = Certificates;
-exports.TakingClasses = TakingClasses;
-exports.ConductingClasses = ConductingClasses;
-exports.Mentoring = Mentoring;
-exports.Writings = Writings;
-exports.Conferences = Conferences;
-exports.Awards = Awards;
-exports.RecognizedExpertise = RecognizedExpertise;
-exports.Patents = Patents;
-exports.Languages = Languages;
-exports.LeisureTravel = LeisureTravel;
-exports.Tools = Tools;
-exports.Skills = Skills;
-exports.Points = Points;
-*/
+var WorkExperienceScore = mongoose.model(strings.WORK_EXPERIENCE_SCORE, workExperienceScoreSchema);
 
 //Exporting Schemas with Scores
 exports.User = User;
@@ -472,6 +467,7 @@ exports.LanguagesScore = LanguagesScore;
 exports.LeisureTravelScore = LeisureTravelScore;
 exports.ToolsScore = ToolsScore;
 exports.SkillsScore = SkillsScore;
+exports.WorkExperience = WorkExperienceScore;
 
 exports.Models = {
     User:User,

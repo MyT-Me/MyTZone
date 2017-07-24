@@ -84,7 +84,7 @@
             <!-- Username -->
             <label class="control-label"  for="username">Username</label>
             <div class="controls">
-                <input type="text" id="username" name="username" placeholder="" class="form-control-login">
+                <input type="text" id="username" name="username" placeholder="" class="form-control-login" ng-model="signUp.username">
                 <p class="help-block">Username can contain any letters or numbers, without spaces</p>
             </div>
         </div>
@@ -93,7 +93,7 @@
             <!-- E-mail -->
             <label class="control-label" for="email">E-mail</label>
             <div class="controls">
-                <input type="text" id="email" name="email" placeholder="" class="form-control-login">
+                <input type="text" id="email" name="email" placeholder="" class="form-control-login" ng-model = "signUp.email">
                 <p class="help-block">Please provide your E-mail</p>
             </div>
         </div>
@@ -102,7 +102,7 @@
             <!-- Password-->
             <label class="control-label" for="password">Password</label>
             <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="form-control-login">
+                <input type="password" id="password" name="password" placeholder="" class="form-control-login" ng-model = "signUp.password">
                 <p class="help-block">Password should be at least 4 characters</p>
             </div>
         </div>
@@ -121,7 +121,7 @@
             <!--<div class="controls">
                 <button class="btn btn-success">Register</button>
             </div>-->
-            <a ui-sref="base.educate" class="btn btn-info">
+            <a class="btn btn-info" ng-click = "registerUser()">
                 Register <span class="glyphicon glyphicon-circle-arrow-right"></span>
             </a>
         </div>
