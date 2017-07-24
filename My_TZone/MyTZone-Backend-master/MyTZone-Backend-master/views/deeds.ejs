@@ -1,0 +1,757 @@
+<section>
+    <nav1>
+        <ol class="cd-multi-steps text-bottom count" id="status-buttons">
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.login">Login</a></li>
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.educate">Education</a></li>
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.work">Work</a></li>
+            <li class="current"><a href="#0" ui-sref-active="active" ui-sref="base.deeds">Deeds</a></li>
+            <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.skills">Skills</a></li>
+            <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.tools">Tools</a></li>
+            <li class="not"><a href="#0">T-Score</a></li>
+        </ol>
+    </nav1>
+</section>
+
+<div id="headingmain" ng-app="FormlyApp">
+    <h1 id="heading_login">Deeds</h1>
+    <div id="inside" class="container">
+        <p>
+            Record activities related to your deeds.
+        </p>
+        <p>
+            Complete all details for one entry before saving and selecting the next applicable deed category.
+        </p>
+        <button ng-click="showTheFormdeed = !showTheFormdeed; setDefaultDeed()" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span> Add New
+        </button>
+    </div>
+
+    <div class="row" id="tablediv" ng-hide="!model.deeds.length">
+        <div class="col-md-12">
+            <table id="tabledit" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <!--<th><input type="checkbox" ng-model="selectedAll" ng-click="checkAlldeed()" /></th>-->
+                    <th>S.No</th>
+                    <th ng-click="orderByField='syear'; reverseSort = !reverseSort">
+                        Start Year<span class="glyphicon glyphicon-sort"></span><span
+                            ng-show="orderByField == 'syear'"><span ng-show="!reverseSort"></span><span
+                            ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='syear'; reverseSort = !reverseSort">
+                        Start Month<span class="glyphicon glyphicon-sort"></span><span
+                            ng-show="orderByField == 'syear'"><span ng-show="!reverseSort"></span><span
+                            ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='syear'; reverseSort = !reverseSort">
+                        Deed Category<span class="glyphicon glyphicon-sort"></span><span
+                            ng-show="orderByField == 'syear'"><span ng-show="!reverseSort"></span><span
+                            ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='syear'; reverseSort = !reverseSort">
+                        Activity<span class="glyphicon glyphicon-sort"></span><span ng-show="orderByField == 'syear'"><span
+                            ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='syear'; reverseSort = !reverseSort">
+                        Description<span class="glyphicon glyphicon-sort"></span> <span
+                            ng-show="orderByField == 'syear'"><span ng-show="!reverseSort"></span><span
+                            ng-show="reverseSort"></span></span>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="deed in model.deeds|orderBy:orderByField:reverseSort" ng-include="getTemplatedeed(deed)">
+                </tr>
+                </tbody>
+            </table>
+
+            <script type="text/ng-template" id="display">
+                <td class="question">{{deed.id}}</td>
+                <td class="question">{{deed.syear}}</td>
+                <td class="question">{{deed.smonth}}</td>
+                <td class="question">{{deed.category}}</td>
+                <td class="question">{{deed.activity}}</td>
+                <td class="question">{{deed.deeddes}}</td>
+                <td class="question">
+                    <button class="btn btn-default btn-info" ng-click="editDeed(deed.id);"><span
+                            class="glyphicon glyphicon-edit"></span></button>
+                    <button class="btn btn-default btn-danger" ng-click="removedeed(deed.id)" ng-model="deed.selected"><span
+                            class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </script>
+        </div>
+    </div>
+
+    <div ng-show="showTheFormdeed" ng-cloak id="deedcon" class="container col-lg-4">
+        <!--<p>Click on the buttons inside the tabbed menu:</p>-->
+
+        <div class="tab" id="deedcon1">
+            <button class="tablinks" ng-click="openDeed($event, 'certificates')" id="defaultOpen">Certificates</button>
+            <button class="tablinks" ng-click="openDeed($event, 'takingclasses')">Taking Classes</button>
+            <button class="tablinks" ng-click="openDeed($event, 'conductingclasses')">Conducting Classes</button>
+            <button class="tablinks" ng-click="openDeed($event, 'mentoring')">Mentoring</button>
+            <button class="tablinks" ng-click="openDeed($event, 'writing')">Writing</button>
+            <button class="tablinks" ng-click="openDeed($event, 'conferences')">Conferences</button>
+            <button class="tablinks" ng-click="openDeed($event, 'awards')">Awards</button>
+            <button class="tablinks" ng-click="openDeed($event, 'recognizedexp')">Recognized Expertise</button>
+            <button class="tablinks" ng-click="openDeed($event, 'patents')">Patents</button>
+            <button class="tablinks" ng-click="openDeed($event, 'leisure')">Leisure</button>
+            <button class="tablinks" ng-click="openDeed($event, 'languages')">Languages</button>
+        </div>
+
+        <div id="certificates" class="tabcontent">
+            <h3>Certificates</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('certificates');addNewdeed('certificates');" name="myForm"
+                  novalidate>
+                <!--<input type="text" ng-model="formData.category" value="certificates" ng-show="false" />-->
+                <div class="form-group" id="activity" required>
+                    <label for="activity">Choose Specific Activity</label><br/>
+                    <input type="radio" name="cert" value="certification" ng-model="formDatadeed.activity">&nbsp;Certification:
+                    State/Federal/Professional<br/>
+                    <input type="radio" name="cert" value="license" ng-model="formDatadeed.activity">&nbsp;License awarded<br/>
+
+                    <!--<select class="form-control" id="activity" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="certification">Certification: State/Federal/Professional</option>-->
+                    <!--<option value="licence">Licence awarded</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="deed">Deed Description</label>
+                    <input type="text" class="form-control" id="deed" placeholder="Enter the deed description"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth">Start</label>
+                    <select id="smonth" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="syear" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+
+        </div>
+
+        <div id="takingclasses" class="tabcontent">
+            <h3>Taking Classes</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('takingclasses');addNewdeed('takingclasses');" name="myForm"
+                  novalidate>
+                <!--<input type="text" ng-model="formData.category" value="takingclasses" ng-show="false" />-->
+                <div class="form-group" id="activity1" ng-model="formDatadeed.activity" required>
+                    <label>Choose Specific Activity</label><br/>
+                    <input type="radio" name="tc" value="1-2 day" ng-model="formDatadeed.activity">&nbsp;1-2 day<br/>
+                    <input type="radio" name="tc" value="3-5 day" ng-model="formDatadeed.activity">&nbsp;3-5 day<br/>
+                    <input type="radio" name="tc" value="1-4 week" ng-model="formDatadeed.activity">&nbsp;1-4 week<br/>
+                    <input type="radio" name="tc" value="4 week/ semester course" ng-model="formDatadeed.activity">&nbsp;4 week/ semester course<br/>
+                    <input type="radio" name="tc" value="Mark for each Certificate of completion received" ng-model="formDatadeed.activity">&nbsp;Mark for
+                    each Certificate of completion received
+
+                    <!--<select class="form-control" id="activity1" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="1-2 day">1-2 day</option>-->
+                    <!--<option value="3-5 day">3-5 day</option>-->
+                    <!--<option value="1-4 week">1-4 week</option>-->
+                    <!--<option value="4 week/ semester course">4 week/ semester course</option>-->
+                    <!--<option value="Mark for each Certificate of completion received">Mark for each Certificate of completion received</option>-->
+                    <!--</select>-->
+
+                </div>
+
+                <div class="form-group">
+                    <label for="deed1">Deed Description</label>
+                    <input type="text" class="form-control" id="deed1" placeholder="Enter the deed description"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth1">Start</label>
+                    <select id="smonth1" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start1" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start1" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+
+        <div id="conductingclasses" class="tabcontent">
+            <h3>Conducting Classes</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('conductingclasses');addNewdeed('conductingclasses');" name="myForm"
+                  novalidate>
+                <div class="form-group" id="activity2" ng-model="formDatadeed.activity" required>
+                    <label>Choose Specific Activity</label><br/>
+                    <input type="radio" name="cc" value="Conduct 1 hour or longer Briefing/Invited
+                    lecture" ng-model="formDatadeed.activity">&nbsp;Conduct 1 hour or longer Briefing/Invited
+                    lecture<br/>
+                    <input type="radio" name="cc" value="Conduct 1-2 day briefing/workshop" ng-model="formDatadeed.activity">&nbsp;Conduct 1-2 day briefing/workshop<br/>
+                    <input type="radio" name="cc" value="Conduct 3-5 day briefing/workshop" ng-model="formDatadeed.activity">&nbsp;Conduct 3-5 day briefing/workshop<br/>
+                    <input type="radio" name="cc" value="Teaching Assistant/ Lab Assistant for Sem/Qtr
+                    course" ng-model="formDatadeed.activity">&nbsp;Teaching Assistant/ Lab Assistant for Sem/Qtr
+                    course<br/>
+                    <input type="radio" name="cc" value="Teacher for full Semester course" ng-model="formDatadeed.activity">&nbsp;Teacher for full Semester course
+
+                    <!--<select class="form-control" id="activity2" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value6">Conduct 1 hour or longer Briefing/Invited lecture</option>-->
+                    <!--<option value="value7">Conduct 1-2 day briefing/workshop</option>-->
+                    <!--<option value="value8">Conduct 3-5 day briefing/workshop</option>-->
+                    <!--<option value="value9">Teaching Assistant/ Lab Assistant for Sem/Qtr course</option>-->
+                    <!--<option value="value10">Teacher for full Semester course</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="deed2">Deed Description</label>
+                    <input type="text" class="form-control" id="deed2" placeholder="Enter the deed description"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth2">Start</label>
+                    <select id="smonth2" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start2" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start2" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+        <div id="mentoring" class="tabcontent">
+            <h3>Mentoring</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('mentoring');addNewdeed('mentoring');" name="myForm" novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="mentoring"
+                       ng-model="formDatadeed.category"/>
+                <div class="form-group" id="activity3" ng-model="formDatadeed.activity" required>
+                    <label for="activity1">Choose Specific Activity</label><br/>
+                    <input type="radio" name="mentor" value="Employee/student/colleague" ng-model="formDatadeed.activity">&nbsp;Employee/student/colleague<br/>
+                    <input type="radio" name="mentor" value="Sponsor student or employee project" ng-model="formDatadeed.activity">&nbsp;Sponsor student or employee project<br/>
+                    <input type="radio" name="mentor" value="Group leader" ng-model="formDatadeed.activity">&nbsp;Group leader<br/>
+
+                    <!--<select class="form-control" id="activity3" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value11">Employee/student/colleague</option>-->
+                    <!--<option value="value12">Sponsor student or employee project</option>-->
+                    <!--<option value="value13">Group leader</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="deed3">Deed Description</label>
+                    <input type="text" class="form-control" id="deed3" placeholder="Enter the deed description"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth3">Start</label>
+                    <select id="smonth3" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start3" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start3" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+
+        <div id="writing" class="tabcontent">
+            <h3>Writing</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('writing');addNewdeed('writing');" name="myForm" novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="writing"
+                       ng-model="formDatadeed.category"/>
+                <div class="form-group" id="activity4" ng-model="formDatadeed.activity" required>
+                    <label for="activity4">Choose Specific Activity</label><br/>
+                    <input type="radio" name="mentor" value="Regular blog related to professional Information" ng-model="formDatadeed.activity">&nbsp;Regular blog related to professional Information<br/>
+                    <input type="radio" name="mentor" value="Reviewed paper-Journal or Conference proceedings" ng-model="formDatadeed.activity">&nbsp;Reviewed paper-Journal or Conference proceedings<br/>
+                    <input type="radio" name="mentor" value="Refereed paper / MS-MA Thesis" ng-model="formDatadeed.activity">&nbsp;Refereed paper / MS-MA Thesis<br/>
+                    <input type="radio" name="mentor" value="White Paper/Book Chapter/ BS-BA individial
+                    capstone project" ng-model="formDatadeed.activity">&nbsp;White Paper/Book Chapter/ BS-BA individial
+                    capstone project<br/>
+                    <input type="radio" name="mentor" value="Book author/ Editor/ PHd - DSc Dissertation" ng-model="formDatadeed.activity">&nbsp;Book author/ Editor/ PHd - DSc Dissertation<br/>
+                    <input type="radio" name="mentor" value="Internal Tech Report/ Internal project report/
+                    BS-BA team capstone project" ng-model="formDatadeed.activity">&nbsp;Internal Tech Report/ Internal project report/
+                    BS-BA team capstone project<br/>
+
+
+                    <!--<select class="form-control" id="activity4" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value11">Regular blog related to professional Information</option>-->
+                    <!--<option value="value12">Reviewed paper-Journal or Conference proceedings</option>-->
+                    <!--<option value="value13">Refereed paper / MS-MA Thesis</option>-->
+                    <!--<option value="value14">White Paper/Book Chapter/ BS-BA individial capstone project</option>-->
+                    <!--<option value="value15">Book author/ Editor/ PHd - DSc Dissertation</option>-->
+                    <!--<option value="value16">Internal Tech Report/ Internal project report/ BS-BA team capstone project</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="publication">Publication Name/ Award Sponsor/ Conference Sponsor</label>
+                    <input type="text" class="form-control" id="publication" placeholder="Enter the Publication Name"
+                           ng-model="formDatadeed.pub"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="article">Article Title/ Award Title/ Presentation Title </label>
+                    <input type="text" class="form-control" id="article" placeholder="Enter the Article Title"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth4">Start</label>
+                    <select id="smonth4" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start4" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start4" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub1">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+
+        <div id="conferences" class="tabcontent">
+            <h3>Conferences</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('conferences');addNewdeed('conferences');" name="myForm"
+                  novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="conferences"
+                       ng-model="formDatadeed.category"/>
+                <div class="form-group" id="activity5" ng-model="formDatadeed.activity" required>
+                    <label for="activity5">Choose Specific Activity</label><br/>
+                    <input type="radio" name="conf" value="Attendee" ng-model="formDatadeed.activity">&nbsp;Attendee<br/>
+                    <input type="radio" name="conf" value="Presenter" ng-model="formDatadeed.activity">&nbsp;Presenter<br/>
+                    <input type="radio" name="conf" value="Co-author of presentation - No attendance" ng-model="formDatadeed.activity">&nbsp;Co-author of presentation - No attendance<br/>
+
+                    <!--<select class="form-control" id="activity5" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value17">Attendee</option>-->
+                    <!--<option value="value18">Presenter</option>-->
+                    <!--<option value="value19">Co-author of presentation - No attendance</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="confname">Publication Name/ Award Sponsor/ Conference Sponsor</label>
+                    <input type="text" class="form-control" id="confname" placeholder="Enter the Conference Sponsor"
+                           ng-model="formDatadeed.pub"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confarticle">Article Title/ Award Title/ Presentation Title </label>
+                    <input type="text" class="form-control" id="confarticle" placeholder="Enter the Presentation Title"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth5">Start</label>
+                    <select id="smonth5" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start5" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start5" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub1">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+
+        <div id="awards" class="tabcontent">
+            <h3>Awards</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('awards');addNewdeed('awards');" name="myForm" novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="awards"
+                       ng-model="formDatadeed.category"/>
+                <div class="form-group" id="activity6" ng-model="formDatadeed.activity" required>
+                    <label for="activity6">Choose Specific Activity</label><br/>
+                    <input type="radio" name="awards" value="Apply for regional competitive grant or
+                    contest" ng-model="formDatadeed.activity">&nbsp;Apply for regional competitive grant or contest<br/>
+                    <input type="radio" name="awards" value="Apply for national/International grant or
+                    contest" ng-model="formDatadeed.activity">&nbsp;Apply for national/International grant or contest<br/>
+                    <input type="radio" name="awards" value="Win grant award or place 1st in
+                    publication,presentation or innovation contest" ng-model="formDatadeed.activity">&nbsp;Win grant award or place 1st in
+                    publication,presentation or innovation contest<br/>
+                    <input type="radio" name="awards" value="Win 2nd or 3rd in publication, presentation or
+                    innovation contest" ng-model="formDatadeed.activity">&nbsp;Win 2nd or 3rd in publication, presentation or
+                    innovation contest<br/>
+                    <input type="radio" name="awards" value="Other local honor or award conferred" ng-model="formDatadeed.activity">&nbsp;Other local honor or award conferred<br/>
+                    <input type="radio" name="awards" value="Other National honor or award conferred" ng-model="formDatadeed.activity">&nbsp;Other National honor or award conferred<br/>
+                    <input type="radio" name="awards" value="Other International honor or award
+                    conferred" ng-model="formDatadeed.activity">&nbsp;Other International honor or award
+                    conferred<br/>
+                    <input type="radio" name="awards" value="Fellow/Diplomate" ng-model="formDatadeed.activity">&nbsp;Fellow/Diplomate<br/>
+
+
+                    <!--<select class="form-control" id="activity6" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value17">Apply for regional competitive grant or contest</option>-->
+                    <!--<option value="value18">Apply for national/International grant or contest</option>-->
+                    <!--<option value="value19">Win grant award or place 1st in publication,presentation or innovation contest</option>-->
+                    <!--<option value="value17">Win 2nd or 3rd in publication, presentation or innovation contest</option>-->
+                    <!--<option value="value18">Other local honor or award conferred</option>-->
+                    <!--<option value="value19">Other National honor or award conferred</option>-->
+                    <!--<option value="value18">Other International honor or award conferred</option>-->
+                    <!--<option value="value19">Fellow/Diplomate</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="awardname">Publication Name/ Award Sponsor/ Conference Sponsor</label>
+                    <input type="text" class="form-control" id="awardname" placeholder="Enter the Award Sponsor"
+                           ng-model="formDatadeed.pub"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="awardtitle">Article Title/ Award Title/ Presentation Title </label>
+                    <input type="text" class="form-control" id="awardtitle" placeholder="Enter the Award Title"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth6">Start</label>
+                    <select id="smonth6" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start6" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start6" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub1">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+
+        <div id="recognizedexp" class="tabcontent">
+            <h3>Recognized Expertise</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('recognizedexp');addNewdeed('recognizedexp');" name="myForm"
+                  novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="recognizedexp"
+                       ng-model="formDatadeed.category"/>
+                <div class="form-group" id="activity7" ng-model="formDatadeed.activity" required>
+                    <label for="activity1">Choose Specific Activity</label><br/>
+                    <input type="radio" name="re" value="Team member" ng-model="formDatadeed.activity">&nbsp;Team member<br/>
+                    <input type="radio" name="re" value="Position/Consultancy" ng-model="formDatadeed.activity">&nbsp;Position/Consultancy<br/>
+                    <input type="radio" name="re" value="Expert Testimony" ng-model="formDatadeed.activity">&nbsp;Expert Testimony<br/>
+                    <input type="radio" name="re" value="Panel/talk/authorship" ng-model="formDatadeed.activity">&nbsp;Panel/talk/authorship<br/>
+
+                    <!--<select class="form-control" id="activity7" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value20">Team member</option>-->
+                    <!--<option value="value21">Position/Consultancy</option>-->
+                    <!--<option value="value22">Expert Testimony</option>-->
+                    <!--<option value="value23">Panel/talk/authorship</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="deed4">Deed Description</label>
+                    <input type="text" class="form-control" id="deed4" placeholder="Enter the deed description"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth8">Start</label>
+                    <select id="smonth8" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start8" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start8" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+
+        <div id="patents" class="tabcontent">
+            <h3>Patents</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('patents');addNewdeed('patents');" name="myForm" novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="patents"
+                       ng-model="formDatadeed.category"/>
+                <div class="form-group" id="activity8" ng-model="formDatadeed.activity" required>
+                    <label for="activity1">Choose Specific Activity</label><br/>
+                    <input type="radio" name="patents" value="Publish" ng-model="formDatadeed.activity">&nbsp;Publish<br/>
+                    <input type="radio" name="patents" value="File" ng-model="formDatadeed.activity">&nbsp;File<br/>
+                    <input type="radio" name="patents" value="Provisional" ng-model="formDatadeed.activity">&nbsp;Provisional<br/>
+                    <input type="radio" name="patents" value="Award" ng-model="formDatadeed.activity">&nbsp;Award<br/>
+
+                    <!--<select class="form-control" id="activity8" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value24">Publish</option>-->
+                    <!--<option value="value25">File</option>-->
+                    <!--<option value="value26">Provisional</option>-->
+                    <!--<option value="value27">Award</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="deed4">Deed Description</label>
+                    <input type="text" class="form-control" id="deed5" placeholder="Enter the deed description"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth9">Start</label>
+                    <select id="smonth9" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start9" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start9" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+        <div id="languages" class="tabcontent">
+            <h3>Languages</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('languages');addNewdeed('languages');" name="myForm" novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="languages"
+                       ng-model="formDatadeed.category"/>
+                <div class="form-group" id="activity9" ng-model="formDatadeed.activity" required>
+                    <label for="activity1">Choose Specific Activity</label><br/>
+                    <input type="radio" name="languages" value="Fluent in 2nd language " ng-model="formDatadeed.activity">&nbsp;Fluent in 2nd language <br/>
+                    <input type="radio" name="languages" value="Fluent in 3rd language" ng-model="formDatadeed.activity">&nbsp;Fluent in 3rd language<br/>
+                    <input type="radio" name="languages" value="Fluent in 4 or more languages" ng-model="formDatadeed.activity">&nbsp;Fluent in 4 or more languages<br/>
+
+                    <!--<select class="form-control" id="activity9" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value24">Fluent in 2nd language </option>-->
+                    <!--<option value="value25">Fluent in 3rd language</option>-->
+                    <!--<option value="value26">Fluent in 4 or more languages</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="deed4">Deed Description</label>
+                    <input type="text" class="form-control" id="deed6" placeholder="Enter the deed description"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth10">Start</label>
+                    <select id="smonth10" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start10" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start10" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+                <button type="submit" value="submit" class="btn btn-default btnsub">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+        </div>
+
+        <div id="leisure" class="tabcontent">
+            <h3>Leisure Travel</h3>
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('leisure');addNewdeed('leisure');" name="myForm" novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="leisure"
+                       ng-model="formDatadeed.category"/>
+                <div class="form-group" id="activity10" ng-model="formDatadeed.activity" required>
+                    <label for="activity1">Choose Specific Activity</label><br/>
+                    <input type="radio" name="leisure" value="&nbsp;National < 1 month cumulative" ng-model="formDatadeed.activity">&nbsp;National < 1 month cumulative<br/>
+                    <input type="radio" name="leisure" value="National > 1 month cumulative" ng-model="formDatadeed.activity">&nbsp;National > 1 month cumulative<br/>
+                    <input type="radio" name="leisure" value="International < 2 weeks cumulative" ng-model="formDatadeed.activity">&nbsp;International < 2 weeks cumulative<br/>
+                    <input type="radio" name="leisure" value="International 2-4 weeks cumulative" ng-model="formDatadeed.activity">&nbsp;International 2-4 weeks cumulative<br/>
+                    <input type="radio" name="leisure" value="International >4 weeks cumulative" ng-model="formDatadeed.activity">&nbsp;International >4 weeks cumulative<br/>
+                    <!---->
+                    <!--<select class="form-control" id="activity10" ng-model="formData.activity" required>-->
+                    <!--<option value="" selected>select a specific activity</option>-->
+                    <!--<option value="value24">National < 1 month cumulative </option>-->
+                    <!--<option value="value25">National > 1 month cumulative </option>-->
+                    <!--<option value="value26">International < 2 weeks cumulative</option>-->
+                    <!--<option value="value25">International 2-4 weeks cumulative</option>-->
+                    <!--<option value="value26">International >4 weeks cumulative</option>-->
+                    <!--</select>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="deed4">Deed Description</label>
+                    <input type="text" class="form-control" id="deed7" placeholder="Enter the deed description"
+                           ng-model="formDatadeed.deeddes"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="smonth11">Start</label>
+                    <select id="smonth11" ng-model="formDatadeed.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <!--<select id="start11" ng-model="formDatadeed.syear" required></select>-->
+                    <select id="start11" ng-options="year for year in years" ng-model="formDatadeed.syear" required></select>
+                </div>
+
+
+
+
+                <button type="submit" value="submit" class="btn btn-default btnsub">Submit</button>
+
+                <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<a ui-sref="base.skills" class="btn btn-block btn-info ng-scope" id="work-next">
+    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+</a>
