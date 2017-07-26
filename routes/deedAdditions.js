@@ -3,16 +3,16 @@ var adders = require('../models/addMethods')
 
 
 module.exports = function (app) {
-    console.log("Addition Ran")
+    console.log("Addition Ran");
     app.post('/api/deeds/:id', function (req, res) {
-        if(!(req.params === 0)){
-            switch (req.params.id){
+        if (!(req.params === 0)) {
+            switch (req.params.id) {
             case parameters.EDUCATION:
-                adders.addEducation(req, function (err) {
+                adders.addEducation(req, function (err, sendJson) {
                     if (err) {
                         res.status(500).send(err.message);
                     } else {
-                        res.status(201).json({"operation": "education added"});
+                        res.status(201).json(sendJson);
                     }
                 });
                 break;

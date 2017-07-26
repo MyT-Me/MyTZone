@@ -9,8 +9,8 @@ var mongoose = require('mongoose');
 var momemt = require('moment');
 var momemtTime = require('moment-timezone-all');
 var schema = mongoose.Schema(); 
-var crypt = require('bcrypt-nodejs');
-
+var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 
 
 var educationSchema = new mongoose.Schema({
@@ -334,6 +334,8 @@ var UserProfileSchema = new mongoose.Schema({
     userName: {type:String, required: true, unique:true},
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true, unique:true},
     password:{type:String,required:true},
+    salt: {type:String},
+    hash: {type: String},
     firstYear: {type:Date},
     education:{
         educationData: [educationScoreSchema],
@@ -403,14 +405,35 @@ var UserProfileSchema = new mongoose.Schema({
 });
 
 
-//Methods Will be Here till we find a better way to implement it
-UserProfileSchema.methods.generateHas = function(password){
-    return crypt.hashSync(password,crypt.genSaltSync(), null);
+//Methods that Set and Validate Password
+
+UserProfileSchema.methods.setPassword = function(password) {
+    this.salt = crypto.randomBytes(16).toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
 
+
+//Methods Will be Here till we find a better way to implement it
+
+
 UserProfileSchema.methods.vaildPassword = function(password){
-    return crypt.compareSync(password, this.password);
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    return this.hash === hash;
 };
+
+//Method to Create a JWT
+UserProfileSchema.methods.generateJWT = function(){
+    var expiry = new Date();
+    expiry.setDate(expiry.getDate()+7);
+
+    return jwt.sign({
+        _id: this._id,
+        email: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        exp: parseInt(expiry.getTime()/1000)
+    },"myTZone");
+}
 
 
 //Creating models for schemas

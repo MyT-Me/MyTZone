@@ -107,8 +107,6 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
 
     $scope.educationInit = function(){
         alert("Education Initialized");
-        console.log("Education Page Initialized");
-        console.log($location.url());
         $http.get('/api/education')
             .then(function(res){
                 if(res.data != null)
@@ -118,7 +116,6 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
                         $scope.eduDetails = [];
                         var ourEducationData = res.data.educationData;
                         ourEducationData.forEach(function(educationElement){
-                            console.log(educationElement);
                             $scope.eduDetails.push({
                                  'school': educationElement.schoolName,
                                  'field': educationElement.fieldOfStudy,
@@ -166,6 +163,7 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
         // $scope.workDataList.unshift(this.workData);
         // $scope.model.recent = this.workData;
         // this.workData = {};
+        console.log("Check After this");
         console.dir($scope.eduDetails);
         console.log($scope.eduDetails);
     };

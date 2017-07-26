@@ -1,11 +1,12 @@
 var parameters = require('../strings/apiParameters');
 module.exports = function (app) {
-    app.put('/api/deeds/:id',function (req,res) {
-        if(!req.params==0){
+    app.put('/api/deeds/:id', function (req, res) {
+        if(!req.params === 0){
             console.log("Inside the Edit API (PUT)");
-            switch (req.params.id){
+            switch (req.params.id) {
                 case parameters.EDUCATION:
-                    console.log("Inside Education")
+                    console.log("Inside Edit Education");
+                    
                     break;
                 case parameters.WORK_EXPERIENCE:
                     break;

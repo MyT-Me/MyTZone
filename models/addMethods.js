@@ -80,32 +80,31 @@ exports.createUser = function(req,callback) {
     })
 }
 
-exports.addEducation = function(req,callback){
+exports.addEducation = function (req, callback) {
     console.log("Education Add method");
-    User.findOne({"email": "revanthpenugonda@gmail.com"},function(err,profile){
-        if(err){
+    User.findOne({"email": "revanthpenugonda@gmail.com"}, function (err, profile) {
+        if (err) {
             console.log("Err Block");
-            callback(err);
-        } else if(profile== null) {
+            callback(err, null);
+        } else if (profile === null) {
             console.log("Profile EMpty log");
-            callback(new Error("No User Found"));
+            callback(new Error("No User Found"), null);
         } else {
             console.log(profile.userName);
-            console.log(req.body)
+            console.log(req.body);
             console.log("I found the User");
             var newEducation = new EducationScore(req.body);
-            
             newEducation.educationScore = 10;
             var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
-            newEducation.customId = stringValues.EDUCATION+time;
+            newEducation.customId = stringValues.EDUCATION + time;
             newEducation.timeStamp = time;
             profile.education.educationData.push(newEducation);
-            profile.save(function(err){
+            profile.save(function (err) {
                 //console.log(err.toString())
-            callback(err);
-            })
+                callback(err, newEducation.customId);
+            });
         }
-    })
+    });
 }
 
 exports.addWorkExperience = function(req,callback){
