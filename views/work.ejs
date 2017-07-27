@@ -309,33 +309,13 @@
                     <table>
                         <tr><label>Choose Paid/Unpaid</label></tr>
                         <tr>
-                            <td class="question question1"><label for="Profit-paid">For profit-paid</label> <input type="radio"
-                                                                                        ng-model="workData.paid"
-                                                                                        name="paid" id="Profit-paid"
-                                                                                        value="Profit-paid"></td>
-                            <td class="question question1"><label for="Profit-unpaid">For profit - unpaid</label> <input type="radio"
-                                                                                              ng-model="workData.paid"
-                                                                                              name="paid"
-                                                                                              id="Profit-unpaid"
-                                                                                              value="Profit-unpaid">
-                            </td>
-                            <td class="question question1"><label for="Non-profit-Unpaid">For Non-Profit Unpaid</label> <input type="radio"
-                                                                                                    ng-model="workData.paid"
-                                                                                                    name="paid"
-                                                                                                    id="Non-profit-Unpaid"
-                                                                                                    value="Non-profit-Unpaid">
-                            </td>
-                            <td class="question question1"><label for="Non-profit-Paid">For Non-Profit Paid</label> <input type="radio"
-                                                                                                ng-model="workData.paid"
-                                                                                                name="paid"
-                                                                                                id="Non-profit-Paid"
-                                                                                                value="Non-profit-Paid">
-                            </td>
+                            <td class="question question1"><label for="Profit-paid">For profit-paid</label> <input type="radio" ng-model="workData.paid" name="paid" id="Profit-paid" value="Profit-paid"></td>
+                            <td class="question question1"><label for="Profit-unpaid">For profit - unpaid</label> <input type="radio" ng-model="workData.paid" name="paid" id="Profit-unpaid" value="Profit-unpaid"></td>
+                            <td class="question question1"><label for="Non-profit-Unpaid">For Non-Profit Unpaid</label> <input type="radio" ng-model="workData.paid" name="paid" id="Non-profit-Unpaid" value="Non-profit-Unpaid"></td>
+                            <td class="question question1"><label for="Non-profit-Paid">For Non-Profit Paid</label> <input type="radio" ng-model="workData.paid" name="paid" id="Non-profit-Paid" value="Non-profit-Paid"></td>
                         </tr>
                     </table>
                 </div>
-
-
                 <!--<p>form = {{user}}</p>-->
                 <!--ng-disabled="myForm.$invalid"-->
         </div>
@@ -347,18 +327,18 @@
 
             <table>
                 <tr>
-                    <td><label class="lab">Operation Responsibilities</label></td>
+                    <td><label>Operation Responsibilities</label></td>
                 </tr>
                 <tr>
                     <td><p class="content"><label>1</label>&nbsp;&nbsp;Select location(s): Where people/systems for this
                         do business - Physically and online</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q1" id="yes" ng-value="yes" ng-model="workData.operationsResponsibilities.selectLocations">&nbsp<label
+                            <input type="radio" name="q1" id="yes" value="yes" ng-model="workData.q1">&nbsp<label
                                 class="labell" for="yes">Yes</label></li>
-                            <input type="radio" name="q1" id="no" ng-value="no" ng-model="workData.operationsResponsibilities.selectLocations"
+                            <input type="radio" name="q1" id="no" value="no" ng-model="workData.q1"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q1" id="some" ng-value="some" ng-model="workData.operationsResponsibilities.selectLocations">&nbsp<label
+                            <input type="radio" name="q1" id="some" value="some" ng-model="workData.q1">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -368,11 +348,11 @@
                         done.</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q2" id="yes" ng-value="yes" ng-model="workData.operationsResponsibilities.selectEquipment">&nbsp<label
+                            <input type="radio" name="q2" id="yes" value="yes" ng-model="workData.q2">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q2" id="no" ng-value="no" ng-model="workData.operationsResponsibilities.selectEquipment"
+                            <input type="radio" name="q2" id="no" value="no" ng-model="workData.q2"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q2" id="some" ng-value="some" ng-model="workData.operationsResponsibilities.selectEquipment">&nbsp<label
+                            <input type="radio" name="q2" id="some" value="some" ng-model="workData.q2">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -381,11 +361,11 @@
                     <td><p class="content"><label>3</label>&nbsp;&nbsp;Select and managing the labor resources</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q3" id="yes" value="yes" ng-model="workData.operationsResponsibilities.selectManagingLabor">&nbsp<label
+                            <input type="radio" name="q3" id="yes" value="yes" ng-model="workData.q3">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q3" id="no" value="no" ng-model="workData.operationsResponsibilities.selectManagingLabor"
+                            <input type="radio" name="q3" id="no" value="no" ng-model="workData.q3"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q3" id="some" value="some" ng-model="workData.operationsResponsibilities.selectManagingLabor">&nbsp<label
+                            <input type="radio" name="q3" id="some" value="some" ng-model="workData.q3">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -395,11 +375,11 @@
                         deadlines,procedures as needed, including systems for quality control and improvement</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q4" id="yes" value="yes" ng-model="workData.operationsResponsibilities.determineProcessing">&nbsp<label
+                            <input type="radio" name="q4" id="yes" value="yes" ng-model="workData.q4">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q4" id="no" value="no" ng-model="workData.operationsResponsibilities.determineProcessing"
+                            <input type="radio" name="q4" id="no" value="no" ng-model="workData.q4"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q4" id="some" value="some" ng-model="workData.operationsResponsibilities.determineProcessing">&nbsp<label
+                            <input type="radio" name="q4" id="some" value="some" ng-model="workData.q4">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -408,18 +388,18 @@
             &nbsp;
             <table>
                 <tr>
-                    <td><label class="lab">Critical Thinking</label></td>
+                    <td><label>Critical Thinking</label></td>
                 </tr>
                 <tr>
                     <td><p class="content"><label>1</label>&nbsp;&nbsp;Required me to form goals based on reason and
                         evidence</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q5" id="yes" value="yes" ng-model="workData.criticalThinking.requiredMetoFormGoals">&nbsp<label
+                            <input type="radio" name="q5" id="yes" value="yes" ng-model="workData.q5">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q5" id="no" value="no" ng-model="workData.criticalThinking.requiredMetoFormGoals"
+                            <input type="radio" name="q5" id="no" value="no" ng-model="workData.q5"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q5" id="some" value="some" ng-model="workData.criticalThinking.requiredMetoFormGoals">&nbsp<label
+                            <input type="radio" name="q5" id="some" value="some" ng-model="workData.q5">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -429,11 +409,11 @@
                         solve problems</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q6" id="yes" value="yes" ng-model="workData.criticalThinking.requiredSystematicApproach">&nbsp<label
+                            <input type="radio" name="q6" id="yes" value="yes" ng-model="workData.q6">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q6" id="no" value="no" ng-model="workData.criticalThinking.requiredSystematicApproach"
+                            <input type="radio" name="q6" id="no" value="no" ng-model="workData.q6"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q6" id="some" value="some" ng-model="workData.criticalThinking.requiredSystematicApproach">&nbsp<label
+                            <input type="radio" name="q6" id="some" value="some" ng-model="workData.q6">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -442,11 +422,11 @@
                     <td><p class="content"><label>3</label>&nbsp;&nbsp;Required me to be inquisitive</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q7" id="yes" value="yes" ng-model="workData.criticalThinking.requiredInquisitive">&nbsp<label
+                            <input type="radio" name="q7" id="yes" value="yes" ng-model="workData.q7">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q7" id="no" value="no" ng-model="workData.criticalThinking.requiredInquisitive"
+                            <input type="radio" name="q7" id="no" value="no" ng-model="workData.q7"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q7" id="some" value="some" ng-model="workData.criticalThinking.requiredInquisitive">&nbsp<label
+                            <input type="radio" name="q7" id="some" value="some" ng-model="workData.q7">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -456,11 +436,11 @@
                         with problems in an orderly manner.</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q8" id="yes" value="yes" ng-model="workData.criticalThinking.requiredPrioritize">&nbsp<label
+                            <input type="radio" name="q8" id="yes" value="yes" ng-model="workData.q8">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q8" id="no" value="no" ng-model="workData.criticalThinking.requiredPrioritize"
+                            <input type="radio" name="q8" id="no" value="no" ng-model="workData.q8"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q8" id="some" value="some" ng-model="workData.criticalThinking.requiredPrioritize">&nbsp<label
+                            <input type="radio" name="q8" id="some" value="some" ng-model="workData.q8">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -470,11 +450,11 @@
                         capabilities.</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q9" id="yes" value="yes" ng-model="workData.criticalThinking.requiredConfidence">&nbsp<label
+                            <input type="radio" name="q9" id="yes" value="yes" ng-model="workData.q9">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q9" id="no" value="no" ng-model="workData.criticalThinking.requiredConfidence"
+                            <input type="radio" name="q9" id="no" value="no" ng-model="workData.q9"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q9" id="some" value="some" ng-model="workData.criticalThinking.requiredConfidence">&nbsp<label
+                            <input type="radio" name="q9" id="some" value="some" ng-model="workData.q9">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -484,17 +464,17 @@
             &nbsp;
             <table>
                 <tr>
-                    <td><label class="lab">System and Operation Innovation</label></td>
+                    <td><label>System and Operation Innovation</label></td>
                 </tr>
                 <tr>
                     <td><p class="content"><label>1</label>&nbsp;&nbsp;Evaluate applications and solutions</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q10" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.evaluateApplications">&nbsp<label
+                            <input type="radio" name="q10" id="yes" value="yes" ng-model="workData.q10">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q10" id="no" value="no" ng-model="workData.systemAndOperationInnovation.evaluateApplications"
+                            <input type="radio" name="q10" id="no" value="no" ng-model="workData.q10"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q10" id="some" value="some" ng-model="workData.systemAndOperationInnovation.evaluateApplications">&nbsp<label
+                            <input type="radio" name="q10" id="some" value="some" ng-model="workData.q10">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -503,11 +483,11 @@
                     <td><p class="content"><label>2</label>&nbsp;&nbsp;Select applications and solutions</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q11" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.selectApplicationsAndSolutions">&nbsp<label
+                            <input type="radio" name="q11" id="yes" value="yes" ng-model="workData.q11">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q11" id="no" value="no" ng-model="workData.systemAndOperationInnovation.selectApplicationsAndSolutions"
+                            <input type="radio" name="q11" id="no" value="no" ng-model="workData.q11"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q11" id="some" value="some" ng-model="workData.systemAndOperationInnovation.selectApplicationsAndSolutions">&nbsp<label
+                            <input type="radio" name="q11" id="some" value="some" ng-model="workData.q11">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -517,11 +497,11 @@
                     </td>
                     <td>
                         <div>
-                            <input type="radio" name="q12" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.specificApplicationsAndSolutions">&nbsp<label
+                            <input type="radio" name="q12" id="yes" value="yes" ng-model="workData.q12">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q12" id="no" value="no" ng-model="workData.systemAndOperationInnovation.specificApplicationsAndSolutions"
+                            <input type="radio" name="q12" id="no" value="no" ng-model="workData.q12"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q12" id="some" value="some" ng-model="workData.systemAndOperationInnovation.specificApplicationsAndSolutions">&nbsp<label
+                            <input type="radio" name="q12" id="some" value="some" ng-model="workData.q12">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -531,11 +511,11 @@
                     </td>
                     <td>
                         <div>
-                            <input type="radio" name="q13" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.buildApplicationsAndSolutions">&nbsp<label
+                            <input type="radio" name="q13" id="yes" value="yes" ng-model="workData.q13">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q13" id="no" value="no" ng-model="workData.systemAndOperationInnovation.buildApplicationsAndSolutions"
+                            <input type="radio" name="q13" id="no" value="no" ng-model="workData.q13"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q13" id="some" value="some" ng-model="workData.systemAndOperationInnovation.buildApplicationsAndSolutions">&nbsp<label
+                            <input type="radio" name="q13" id="some" value="some" ng-model="workData.q13">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -545,11 +525,11 @@
                         applications/solutions</p></td>
                     <td>
                         <div>
-                            <input type="radio" name="q14" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.accessBenifitCostValueSolutions">&nbsp<label
+                            <input type="radio" name="q14" id="yes" value="yes" ng-model="workData.q14">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q14" id="no" value="no" ng-model="workData.systemAndOperationInnovation.accessBenifitCostValueSolutions"
+                            <input type="radio" name="q14" id="no" value="no" ng-model="workData.q14"
                                    ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                            <input type="radio" name="q14" id="some" value="some" ng-model="workData.systemAndOperationInnovation.accessBenifitCostValueSolutions">&nbsp<label
+                            <input type="radio" name="q14" id="some" value="some" ng-model="workData.q14">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
                     </td>
@@ -581,11 +561,11 @@
                             do business - Physically and online</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q1" id="yes" value="yes" ng-model="workData.operationsResponsibilities.selectLocations">&nbsp<label
+                                <input type="radio" name="q1" id="yes" value="yes" ng-model="workData.q1">&nbsp<label
                                     class="labell" for="yes">Yes</label></li>
-                                <input type="radio" name="q1" id="no" value="no" ng-model="workData.operationsResponsibilities.selectLocations"
+                                <input type="radio" name="q1" id="no" value="no" ng-model="workData.q1"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q1" id="some" value="some" ng-model="workData.operationsResponsibilities.selectLocations">&nbsp<label
+                                <input type="radio" name="q1" id="some" value="some" ng-model="workData.q1">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -595,11 +575,11 @@
                             done.</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q2" id="yes" value="yes" ng-model="workData.operationsResponsibilities.selectEquipment">&nbsp<label
+                                <input type="radio" name="q2" id="yes" value="yes" ng-model="workData.q2">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q2" id="no" value="no" ng-model="workData.operationsResponsibilities.selectEquipment"
+                                <input type="radio" name="q2" id="no" value="no" ng-model="workData.q2"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q2" id="some" value="some" ng-model="workData.operationsResponsibilities.selectEquipment">&nbsp<label
+                                <input type="radio" name="q2" id="some" value="some" ng-model="workData.q2">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -608,11 +588,11 @@
                         <td><p class="content"><label>3</label>&nbsp;&nbsp;Select and managing the labor resources</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q3" id="yes" value="yes" ng-model="workData.operationsResponsibilities.selectManagingLabor">&nbsp<label
+                                <input type="radio" name="q3" id="yes" value="yes" ng-model="workData.q3">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q3" id="no" value="no" ng-model="workData.operationsResponsibilities.selectManagingLabor"
+                                <input type="radio" name="q3" id="no" value="no" ng-model="workData.q3"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q3" id="some" value="some" ng-model="workData.operationsResponsibilities.selectManagingLabor">&nbsp<label
+                                <input type="radio" name="q3" id="some" value="some" ng-model="workData.q3">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -622,11 +602,11 @@
                             deadlines,procedures as needed, including systems for quality control and improvement</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q4" id="yes" value="yes" ng-model="workData.operationsResponsibilities.determineProcessing">&nbsp<label
+                                <input type="radio" name="q4" id="yes" value="yes" ng-model="workData.q4">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q4" id="no" value="no" ng-model="workData.operationsResponsibilities.determineProcessing"
+                                <input type="radio" name="q4" id="no" value="no" ng-model="workData.q4"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q4" id="some" value="some" ng-model="workData.operationsResponsibilities.determineProcessing">&nbsp<label
+                                <input type="radio" name="q4" id="some" value="some" ng-model="workData.q4">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -642,11 +622,11 @@
                             evidence</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q5" id="yes" value="yes" ng-model="workData.criticalThinking.requiredMetoFormGoals">&nbsp<label
+                                <input type="radio" name="q5" id="yes" value="yes" ng-model="workData.q5">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q5" id="no" value="no" ng-model="workData.criticalThinking.requiredMetoFormGoals"
+                                <input type="radio" name="q5" id="no" value="no" ng-model="workData.q5"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q5" id="some" value="some" ng-model="workData.criticalThinking.requiredMetoFormGoals">&nbsp<label
+                                <input type="radio" name="q5" id="some" value="some" ng-model="workData.q5">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -656,11 +636,11 @@
                             solve problems</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q6" id="yes" value="yes" ng-model="workData.criticalThinking.requiredSystematicApproach">&nbsp<label
+                                <input type="radio" name="q6" id="yes" value="yes" ng-model="workData.q6">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q6" id="no" value="no" ng-model="workData.criticalThinking.requiredSystematicApproach"
+                                <input type="radio" name="q6" id="no" value="no" ng-model="workData.q6"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q6" id="some" value="some" ng-model="workData.criticalThinking.requiredSystematicApproach">&nbsp<label
+                                <input type="radio" name="q6" id="some" value="some" ng-model="workData.q6">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -669,11 +649,11 @@
                         <td><p class="content"><label>3</label>&nbsp;&nbsp;Required me to be inquisitive</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q7" id="yes" value="yes" ng-model="workData.criticalThinking.requiredInquisitive">&nbsp<label
+                                <input type="radio" name="q7" id="yes" value="yes" ng-model="workData.q7">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q7" id="no" value="no" ng-model="workData.criticalThinking.requiredInquisitive"
+                                <input type="radio" name="q7" id="no" value="no" ng-model="workData.q7"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q7" id="some" value="some" ng-model="workData.criticalThinking.requiredInquisitive">&nbsp<label
+                                <input type="radio" name="q7" id="some" value="some" ng-model="workData.q7">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -683,11 +663,11 @@
                             with problems in an orderly manner.</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q8" id="yes" value="yes" ng-model="workData.criticalThinking.requiredPrioritize">&nbsp<label
+                                <input type="radio" name="q8" id="yes" value="yes" ng-model="workData.q8">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q8" id="no" value="no" ng-model="workData.criticalThinking.requiredPrioritize"
+                                <input type="radio" name="q8" id="no" value="no" ng-model="workData.q8"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q8" id="some" value="some" ng-model="workData.criticalThinking.requiredPrioritize">&nbsp<label
+                                <input type="radio" name="q8" id="some" value="some" ng-model="workData.q8">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -697,11 +677,11 @@
                             capabilities.</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q9" id="yes" value="yes" ng-model="workData.criticalThinking.requiredConfidence">&nbsp<label
+                                <input type="radio" name="q9" id="yes" value="yes" ng-model="workData.q9">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q9" id="no" value="no" ng-model="workData.criticalThinking.requiredConfidence"
+                                <input type="radio" name="q9" id="no" value="no" ng-model="workData.q9"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q9" id="some" value="some" ng-model="workData.criticalThinking.requiredConfidence">&nbsp<label
+                                <input type="radio" name="q9" id="some" value="some" ng-model="workData.q9">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -717,11 +697,11 @@
                         <td><p class="content"><label>1</label>&nbsp;&nbsp;Evaluate applications and solutions</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q10" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.evaluateApplications">&nbsp<label
+                                <input type="radio" name="q10" id="yes" value="yes" ng-model="workData.q10">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q10" id="no" value="no" ng-model="workData.systemAndOperationInnovation.evaluateApplications"
+                                <input type="radio" name="q10" id="no" value="no" ng-model="workData.q10"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q10" id="some" value="some" ng-model="workData.systemAndOperationInnovation.evaluateApplications">&nbsp<label
+                                <input type="radio" name="q10" id="some" value="some" ng-model="workData.q10">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -730,11 +710,11 @@
                         <td><p class="content"><label>2</label>&nbsp;&nbsp;Select applications and solutions</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q11" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.selectApplicationsAndSolutions">&nbsp<label
+                                <input type="radio" name="q11" id="yes" value="yes" ng-model="workData.q11">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q11" id="no" value="no" ng-model="workData.systemAndOperationInnovation.selectApplicationsAndSolutions"
+                                <input type="radio" name="q11" id="no" value="no" ng-model="workData.q11"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q11" id="some" value="some" ng-model="workData.systemAndOperationInnovation.selectApplicationsAndSolutions">&nbsp<label
+                                <input type="radio" name="q11" id="some" value="some" ng-model="workData.q11">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -744,11 +724,11 @@
                         </td>
                         <td>
                             <div>
-                                <input type="radio" name="q12" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.specificApplicationsAndSolutions">&nbsp<label
+                                <input type="radio" name="q12" id="yes" value="yes" ng-model="workData.q12">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q12" id="no" value="no" ng-model="workData.systemAndOperationInnovation.specificApplicationsAndSolutions"
+                                <input type="radio" name="q12" id="no" value="no" ng-model="workData.q12"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q12" id="some" value="some" ng-model="workData.systemAndOperationInnovation.specificApplicationsAndSolutions">&nbsp<label
+                                <input type="radio" name="q12" id="some" value="some" ng-model="workData.q12">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -758,11 +738,11 @@
                         </td>
                         <td>
                             <div>
-                                <input type="radio" name="q13" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.buildApplicationsAndSolutions">&nbsp<label
+                                <input type="radio" name="q13" id="yes" value="yes" ng-model="workData.q13">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q13" id="no" value="no" ng-model="workData.systemAndOperationInnovation.buildApplicationsAndSolutions"
+                                <input type="radio" name="q13" id="no" value="no" ng-model="workData.q13"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q13" id="some" value="some" ng-model="workData.systemAndOperationInnovation.buildApplicationsAndSolutions">&nbsp<label
+                                <input type="radio" name="q13" id="some" value="some" ng-model="workData.q13">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>
@@ -772,11 +752,11 @@
                             applications/solutions</p></td>
                         <td>
                             <div>
-                                <input type="radio" name="q14" id="yes" value="yes" ng-model="workData.systemAndOperationInnovation.accessBenifitCostValueSolutions">&nbsp<label
+                                <input type="radio" name="q14" id="yes" value="yes" ng-model="workData.q14">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q14" id="no" value="no" ng-model="workData.systemAndOperationInnovation.accessBenifitCostValueSolutions"
+                                <input type="radio" name="q14" id="no" value="no" ng-model="workData.q14"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
-                                <input type="radio" name="q14" id="some" value="some" ng-model="workData.systemAndOperationInnovation.accessBenifitCostValueSolutions">&nbsp<label
+                                <input type="radio" name="q14" id="some" value="some" ng-model="workData.q14">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
                             </div>
                         </td>

@@ -44,7 +44,9 @@
                                     <th>Vendor/Distributor</th>
                                     <th style="width: 30px;">Number of LinkedIn Endorsements</th>
                                     <!--<th data-toggle="tooltip" title="Hooray!">Proficiency</th>-->
-                                    <th>Current Proficiency</th>
+                                    <th>Current Proficiency
+                                        <div>Basic&emsp;&emsp;Intermediate&emsp;Advanced&emsp;&emsp;&emsp;Expert</div></th>
+
                                     <!--<th style="width: 30px;" ng-click="orderByField='proficiency'; reverseSortSkills = !reverseSortSkills">Year of acheived Proficiency
                                         <span class="glyphicon glyphicon-sort"></span>
                                         <span ng-show="orderByField == 'start'"></span>
@@ -74,7 +76,7 @@
                                          <input class="skill1" type="text" ng-model="personalDetail.vendor" required/>
                                     </td>
                                     <td style="width: 30px;">
-                                        <input class="skill2" type="number" min="0" max="30" step="1" value ="0" ng-model="personalDetail.linkedin" required/>
+                                        <input class="skill2" type="number" min="0" max="30" step="1" placeholder="0" value ="0" ng-model="personalDetail.linkedin" required/>
                                     </td>
                                     <td>
                                         <!--<input type="radio" name="tick1_{{$index}}" id="expert" value="expert" ng-model="personalDetail.skill">&nbsp;<label class="labell expert skillset" for="expert">Expert</label>
@@ -87,7 +89,7 @@
                                         <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;
                                     </td>
                                     <td style="width: 30px; margin-left:14px;">
-                                        <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>
+                                        <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.usage"> Yes<input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.usage"> No<br>
                                     </td>
                                     <!--<td style="padding-left: 4px;">
                                         <input type="radio" name="tick2_{{$index}}" value="Yes" ng-model="personalDetail.formal"> Yes &nbsp;
@@ -107,9 +109,9 @@
                             </table>
 
                             <div class="form-group">
-                                <input ng-hide="!personalDetailsSkills.length" type="button" class="btn btn-danger pull-right" ng-click="removeSkills()" value="Remove">
-                                <input type="submit" class="btn btn-success addnew pull-right" value="Save">
-                                <input type="submit" class="btn btn-primary addnew pull-right" value="Add New">
+                                <input ng-hide="!personalDetailsSkills.length" type="button" class=".btn-md btn-danger pull-right" ng-click="removeSkills()" value="Remove">
+                                <input type="submit" class=".btn-md btn-success addnew pull-right" value="Save">
+                                <input type="submit" class=".btn-md btn-primary addnew pull-right" value="Add New">
                             </div>
                         </form>
 

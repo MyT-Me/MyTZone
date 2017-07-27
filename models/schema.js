@@ -438,7 +438,7 @@ UserProfileSchema.methods.generateJWT = function(){
 
 //Creating models for schemas
 
-var User =  mongoose.model(strings.USER,UserProfileSchema);
+//var User =  mongoose.model(strings.USER,UserProfileSchema);
 var Education = mongoose.model(strings.EDUCATION,educationSchema);
 var WorkExperience = mongoose.model(strings.WORK_EXPERIENCE,workExperienceSchema);
 var Certificates = mongoose.model(strings.CERTIFICATES,certificateSchema);

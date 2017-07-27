@@ -1,0 +1,89 @@
+<section>
+    <nav1>
+        <ol class="cd-multi-steps text-bottom count" id="status-buttons">
+          <!--  <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.Registration">Sign Up</a></li>-->
+        </ol>
+    </nav1>
+</section>
+
+<div id="headingmain1" col-md-10 col-md-offset-1">
+<h1 id="heading_login">Sign-Up</h1>
+
+    <div ng-app="FormlyApp" id="smallcon2" class="container col-md-10 col-md-offset-1">
+    <form ng-submit="addNew();" name="myForm"  novalidate>
+
+
+<form class="form-horizontal" action='' method="POST">
+            <fieldset>
+                <!--<div id="legend">
+                    <legend class="">Sign Up</legend>
+                </div>-->
+
+                <div class="control-group">
+                    <!-- LastName -->
+                    <label class="control-label"  for="lastname">Last Name</label>
+                    <div class="controls">
+                        <input type="text" id="lastname" name="lastname" placeholder="" class="form-control-login">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- FirstName -->
+                    <label class="control-label"  for="firstname">First Name</label>
+                    <div class="controls">
+                        <input type="text" id="firstname" name="firstname" placeholder="" class="form-control-login">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- Middle Initial -->
+                    <label class="control-label"  for="middlename">Middle Initial</label>
+                    <div class="controls">
+                        <input type="text" id="middlename" name="middlename" placeholder="" class="form-control-login">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- Firstyear for Entry -->
+                    <label class="control-label" >First Year - myTE Scoring Information Entry</label>
+                    <div class="controls">
+                        <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- DOB -->
+                    <label class="control-label"  for="dateofbirth">Date Of Birth</label>
+                    <div class="controls">
+                        <input type="text" id="dateofbirth" name="dateofbirth" placeholder="" class="form-control-login">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- E-mail -->
+                    <label class="control-label" for="email">E-mail</label>
+                    <div class="controls">
+                        <input type="text" id="email" name="email" placeholder="" class="form-control-login">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <!-- Password-->
+                    <label class="control-label" for="password">Password</label>
+                    <div class="controls">
+                        <input type="password" id="password" name="password" placeholder="" class="form-control-login">
+                    </div>
+                </div>
+
+
+                <div class="control-group">
+                    <!-- Button -->
+                    <!--<div class="controls">
+                        <button class="btn btn-success">Register</button>
+                    </div>-->
+                    <a ui-sref="base.login" class="btn btn-info">
+                        Register <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                    </a>
+                </div>
+            </fieldset>
+        </form>

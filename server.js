@@ -45,6 +45,9 @@ app.use(function(req, res, next) {
 
 
 
+//Passport Settings 
+app.use(passport.initialize());
+
 //Additional Usage Settings
 
 app.use(morgan('dev'));

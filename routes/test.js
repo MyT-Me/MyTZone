@@ -1,13 +1,16 @@
+var validator = require('jsonschema').Validator;
+var ourJsonSchema = require('../jsonSchemas');
 module.exports = function (app) {
-    app.post('/test/:id',function (req,res) {
+    var v = new validator();
+    app.post('/test', function (req, res) {
         console.log(req.params);
         console.log(req.body);
-        res.setHeader('Content-Type','application/json');
-        res.send(JSON.stringify({"request":"received"}));
-    })
-
-    app.get('/test',function(req,res){
-        res.send(JSON.stringify({"status":"I am working"}));
-    })
-
-}
+        console.log(v.validate(req.body, ourJsonSchema.login));
+        console.log(v.validate(req.body, ourJsonSchema.login).valid);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({"request": "received"}));
+    });
+    app.get('/test', function (req, res) {
+        res.send(JSON.stringify({"status": "I am working"}));
+    });
+};

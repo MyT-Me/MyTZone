@@ -1,3 +1,22 @@
+$(function() {
+
+    $('#login-form-link').click(function(e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register-form-link').click(function(e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+
+});
+
 var app = angular.module('formlyApp', ['ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -17,6 +36,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('base.login', {
             url: '/login',
             templateUrl: '/sub/login'
+        })
+
+        //Url for resiterations
+        .state('base.registration', {
+            url: '/registration',
+            templateUrl: '/sub/registration',
         })
 
         // url will be /form/interests
@@ -52,15 +77,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/base/login');
 });
 
-app.controller("Controller", ['$scope','$http','$location', function($scope,$http,$location) {
+
+app.controller("Controller", ['$scope', function($scope) {
 
 
-    var year = 1900;
-    var till = 2020;
+    var year = 2021;
+    var till = 1900;
     var range = [];
 
     var options = "";
-    for(var y=year; y<=till; y++){
+    for(var y=year; y>=till; y--){
         range.push(y);
     }
     $scope.years = range;
@@ -105,41 +131,7 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
         });
     }
 
-    $scope.educationInit = function(){
-        alert("Education Initialized");
-        $http.get('/api/education')
-            .then(function(res){
-                if(res.data != null)
-                {
-                    if(res.data.educationData != null)
-                    {
-                        $scope.eduDetails = [];
-                        var ourEducationData = res.data.educationData;
-                        ourEducationData.forEach(function(educationElement){
-                            $scope.eduDetails.push({
-                                 'school': educationElement.schoolName,
-                                 'field': educationElement.fieldOfStudy,
-                                 'degree': educationElement.typeOfProgram,
-                                 'start': educationElement.startYear,
-                                 'end': educationElement.yearAwarded,
-                                 'status': educationElement.programStatus,
-                                  'honor': "",
-                                'ind': $scope.eduDetails.length + 1
-                             });
-                        });
-                    }
-                }
-            })
-            .catch(function (err){
-                console.log(err.toString());
-            });
-        }
-    
     $scope.addNewEdu = function(){
-
-        var tempSend = {
-        
-        }
 
         $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
 
@@ -163,8 +155,7 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
         // $scope.workDataList.unshift(this.workData);
         // $scope.model.recent = this.workData;
         // this.workData = {};
-        console.log("Check After this");
-        console.dir($scope.eduDetails);
+
         console.log($scope.eduDetails);
     };
 
@@ -380,199 +371,30 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
     // document.getElementById("defaultOpen").click();
 
 
-    $scope.deedsInit = function(){
-        console.log("Deeds Page Initialized");
-        $http.get('/api/deeds')
-            .then(function (res){
-                if(res.data != null)
-                {
-                    if(res.data.educationData != null)
-                    {
-                        var ourDeedData = res.data.deeds;
-                        ourDeedData.forEach(function(deedElement){
-                                $scope.model.deeds.push({
-                                'id': $scope.model.deeds.length + 1,
-                                'smonth': deedElement.startMonth,
-                                'syear': deedElement.startYear,
-                                'category': deedElement.deedCategory,
-                                'activity': deedElement.activity,
-                                'deeddes': deedElement.description
-                                });
-                        });
-                    }
-                }
-            });
-    }
-
 
     $scope.addNewdeed = function (category) {
-        
-        console.log("Adding New Deed");
-        
-        var postUrl = 'https://mytzone.herokuapp.com/api/deeds/';
-        var localUrl = 'http://localhost:8080/api/deeds/';
-        var postId = "";
-        var toSend = {}
-        var tmpDeed = {
-                                'id': $scope.model.deeds.length + 1,
-                                'smonth': this.formDatadeed.smonth,
-                                'syear': this.formDatadeed.syear,
-                                'category': category,
-                                'activity': this.formDatadeed.activity,
-                                'deeddes': this.formDatadeed.deeddes,
-                                'pub':this.formDatadeed.pub,
-                                'art':this.formDatadeed.art
-            };
-        console.log("category" + category )
-        switch (category.toLowerCase()){
-            case 'certificates':
-                postId = "certificates"
-                toSend = {
-                    specificActivity:this.formDatadeed.activity,
-                    description:this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                console.log("Certificate");
-                break;
-            case 'takingclasses':
-                postId = "takingClasses";
-                toSend = {
-                    specificActivity:this.formDatadeed.activity,
-                    description:this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                console.log("Taking Classes");
-                break;
-            case 'conductingclasses':
-                postId = "conductingClasses"
-                console.log("Conducting Classes");
-                toSend = {
-                    specificActivity:this.formDatadeed.activity,
-                    description:this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                break;
-            case 'mentoring':
-                postId = "mentoring"
-                console.log("mentoring");
-                toSend = {
-                    specificActivity:this.formDatadeed.activity,
-                    description:this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                break;
-            case 'writing':
-                postId = "writings"
-                console.log("Writing");
-                toSend = {
-                    publicationName:this.formDatadeed.pub,
-                    specificActivity:this.formDatadeed.activity,
-                    articleTitle:this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                break;
-            case 'conferences':
-                postId = "confrences"
-                console.log("conferences");
-                toSend = {
-                    publicationName:this.formDatadeed.pub,
-                    specificActivity:this.formDatadeed.activity,
-                    articleTitle:this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                break;
-            case 'Awards':
-                postId = "awards"
-                console.log("Awards");
-                toSend = {
-                    confrenceSponsor:this.formDatadeed.pub,
-                    specificActivity:this.formDatadeed.activity,
-                    presentationTitle:this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear                }
-                break;
-            case 'recognized expertise':
-                postId = "recognizedExpertise"
-                console.log("recognized expertise");
-                toSend = {
-                        specificActivity: this.formDatadeed.activity,
-                        deedDescription: this.formDatadeed.deeddes,
-                        month:this.formDatadeed.smonth,
-                        year:this.formDatadeed.syear
-                }
-                break;
-            case 'patents':
-                postId = "patents"
-                console.log("conferences");
-                toSend = {
-                    specificActivity: this.formDatadeed.activity,
-                    deedDescription: this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                break;
-            case 'leisure':
-                postId = "leisureTravel"
-                console.log("Leisure Travel");
-                toSend = {
-                    specificActivity: this.formDatadeed.activity,
-                    deedDescription: this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                break;
-            case 'languages':
-                postId = "languages"
-                console.log("languages");
-                toSend = {
-                    specificActivity: this.formDatadeed.activity,
-                    deedDescription: this.formDatadeed.deeddes,
-                    month:this.formDatadeed.smonth,
-                    year:this.formDatadeed.syear
-                }
-                break;
-        }
-        console.log(localUrl+postId);
-        $http.post(localUrl+postId,toSend,{headers:{'Content-Type':'application/json'}})
-            .then(function(res){
-                        console.log(res)
-                        if(res.status===201){
 
-            $scope.model.deeds.push(tmpDeed);
-
-            $scope.model.deeds = sortByKey($scope.model.deeds, "id");
-
-            this.formDatadeed = {};
-            $scope.formDatadeed = {};                
-                        }               
-        })
-            .catch(function(err){
-            console.log(err)
-            $scope.model.deeds.push(tmpDeed);
-
-            $scope.model.deeds = sortByKey($scope.model.deeds, "id");
-
-            this.formDatadeed = {};
-            $scope.formDatadeed = {};                            
-                                })
-
-        /*
-        $http.post(localUrl,toSend,{headers:{'Content-Type':'application/json'}})
-            .then(function(res){console.log(res)})
-            .catch(function(err){console.log(err)});
-            */
-        
         if ($scope.editIndexdeed !== null) {
             $scope.saveDeed();
         } else {
 
-            
+            var tmpDeed = {
+                'id': $scope.model.deeds.length + 1,
+                'smonth': this.formDatadeed.smonth,
+                'syear': this.formDatadeed.syear,
+                'category': category,
+                'activity': this.formDatadeed.activity,
+                'deeddes': this.formDatadeed.deeddes,
+                'pub':this.formDatadeed.pub,
+                'art':this.formDatadeed.art
+            };
+
+            $scope.model.deeds.push(tmpDeed);
+
+            $scope.model.deeds = sortByKey($scope.model.deeds, "id");
+
+            this.formDatadeed = {};
+            $scope.formDatadeed = {};
         }
 
         $scope.showTheFormdeed = false;
@@ -686,11 +508,8 @@ app.controller("Controller", ['$scope','$http','$location', function($scope,$htt
     };
 
     $scope.saveDeed = function () {
-        
-        console.log("Inside save deed");
-        
-        
         $scope.model.deeds[$scope.editIndexdeed] = angular.copy($scope.formDatadeed);
+
         $scope.model.deeds[$scope.editIndexdeed]["id"] = $scope.editIndexdeed;
         $scope.model.deeds[$scope.editIndexdeed]["smonth"] = $scope.formDatadeed.smonth;
         $scope.model.deeds[$scope.editIndexdeed]["syear"] = $scope.formDatadeed.syear;

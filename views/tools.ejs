@@ -41,7 +41,10 @@
                         <th>Method/Skill Name</th>
                         <th>Vendor/Distributor</th>
                         <th style="width: 30px;">Number of LinkedIn Endorsements</th>
-                        <th>Current Proficiency</th>
+                        <th>Current Proficiency
+
+                            <div>Basic&emsp;&emsp;&emsp;&emsp;Intermediate&emsp;&emsp;Advanced&emsp;&emsp;&emsp;Expert</div></th>
+
                         <!--<th style="width: 30px;" ng-click="orderByField='year'; reverseSortTools = !reverseSortTools">
                             Year of acheived Proficiency
                             <span class="glyphicon glyphicon-sort"></span>
@@ -73,13 +76,13 @@
                             <input class="skill1" type="text" ng-model="personalDetail.vendor" required/>
                         </td>
                         <td style="width: 30px;">
-                            <input class="skill2" type="number" min="0" max="30" step="1" value ="0" ng-model="personalDetail.linkedin"/>
+                            <input class="skill2" type="number" min="0" max="30" step="1" placeholder="0" value ="0" ng-model="personalDetail.linkedin"/>
                         </td>
                         <td>
                             <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;&emsp;
+                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;&emsp;&emsp;
                             <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;&emsp;
-                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;&emsp;
-                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;&emsp;
+                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;
                             </td>
                         <td style="width: 30px; margin-left:14px;">
                             <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>
@@ -101,9 +104,9 @@
 
                 <div class="form-group">
                     <!--<input ng-hide="!personalDetails.length" type="button" class="btn btn-danger pull-right" ng-click="remove()" value="Remove">-->
-                    <input ng-hide="!personalDetailsTools.length" type="button" class="btn btn-danger pull-right" ng-click="removeTools()" value="Remove">
-                    <input type="submit" class="btn btn-success addnew pull-right" value="Save">
-                    <input type="submit" class="btn btn-primary addnew pull-right" value="Add New">
+                    <input ng-hide="!personalDetailsTools.length" type="button" class=".btn-md btn-danger pull-right" ng-click="removeTools()" value="Remove">
+                    <input type="submit" class=".btn-md btn-success addnew pull-right" value="Save">
+                    <input type="submit" class=".btn-md btn-primary addnew pull-right" value="Add New">
                 </div>
             </form>
 

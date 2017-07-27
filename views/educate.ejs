@@ -1,4 +1,4 @@
-<section ng-init = "educationInit()">
+<section>
     <nav1>
         <ol class="cd-multi-steps text-bottom count" id="status-buttons">
             <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.login">Login</a></li>
@@ -137,8 +137,8 @@
                                     <!--<input id="honors3" ng-model="eduDetail.honor3" type="checkbox" name="summa" value="summa">Summa Cum Laude<br>-->
                                     <!--<input id="honors4" ng-model="eduDetail.honor4" type="checkbox" name="none" value="none">None<br>-->
                                 <select id="honors" ng-model="eduDetail.honor">
-                                    <option value="none">None</option>
-                                    <option value="" selected>select your honors</option>
+                                    <!--<option value="none"></option>-->
+                                    <option value="" selected>None</option>
                                     <option value="valedictorian">Valedictorian</option>
                                     <option value="cum">Cum Laude</option>
                                     <option value="magna">Magna Cum Laude</option>
@@ -152,9 +152,9 @@
                     </table>
 
                     <div class="form-group">
-                        <input ng-hide="!eduDetails.length" type="button" class="btn btn-danger pull-right" ng-click="removeEdu()" value="Remove">
-                        <input type="submit" class="btn btn-success addnew pull-right" value="Save">
-                        <input type="submit" class="btn btn-primary addnew pull-right" value="Add New">
+                        <input ng-hide="!eduDetails.length" type="button" class=".btn-md btn-danger pull-right" ng-click="removeEdu()" value="Remove">
+                        <input type="submit" class=".btn-md btn-success addnew pull-right" value="Save">
+                        <input type="submit" class=".btn-md btn-primary addnew pull-right" value="Add New">
                     </div>
                 </form>
 

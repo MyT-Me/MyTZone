@@ -17,6 +17,9 @@ module.exports = function (app) {
             case parameters.LOGIN:
                 res.render('login');
                 break;
+            case parameters.REGISTRATION:
+                res.render('registration');
+                break;
             case parameters.EDUCATION:
                 res.render('educate');
                 break;
