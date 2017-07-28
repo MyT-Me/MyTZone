@@ -1,3 +1,4 @@
+'use strict';
 var parameters = require('../strings/apiParameters');
 module.exports = function (app) {
     app.put('/api/deeds/:id', function (req, res) {
@@ -6,7 +7,6 @@ module.exports = function (app) {
             switch (req.params.id) {
                 case parameters.EDUCATION:
                     console.log("Inside Edit Education");
-                    
                     break;
                 case parameters.WORK_EXPERIENCE:
                     break;

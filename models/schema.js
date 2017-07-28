@@ -175,7 +175,7 @@ var workExperienceScoreSchema = new mongoose.Schema({
 });
 
 var certificatesScoreSchema = new mongoose.Schema({
-    customId:{type:String},
+    customId:{type:String, required: true},
     specificActivity:{type: String, required:true},
     description:{type:String, required:true},
     month:{type:Date},
