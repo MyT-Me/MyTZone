@@ -6,6 +6,7 @@
 module.exports = {
     BASE: 'base',
     LOGIN: 'login',
+    REGISTRATION: 'registration',
     EDUCATION: 'education',
     WORK_EXPERIENCE: 'workExperience',
     CERTIFICATES: 'certificates',
