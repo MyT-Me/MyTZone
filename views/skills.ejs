@@ -42,10 +42,23 @@
                                     <th>Category</th>
                                     <th>Software/Device Name</th>
                                     <th>Vendor/Distributor</th>
-                                    <th style="width: 30px;">Number of LinkedIn Endorsements</th>
+                                    <th style="width: 30px;">Number of LinkedIn Endorsements for this Skill</th>
                                     <!--<th data-toggle="tooltip" title="Hooray!">Proficiency</th>-->
-                                    <th>Current Proficiency
-                                        <div>Basic&emsp;&emsp;Intermediate&emsp;Advanced&emsp;&emsp;&emsp;Expert</div></th>
+                                        
+
+                                <th style ="width: 60px">Your Current Level of Proficiency and Year Attained<br>
+                                <div>
+                            <table width=100% height= "100%" bottom= "0">
+                                <tr style= "display:block margin:5px 0">
+                                <th  width=25% height: 100%><pre><span style="line-height:80% font-size:10px">I have acheived >25% Proficiency </span><br><br>Basic</pre></th>
+                                <th  width=25% height: 100%><pre><span style="line-height:0 font-size:10px">I have acheived >50% Proficiency </span><br><br>Inter</pre></th>
+                                <th  width=25% height: 100%><pre><span style="line-height:0 font-size:10px">I have acheived >75% Proficiency </span><br><br>Advanced </pre></th>
+                                <th  width=25% height: 100%><pre><span style="line-height:0 font-size:10px">I have acheived >95% Proficiency </span><br><br>Expert</pre></th>
+                                </tr>
+                            </table>
+                            <!--<div>Basic&emsp;&emsp;&emsp;&emsp;Intermediate&emsp;&emsp;Advanced&emsp;&emsp;&emsp;Expert</div>-->  
+                                </div>
+                                </th>
 
                                     <!--<th style="width: 30px;" ng-click="orderByField='proficiency'; reverseSortSkills = !reverseSortSkills">Year of acheived Proficiency
                                         <span class="glyphicon glyphicon-sort"></span>
@@ -83,10 +96,19 @@
                                         <input type="radio" name="tick1_{{$index}}" id="advanced" value="advanced" ng-model="personalDetail.skill">&nbsp;<label class="labell advanced skillset" for="advanced">Advanced</label>
                                         <input type="radio" name="tick1_{{$index}}" id="intermediate" value="intermediate" ng-model="personalDetail.skill">&nbsp;<label class="labell intermediate skillset" for="intermediate">Intermediate</label>
                                         <input type="radio" name="tick1_{{$index}}" id="basic" value="basic" ng-model="personalDetail.skill">&nbsp;<label class="labell basic" for="basic">Basic</label>-->
+                                        <!--<select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;
                                         <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;
                                         <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;
-                                        <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;
-                                        <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;
+                                        <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;-->
+                                        <table width="100%">
+                                        <tr>
+                                        <td width= "25%" ><select border:"1" width="100%" id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select></td>
+                                        <td width= "25%" ><select border:"1"  width="100%" id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select></td>
+                                        <td width= "25%" ><select border:"1"  width="100%" id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select></td>
+                                        <td width= "25%" ><select border:"1"  width="100%" id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select></td>
+                                        </tr>
+                                       </table>
+                                    
                                     </td>
                                     <td style="width: 30px; margin-left:14px;">
                                         <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.usage"> Yes<input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.usage"> No<br>

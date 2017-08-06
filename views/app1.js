@@ -78,7 +78,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
 
 
-app.controller("Controller", ['$scope', function($scope) {
+app.controller("Controller", ['$scope','$http', function($scope,$http) {
 
 
     var year = 2021;
@@ -131,10 +131,12 @@ app.controller("Controller", ['$scope', function($scope) {
         });
     }
 
-    $scope.addNewEdu = function(){
+    $scope.eduInit = function(){
+        //pass
+    };
 
+    addNewBlankEduField = function() {
         $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
-
         $scope.eduDetails.push({
             'school': "",
             'field': "",
@@ -145,18 +147,47 @@ app.controller("Controller", ['$scope', function($scope) {
             'honor': "",
             'ind': $scope.eduDetails.length + 1
         });
+    }
 
-        // var tmp = this.workData;
-        // console.log(tmp);
-        // console.log($scope);
-        // tmp["id"] = $scope.model.user.length + 1;
-        // $scope.model.user.unshift(tmp);
-        //
-        // $scope.workDataList.unshift(this.workData);
-        // $scope.model.recent = this.workData;
-        // this.workData = {};
+    $scope.addNewEdu = function(){
+        console.log("Current eduDetails");
+        alert($scope.eduDetails);
+        console.log("Length of EduDetails");
+        var eduListLength = $scope.eduDetails.length;
+        console.log(eduListLength);
+        if(eduListLength>0) {
+            console.log("Grater Than 0");
+            var latestEduDetail = $scope.eduDetails.find(function(eduDetail){
+                return eduDetail.ind === eduListLength;
+            });
+            console.log("This is My To Send");
+            console.log(latestEduDetail)
 
-        console.log($scope.eduDetails);
+            var toSend = {
+                "schoolUniversityName": latestEduDetail.school,
+                "majorFiedOfStudy": latestEduDetail.field,
+                "typeOfDegree": latestEduDetail.degree,
+                "startYear": latestEduDetail.start,
+                "endYear": latestEduDetail.end,
+                "degreeProgramStatus": latestEduDetail.status,
+            };
+            console.log("This is being sent");
+            console.log(toSend)
+            $http.post('/api/deeds/education', toSend, {headers:{'Content-Type':'application/json'}}).then(function(response){
+                //Success handling
+                console.log(response);
+                alert("Added Successfully");
+                addNewBlankEduField();
+            },function(response){
+                //Failure Handing
+                console.log(response);
+                alert("Sorry Could Not Add to Database");
+            });
+            //addNewBlankEduField();
+        } else {
+            console.log("0");
+            addNewBlankEduField();
+        }
     };
 
     $scope.removeEdu = function(){
@@ -373,7 +404,7 @@ app.controller("Controller", ['$scope', function($scope) {
 
 
     $scope.addNewdeed = function (category) {
-
+        console.log(category);
         if ($scope.editIndexdeed !== null) {
             $scope.saveDeed();
         } else {
@@ -532,6 +563,7 @@ app.controller("Controller", ['$scope', function($scope) {
     $scope.personalDetailsSkills = [];
     $scope.reverseSortSkills = false;
     $scope.addNewSkill = function(){
+        console.log("Skills is Called");
 
         $scope.personalDetailsSkills = sortByKey($scope.personalDetailsSkills, "ind");
         $scope.personalDetailsSkills.push({
@@ -574,7 +606,13 @@ app.controller("Controller", ['$scope', function($scope) {
 ///ToolsController
     $scope.personalDetailsTools = [];
     $scope.reverseSortTools = false;
-    $scope.addNewtools = function(){
+
+    $scope.toolsInit = function() {
+        //pass
+    }
+
+    addNewBlankTools = function() {
+        console.log("Being Called");
         $scope.personalDetailsTools = sortByKey($scope.personalDetailsTools, "ind");
         $scope.personalDetailsTools.push({
             'category': "",
@@ -585,12 +623,29 @@ app.controller("Controller", ['$scope', function($scope) {
             'year': "",
             'formal': "",
             'usage': "",
-            'ind': $scope.personalDetailsTools.length
+            'ind': $scope.personalDetailsTools.length + 1
         });
+    }
 
-        console.log($scope.personalDetailsTools);
+    $scope.addNewtools = function(){
+        console.log("Length Of Tool Details");
+        var toolListLength = $scope.personalDetailsTools.length;
+        console.log(toolListLength);
+        if(toolListLength>0) {
+            var latestToolDetails = $scope.personalDetailsTools.find(function(toolDetail){
+                console.log("Each Object");
+                console.log(toolDetail);
+                return toolDetail.ind === toolListLength;
+            });
+            console.log("Latest Ones");
+            console.log(latestToolDetails);
+            addNewBlankTools();
+        } else {
+            console.log("Empty Call");
+            addNewBlankTools();
+        }
 
-    };
+    };  
 
     $scope.removeTools = function(){
         var newDataList=[];

@@ -1,6 +1,16 @@
 var models = require('./schema');
 var User = models.User;
 
+var sorter = function(a ,b) {
+    if (a.customId < b.customId) {
+        return -1;
+    };
+    if (a.customId > b.customId) {
+        return 1;
+    };
+    return 0;
+}
+
 exports.getEducation = function(req,callback){
     try {
         User.findOne({"email": "revanthpenugonda@gmail.com"},function(err,profile){
@@ -30,6 +40,7 @@ exports.getEducation = function(req,callback){
                 }
                 toSend.educationData.push(toSendElement);
             }, this);
+            toSend.educationData.sort(sorter);
             callback(null,JSON.stringify(toSend));
         }
     })

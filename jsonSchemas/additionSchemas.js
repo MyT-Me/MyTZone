@@ -22,11 +22,14 @@ module.exports = {
                         "MD",
                         "LLD"]
             },
-            "startYear":{
+            "startYear": {
+                "type": "number"
+            },
+            "endYear": {
                 "type": "number"
             },
             "degreeProgramStatus": {
-                "enum": ["In progress", 
+                "enum": ["In progress",
                         "Degree Awarded",
                         "Degree - Add'l field of Study"]
             },

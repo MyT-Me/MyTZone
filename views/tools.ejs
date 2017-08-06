@@ -40,10 +40,18 @@
                         <th>Category</th>
                         <th>Method/Skill Name</th>
                         <th>Vendor/Distributor</th>
-                        <th style="width: 30px;">Number of LinkedIn Endorsements</th>
-                        <th>Current Proficiency
-
-                            <div>Basic&emsp;&emsp;&emsp;&emsp;Intermediate&emsp;&emsp;Advanced&emsp;&emsp;&emsp;Expert</div></th>
+                        <th style="width: 30px;">Number of LinkedIn Endorsements for this Tool</th>
+                        <th style ="width: 60px">Your Current Level of Proficiency<br>
+                            <table width=100% height= "100%" bottom= "0">
+                                <tr style= "display:block margin:5px 0">
+                                <th  width=25% height: 100%><pre><span style="font-size:12px">I have acheived >25% Proficiency </span><br><br>Basic</pre></th>
+                                <th  width=25% height: 100%><pre><span style="font-size:12px">I have acheived >50% Proficiency </span><br><br>Inter</pre></th>
+                                <th  width=25% height: 100%><pre><span style="font-size:12px">I have acheived >75% Proficiency </span><br><br>Advanced </pre></th>
+                                <th  width=25% height: 100%><pre><span style="font-size:12px">I have acheived >95% Proficiency </span><br><br>Expert</pre></th>
+                                </tr>
+                            </table>
+                            <!--<div>Basic&emsp;&emsp;&emsp;&emsp;Intermediate&emsp;&emsp;Advanced&emsp;&emsp;&emsp;Expert</div>-->  
+                            </th>
 
                         <!--<th style="width: 30px;" ng-click="orderByField='year'; reverseSortTools = !reverseSortTools">
                             Year of acheived Proficiency
@@ -78,11 +86,15 @@
                         <td style="width: 30px;">
                             <input class="skill2" type="number" min="0" max="30" step="1" placeholder="0" value ="0" ng-model="personalDetail.linkedin"/>
                         </td>
-                        <td>
-                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;&emsp;
-                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;&emsp;&emsp;
-                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;&emsp;&emsp;
-                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>&emsp;
+                        <td >
+                        <table width="100%">
+                            <tr>
+                            <td width= "25%" ><select border:"1" width="100%" id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select></td>
+                            <td width= "25%" ><select border:"1"  width="100%" id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select></td>
+                            <td width= "25%" ><select border:"1"  width="100%" id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select></td>
+                            <td width= "25%" ><select border:"1"  width="100%" id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select></td>
+                            </tr>
+                        </table>
                             </td>
                         <td style="width: 30px; margin-left:14px;">
                             <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>

@@ -1,6 +1,9 @@
+'use strict';
 var parameters = require('../strings/apiParameters');
-var adders = require('../models/addMethods')
-
+var adders = require('../models/addMethods');
+var addJSONSchema = require('../jsonSchemas')('addition');
+var validatorClass = require('jsonschema').Validator; 
+var validator = new validatorClass();
 
 module.exports = function (app) {
     console.log("Addition Ran");
@@ -8,8 +11,17 @@ module.exports = function (app) {
         if (!(req.params === 0)) {
             switch (req.params.id) {
             case parameters.EDUCATION:
+                var result = validator.validate(req.body, addJSONSchema.education);
+                if (result.valid) {
+                    console.log("JSON Schema Test Passed");
+                } else {
+                    console.log("Error")
+                    res.status(500).send(result.errors);
+                    return;
+                }
                 adders.addEducation(req, function (err, sendJson) {
                     if (err) {
+                        console.log(err);
                         res.status(500).send(err.message);
                     } else {
                         res.status(201).json(sendJson);

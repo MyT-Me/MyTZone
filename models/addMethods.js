@@ -98,6 +98,7 @@ exports.addEducation = function (req, callback) {
             var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
             newEducation.customId = stringValues.EDUCATION + time;
             newEducation.timeStamp = time;
+            console.log(newEducation);
             profile.education.educationData.push(newEducation);
             profile.save(function (err) {
                 //console.log(err.toString())

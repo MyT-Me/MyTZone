@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
  require('mongoose-type-email');
 var momemt = require('moment');
 var momemtTime = require('moment-timezone-all');
-var schema = mongoose.Schema(); 
+var schema = mongoose.Schema();
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
@@ -112,29 +112,27 @@ var leisureTravelSchema = new mongoose.Schema({
 
 var toolSchema = new mongoose.Schema({
 
-})
+});
 
 var skillsSchema = new mongoose.Schema({
 
-})
+});
 
 var pointsSchema = new mongoose.Schema({
-
-})  
-
-
+    //pass
+});
 
 //With Score for Each section
 var educationScoreSchema = new mongoose.Schema({
-   customId:{type:String},
-   schoolName: {type:String, required:true},
-   fieldOfStudy: {type:String,required:true},
-   typeOfProgram:{type:String,required:true},
+   customId:{type:String, required: true},
+   schoolUniversityName: {type:String, required:true},
+   majorFiedOfStudy: {type:String,required:true},
+   typeOfDegree:{type:String,required:true},
    startYear: {type: Date, required:true},
-   yearAwarded:{type: Date, required:true},
-   programStatus:{type: String, required:true},
+   endYear:{type: Date, required:true},
+   degreeProgramStatus:{type: String, required:true},
    honors:{type: Boolean},
-   timeStamp:{type:String},
+   timeStamp:{type:String, required: true},
    educationScore :{type:Number,required:true,default:0}
 })
 
@@ -333,7 +331,7 @@ var UserProfileSchema = new mongoose.Schema({
     middleName: {type:String },
     userName: {type:String, required: true, unique:true},
     email: {type:mongoose.SchemaTypes.Email, requiredtrue:true, unique:true},
-    password:{type:String,required:true},
+    //password:{type:String,required:true},
     salt: {type:String},
     hash: {type: String},
     firstYear: {type:Date},
@@ -389,7 +387,7 @@ var UserProfileSchema = new mongoose.Schema({
     leisureTravel:{
         leisureTravelData: [leisureTravelScoreSchema],
         leisureTravelTotalScore: {type:Number,required:true,default:0}
-    },
+    }/*,
     tools:{
         toolsData: [toolsScoreSchema],
         toolsTotalScore: {type: Number, required:true, default: 0}
@@ -401,7 +399,7 @@ var UserProfileSchema = new mongoose.Schema({
     points:{
         pointsDat: [],
         pointsScore: {type: Number, required:true, default: 0}
-    }
+    }*/
 });
 
 
