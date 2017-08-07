@@ -105,16 +105,19 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         } else {
             var IndexToReturn = detailsObject[lengthValue-1].ind + 1;
             console.log("Returning Index");
-            console.log(IndexToReturn); 
+            console.log(IndexToReturn);
             return IndexToReturn;
         }
     }
 
     Array.prototype.extend = function(newArray) {
         newArray.forEach(function(element){
+            console.log(element.ind);
             this.push(element);
         },this);
     }
+
+
 
     // LOGIN
     $scope.loginDetails = [];
@@ -152,7 +155,7 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     function sortByKey(array, key) {
         return array.sort(function(a, b) {
             var x = a[key]; var y = b[key];
-            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+            return ((x > y) ? -1 : ((x < y) ? 0 : 1));
         });
     }
 
@@ -165,14 +168,11 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             console.log("Positive Init");
             var responseData = response.data;
             var responseArray = angular.fromJson(responseData["educationData"]);
-            responseArray = sortByKey(responseArray, "timeStamp");
-            var ind = 1;
-            for(i = 0;i<responseArray.length;i++){
-                    responseArray[i].ind = i+1;
-                }
-            //console.log("Printing the whole Array");
-            //console.log($scope.eduDetails);
+            console.log("This is Repsonse");
+            console.log(responseArray);
             $scope.eduDetails.extend(responseArray);
+            console.log("This EduDEtails");
+            console.log($scope.eduDetails);
             addNewBlankEduField();
         }, function(response) {
             //Negative Response
@@ -182,7 +182,7 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     };
 
     addNewBlankEduField = function() {
-        $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
+       $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
         var ind = getIndex($scope.eduDetails);
         $scope.eduDetails.push({
             'school': "",

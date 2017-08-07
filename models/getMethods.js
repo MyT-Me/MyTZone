@@ -4,15 +4,19 @@ var models = require('./schema');
 var getSchemas = require('../jsonSchemas/getSchemas');
 var User = models.User;
 
-var sorter = function(a ,b) {
-    if (a.customId < b.customId) {
+var sorter = function(a, b){
+    var keyA = new Date(a.timeStamp),
+        keyB = new Date(b.timeStamp);
+    // Compare the 2 dates
+    if(keyA < keyB) {
         return -1;
-    };
-    if (a.customId > b.customId) {
+    }
+    if(keyA > keyB) {
         return 1;
-    };
+    }
     return 0;
-}
+};
+
 
 var getJSONProducer = function (jsonSchema, modelObject) {
     var ourSchema = JSON.parse(JSON.stringify(jsonSchema));
@@ -26,7 +30,6 @@ var getJSONProducer = function (jsonSchema, modelObject) {
             }
         }
     }
-    console.log(returnJSON);
     return returnJSON;
 };
 
@@ -75,9 +78,17 @@ exports.getEducation = function(req,callback){
             var educationData = profile.education.educationData;
             var ourSchema = getSchemas(strings.EDUCATION);
             var toSendArray = getArrayJSONBuilder(ourSchema,educationData);
+            toSendArray.sort(sorter);
+            var ind = 1;
+            toSendArray.forEach(function(element){
+                element.ind = ind;
+                ind++;
+            });
             var toSend = {
                 educationData: toSendArray
             };
+            console.log("Sending JSON")
+            console.log(toSend);
             callback(null, JSON.stringify(toSend));
 
         }
