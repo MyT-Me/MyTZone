@@ -91,6 +91,31 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     }
     $scope.years = range;
 
+    //Config Values 
+    var config = {
+        headers:{headers:{'Content-Type':'application/json'}}
+    }
+
+    //Common Functions
+
+    var getIndex = function(detailsObject) {
+        var lengthValue = detailsObject.length;
+        if(lengthValue === 0) {
+            return lengthValue+1;
+        } else {
+            var IndexToReturn = detailsObject[lengthValue-1].ind + 1;
+            console.log("Returning Index");
+            console.log(IndexToReturn); 
+            return IndexToReturn;
+        }
+    }
+
+    Array.prototype.extend = function(newArray) {
+        newArray.forEach(function(element){
+            this.push(element);
+        },this);
+    }
+
     // LOGIN
     $scope.loginDetails = [];
 
@@ -132,11 +157,33 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     }
 
     $scope.eduInit = function(){
-        //pass
+        //Get Existing Data From the Database
+
+        $http.get('/api/education').then(function(response) {
+            //Positive Response
+            $scope.eduDetails = [];
+            console.log("Positive Init");
+            var responseData = response.data;
+            var responseArray = angular.fromJson(responseData["educationData"]);
+            responseArray = sortByKey(responseArray, "timeStamp");
+            var ind = 1;
+            for(i = 0;i<responseArray.length;i++){
+                    responseArray[i].ind = i+1;
+                }
+            //console.log("Printing the whole Array");
+            //console.log($scope.eduDetails);
+            $scope.eduDetails.extend(responseArray);
+            addNewBlankEduField();
+        }, function(response) {
+            //Negative Response
+            console.log("Negative Init");
+            console.log(response);
+        });
     };
 
     addNewBlankEduField = function() {
         $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
+        var ind = getIndex($scope.eduDetails);
         $scope.eduDetails.push({
             'school': "",
             'field': "",
@@ -145,24 +192,20 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             'end': "",
             'status': "",
             'honor': "",
-            'ind': $scope.eduDetails.length + 1
+            'id': "",
+            'ind': ind
         });
     }
 
     $scope.addNewEdu = function(){
-        console.log("Current eduDetails");
-        alert($scope.eduDetails);
-        console.log("Length of EduDetails");
+        
         var eduListLength = $scope.eduDetails.length;
-        console.log(eduListLength);
         if(eduListLength>0) {
             console.log("Grater Than 0");
             var latestEduDetail = $scope.eduDetails.find(function(eduDetail){
                 return eduDetail.ind === eduListLength;
             });
-            console.log("This is My To Send");
-            console.log(latestEduDetail)
-
+            console.log(latestEduDetail);
             var toSend = {
                 "schoolUniversityName": latestEduDetail.school,
                 "majorFiedOfStudy": latestEduDetail.field,
@@ -171,13 +214,13 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
                 "endYear": latestEduDetail.end,
                 "degreeProgramStatus": latestEduDetail.status,
             };
-            console.log("This is being sent");
-            console.log(toSend)
-            $http.post('/api/deeds/education', toSend, {headers:{'Content-Type':'application/json'}}).then(function(response){
+            $http.post('/api/deeds/education', toSend, config.headers).then(function(response){
                 //Success handling
-                console.log(response);
-                alert("Added Successfully");
+                console.log(response.data);
+                $scope.eduDetails[$scope.eduDetails.length-1]['id'] = response.data.dbid;
+                $scope.eduDetails[$scope.eduDetails.length-1]['timestamp'] = response.data.timestamp;
                 addNewBlankEduField();
+                console.log($scope.eduDetails);
             },function(response){
                 //Failure Handing
                 console.log(response);

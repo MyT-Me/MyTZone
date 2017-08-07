@@ -1,4 +1,7 @@
+'use strict';
+var strings = require('../strings')('api');
 var models = require('./schema');
+var getSchemas = require('../jsonSchemas/getSchemas');
 var User = models.User;
 
 var sorter = function(a ,b) {
@@ -11,19 +14,45 @@ var sorter = function(a ,b) {
     return 0;
 }
 
+var getJSONProducer = function (jsonSchema, modelObject) {
+    var ourSchema = JSON.parse(JSON.stringify(jsonSchema));
+    var returnJSON = {};
+    console.log("");
+    console.log(modelObject);
+    for (var key in ourSchema) {
+        if(ourSchema.hasOwnProperty(key)) {
+            if(modelObject[ourSchema[key]] !== undefined) {
+                returnJSON[key] = modelObject[ourSchema[key]];
+            }
+        }
+    }
+    console.log(returnJSON);
+    return returnJSON;
+};
+
+var getArrayJSONBuilder = function (jsonSchema, modelObject) {
+    var jsonArray = [];
+    modelObject.forEach(function (modelObjectElement) {
+        var tempElement = getJSONProducer(jsonSchema, modelObjectElement);
+
+        jsonArray.push(tempElement);
+    });
+    return jsonArray;
+}
+
 exports.getEducation = function(req,callback){
     try {
-        User.findOne({"email": "revanthpenugonda@gmail.com"},function(err,profile){
-        if(err){
+    User.findOne({"email": "revanthpenugonda@gmail.com"},function(err,profile) {
+            if (err) {
             console.log(err);
-            callback(err,null);
-        } else if(profile == null) {
+            callback(err, null);
+            } else if (profile === null) {
             console.log("No User Found");
-            callback(new Error("No User Found"),null);           
-        } else {
-            var educationData = profile.education.educationData;
-            var toSend = {educationData:[]}
-            educationData.forEach(function(element) {
+                callback(new Error("No User Found"),null);           
+            } else {
+                /*var educationData = profile.education.educationData;
+                var toSend = {educationData:[]};
+                educationData.forEach(function(element) {
                 console.log("Each Element");
                 console.log(element);
                 var startYearDate = new Date(element.startYear);
@@ -42,6 +71,15 @@ exports.getEducation = function(req,callback){
             }, this);
             toSend.educationData.sort(sorter);
             callback(null,JSON.stringify(toSend));
+            */
+            var educationData = profile.education.educationData;
+            var ourSchema = getSchemas(strings.EDUCATION);
+            var toSendArray = getArrayJSONBuilder(ourSchema,educationData);
+            var toSend = {
+                educationData: toSendArray
+            };
+            callback(null, JSON.stringify(toSend));
+
         }
     })
     } catch (error) {

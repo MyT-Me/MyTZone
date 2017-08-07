@@ -1,16 +1,16 @@
 'use strict';
 var parameters = require('../strings/apiParameters');
-var getters = require('../models/getMethods')
+var getters = require('../models/getMethods');
 
 
 module.exports = function (app) {
-    app.get('/api/:id', function (req, res){
+    app.get('/api/:id/:customId', function (req, res) {
         if (req.params === 0) {
             res.status(404).send();
         }
         switch (req.params.id) {
         case parameters.EDUCATION:
-            getters.getEducationa(req, function (err, educationData){
+            getters.getEducation(req, function (err, educationData) {
                 if (!(err === null)) {
                     res.status(500).send({error: err.toString()});
                 } else {
@@ -41,9 +41,8 @@ module.exports = function (app) {
 
 module.exports = function(app){
     console.log("Education Test")
-    
     //Adding Education GET
-    app.get('/api/education',function(req,res){
+    app.get('/api/education', function (req, res){
         getters.getEducation(req,function(err,educationData){
             console.log("CalledBack")
             if(err===null)

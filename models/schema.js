@@ -20,7 +20,7 @@ var educationSchema = new mongoose.Schema({
    startYear: {type: Date, required:true},
    yearAwarded:{type: Date, required:true},
    programStatus:{type: String, required:true},
-   honors:{type: Boolean},
+   honors:{type: String},
    timeStamp:{type:String}
 });
 

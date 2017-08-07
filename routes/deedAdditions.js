@@ -9,9 +9,10 @@ module.exports = function (app) {
     console.log("Addition Ran");
     app.post('/api/deeds/:id', function (req, res) {
         if (!(req.params === 0)) {
+            var result;
             switch (req.params.id) {
             case parameters.EDUCATION:
-                var result = validator.validate(req.body, addJSONSchema.education);
+                result = validator.validate(req.body, addJSONSchema.education);
                 if (result.valid) {
                     console.log("JSON Schema Test Passed");
                 } else {
@@ -19,11 +20,14 @@ module.exports = function (app) {
                     res.status(500).send(result.errors);
                     return;
                 }
-                adders.addEducation(req, function (err, sendJson) {
+                adders.addEducation(req, function (err, sendJsonData) {
                     if (err) {
                         console.log(err);
                         res.status(500).send(err.message);
                     } else {
+                        var sendJson = {
+                            dbid: sendJsonData
+                        };
                         res.status(201).json(sendJson);
                     }
                 });
