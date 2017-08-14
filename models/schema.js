@@ -131,7 +131,7 @@ var educationScoreSchema = new mongoose.Schema({
    startYear: {type: Date, required:true},
    endYear:{type: Date, required:true},
    degreeProgramStatus:{type: String, required:true},
-   honors:{type: Boolean},
+   honors:{type: String},
    timeStamp:{type:String, required: true},
    educationScore :{type:Number,required:true,default:0}
 })

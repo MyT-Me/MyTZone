@@ -53,28 +53,6 @@ exports.getEducation = function(req,callback){
             console.log("No User Found");
                 callback(new Error("No User Found"),null);           
             } else {
-                /*var educationData = profile.education.educationData;
-                var toSend = {educationData:[]};
-                educationData.forEach(function(element) {
-                console.log("Each Element");
-                console.log(element);
-                var startYearDate = new Date(element.startYear);
-                var endYearDate = new Date(element.yearAwarded);
-                var toSendElement = {
-                    schoolName: element.schoolName,
-                    fieldOfStudy: element.fieldOfStudy,
-                    typeOfProgram: element.typeOfProgram,
-                    startYear: startYearDate.getFullYear(),
-                    yearAwarded: endYearDate.getFullYear(),
-                    programStatus: element.programStatus,
-                    honors: element.honors,
-                    customId: element.customId
-                }
-                toSend.educationData.push(toSendElement);
-            }, this);
-            toSend.educationData.sort(sorter);
-            callback(null,JSON.stringify(toSend));
-            */
             var educationData = profile.education.educationData;
             var ourSchema = getSchemas(strings.EDUCATION);
             var toSendArray = getArrayJSONBuilder(ourSchema,educationData);

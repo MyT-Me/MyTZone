@@ -5,31 +5,37 @@ var addJSONSchema = require('../jsonSchemas')('addition');
 var validatorClass = require('jsonschema').Validator; 
 var validator = new validatorClass();
 
+
+var JSONValidator = function (validationSchema, req, res, callback) {
+    var result = validator.validate(req.body, validationSchema);
+    if(result.valid) {
+        callback(req, res);
+    } else {
+        console.log("Error")
+        res.status(500).send(result.errors);
+        return;
+    }
+}
+
+
 module.exports = function (app) {
     console.log("Addition Ran");
     app.post('/api/deeds/:id', function (req, res) {
         if (!(req.params === 0)) {
-            var result;
             switch (req.params.id) {
             case parameters.EDUCATION:
-                result = validator.validate(req.body, addJSONSchema.education);
-                if (result.valid) {
-                    console.log("JSON Schema Test Passed");
-                } else {
-                    console.log("Error")
-                    res.status(500).send(result.errors);
-                    return;
-                }
-                adders.addEducation(req, function (err, sendJsonData) {
-                    if (err) {
-                        console.log(err);
-                        res.status(500).send(err.message);
-                    } else {
-                        var sendJson = {
-                            dbid: sendJsonData
-                        };
-                        res.status(201).json(sendJson);
-                    }
+                JSONValidator(addJSONSchema.education, req, res, function (req, res){
+                    adders.addEducation(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.WORK_EXPERIENCE:
@@ -43,113 +49,169 @@ module.exports = function (app) {
                 });
                 break;
             case parameters.CERTIFICATES:
-                adders.addCertificates(req, function (err) {
-                    if (err) {
-                        console.log("Error in Certificates");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Certificate Added"});
-                    }
+                JSONValidator(addJSONSchema.Certificate, req, res, function (req, res){
+                    adders.addCertificates(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Certificates");
+                            console.log(err)
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.TAKING_CLASSES:
-                adders.addTakingClasses(req, function (err) {
-                    if (err) {
-                        console.log("Error in Taking Classes");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Taking Classes Added"});
-                    }
+                JSONValidator(addJSONSchema.TakingClasses, req, res, function (req, res){
+                    adders.addTakingClasses(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Taking Classes");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.CONDUCTING_CLASSES:
-                adders.addConductingClasses(req, function (err) {
-                    if (err) {
-                        console.log("Error in Conducting Classes");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Conducting Classes Added"});
-                    }
+                JSONValidator(addJSONSchema.ConductingClasses, req, res, function (req, res) {
+                    adders.addConductingClasses(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Conducting Classes");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.MENTORING:
-                adders.addMentoring(req, function (err) {
-                    if (err) {
-                        console.log("Error in Mentoring");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Mentoring Added"});
-                    }
+                JSONValidator(addJSONSchema.Mentoring, req, res, function (req, res) {
+                    adders.addMentoring(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Mentoring");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.WRITINGS:
-                adders.addWritings(req, function (err) {
-                    if (err) {
-                        console.log("Error in Writings");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation":"Writing Added"});
-                    }
+                JSONValidator(addJSONSchema.Writing, req, res, function (req, res) {
+                    adders.addWritings(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Writings");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.CONFERENCES:
-                adders.addPatents(req, function (err) {
-                    if (err) {
-                        console.log("Error in Confrences");
-                        res.status(500).send(err.message);
+                JSONValidator(addJSONSchema.Confrences, req, res, function (req, res) {
+                    adders.addPatents(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Confrences");
+                            res.status(500).send(err.message);
                         } else {
-                        res.status(201).json({"operation": "Confrences Added"});
-                    }
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.AWARDS:
-                adders.addAwards(req, function (err) {
-                    if (err) {
-                        console.log("Error in Awards");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Awards Added"});
-                    }
+                JSONValidator(addJSONSchema.Awards, req, res, function (req, res) {
+                    adders.addAwards(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Awards");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.RECOGNIZED_EXPERTISE:
-                adders.addRecognizedExperteise(req, function (err) {
-                    if (err) {
-                        console.log("Error in Recognized Expertiese");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Recognized Expertiese Added"});
-                    }
+                JSONValidator(addJSONSchema.RecognizedExperties, req, res, function (req, res){
+                    adders.addRecognizedExperteise(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Recognized Expertiese");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.PATENTS:
-                adders.addPatents(req, function (err) {
+                JSONValidator(addJSONSchema.Patents, req, res, function (req, res){
+                    adders.addPatents(req, function (err, sendJsonData) {
                     if (err) {
                         console.log("Error in Patents");
                         res.status(500).send(err.message);
                     } else {
-                        res.status(201).json({"operation": "Patents Added"});
+                        var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
                     }
+                    });
                 });
                 break;
             case parameters.LANGUAGES:
-                adders.addLanguages(req, function (err) {
-                    if (err) {
-                        console.log("Error in Languages");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Languages Added"});
-                    }
+                JSONValidator(addJSONSchema.Languages, req, res, function (req, res){
+                    adders.addLanguages(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Languages");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.LEISURE_TRAVEL:
-                adders.addLeisureTravel(req, function (err) {
-                    if (err) {
-                        console.log("Error in Leisure Travel");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Leisure Travel Added"});
-                    }     
+                JSONValidator(addJSONSchema.LeisureTravel, req, res, function(req, res) {
+                    adders.addLeisureTravel(req, function (err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Leisure Travel");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }     
+                    });
                 });
                 break;
             case parameters.TOOLS:

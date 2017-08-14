@@ -90,9 +90,11 @@ exports.addEducation = function (req, callback) {
             console.log("Profile EMpty log");
             callback(new Error("No User Found"), null);
         } else {
-            console.log(profile.userName);
+            console.log("Input Request");
             console.log(req.body);
-            console.log("I found the User");
+            console.log("Saving Education Block");
+            console.log(newEducation);
+
             var newEducation = new EducationScore(req.body);
             newEducation.educationScore = 10;
             var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
@@ -165,16 +167,17 @@ exports.addCertificates = function(req,callback){
             callback(new Error("No User Found"));
         } else {
             console.log(profile.userName);
-            console.log(req.body)
-
             //Computing and Adding a Certificate
             var newCertificate = new CertificateScore(req.body);
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newCertificate.customId = stringValues.CERTIFICATES + time;
+            newCertificate.timeStamp = time;
             newCertificate.certificatesScore = 10;
             profile.certificates.certificateData.push(newCertificate);
             profile.certificates.certificateTotalScore = profile.certificates.certificateTotalScore + 10;
             profile.save(function(err){
-            callback(err);
-            })
+                callback(err, newCertificate.customId);
+            });
         }
     })
 

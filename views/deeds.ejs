@@ -88,15 +88,15 @@
 
         <div class="tab" id="deedcon1">
             <button class="tablinks" ng-click="openDeed($event, 'certificates')" id="defaultOpen">Certificates</button>
-            <button class="tablinks" ng-click="openDeed($event, 'takingclasses')">Taking Classes</button>
-            <button class="tablinks" ng-click="openDeed($event, 'conductingclasses')">Conducting Classes</button>
+            <button class="tablinks" ng-click="openDeed($event, 'takingClasses')">Taking Classes</button>
+            <button class="tablinks" ng-click="openDeed($event, 'conductingClasses')">Conducting Classes</button>
             <button class="tablinks" ng-click="openDeed($event, 'mentoring')">Mentoring</button>
             <button class="tablinks" ng-click="openDeed($event, 'writing')">Writing</button>
             <button class="tablinks" ng-click="openDeed($event, 'conferences')">Conferences</button>
             <button class="tablinks" ng-click="openDeed($event, 'awards')">Awards</button>
-            <button class="tablinks" ng-click="openDeed($event, 'recognizedexp')">Recognized Expertise</button>
+            <button class="tablinks" ng-click="openDeed($event, 'recognizedExpertise')">Recognized Expertise</button>
             <button class="tablinks" ng-click="openDeed($event, 'patents')">Patents</button>
-            <button class="tablinks" ng-click="openDeed($event, 'leisure')">Leisure</button>
+            <button class="tablinks" ng-click="openDeed($event, 'leisureTravel')">Leisure</button>
             <button class="tablinks" ng-click="openDeed($event, 'languages')">Languages</button>
         </div>
 
@@ -107,9 +107,9 @@
                 <!--<input type="text" ng-model="formData.category" value="certificates" ng-show="false" />-->
                 <div class="form-group" id="activity" required>
                     <label for="activity">Choose Specific Activity</label><br/>
-                    <input type="radio" name="cert" value="certification" ng-model="formDatadeed.activity">&nbsp;Certification:
+                    <input type="radio" name="cert" value="Certification: State/Federal/Professional" ng-model="formDatadeed.activity">&nbsp;Certification:
                     State/Federal/Professional<br/>
-                    <input type="radio" name="cert" value="license" ng-model="formDatadeed.activity">&nbsp;License awarded<br/>
+                    <input type="radio" name="cert" value="License awarded" ng-model="formDatadeed.activity">&nbsp;License awarded<br/>
 
                     <!--<select class="form-control" id="activity" ng-model="formData.activity" required>-->
                     <!--<option value="" selected>select a specific activity</option>-->
@@ -152,9 +152,9 @@
 
         </div>
 
-        <div id="takingclasses" class="tabcontent">
+        <div id="takingClasses" class="tabcontent">
             <h3>Taking Classes</h3>
-            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('takingclasses');addNewdeed('takingclasses');" name="myForm"
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('takingClasses');addNewdeed('takingClasses');" name="myForm"
                   novalidate>
                 <!--<input type="text" ng-model="formData.category" value="takingclasses" ng-show="false" />-->
                 <div class="form-group" id="activity1" ng-model="formDatadeed.activity" required>
@@ -210,9 +210,9 @@
             </form>
         </div>
 
-        <div id="conductingclasses" class="tabcontent">
+        <div id="conductingClasses" class="tabcontent">
             <h3>Conducting Classes</h3>
-            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('conductingclasses');addNewdeed('conductingclasses');" name="myForm"
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('conductingClasses');addNewdeed('conductingClasses');" name="myForm"
                   novalidate>
                 <div class="form-group" id="activity2" ng-model="formDatadeed.activity" required>
                     <label>Choose Specific Activity</label><br/>
@@ -353,7 +353,7 @@
                 <div class="form-group">
                     <label for="publication">Publication Name/ Award Sponsor/ Conference Sponsor</label>
                     <input type="text" class="form-control" id="publication" placeholder="Enter the Publication Name"
-                           ng-model="formDatadeed.pub"
+                           ng-model="formDatadeed.publication"
                            required>
                 </div>
 
@@ -528,11 +528,11 @@
             </form>
         </div>
 
-        <div id="recognizedexp" class="tabcontent">
+        <div id="recognizedExpertise" class="tabcontent">
             <h3>Recognized Expertise</h3>
-            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('recognizedexp');addNewdeed('recognizedexp');" name="myForm"
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('recognizedExpertise');addNewdeed('recognizedExpertise');" name="myForm"
                   novalidate>
-                <input type="text" ng-show="false" name="formDatadeed.category" value="recognizedexp"
+                <input type="text" ng-show="false" name="formDatadeed.category" value="recognizedExpertise"
                        ng-model="formDatadeed.category"/>
                 <div class="form-group" id="activity7" ng-model="formDatadeed.activity" required>
                     <label for="activity1">Choose Specific Activity</label><br/>
@@ -689,10 +689,10 @@
             </form>
         </div>
 
-        <div id="leisure" class="tabcontent">
+        <div id="leisureTravel" class="tabcontent">
             <h3>Leisure Travel</h3>
-            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('leisure');addNewdeed('leisure');" name="myForm" novalidate>
-                <input type="text" ng-show="false" name="formDatadeed.category" value="leisure"
+            <form ng-show="showTheFormdeed" ng-submit="setCategorydeed('leisureTravel');addNewdeed('leisureTravel');" name="myForm" novalidate>
+                <input type="text" ng-show="false" name="formDatadeed.category" value="leisureTravel"
                        ng-model="formDatadeed.category"/>
                 <div class="form-group" id="activity10" ng-model="formDatadeed.activity" required>
                     <label for="activity1">Choose Specific Activity</label><br/>

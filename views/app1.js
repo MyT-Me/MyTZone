@@ -93,7 +93,21 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
 
     //Config Values 
     var config = {
-        headers:{headers:{'Content-Type':'application/json'}}
+        headers:{headers:{'Content-Type':'application/json'}},
+        CERTIFICATES: 'certificates',
+        TAKING_CLASSES: 'takingClasses',
+        CONDUCTING_CLASSES:'conductingClasses',
+        MENTORING:'mentoring',
+        WRITINGS:'writings',
+        CONFERENCES:'confrences',
+        AWARDS:'awards',
+        RECOGNIZED_EXPERTISE:'recognizedExpertise',
+        PATENTS:'patents',
+        LANGUAGES:'languages',
+        LEISURE_TRAVEL:'leisureTravel',
+        TOOLS:'tools',
+        SKILLS:'skills',
+        POINTS:'points'
     }
 
     //Common Functions
@@ -214,6 +228,11 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
                 "endYear": latestEduDetail.end,
                 "degreeProgramStatus": latestEduDetail.status,
             };
+
+            if(latestEduDetail.honor !== "") {
+                toSend["honors"] = latestEduDetail.honor;
+            }
+
             $http.post('/api/deeds/education', toSend, config.headers).then(function(response){
                 //Success handling
                 console.log(response.data);
@@ -444,10 +463,55 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     // Get the element with id="defaultOpen" and click on it
     // document.getElementById("defaultOpen").click();
 
+    //Adding A Blank Deed
+    var addBlankDeed = function() {
+
+    }
 
 
     $scope.addNewdeed = function (category) {
-        console.log(category);
+        console.log("Submit Clicked");
+        var formDatadeed = $scope.formDatadeed;
+        console.log($scope.formDatadeed);
+        //Loading the Common JSON parameters now 
+        var toSend = {
+            specificActivity: formDatadeed.activity,
+            month: formDatadeed.smonth,
+            year: formDatadeed.syear
+        }
+
+        switch(category){
+            case config.WRITINGS:
+                toSend["PublicationName"] = formDatadeed.publication ;
+                toSend["ArticleTitle"] =  formDatadeed.deeddes;
+            break;
+            case config.CONFERENCES:
+                toSend["ConferenceSponsor"] = formDatadeed.publication;
+                toSend["PresentationTitle"] = formDatadeed.deeddes;
+            break;
+            case config.AWARDS:
+                toSend["AwardSponsor"] = formDatadeed.publication;
+                toSend["AwardTitle"] = formDatadeed.deeddes;
+            break;
+            default:
+                toSend['description'] = formDatadeed.deeddes;
+            break;
+        }
+        console.log("Trying to Print Sending JSON");
+        console.log(toSend);
+        //Sending http POST request to the backend 
+        $http.post('/api/deeds/'+category, toSend, config.headers).then(function(response) {
+            //Positive 
+            alert("Worked Added");
+            console.log("Worked");
+        }, function(response){
+            //Negative
+            alert("Didn't Add");
+            console.log(response); 
+
+        });
+
+
         if ($scope.editIndexdeed !== null) {
             $scope.saveDeed();
         } else {
@@ -468,7 +532,7 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             $scope.model.deeds = sortByKey($scope.model.deeds, "id");
 
             this.formDatadeed = {};
-            $scope.formDatadeed = {};
+            //$scope.formDatadeed = {};
         }
 
         $scope.showTheFormdeed = false;
@@ -561,11 +625,16 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
             document.getElementById(deed).style.display = "block";
-            event.currentTarget.className += " active";
 
-            if(document.getElementById('defaultOpen') !== null){
+
+            if(event){
+                event.currentTarget.className += " active";
+            } else {
+                if(document.getElementById('defaultOpen') !== null){
                 document.getElementById("defaultOpen").click();
+                }
             }
+
         };
 
         // Get the element with id="defaultOpen" and click on it

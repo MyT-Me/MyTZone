@@ -56,7 +56,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
