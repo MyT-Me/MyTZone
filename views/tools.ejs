@@ -64,7 +64,7 @@
                             <span ng-show="reverseSortTools"></span>
                         </th>-->
                         <th>Formal Certification</th>
-                        <th style="width: 30px;">Usage of this method/skill in a project or position in the past 3 years</th>
+                        <th style="width: 30px;">I have used this method/skill in a project or position in the past 3 years</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -92,7 +92,7 @@
                         <td >
                         <table width="100%">
                             <tr>
-                            <td width= "25%" ><select border:"1" ng-change ="toolsClearDropDowns(personalDetail.basicyear, $index);" width="100%" id="basicyear" ng-options="year for year in years" ng-model="personalDetail.basicyear" ></select></td>
+                            <td width= "25%" ><select border:"1"  ng-change ="toolsClearDropDowns(personalDetail.basicyear, $index);" width="100%" id="basicyear" ng-options="year for year in years" ng-model="personalDetail.basicyear" ></select></td>
                             <td width= "25%" ><select border:"1" ng-change ="toolsClearDropDowns(personalDetail.interyear, $index);" width="100%" id="interyear" ng-options="year for year in years" ng-model="personalDetail.interyear" ></select></td>
                             <td width= "25%" ><select border:"1" ng-change ="toolsClearDropDowns(personalDetail.advancedyear,$index);" width="100%" id="advancedyear" ng-options="year for year in years" ng-model="personalDetail.advancedyear" ></select></td>
                             <td width= "25%" ><select border:"1" ng-change ="toolsClearDropDowns(personalDetail.expertyear, $index);" width="100%" id="expertyear" ng-options="year for year in years" ng-model="personalDetail.expertyear" ></select></td>
@@ -101,13 +101,17 @@
                             </td>
                         </td>
                         <td style="width: 30px; margin-left:14px;">
+                        <div ng-init = "personalDetail.formal = 'No'">
                             <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.formal"> Yes
                             <input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.formal"> No<br>
+                        </div
                         </td>
+                        <div ng-init = "personalDetail.usage = 'No'">                        
                         <td style="width: 30px; margin-left:14px;">
                             <input type="radio" name="tick4_{{$index}}" value="Yes" ng-model="personalDetail.usage"> Yes
                             <input type="radio" name="tick4_{{$index}}" value="No" ng-model="personalDetail.usage"> No<br>
                         </td>
+                        </div>
                         <!--<td>-->
                             <!--<input type="radio" name="tick2" value="Yes" style="margin-left: 20px;" ng-model="personalDetail.usage"> Yes-->
                             <!--<input type="radio" name="tick2" value="No" ng-model="personalDetail.usage"> No<br>-->
