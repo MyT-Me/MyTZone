@@ -1,0 +1,126 @@
+<div class="control-group">
+    <span style="padding-left:73em"><a ui-sref="base.login" class="btn btn-danger">Logout</a></span>
+</div>
+
+
+<section>
+    <nav1>
+        <ol class="cd-multi-steps text-bottom count" id="status-buttons">
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.login">Login</a></li>
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.educate">Education</a></li>
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.work">Work</a></li>
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.deeds">Deeds</a></li>
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.skills">Skills</a></li>
+            <li class="current"><a href="#0" ui-sref-active="active" ui-sref="base.tools">Tools</a></li>
+            <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.chart">T-Score</a></li>
+        </ol>
+    </nav1>
+</section>
+
+
+<h1 id="heading_login">Tools</h1>
+<!--<div id="inside">
+    <!--<p>
+        Record your current proficiencies for Professional(analytic, design, business, clinical) and Personal Enrichment methods or skills you possess. Current Proficiencies are self-rated from Basic to Expert.
+    </p>
+    <p><strong class="expert">Expert</strong> - I am able to handle independently all types of assignments or tasks and serve as a mentor/instructor (>90% Proficiency)</p>
+    <p><strong class="advanced">Advanced</strong> - I am able to handle independently nearly all types of assignments or tasks (>75% Proficiency)</p>
+    <p><strong class="intermediate">Intermediate</strong> - I am able to handle independently many types of assignments or tasks (>50% Proficiency)</p>
+    <p><strong class="basic">Basic</strong> - I can perform simple assignments or tasks (>25% Proficiency)</p>-->
+    <!--<button ng-click="showTheForm = !showTheForm;" class="btn btn-default">-->
+    <!--<span class="glyphicon glyphicon-plus"></span> Add New-->
+    <!--</button>
+</div>-->
+
+<div ng-app="FormlyApp" id="smallcon1" class="container col-md-10 col-md-offset-1">
+
+    <div class="row">
+        <div class="col-md-12 skill" >
+
+            <form ng-submit="addNewtools()">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /></th>
+                        <th>Category</th>
+                        <th>Method/Skill Name</th>
+                        <th>Vendor/Distributor</th>
+                        <th style="width: 30px;">Number of LinkedIn Endorsements</th>
+                        <th>Current Proficiency
+
+                            <div>Basic&emsp;Intermediate&emsp;&emsp;Advanced&emsp;&emsp;&emsp;Expert</div></th>
+
+                        <!--<th style="width: 30px;" ng-click="orderByField='year'; reverseSortTools = !reverseSortTools">
+                            Year of acheived Proficiency
+                            <span class="glyphicon glyphicon-sort"></span>
+                            <span ng-show="orderByField == 'year'"></span>
+                            <span ng-show="!reverseSortTools"></span>
+                            <span ng-show="reverseSortTools"></span>
+                        </th>-->
+                        <th>Formal Certification</th>
+                        <th style="width: 30px;">Usage of this method/skill in a project or position in the past 3 years</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="personalDetail in personalDetailsTools|orderBy:orderByField:reverseSortTools">
+                        <!--<td>-->
+                        <!--<input type="checkbox" ng-model="personalDetail.selected"/></td>-->
+                        <td>
+                            <input type="checkbox" ng-model="personalDetail.selected"/>
+                        </td>
+                        <td style="width: 30px;">
+                            <select ng-model="personalDetail.category" required>
+                                <option value="softwareuser">Software-User</option>
+                                <option value="softwareprogramming">Software Programming</option>
+                                <option value="deviceoperation">Device Operation</option>
+                            </select>
+                        </td>
+                        <td style="width: 30px;">
+                            <input type="text" ng-model="personalDetail.software" required/>
+                        <td style="width: 30px;">
+                            <input class="skill1" type="text" ng-model="personalDetail.vendor" required/>
+                        </td>
+                        <td style="width: 30px;">
+                            <input class="skill2" type="number" min="0" max="30" step="1" placeholder="0" value ="0" ng-model="personalDetail.linkedin"/>
+                        </td>
+                        <td>
+                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.basicyear" required></select>&emsp;&emsp;&emsp;
+                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.intermediateyear" required></select>&emsp;&emsp;
+                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.advancedyear" required></select>&emsp;&emsp;&emsp;
+                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.expertyear" required></select>&emsp;
+                            </td>
+                        </td>
+                        <td style="width: 30px; margin-left:14px;">
+                            <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.formal"> Yes
+                            <input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.formal"> No<br>
+                        </td>
+                        <td style="width: 30px; margin-left:14px;">
+                            <input type="radio" name="tick4_{{$index}}" value="Yes" ng-model="personalDetail.usage"> Yes
+                            <input type="radio" name="tick4_{{$index}}" value="No" ng-model="personalDetail.usage"> No<br>
+                        </td>
+                        <!--<td>-->
+                            <!--<input type="radio" name="tick2" value="Yes" style="margin-left: 20px;" ng-model="personalDetail.usage"> Yes-->
+                            <!--<input type="radio" name="tick2" value="No" ng-model="personalDetail.usage"> No<br>-->
+                        <!--</td>-->
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    <!--<input ng-hide="!personalDetails.length" type="button" class="btn btn-danger pull-right" ng-click="remove()" value="Remove">-->
+                    <input ng-hide="!personalDetailsTools.length" type="button" class=".btn-md btn-danger pull-right" ng-click="removeTools()" value="Remove">
+                    <input type="submit" class=".btn-md btn-success addnew pull-right" value="Save">
+                    <input type="submit" class=".btn-md btn-primary addnew pull-right" value="Add New">
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!--<button ng-disabled="myForm.$invalid"  type="submit" value="submit" class="btn btn-default">Submit</button>-->
+    </form>
+
+</div>
+<a ui-sref="base.chart" class="btn btn-block btn-info" id="work-next">
+    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+</a>

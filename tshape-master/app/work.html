@@ -1,0 +1,788 @@
+<div class="control-group">
+    <span style="padding-left:73em"><a ui-sref="base.login" class="btn btn-danger">Logout</a></span>
+</div>
+
+
+<section>
+    <nav1>
+        <ol class="cd-multi-steps text-bottom count" id="status-buttons">
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.login">Login</a></li>
+            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.educate">Education</a></li>
+            <li class="current"><a href="#0" ui-sref-active="active" ui-sref="base.work">Work</a></li>
+            <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.deeds">Deeds</a></li>
+            <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.skills">Skills</a></li>
+            <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.tools">Tools</a></li>
+            <li class="not"><a href="#0" ui-sref-active="active" ui-href="style.css">TScore</a></li>
+        </ol>
+    </nav1>
+</section>
+
+
+<div id="headingmain" ng-app="FormlyApp">
+    <h1 id="heading_login">Work/Volunteer Segments</h1>
+    <div id="inside_work">
+        <button ng-show="showbutton" ng-click="showTheFormWork = !showTheFormWork; setSameEmployerTrue();" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span> Add segment under same organization
+        </button>
+        <button ng-show="showbutton" ng-click="showTheFormWork = !showTheFormWork; setSameEmployerFalse();" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span> Add segment under different organization
+        </button>
+        <button ng-click="showTheFormWork = !showTheFormWork; processForm1();" ng-show="shownew" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span> Add New
+        </button>
+
+    </div>
+    <div class="row" id="tablediv" ng-hide="!model.user.length">
+        <div class="col-md-12">
+            <table id="tabledit" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <!--<th><input type="checkbox" ng-model="selectedAll" ng-click="checkAll()"/></th>-->
+                    <th>S.No</th>
+                    <th ng-click="orderByField='start'; reverseSort = !reverseSort">
+                        Organization<span class="glyphicon glyphicon-sort"></span> <span
+                            ng-show="orderByField == 'start'"></span><span ng-show="!reverseSort"></span><span
+                            ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='start'; reverseSort = !reverseSort">
+                        Start Date<span class="glyphicon glyphicon-sort"></span> <span
+                            ng-show="orderByField == 'start'"><span ng-show="!reverseSort"></span><span
+                            ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='start'; reverseSort = !reverseSort">
+                        End Date <span class="glyphicon glyphicon-sort"></span> <span ng-show="orderByField == 'start'"><span
+                            ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='start'; reverseSort = !reverseSort">
+                        position/activity<span class="glyphicon glyphicon-sort"></span> <span
+                            ng-show="orderByField == 'start'"><span ng-show="!reverseSort"></span><span
+                            ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='end'; reverseSort = !reverseSort">
+                        Role<span class="glyphicon glyphicon-sort"></span> <span ng-show="orderByField == 'end'"><span
+                            ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='start'; reverseSort = !reverseSort">
+                        Team Size<span class="glyphicon glyphicon-sort"></span> <span ng-show="orderByField == 'start'"><span
+                            ng-show="!reverseSort"></span><span ng-show="reverseSort"></span></span>
+                    </th>
+                    <th ng-click="orderByField='start'; reverseSort = !reverseSort">
+                        Paid/Unpaid<span class="glyphicon glyphicon-sort"></span> <span
+                            ng-show="orderByField == 'start'"><span ng-show="!reverseSort"></span><span
+                            ng-show="reverseSort"></span></span>
+                    </th>
+                    <th>
+                        Questions
+                    </th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in model.user|orderBy:orderByField:reverseSort">
+                    <td class="question">{{ $index + 1 }}</td>
+                    <td class="question">{{user.ename}}</td>
+                    <td class="question">{{user.smonth +' '+ user.syear}}</td>
+                    <td class="question">{{user.emonth +' '+ user.eyear}}</td>
+                    <td class="question">{{user.position}}</td>
+                    <td class="question">{{user.role}}</td>
+                    <td class="question">{{user.team}}</td>
+                    <td class="question">{{user.paid}}</td>
+                    <td class="question">
+                    <button class="btn btn-default btn-link" ng-click="questionWork($index)">View Questions<span class="glyphicon glyphicon-chevron-down"></span>
+                    </button>
+                    </td>
+
+                    <td class="question">
+                        <button class="btn btn-default btn-info" ng-click="editWork($index);">Edit<span
+                                class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-default btn-danger" ng-click="removeWork($index)">Delete<span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div ng-show="showTheFormWork" ng-cloak id="smallcon" class="container col-md-10 col-md-offset-1">
+
+        <form ng-show="showTheFormWork" ng-cloak ng-submit="addNewWork();" name="myForm" novalidate>
+            <h3>Work Experience</h3>
+            <div class="first">
+                <p>
+                    <label class="head"> Record any work/volunteer experience and roles within clubs/organization.</label>
+                </p>
+
+                <div class="form-group">
+                    <div class="form-group">
+                        <select class="form-control" id="esector" ng-model="workData.esector" required>
+                            <option value="" selected>Choose Employer's sector of focus</option>
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="Building & Construction">Building & Construction</option>
+                            <option value="Education">Education</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Energy and Electric">Energy and Electric</option>
+                            <option value="Financial and Business consulting">Financial and Business consulting</option>
+                            <option value="Fitness and Well being">Fitness and Well being</option>
+                            <option value="Government">Government</option>
+                            <option value="Health care delivery">Health care delivery</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value="Information and Communication Technology">Information and Communication
+                                Technology
+                            </option>
+                            <option value="Manufacturing">Manufacturing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!--<label for="ename">Employer/Organizational Name</label>-->
+                    <input type="text" class="form-control" id="ename" placeholder="Employer/Organizational name"
+                           ng-model="workData.ename"
+                           required>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="region" ng-model="workData.region" required>
+                        <option value="" selected>Choose your Location/Region</option>
+                        <option value="North America">North America</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Central America">Central America</option>
+                        <option value="South America">South America</option>
+                        <option value="Eastern Africa">Eastern Africa</option>
+                        <option value="Middle Africa">Middle Africa</option>
+                        <option value="North Africa">North Africa</option>
+                        <option value="Western Africa">Western Africa</option>
+                        <option value="Sub Saharan Africa">Sub Saharan Africa</option>
+                        <option value="Eastern Asia">Eastern Asia</option>
+                        <option value="Central Asia">Central Asia</option>
+                        <option value="South-Eastern Asia">South-Eastern Asia</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="smonth">Start</label>
+                    <select id="smonth" ng-model="workData.smonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <select id="start" ng-options="year for year in years" ng-model="workData.syear" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="emonth">End </label>
+                      <select id="emonth" ng-model="workData.emonth" required>
+                        <option value="" selected>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <select id="end" ng-options="year for year in years" ng-model="workData.eyear" name="year" required></select>
+                    <input type="checkbox" id="Current" name="Continuing" value="Current_Company">
+                    <label for="Current">Continuing</label>
+                </div>
+
+                <div class="form-group">
+                    <!--<label for="position">Position/Activity Description</label>-->
+                    <input type="text" class="form-control" id="position"
+                           placeholder="Enter the Position/Activity Description" ng-model="workData.position"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <!--<label for="primary">Primary Function</label>-->
+                    <select class="form-control" id="primary" ng-model="workData.primary" required>
+                        <option value="" selected>Choose your primary function</option>
+                        <option value="Business Development">Business Development</option>
+                        <option value="Consulting - External">Consulting - External</option>
+                        <option value="Consulting - Internal">Consulting - Internal</option>
+                        <option value="CSR Corporate Social Responsibility">CSR Corporate Social Responsibility</option>
+                        <option value="Customer Service(Student/Patient/Client/Member)">Customer
+                            Service(Student/Patient/Client/Member)
+                        </option>
+                        <option value="Education">Education</option>
+                        <option value="Engineering-Software">Engineering-Software</option>
+                        <option value="Engineering - Products/Services">Engineering - Products/Services</option>
+                        <option value="Engineering - Structures">Engineering - Structures</option>
+                        <option value="Finance and Accounting">Finance and Accounting</option>
+                        <option value="Headquarters and Administration">Headquarters and Administration</option>
+                        <option value="Health/Safety">Health/Safety</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <!--<label for="role">Choose your role</label>-->
+                    <select class="form-control" id="role" ng-model="workData.role" required>
+                        <option value="" selected>Choose your role</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Team Leader">Team Leader</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Executive/Founder">Executive/Founder</option>
+                        <option value="Consultant/Subject matter expert">Consultant/Subject matter expert</option>
+                        <option value="Bd of Dir">Bd of Dir</option>
+                        <option value="Member(Student or Full membership)">Member(Student or Full membership)</option>
+                        <option value="Local or student committee">Local or student committee</option>
+                        <option value="Local or student officer">Local or student officer</option>
+                        <option value="National Committee">National Committee</option>
+                        <option value="National Officer">National Officer</option>
+                        <option value="Fellow">Fellow</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Choose team size</label>&nbsp;
+                    <label class="labell" for="1">1</label> <input type="radio" ng-model="workData.team" name="team"
+                                                                   id="1" value="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label class="labell" for="2-3">2-3</label> <input type="radio" ng-model="workData.team" name="team"
+                                                                       id="2-3" value="2-3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label class="labell" for="4-8">4-8</label> <input type="radio" ng-model="workData.team" name="team"
+                                                                       id="4-8" value="4-8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label class="labell" for=">9">>9</label> <input type="radio" ng-model="workData.team" name="team"
+                                                                     id=">9" value=">9">
+                </div>
+
+
+                <div class="form-group">
+                    <table>
+                        <tr><label>Select team's Multi-disciplinary Makeup</label></tr>
+                        <tr>
+                            <td class="question question1"><label for="Very low">Very low 0-15%</label><input type="radio"
+                                                                                   ng-model="workData.multidis"
+                                                                                   name="multidis" id="Very low"
+                                                                                   value="Very low"></td>
+                            <td class="question question1"><label for="Low">Low 16-35%</label> <input type="radio" ng-model="workData.multidis"
+                                                                           name="multidis" id="Low" value="Low"></td>
+                            <td class="question question1"><label for="Moderate">Moderate 36-50%</label> <input type="radio"
+                                                                                     ng-model="workData.multidis"
+                                                                                     name="multidis" id="Moderate"
+                                                                                     value="Moderate"></td>
+                            <td class="question question1"><label for="High">High 51-75%</label> <input type="radio" ng-model="workData.multidis"
+                                                                             name="multidis" id="High" value="High">
+                            </td>
+                            <td class="question question1"><label for="VeryHigh">Very high >76%</label> <input type="radio"
+                                                                                    ng-model="workData.multidis"
+                                                                                    name="multidis" id="VeryHigh"
+                                                                                    value="VeryHigh"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="form-group">
+                    <table>
+                        <tr><label>Select team's Multi-Cultural Makeup</label></tr>
+                        <tr>
+                            <td class="question question1"><label for="Very loww">Very low 0-15%</label> <input type="radio"
+                                                                                     ng-model="workData.multicul"
+                                                                                     name="multicul" id="Very loww"
+                                                                                     value="Very loww"></td>
+                            <td class="question question1"><label for="Loww">Low 16-35%</label> <input type="radio" ng-model="workData.multicul"
+                                                                            name="multicul" id="Loww" value="Loww"></td>
+                            <td class="question question1"><label for="Moderatee">Moderate 36-50%</label> <input type="radio"
+                                                                                      ng-model="workData.multicul"
+                                                                                      name="multicul" id="Moderatee"
+                                                                                      value="Moderatee"></td>
+                            <td class="question question1"><label for="Highh">High 51-75%</label> <input type="radio" ng-model="workData.multicul"
+                                                                              name="multicul" id="Highh" value="Highh">
+                            </td>
+                            <td class="question question1"><label for="VeryHighh">Very high >76%</label> <input type="radio"
+                                                                                     ng-model="workData.multicul"
+                                                                                     name="multicul" id="VeryHighh"
+                                                                                     value="VeryHighh"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="form-group">
+                    <table>
+                        <tr><label>Choose Paid/Unpaid</label></tr>
+                        <tr>
+                            <td class="question question1"><label for="Profit-paid">For profit-paid</label> <input type="radio" ng-model="workData.paid" name="paid" id="Profit-paid" value="Profit-paid"></td>
+                            <td class="question question1"><label for="Profit-unpaid">For profit - unpaid</label> <input type="radio" ng-model="workData.paid" name="paid" id="Profit-unpaid" value="Profit-unpaid"></td>
+                            <td class="question question1"><label for="Non-profit-Unpaid">For Non-Profit Unpaid</label> <input type="radio" ng-model="workData.paid" name="paid" id="Non-profit-Unpaid" value="Non-profit-Unpaid"></td>
+                            <td class="question question1"><label for="Non-profit-Paid">For Non-Profit Paid</label> <input type="radio" ng-model="workData.paid" name="paid" id="Non-profit-Paid" value="Non-profit-Paid"></td>
+                        </tr>
+                    </table>
+                </div>
+                <!--<p>form = {{user}}</p>-->
+                <!--ng-disabled="myForm.$invalid"-->
+        </div>
+        <div class="second">
+            <p><label class="head">Select answers to prompt below regarding Operations Responsibilities, Critical Thinking and
+                Operations Innovation.</label></p>
+            <p></p>
+
+
+            <table>
+                <tr>
+                    <td><label>Operation Responsibilities</label></td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>1</label>&nbsp;&nbsp;Select location(s): Where people/systems for this
+                        do business - Physically and online</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q1" id="yes" value="yes" ng-model="workData.q1">&nbsp<label
+                                class="labell" for="yes">Yes</label></li>
+                            <input type="radio" name="q1" id="no" value="no" ng-model="workData.q1"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q1" id="some" value="some" ng-model="workData.q1">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>2</label>&nbsp;&nbsp;Select equipment: the tools needed to get the job
+                        done.</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q2" id="yes" value="yes" ng-model="workData.q2">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q2" id="no" value="no" ng-model="workData.q2"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q2" id="some" value="some" ng-model="workData.q2">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>3</label>&nbsp;&nbsp;Select and managing the labor resources</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q3" id="yes" value="yes" ng-model="workData.q3">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q3" id="no" value="no" ng-model="workData.q3"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q3" id="some" value="some" ng-model="workData.q3">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>4</label>&nbsp;&nbsp;Determine processes: assignments,
+                        deadlines,procedures as needed, including systems for quality control and improvement</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q4" id="yes" value="yes" ng-model="workData.q4">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q4" id="no" value="no" ng-model="workData.q4"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q4" id="some" value="some" ng-model="workData.q4">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            &nbsp;
+            <table>
+                <tr>
+                    <td><label>Critical Thinking</label></td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>1</label>&nbsp;&nbsp;Required me to form goals based on reason and
+                        evidence</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q5" id="yes" value="yes" ng-model="workData.q5">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q5" id="no" value="no" ng-model="workData.q5"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q5" id="some" value="some" ng-model="workData.q5">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>2</label>&nbsp;&nbsp;Required me to form a systematic approach to
+                        solve problems</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q6" id="yes" value="yes" ng-model="workData.q6">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q6" id="no" value="no" ng-model="workData.q6"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q6" id="some" value="some" ng-model="workData.q6">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>3</label>&nbsp;&nbsp;Required me to be inquisitive</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q7" id="yes" value="yes" ng-model="workData.q7">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q7" id="no" value="no" ng-model="workData.q7"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q7" id="some" value="some" ng-model="workData.q7">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>4</label>&nbsp;&nbsp;Required me to prioritize my efforts and deal
+                        with problems in an orderly manner.</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q8" id="yes" value="yes" ng-model="workData.q8">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q8" id="no" value="no" ng-model="workData.q8"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q8" id="some" value="some" ng-model="workData.q8">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>5</label>&nbsp;&nbsp;Reinforced my confidence in my own reasoning
+                        capabilities.</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q9" id="yes" value="yes" ng-model="workData.q9">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q9" id="no" value="no" ng-model="workData.q9"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q9" id="some" value="some" ng-model="workData.q9">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr></tr>
+            </table>
+            &nbsp;
+            <table>
+                <tr>
+                    <td><label>System and Operation Innovation</label></td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>1</label>&nbsp;&nbsp;Evaluate applications and solutions</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q10" id="yes" value="yes" ng-model="workData.q10">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q10" id="no" value="no" ng-model="workData.q10"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q10" id="some" value="some" ng-model="workData.q10">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>2</label>&nbsp;&nbsp;Select applications and solutions</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q11" id="yes" value="yes" ng-model="workData.q11">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q11" id="no" value="no" ng-model="workData.q11"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q11" id="some" value="some" ng-model="workData.q11">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>3</label>&nbsp;&nbsp;Specify/ design applications and solutions</p>
+                    </td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q12" id="yes" value="yes" ng-model="workData.q12">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q12" id="no" value="no" ng-model="workData.q12"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q12" id="some" value="some" ng-model="workData.q12">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>4</label>&nbsp;&nbsp;Build/test/install applications and solutions</p>
+                    </td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q13" id="yes" value="yes" ng-model="workData.q13">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q13" id="no" value="no" ng-model="workData.q13"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q13" id="some" value="some" ng-model="workData.q13">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="content"><label>5</label>&nbsp;&nbsp;Assess benefit/cost/value of
+                        applications/solutions</p></td>
+                    <td>
+                        <div>
+                            <input type="radio" name="q14" id="yes" value="yes" ng-model="workData.q14">&nbsp<label
+                                class="labell" for="yes">Yes</label> </li>
+                            <input type="radio" name="q14" id="no" value="no" ng-model="workData.q14"
+                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q14" id="some" value="some" ng-model="workData.q14">&nbsp<label
+                                class="labell" for="some">Some</label> </li>
+                        </div>
+                    </td>
+                </tr>
+                <tr></tr>
+            </table>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="submit" value="submit" class="btn btn-default but">Submit</button>
+        </form>
+    </div>
+
+    <div ng-show="showQuestionsWork" ng-cloak id="smallconq" class="container col-md-10 col-md-offset-1">
+
+        <form ng-show="showQuestionsWork" ng-cloak ng-submit="addNewWork();" name="myForm1" novalidate>
+            <div class="second">
+                <p><label class="head">Select answers to prompt below regarding Operations Responsibilities, Critical Thinking and
+                    Operations Innovation.</label></p>
+                <p></p>
+
+
+                <table>
+                    <tr>
+                        <td><label class="lab">Operation Responsibilities</label></td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>1</label>&nbsp;&nbsp;Select location(s): Where people/systems for this
+                            do business - Physically and online</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q1" id="yes" value="yes" ng-model="workData.q1">&nbsp<label
+                                    class="labell" for="yes">Yes</label></li>
+                                <input type="radio" name="q1" id="no" value="no" ng-model="workData.q1"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q1" id="some" value="some" ng-model="workData.q1">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>2</label>&nbsp;&nbsp;Select equipment: the tools needed to get the job
+                            done.</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q2" id="yes" value="yes" ng-model="workData.q2">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q2" id="no" value="no" ng-model="workData.q2"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q2" id="some" value="some" ng-model="workData.q2">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>3</label>&nbsp;&nbsp;Select and managing the labor resources</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q3" id="yes" value="yes" ng-model="workData.q3">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q3" id="no" value="no" ng-model="workData.q3"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q3" id="some" value="some" ng-model="workData.q3">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>4</label>&nbsp;&nbsp;Determine processes: assignments,
+                            deadlines,procedures as needed, including systems for quality control and improvement</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q4" id="yes" value="yes" ng-model="workData.q4">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q4" id="no" value="no" ng-model="workData.q4"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q4" id="some" value="some" ng-model="workData.q4">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                &nbsp;
+                <table>
+                    <tr>
+                        <td><label class="lab">Critical Thinking</label></td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>1</label>&nbsp;&nbsp;Required me to form goals based on reason and
+                            evidence</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q5" id="yes" value="yes" ng-model="workData.q5">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q5" id="no" value="no" ng-model="workData.q5"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q5" id="some" value="some" ng-model="workData.q5">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>2</label>&nbsp;&nbsp;Required me to form a systematic approach to
+                            solve problems</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q6" id="yes" value="yes" ng-model="workData.q6">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q6" id="no" value="no" ng-model="workData.q6"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q6" id="some" value="some" ng-model="workData.q6">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>3</label>&nbsp;&nbsp;Required me to be inquisitive</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q7" id="yes" value="yes" ng-model="workData.q7">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q7" id="no" value="no" ng-model="workData.q7"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q7" id="some" value="some" ng-model="workData.q7">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>4</label>&nbsp;&nbsp;Required me to prioritize my efforts and deal
+                            with problems in an orderly manner.</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q8" id="yes" value="yes" ng-model="workData.q8">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q8" id="no" value="no" ng-model="workData.q8"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q8" id="some" value="some" ng-model="workData.q8">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>5</label>&nbsp;&nbsp;Reinforced my confidence in my own reasoning
+                            capabilities.</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q9" id="yes" value="yes" ng-model="workData.q9">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q9" id="no" value="no" ng-model="workData.q9"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q9" id="some" value="some" ng-model="workData.q9">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </table>
+                &nbsp;
+                <table>
+                    <tr>
+                        <td><label class="lab">System and Operation Innovation</label></td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>1</label>&nbsp;&nbsp;Evaluate applications and solutions</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q10" id="yes" value="yes" ng-model="workData.q10">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q10" id="no" value="no" ng-model="workData.q10"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q10" id="some" value="some" ng-model="workData.q10">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>2</label>&nbsp;&nbsp;Select applications and solutions</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q11" id="yes" value="yes" ng-model="workData.q11">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q11" id="no" value="no" ng-model="workData.q11"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q11" id="some" value="some" ng-model="workData.q11">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>3</label>&nbsp;&nbsp;Specify/ design applications and solutions</p>
+                        </td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q12" id="yes" value="yes" ng-model="workData.q12">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q12" id="no" value="no" ng-model="workData.q12"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q12" id="some" value="some" ng-model="workData.q12">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>4</label>&nbsp;&nbsp;Build/test/install applications and solutions</p>
+                        </td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q13" id="yes" value="yes" ng-model="workData.q13">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q13" id="no" value="no" ng-model="workData.q13"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q13" id="some" value="some" ng-model="workData.q13">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p class="content"><label>5</label>&nbsp;&nbsp;Assess benefit/cost/value of
+                            applications/solutions</p></td>
+                        <td>
+                            <div>
+                                <input type="radio" name="q14" id="yes" value="yes" ng-model="workData.q14">&nbsp<label
+                                    class="labell" for="yes">Yes</label> </li>
+                                <input type="radio" name="q14" id="no" value="no" ng-model="workData.q14"
+                                       ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                                <input type="radio" name="q14" id="some" value="some" ng-model="workData.q14">&nbsp<label
+                                    class="labell" for="some">Some</label> </li>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </table>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" value="submit" class="btn btn-default but">Submit</button>
+        </form>
+    </div>
+
+    <!--<a href="deeds.html"><input type="submit" class="btn btn-success addnew pull-right pull-button" value="Next"></a>-->
+
+
+    <!--<pre>-->
+        <!--{{ model.user }}-->
+    <!--</pre>-->
+
+</div>
+<a ui-sref="base.deeds" class="btn btn-block btn-info" id="work-next">
+    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+</a>
