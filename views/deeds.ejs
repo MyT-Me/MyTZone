@@ -159,10 +159,10 @@
                 <!--<input type="text" ng-model="formData.category" value="takingclasses" ng-show="false" />-->
                 <div class="form-group" id="activity1" ng-model="formDatadeed.activity" required>
                     <label>Choose Specific Activity</label><br/>
-                    <input type="radio" name="tc" value="1-2 day" ng-model="formDatadeed.activity">&nbsp;1-2 day<br/>
-                    <input type="radio" name="tc" value="3-5 day" ng-model="formDatadeed.activity">&nbsp;3-5 day<br/>
-                    <input type="radio" name="tc" value="1-4 week" ng-model="formDatadeed.activity">&nbsp;1-4 week<br/>
-                    <input type="radio" name="tc" value="4 week/ semester course" ng-model="formDatadeed.activity">&nbsp;4 week/ semester course<br/>
+                    <input type="radio" name="tc" value="1 - 2 day" ng-model="formDatadeed.activity">&nbsp;1-2 day<br/>
+                    <input type="radio" name="tc" value="3 - 5 day" ng-model="formDatadeed.activity">&nbsp;3-5 day<br/>
+                    <input type="radio" name="tc" value="1 - 4 week" ng-model="formDatadeed.activity">&nbsp;1-4 week<br/>
+                    <input type="radio" name="tc" value="> 4 week / semester course" ng-model="formDatadeed.activity">&nbsp;4 week/ semester course<br/>
                     <input type="radio" name="tc" value="Mark for each Certificate of completion received" ng-model="formDatadeed.activity">&nbsp;Mark for
                     each Certificate of completion received
 
@@ -216,13 +216,11 @@
                   novalidate>
                 <div class="form-group" id="activity2" ng-model="formDatadeed.activity" required>
                     <label>Choose Specific Activity</label><br/>
-                    <input type="radio" name="cc" value="Conduct 1 hour or longer Briefing/Invited
-                    lecture" ng-model="formDatadeed.activity">&nbsp;Conduct 1 hour or longer Briefing/Invited
+                    <input type="radio" name="cc" value="Conduct 1 hour or longer Briefing/Invited lecture" ng-model="formDatadeed.activity">&nbsp;Conduct 1 hour or longer Briefing/Invited
                     lecture<br/>
-                    <input type="radio" name="cc" value="Conduct 1-2 day briefing/workshop" ng-model="formDatadeed.activity">&nbsp;Conduct 1-2 day briefing/workshop<br/>
-                    <input type="radio" name="cc" value="Conduct 3-5 day briefing/workshop" ng-model="formDatadeed.activity">&nbsp;Conduct 3-5 day briefing/workshop<br/>
-                    <input type="radio" name="cc" value="Teaching Assistant/ Lab Assistant for Sem/Qtr
-                    course" ng-model="formDatadeed.activity">&nbsp;Teaching Assistant/ Lab Assistant for Sem/Qtr
+                    <input type="radio" name="cc" value="Conduct 1 - 2 day briefing/workshop" ng-model="formDatadeed.activity">&nbsp;Conduct 1-2 day briefing/workshop<br/>
+                    <input type="radio" name="cc" value="Conduct 3 - 5 day briefing/workshop" ng-model="formDatadeed.activity">&nbsp;Conduct 3-5 day briefing/workshop<br/>
+                    <input type="radio" name="cc" value="Teaching Assistant/Lab Assistant for Sem/Qtr course" ng-model="formDatadeed.activity">&nbsp;Teaching Assistant/ Lab Assistant for Sem/Qtr
                     course<br/>
                     <input type="radio" name="cc" value="Teacher for full Semester course" ng-model="formDatadeed.activity">&nbsp;Teacher for full Semester course
 
@@ -327,15 +325,13 @@
                        ng-model="formDatadeed.category"/>
                 <div class="form-group" id="activity4" ng-model="formDatadeed.activity" required>
                     <label for="activity4">Choose Specific Activity</label><br/>
-                    <input type="radio" name="mentor" value="Regular blog related to professional Information" ng-model="formDatadeed.activity">&nbsp;Regular blog related to professional Information<br/>
-                    <input type="radio" name="mentor" value="Reviewed paper-Journal or Conference proceedings" ng-model="formDatadeed.activity">&nbsp;Reviewed paper-Journal or Conference proceedings<br/>
-                    <input type="radio" name="mentor" value="Refereed paper / MS-MA Thesis" ng-model="formDatadeed.activity">&nbsp;Refereed paper / MS-MA Thesis<br/>
-                    <input type="radio" name="mentor" value="White Paper/Book Chapter/ BS-BA individial
-                    capstone project" ng-model="formDatadeed.activity">&nbsp;White Paper/Book Chapter/ BS-BA individial
+                    <input type="radio" name="mentor" value="Regular blog related to professional information" ng-model="formDatadeed.activity">&nbsp;Regular blog related to professional Information<br/>
+                    <input type="radio" name="mentor" value="Reviewed paper - Journal or Conference Proceedings/MS-MA Culminating Project" ng-model="formDatadeed.activity">&nbsp;Reviewed paper-Journal or Conference proceedings<br/>
+                    <input type="radio" name="mentor" value="Refereed paper/MS-MA Thesis" ng-model="formDatadeed.activity">&nbsp;Refereed paper / MS-MA Thesis<br/>
+                    <input type="radio" name="mentor" value="White Paper/Book chapter/BS-BA Individual capstone project" ng-model="formDatadeed.activity">&nbsp;White Paper/Book Chapter/ BS-BA individial
                     capstone project<br/>
-                    <input type="radio" name="mentor" value="Book author/ Editor/ PHd - DSc Dissertation" ng-model="formDatadeed.activity">&nbsp;Book author/ Editor/ PHd - DSc Dissertation<br/>
-                    <input type="radio" name="mentor" value="Internal Tech Report/ Internal project report/
-                    BS-BA team capstone project" ng-model="formDatadeed.activity">&nbsp;Internal Tech Report/ Internal project report/
+                    <input type="radio" name="mentor" value="Book author/Editor/PhD-DSc Dissertation" ng-model="formDatadeed.activity">&nbsp;Book author/ Editor/ PHd - DSc Dissertation<br/>
+                    <input type="radio" name="mentor" value="Internal Tech report/Internal project report/BS-BA team capstone project" ng-model="formDatadeed.activity">&nbsp;Internal Tech Report/ Internal project report/
                     BS-BA team capstone project<br/>
 
 
@@ -400,7 +396,7 @@
                     <label for="activity5">Choose Specific Activity</label><br/>
                     <input type="radio" name="conf" value="Attendee" ng-model="formDatadeed.activity">&nbsp;Attendee<br/>
                     <input type="radio" name="conf" value="Presenter" ng-model="formDatadeed.activity">&nbsp;Presenter<br/>
-                    <input type="radio" name="conf" value="Co-author of presentation - No attendance" ng-model="formDatadeed.activity">&nbsp;Co-author of presentation - No attendance<br/>
+                    <input type="radio" name="conf" value="Co-author of presentation -no attend" ng-model="formDatadeed.activity">&nbsp;Co-author of presentation - No attendance<br/>
 
                     <!--<select class="form-control" id="activity5" ng-model="formData.activity" required>-->
                     <!--<option value="" selected>select a specific activity</option>-->
@@ -457,20 +453,15 @@
                        ng-model="formDatadeed.category"/>
                 <div class="form-group" id="activity6" ng-model="formDatadeed.activity" required>
                     <label for="activity6">Choose Specific Activity</label><br/>
-                    <input type="radio" name="awards" value="Apply for regional competitive grant or
-                    contest" ng-model="formDatadeed.activity">&nbsp;Apply for regional competitive grant or contest<br/>
-                    <input type="radio" name="awards" value="Apply for national/International grant or
-                    contest" ng-model="formDatadeed.activity">&nbsp;Apply for national/International grant or contest<br/>
-                    <input type="radio" name="awards" value="Win grant award or place 1st in
-                    publication,presentation or innovation contest" ng-model="formDatadeed.activity">&nbsp;Win grant award or place 1st in
+                    <input type="radio" name="awards" value="Apply for regional competitive grant or contest" ng-model="formDatadeed.activity">&nbsp;Apply for regional competitive grant or contest<br/>
+                    <input type="radio" name="awards" value="Apply for national / international grant or contest" ng-model="formDatadeed.activity">&nbsp;Apply for national/International grant or contest<br/>
+                    <input type="radio" name="awards" value="Win grant award or place 1st in publication, presentation, or innovation contest" ng-model="formDatadeed.activity">&nbsp;Win grant award or place 1st in
                     publication,presentation or innovation contest<br/>
-                    <input type="radio" name="awards" value="Win 2nd or 3rd in publication, presentation or
-                    innovation contest" ng-model="formDatadeed.activity">&nbsp;Win 2nd or 3rd in publication, presentation or
+                    <input type="radio" name="awards" value="Win 2nd or 3rd in publication, presentation, or innovation contest" ng-model="formDatadeed.activity">&nbsp;Win 2nd or 3rd in publication, presentation or
                     innovation contest<br/>
-                    <input type="radio" name="awards" value="Other local honor or award conferred" ng-model="formDatadeed.activity">&nbsp;Other local honor or award conferred<br/>
+                    <input type="radio" name="awards" value="Other Local honor or award conferred" ng-model="formDatadeed.activity">&nbsp;Other local honor or award conferred<br/>
                     <input type="radio" name="awards" value="Other National honor or award conferred" ng-model="formDatadeed.activity">&nbsp;Other National honor or award conferred<br/>
-                    <input type="radio" name="awards" value="Other International honor or award
-                    conferred" ng-model="formDatadeed.activity">&nbsp;Other International honor or award
+                    <input type="radio" name="awards" value="Other International honor or award conferred" ng-model="formDatadeed.activity">&nbsp;Other International honor or award
                     conferred<br/>
                     <input type="radio" name="awards" value="Fellow/Diplomate" ng-model="formDatadeed.activity">&nbsp;Fellow/Diplomate<br/>
 
@@ -538,7 +529,7 @@
                     <label for="activity1">Choose Specific Activity</label><br/>
                     <input type="radio" name="re" value="Team member" ng-model="formDatadeed.activity">&nbsp;Team member<br/>
                     <input type="radio" name="re" value="Position/Consultancy" ng-model="formDatadeed.activity">&nbsp;Position/Consultancy<br/>
-                    <input type="radio" name="re" value="Expert Testimony" ng-model="formDatadeed.activity">&nbsp;Expert Testimony<br/>
+                    <input type="radio" name="re" value="Expert testimony" ng-model="formDatadeed.activity">&nbsp;Expert Testimony<br/>
                     <input type="radio" name="re" value="Panel/talk/authorship" ng-model="formDatadeed.activity">&nbsp;Panel/talk/authorship<br/>
 
                     <!--<select class="form-control" id="activity7" ng-model="formData.activity" required>-->
@@ -644,9 +635,9 @@
                        ng-model="formDatadeed.category"/>
                 <div class="form-group" id="activity9" ng-model="formDatadeed.activity" required>
                     <label for="activity1">Choose Specific Activity</label><br/>
-                    <input type="radio" name="languages" value="Fluent in 2nd language " ng-model="formDatadeed.activity">&nbsp;Fluent in 2nd language <br/>
+                    <input type="radio" name="languages" value="Fluent in 2nd language" ng-model="formDatadeed.activity">&nbsp;Fluent in 2nd language <br/>
                     <input type="radio" name="languages" value="Fluent in 3rd language" ng-model="formDatadeed.activity">&nbsp;Fluent in 3rd language<br/>
-                    <input type="radio" name="languages" value="Fluent in 4 or more languages" ng-model="formDatadeed.activity">&nbsp;Fluent in 4 or more languages<br/>
+                    <input type="radio" name="languages" value="Fluent in 4th or more language" ng-model="formDatadeed.activity">&nbsp;Fluent in 4 or more languages<br/>
 
                     <!--<select class="form-control" id="activity9" ng-model="formData.activity" required>-->
                     <!--<option value="" selected>select a specific activity</option>-->
@@ -696,10 +687,10 @@
                        ng-model="formDatadeed.category"/>
                 <div class="form-group" id="activity10" ng-model="formDatadeed.activity" required>
                     <label for="activity1">Choose Specific Activity</label><br/>
-                    <input type="radio" name="leisure" value="&nbsp;National < 1 month cumulative" ng-model="formDatadeed.activity">&nbsp;National < 1 month cumulative<br/>
+                    <input type="radio" name="leisure" value="National < 1 month cumulative" ng-model="formDatadeed.activity">&nbsp;National < 1 month cumulative<br/>
                     <input type="radio" name="leisure" value="National > 1 month cumulative" ng-model="formDatadeed.activity">&nbsp;National > 1 month cumulative<br/>
                     <input type="radio" name="leisure" value="International < 2 weeks cumulative" ng-model="formDatadeed.activity">&nbsp;International < 2 weeks cumulative<br/>
-                    <input type="radio" name="leisure" value="International 2-4 weeks cumulative" ng-model="formDatadeed.activity">&nbsp;International 2-4 weeks cumulative<br/>
+                    <input type="radio" name="leisure" value="International 2 - 4 weeks cumulative" ng-model="formDatadeed.activity">&nbsp;International 2-4 weeks cumulative<br/>
                     <input type="radio" name="leisure" value="International >4 weeks cumulative" ng-model="formDatadeed.activity">&nbsp;International >4 weeks cumulative<br/>
                     <!---->
                     <!--<select class="form-control" id="activity10" ng-model="formData.activity" required>-->

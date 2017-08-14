@@ -214,9 +214,9 @@ var mentoringScoreSchema= new mongoose.Schema({
 
 var writingsScoreSchema = new mongoose.Schema({
     customId:{type:String},
-    publicationName:{type:String, required:true},
+    PublicationName:{type:String, required:true},
     specificActivity:{type:String, required:true},
-    articleTitle:{type:String, required:true},
+    ArticleTitle:{type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
     timeStamp:{type:Date},
@@ -225,9 +225,9 @@ var writingsScoreSchema = new mongoose.Schema({
 
 var conferenceScoreSchema = new mongoose.Schema({
     customId:{type:String},
-    publicationName:{type:String, required:true},
+    ConferenceSponsor:{type:String, required:true},
     specificActivity:{type:String, required:true},
-    articleTitle:{type:String, required:true},
+    PresentationTitle:{type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
     timeStamp:{type:Date},
@@ -236,9 +236,9 @@ var conferenceScoreSchema = new mongoose.Schema({
 
 var awardsScoreSchema = new mongoose.Schema({
     customId:{type:String},
-    confrenceSponsor:{type: String, required: true},
+    AwardSponsor:{type: String, required: true},
     specificActivity:{type:String, required:true},
-    presentationTitle:{type:String,required:true},
+    AwardTitle:{type:String,required:true},
     month:{type:Date},
     year:{type:Date, required:true},
     timeStamp:{type:Date},
@@ -248,7 +248,7 @@ var awardsScoreSchema = new mongoose.Schema({
 var recognizedExpertiseScoreSchema = new mongoose.Schema({
     customId:{type:String},
     specificActivity: {type: String, required:true},
-    deedDescription: {type:String, required:true},
+    description: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
     timeStamp:{type:Date},
@@ -258,7 +258,7 @@ var recognizedExpertiseScoreSchema = new mongoose.Schema({
 var patentsScoreSchema = new mongoose.Schema({
     customId:{type:String},
     specificActivity: {type: String, required:true},
-    deedDescription: {type:String, required:true},
+    description: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
     timeStamp:{type:Date},
@@ -268,7 +268,7 @@ var patentsScoreSchema = new mongoose.Schema({
 var languagesScoreSchema = new mongoose.Schema({
     customId:{type:String},
     specificActivity: {type: String, required:true},
-    deedDescription: {type:String, required:true},
+    description: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
     timeStamp:{type:Date},
@@ -278,7 +278,7 @@ var languagesScoreSchema = new mongoose.Schema({
 var leisureTravelScoreSchema = new mongoose.Schema({
     customId:{type:String},
     specificActivity: {type: String, required:true},
-    deedDescription: {type:String, required:true},
+    description: {type:String, required:true},
     month:{type:Date},
     year:{type:Date, required:true},
     timeStamp:{type:Date},

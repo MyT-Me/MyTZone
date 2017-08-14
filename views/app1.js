@@ -731,12 +731,78 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             'software': "",
             'vendor': "",
             'linkedin': "",
-            'proficiency': "",
+            'basicyear': "",
+            'interyear': "",
+            'advancedyear': "",
+            'expertyear': "",
             'year': "",
             'formal': "",
             'usage': "",
             'ind': $scope.personalDetailsTools.length + 1
         });
+    }
+
+    $scope.skillsClearDropDowns = function(value, index) {
+        toolsSkillsClearDropDowns(value,index, "skills");
+    };
+    
+    $scope.toolsClearDropDowns = function(value, index) {
+        toolsSkillsClearDropDowns(value,index, "tools");
+    };
+
+    var toolsSkillsClearDropDowns = function (value, index , page) {
+        id = event.target.id;
+        if(value === ""){
+            return;
+        }
+        var proficiencyObject;
+        if(page === 'skills') {
+            proficiencyObject = $scope.personalDetailsSkills; 
+        } else if(page === 'tools') {
+            proficiencyObject = $scope.personalDetailsTools;
+        }
+        switch(id) {
+            case 'basicyear':
+            /*
+                document.getElementById('interyear').value = "";
+                document.getElementById('advancedyear').value = "";
+                document.getElementById('expertyear').value = "";
+            */
+                proficiencyObject[index].interyear = "";
+                proficiencyObject[index].advancedyear = "";
+                proficiencyObject[index].expertyear = "";
+                break;
+            case 'interyear':
+                /*
+                document.getElementById('basicyear').value = "";
+                document.getElementById('advancedyear').value = "";
+                document.getElementById('expertyear').value = "";
+                */
+                proficiencyObject[index].basicyear = "";
+                proficiencyObject[index].advancedyear = "";
+                proficiencyObject[index].expertyear = "";
+                break;
+            case 'advancedyear':
+            /*
+                document.getElementById('basicyear').value = "";
+                document.getElementById('interyear').value = "";
+                document.getElementById('expertyear').value = "";
+            */
+                proficiencyObject[index].interyear = "";
+                proficiencyObject[index].basicyear = "";
+                proficiencyObject[index].expertyear = "";
+                break;
+            case 'expertyear':
+            /*
+                document.getElementById('basicyear').value = "";
+                document.getElementById('interyear').value = "";
+                document.getElementById('advancedyear').value = "";
+            */
+                proficiencyObject[index].basicyear = "";
+                proficiencyObject[index].interyear = "";
+                proficiencyObject[index].advancedyear = "";
+                break;
+        };
     }
 
     $scope.addNewtools = function(){

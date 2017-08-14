@@ -11,7 +11,12 @@ var JSONValidator = function (validationSchema, req, res, callback) {
     if(result.valid) {
         callback(req, res);
     } else {
-        console.log("Error")
+        console.log("=======================================================")
+        console.log("Error");
+        console.log(result.errors);
+
+        console.log("Input");
+        console.log(req.body);
         res.status(500).send(result.errors);
         return;
     }
@@ -21,6 +26,7 @@ var JSONValidator = function (validationSchema, req, res, callback) {
 module.exports = function (app) {
     console.log("Addition Ran");
     app.post('/api/deeds/:id', function (req, res) {
+        console.log(req);
         if (!(req.params === 0)) {
             switch (req.params.id) {
             case parameters.EDUCATION:

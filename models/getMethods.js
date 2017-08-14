@@ -66,7 +66,6 @@ exports.getEducation = function(req,callback){
                 educationData: toSendArray
             };
             console.log("Sending JSON")
-            console.log(toSend);
             callback(null, JSON.stringify(toSend));
 
         }

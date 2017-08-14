@@ -72,6 +72,9 @@ var UserProfileSchema = new mongoose.Schema({
 });
 */
 
+//Common Methods
+
+
 
 exports.createUser = function(req,callback) {
     var user = new User(req.body);
@@ -193,13 +196,15 @@ exports.addMentoring = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
-             console.log(req.body)
             var newMentoring = new MentoringScore(req.body);
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
             newMentoring.mentoringScore = 10;
+            newMentoring.customId = stringValues.MENTORING + time;
+            newMentoring.timeStamp = time;
             profile.mentoring.mentoringData.push(newMentoring);       
             profile.mentoring.mentoringTotalScore = profile.mentoring.mentoringTotalScore + 10;
             profile.save(function(err){
-                callback(err);
+                callback(err, newMentoring.customId);
             })
         }
     })
@@ -220,11 +225,15 @@ exports.addTakingClasses = function(req,callback){
              console.log(req.body)
             //Compute Part along with new Taking Classes Block
             var newTakingClasses = new TakingClassesScore(req.body);
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
             newTakingClasses.TakingClassesScore = 10;
+            newTakingClasses.customId = stringValues.TAKING_CLASSES + time;
+            newTakingClasses.timeStamp = time;
             profile.takingClasses.takingClassesData.push(newTakingClasses);
             profile.takingClasses.takingClassesTotalScore = profile.takingClasses.takingClassesTotalScore + 10;
             profile.save(function(err){
-                callback(err);
+                console.log(err);
+                callback(err, newTakingClasses.customId);
             })
          }
      })
@@ -242,6 +251,9 @@ exports.addConductingClasses = function(req,callback){
          } else {
              console.log(req.body)
             var newConductingClasses = new ConductingClassesScore(req.body);
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newConductingClasses.customId = stringValues.CONDUCTING_CLASSES + time;
+            newConductingClasses.timeStamp = time;
             newConductingClasses.ConductingClassesScore = 10;
             profile.conductingClasses.conductingClassesData.push(newConductingClasses);
             profile.conductingClasses.conductingClassesTotalScore = profile.conductingClasses.conductingClassesTotalScore + 10;
@@ -266,6 +278,9 @@ exports.addWritings = function(req,callback){
              console.log(req.body)
             var newWritings = new WritingsScore(req.body);
             newWritings.writingScore = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newWritings.customId = stringValues.WRITINGS + time;
+            newWritings.timeStamp = time;
             profile.writings.writingsData.push(newWritings);
             profile.writings.writingTotalScore = profile.writings.writingTotalScore + 10; 
             profile.save(function(err){
@@ -284,16 +299,19 @@ exports.addConfrences = function(req,callback){
             console.log("Couldn't find profile");
             callback(new Error("User not found"));
          } else {
-             console.log(req.body)
-            var newConfrences = new ConfrenceScore(req.body);
+            console.log(req.body)
+            var newConfrences = new ConferencesScore(req.body);
             newConfrences.confrenceScore = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newConfrences.customId = stringValues.CONFERENCES + time;
+            newConfrences.timeStamp = time;
             profile.conferences.confrenceData.push(newConfrences);
             profile.conferences.confrenceTotalScore = profile.conferences.confrenceTotalScore + 10; 
-            profile.save(function(err){
-                callback(err);
-            })
+            profile.save(function(err) {
+                callback(err, newConfrences.customId);
+            });
         }
-    })
+    });
 }
 
 exports.addAwards = function(req,callback){
@@ -308,10 +326,16 @@ exports.addAwards = function(req,callback){
              console.log(req.body)
             var newAwards = new AwardsScore(req.body); 
             newAwards.awardsScore = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newAwards.customId = stringValues.AWARDS + time;
+            newAwards.timeStamp = time;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newConfrences.customId = stringValues.CONDUCTING_CLASSES + time;
+            newConfrences.timeStamp = time;
             profile.awards.awardsData.push(newAwards);
             profile.awards.awardsTotalScore = profile.awards.awardsTotalScore +10;                   
             profile.save(function(err){
-                callback(err);
+                callback(err, newAwards.customId);
             })
         }
     })
@@ -329,10 +353,13 @@ exports.addRecognizedExperteise = function(req,callback){
              console.log(req.body)
             var newRecognizedExperteise = new RecognizedExpertiseScore(req.body);        
             newRecognizedExperteise.recognizedExpertiseScore = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newRecognizedExperteise.customId = stringValues.RECOGNIZED_EXPERTIESE + time;
+            newRecognizedExperteise.timeStamp = time;
             profile.recognizedExpertise.recognizedExpertiseData.push(newRecognizedExperteise);
             profile.recognizedExpertise.recognizedExpertiseTotalScore = profile.recognizedExpertise.recognizedExpertiseTotalScore + 10; 
             profile.save(function(err){
-                callback(err);
+                callback(err, newRecognizedExperteise.customId);
             })
         }
     })
@@ -350,10 +377,13 @@ exports.addPatents = function(req,callback){
              console.log(req.body)
             var newPatent = new PatentsScore(req.body);        
             newPatent.patentsScore = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newPatent.customId = stringValues.PATENTS + time;
+            newPatent.timeStamp = time;
             profile.patents.patentsData.push(newPatent);
             profile.patents.patentsTotalScore = profile.patents.patentsTotalScore + 10; 
             profile.save(function(err){
-                                callback(err);
+                callback(err, newPatent.customId);
             })
         }
     })
@@ -371,10 +401,13 @@ exports.addLanguages = function(req,callback){
              console.log(req.body)
             var newLanguages = new LanguagesScore(req.body); 
             newLanguages.languagesScore = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newLanguages.customId = stringValues.LANGUAGES + time;
+            newLanguages.timeStamp = time;
             profile.languages.languagesData.push(newLanguages);
             profile.languages.languagesTotalScore = profile.languages.languagesTotalScore+10;        
             profile.save(function(err){
-                callback(err);
+                callback(err, newLanguages.customId);
             })
         }
     })
@@ -392,10 +425,13 @@ exports.addLeisureTravel = function(req,callback){
             console.log(req.body)
             var newLeisureTravel = new LeisureTravelScore(req.body);        
             newLeisureTravel.leisureTravelScore = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newLeisureTravel.customId = stringValues.LEISURE_TRAVEL + time;
+            newLeisureTravel.timeStamp = time;
             profile.leisureTravel.leisureTravelData.push(newLeisureTravel);
             profile.leisureTravel.leisureTravelTotalScore = profile.leisureTravel.leisureTravelTotalScore + 10;
             profile.save(function(err){
-                callback(err);
+                callback(err, newLeisureTravel.customId);
             })
         }
     });

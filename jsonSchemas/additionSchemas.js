@@ -72,12 +72,17 @@ module.exports = {
         "description": "Taking Classes Addition JSON",
         "properties":{
             "specificActivity": {
+                "enum": ["1 - 2 day",
+                        "3 - 5 day",
+                        "1 - 4 week",
+                        "> 4 week / semester course",
+                        "Mark for each Certificate of completion received"]
                             },
             "description": {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -94,15 +99,15 @@ module.exports = {
             "specificActivity": {
                 "enum": ["Conduct 1 hour or longer Briefing/Invited lecture",
                         "Conduct 1 - 2 day briefing/workshop",
-                        "Conduct 3 - 5 day briefing / workshop",
-                        "Teaching Assistant /Lab Assistant for Sem/Qtr course",
+                        "Conduct 3 - 5 day briefing/workshop",
+                        "Teaching Assistant/Lab Assistant for Sem/Qtr course",
                         "Teacher for full Semester course"]
             },
             "description": {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -125,7 +130,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -141,11 +146,11 @@ module.exports = {
         "properties": {
             "specificActivity": {
                 "enum": ["Regular blog related to professional information",
-                        "Reviewed paper - Journal or Conference Proceedings / MS-MA Culminating Project",
-                        "Refereed paper / MS-MA Thesis",
-                        "White Paper/Book chapter / BS-BA Individual capstone project",
-                        "Book author/Editor / PhD-DSc Dissertation",
-                        "Internal Tech report / Internal project report / BS-BA team capstone project"]
+                        "Reviewed paper - Journal or Conference Proceedings/MS-MA Culminating Project",
+                        "Refereed paper/MS-MA Thesis",
+                        "White Paper/Book chapter/BS-BA Individual capstone project",
+                        "Book author/Editor/PhD-DSc Dissertation",
+                        "Internal Tech report/Internal project report/BS-BA team capstone project"]
             },
             "PublicationName": {
                 "type": "string"
@@ -154,7 +159,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -180,7 +185,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -211,7 +216,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -235,7 +240,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -259,7 +264,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -284,7 +289,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
@@ -307,7 +312,7 @@ module.exports = {
                 "type": "string"
             },
             "month": {
-                "type": "number"
+                "type": "string"
             },
             "year": {
                 "type": "number"
