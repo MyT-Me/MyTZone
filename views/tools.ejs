@@ -1,3 +1,6 @@
+<div class="control-group">
+    <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger">Logout</a></span>
+</div>
 <section>
     <nav1>
         <ol class="cd-multi-steps text-bottom count" id="status-buttons">
@@ -96,15 +99,14 @@
                             </tr>
                         </table>
                             </td>
-                        <td style="width: 30px; margin-left:14px;">
-                            <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>
                         </td>
-                        <!--<td style="padding-left: 15px;">
-                            <input type="radio" name="tick2_{{$index}}" value="Yes" ng-model="personalDetail.formal"> Yes
-                            <input type="radio" name="tick2_{{$index}}" value="No" ng-model="personalDetail.formal"> No<br>
-                        </td>-->
-                        <td style="padding-left: 15px;">
-                            <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.usage"> Yes<input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.usage"> No <br>
+                        <td style="width: 30px; margin-left:14px;">
+                            <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.formal"> Yes
+                            <input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.formal"> No<br>
+                        </td>
+                        <td style="width: 30px; margin-left:14px;">
+                            <input type="radio" name="tick4_{{$index}}" value="Yes" ng-model="personalDetail.usage"> Yes
+                            <input type="radio" name="tick4_{{$index}}" value="No" ng-model="personalDetail.usage"> No<br>
                         </td>
                         <!--<td>-->
                             <!--<input type="radio" name="tick2" value="Yes" style="margin-left: 20px;" ng-model="personalDetail.usage"> Yes-->
