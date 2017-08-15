@@ -108,6 +108,19 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         TOOLS:'tools',
         SKILLS:'skills',
         POINTS:'points'
+    };
+
+    var colorHex = {
+            EMRALD: '#2ecc71',
+            CARROT: '#e67e22',
+            AMETHIEST: '#9b59b6',
+            PETER: '#3498db'
+        };
+    var colorSchemas = {
+        BASIC: 'EMRALD',
+        INTER: 'CARROT',
+        ADVANCED: 'PETER',
+        EXPERT: 'AMETHIEST'
     }
 
     //Common Functions
@@ -670,6 +683,32 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         $scope.shownew = false;
     };
 
+//Common for SKills and Tools
+
+$scope.dropDownColorSetter = function(value , proficiencyType) {
+    var returnValue;
+    if(value === "" || value === undefined) {
+        returnValue = "None";
+    } else {
+        switch(proficiencyType) {
+            case 'basic':
+                returnValue = colorHex[colorSchemas.BASIC];
+                break;
+            case 'inter':
+                returnValue = colorHex[colorSchemas.INTER];
+                break;
+            case 'advanced':
+                returnValue = colorHex[colorSchemas.ADVANCED];
+                break;
+            case 'expert':
+                returnValue =  colorHex[colorSchemas.EXPERT];
+                break;
+        }
+    }
+    console.log(returnValue);
+    return returnValue;
+}
+
 //Skills Controller
 
     $scope.personalDetailsSkills = [];
@@ -752,7 +791,9 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
 
     var toolsSkillsClearDropDowns = function (value, index , page) {
         id = event.target.id;
-        if(value === ""){
+        console.log("Inside our cleaner");
+        console.log(value);
+        if(value === "" || value === undefined){
             return;
         }
         var proficiencyObject;
