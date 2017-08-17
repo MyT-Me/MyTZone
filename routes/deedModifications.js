@@ -1,5 +1,6 @@
 'use strict';
-var parameters = require('../strings/apiParameters');
+
+var parameters = require('../strings/apiStrings');
 module.exports = function (app) {
     app.put('/api/deeds/:id', function (req, res) {
         if(!req.params === 0){

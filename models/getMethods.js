@@ -43,6 +43,45 @@ var getArrayJSONBuilder = function (jsonSchema, modelObject) {
     return jsonArray;
 }
 
+exports.getDeeds = function (req, deedName, callback) {
+    try {
+        User.findOne({"email": "revanthpenugonda@gmail.com"}, function (err, profile) {
+            if (err){
+                // Can be any error - ex: Error Due to Connection
+                console.log("Error" + err);
+                callback(err, null);
+            } else if(profile === null){
+                // If incorrect Details send about the profile
+                console.log("No User Found");
+                callback(new Error("No User Found"), null);
+            } else {
+                //Real Processing Starts
+                var deedData = profile[deedName].deedData;
+                var ourSchema = getSchemas(deedName);
+                var toSendArray = getArrayJSONBuilder(ourSchema, deedData);
+                toSendArray.sort(sorter);
+                var ind = 1;
+                toSendArray.forEach(function (element) {
+                    element.ind = ind;
+                    ind++;
+                });
+                var toSend = {
+                    deedData: toSendArray
+                };
+                console.log("Sending JSON");
+                callback(null ,toSend);
+            }
+        })
+    } catch(err) {
+        callback(err, null);
+    }
+
+}
+
+
+
+//Trying to Eliminate these Redundant Methods by adding a simpler single Method
+/*
 exports.getEducation = function(req,callback){
     try {
     User.findOne({"email": "revanthpenugonda@gmail.com"},function(err,profile) {
@@ -318,3 +357,4 @@ exports.getWorkExperience = function(req,callback){
         callback(error,null);
     }
 }
+*/

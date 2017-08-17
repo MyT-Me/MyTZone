@@ -1,32 +1,12 @@
 /**
  * Created by revan on 4/13/2017.
  */
-
+'use strict';
 
 var models = require('./schema');
 var moment = require('moment-timezone');
 var stringValues = require('../strings')('models');
 var User = models.User;
-/*
-NO LONGER NEED TO THESE
-WILL UNCOMMENT WHEN NEEDED
-var Education = models.Education;
-var WorkSection = models.WorkSection;
-var WorkExperience = models.WorkExperience;
-var Certificates = models.Certificates;
-var TakingClasses = models.TakingClasses;
-var ConductingClasses = models.ConductingClasses; 
-var Mentoring = models.Mentoring;
-var Writings = models.Writings;
-var Conferences = models.Conferences;
-var Awards = models.Awards;
-var RecognizedExpertise = models.RecognizedExpertise;
-var Patents = models.Patents;
-var Languages = models.Languages;
-var LeisureTravel = models.LeisureTravel;
-var Tools = models.Tools;
-var Skills = models.Skills;
-*/
 
 
 //Loading Schema with scores in it
@@ -43,46 +23,78 @@ var PatentsScore = models.PatentsScore;
 var LanguagesScore = models.LanguagesScore;
 var LeisureTravelScore = models.LeisureTravelScore;
 var WorkExperience = models.WorkExperience;
-// Need to Add Tools, Skills and Points Soon
-
-/*
-var UserProfileSchema = new mongoose.Schema({
-    firstName: {type: String, required:true},
-    lastName: {type:String, required:true},
-    middleName: {type:String, },
-    userName: {type:String, required: true},
-    email: {type:mongoose.SchemaTypes.Email, requiredtrue:true },
-    firstYear: {type:Date},
-    education:[educationSchema],
-    workExperience:[workExperienceSchema],
-    certificates:[certificateSchema],
-    takingClasses:[takingClassesSChema],
-    conductingClasses:[conductingClassesSchema],
-    mentoring:[mentoringSchema],
-    writings:[writingSchema],
-    conferences:[conferenceSchema],
-    awards:[awardSchema],
-    recognizedExpertise:[recognizedExpertiseSchema],
-    patents:[patentsSchema],
-    languages:[languagesSchema],
-    leisureTravel:[leisureTravelSchema],
-    tools:[],
-    skills:[],
-    points:[]
-});
-*/
 
 //Common Methods
 
-
-
-exports.createUser = function(req,callback) {
+exports.createUser = function (req,callback) {
     var user = new User(req.body);
     user.save(function(err){
         callback(err);
-    })
-}
+    });
+};
 
+var schemaLoader = function (deedName, deedBody){
+    switch (deedName) {
+    case stringValues.EDUCATION:
+        console.log("Ideally before");
+        return (new EducationScore(deedBody));
+    case stringValues.CERTIFICATES:
+        return new CertificateScore(deedBody);
+    case stringValues.TAKING_CLASSES:
+        return new TakingClassesScore(deedBody);
+    case stringValues.CONDUCTING_CLASSES:
+        return new ConductingClassesScore(deedBody);
+    case stringValues.MENTORING:
+        return new MentoringScore(deedBody);
+    case stringValues.WRITINGS:
+        return new WritingsScore(deedBody);
+    case stringValues.CONFERENCES:
+        return new ConferencesScore(deedBody);
+    case stringValues.AWARDS:
+        return new AwardsScore(deedBody);
+    case stringValues.RECOGNIZED_EXPERTIESE:
+        return new RecognizedExpertiseScore(deedBody);
+    case stringValues.PATENTS:
+        return new PatentsScore(deedBody);
+    case stringValues.LANGUAGES:
+        return new LanguagesScore(deedBody);
+    case stringValues.LEISURE_TRAVEL:
+        return new LeisureTravelScore(deedBody);
+    case stringValues.WORK_EXPERIENCE:
+        return null;
+    }
+};
+
+
+exports.addDeed = function (req, deedName, callback){
+    User.findOne({"email": "revanthpenugonda@gmail.com"}, function (err, profile) {
+        if (err) {
+            console.log("Err Block");
+            callback(err, null);
+        } else if (profile === null) {
+            console.log("Profile Empty log");
+            callback(new Error("No User Found"), null);
+        } else {
+            var newDeed = schemaLoader(deedName, req.body);
+            //Testing this because of Async Problems
+
+            console.log("Ideally After");
+            newDeed.score = 10;
+            var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
+            newDeed.customId = deedName + time;
+            newDeed.timeStamp = time;
+            console.log(profile);
+            profile[deedName].deedData.push(newDeed);
+            //Score Compute Addition Here
+            profile.save(function (err) {
+                callback(err, newDeed.customId);
+            });
+        }
+    });
+};
+
+// These Functions below would become Redundant if the Above function Works
+/*
 exports.addEducation = function (req, callback) {
     console.log("Education Add method");
     User.findOne({"email": "revanthpenugonda@gmail.com"}, function (err, profile) {
@@ -257,7 +269,7 @@ exports.addConductingClasses = function(req,callback){
             newConductingClasses.ConductingClassesScore = 10;
             profile.conductingClasses.conductingClassesData.push(newConductingClasses);
             profile.conductingClasses.conductingClassesTotalScore = profile.conductingClasses.conductingClassesTotalScore + 10;
-            profile.save(function(err){
+            profile.save(function (err) {
                 callback(err);
             })
         }
@@ -283,7 +295,7 @@ exports.addWritings = function(req,callback){
             newWritings.timeStamp = time;
             profile.writings.writingsData.push(newWritings);
             profile.writings.writingTotalScore = profile.writings.writingTotalScore + 10; 
-            profile.save(function(err){
+            profile.save(function (err) {
                 callback(err);
             })
         }
@@ -307,7 +319,7 @@ exports.addConfrences = function(req,callback){
             newConfrences.timeStamp = time;
             profile.conferences.confrenceData.push(newConfrences);
             profile.conferences.confrenceTotalScore = profile.conferences.confrenceTotalScore + 10; 
-            profile.save(function(err) {
+            profile.save(function (err) {
                 callback(err, newConfrences.customId);
             });
         }
@@ -464,3 +476,4 @@ exports.addSkills = function(req,callback){
 exports.addPoints = function(req,callback){
 }
 
+*/

@@ -1,8 +1,7 @@
 
 var models = require('./schema');
 
-var Models = models.Models;
-var User = Models.User;
+var User = models.User;
 
 exports.removeEducation = function(req,callback){
     console.log("removing Education");

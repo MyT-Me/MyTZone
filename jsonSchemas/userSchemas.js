@@ -23,6 +23,9 @@ module.exports = {
         "title": "registration",
         "description": "Registration Schema Validation JSON",
         "properties": {
+            "userName": {
+              "type": "string"
+            },
             "lastName": {
                 "type": "string"
             },
@@ -45,9 +48,9 @@ module.exports = {
             },
             "password": {
                 "type": "string",
-            },
-            "required": ['lastName', 'firstName','firstYear','dateOfBirth','email','password'],
-            "additionalProperties": false
-        }
+            }
+        },
+        "required": ['userName','lastName', 'firstName','firstYear','dateOfBirth','email','password'],
+        "additionalProperties": false
     }
 };

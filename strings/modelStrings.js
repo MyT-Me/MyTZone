@@ -6,7 +6,7 @@ module.exports = {
     TAKING_CLASSES: 'takingClasses',
     CONDUCTING_CLASSES: 'conductingClasses',
     MENTORING: 'mentoring',
-    WRITINGS: 'writing',
+    WRITINGS: 'writings',
     CONFERENCES: 'confrences',
     AWARDS: 'awards',
     RECOGNIZED_EXPERTIESE: 'recognizedExpertise',

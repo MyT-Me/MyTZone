@@ -321,14 +321,50 @@ module.exports = {
         "required": ['specificActivity', 'description', 'month', 'year'],
         "additionalProperties": false
     },
+
+    /*
+    customId:{type:String},
+    
+    softwareDeviceName: {type:String,required:true},
+    vendorDistributor: {type:String, required:true},
+    numberOfLinkedEndorsments: {type:Number, required: true},
+    proficiencyType: {type: String, required: true},
+    proficiencyYear: {type: Number, required: true},
+    formalCertification: {type:Boolean, required:true},
+    usagein3Years:{type:Boolean,required:true},
+    skillsScore:{type:Number}
+    */
     skills: {
         "type": "object",
         "title": "Skills",
         "description": "Skills Addition JSON",
         "properties": {
-
+            "category": {
+                "enum": ["Professional Methods / Skills", "Personal Enrichment Skills"]
+            },
+            "softwareDeviceName": {
+                "type": "string"
+            },
+            "vendorDistributor": {
+                "type": "string"
+            },
+            "numberOfLinkedEndorsments": {
+                "type": "number"
+            },
+            "proficiencyType": {
+                "enum": ["basic", "inter", "advanced", "expert"]
+            },
+            "proficiencyYear": {
+                "type": "number"
+            },
+            "formalCertification": {
+                "type": "boolean"
+            },
+            "usagein3Years": {
+                "type": "boolean"
+            }
         },
-        "required": [],
+        "required": ["category", "softwareDeviceName", "vendorDistributor", "numberOfLinkedEndorsments", "proficiencyType", "proficiencyYear", "formalCertification", "usagein3Years"],
         "additionalProperties": false
     },
     tools: {
@@ -336,9 +372,32 @@ module.exports = {
         "title": "Tools",
         "description": "Tools Addition JSON",
         "properties": {
-
+            "category": {
+                "enum": ["Professional Methods / Skills", "Personal Enrichment Skills"]
+            },
+            "softwareDeviceName": {
+                "type": "string"
+            },
+            "vendorDistributor": {
+                "type": "string"
+            },
+            "numberOfLinkedEndorsments": {
+                "type": "number"
+            },
+            "proficiencyType": {
+                "enum": ["basic", "inter", "advanced", "expert"]
+            },
+            "proficiencyYear": {
+                "type": "number"
+            },
+            "formalCertification": {
+                "type": "boolean"
+            },
+            "usagein3Years": {
+                "type": "boolean"
+            }
         },
-        "required": [],
+        "required": ["category", "softwareDeviceName", "vendorDistributor", "numberOfLinkedEndorsments", "proficiencyType", "proficiencyYear", "formalCertification", "usagein3Years"],
         "additionalProperties": false
     },
     workExperience: {

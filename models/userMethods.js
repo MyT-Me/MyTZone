@@ -2,8 +2,10 @@ var models = require('./schema');
 var user = models.User;
 var passport = require('passport');
 var passportLocal = require('passport-local');
+
+
 exports.createUser = function(req,callback) {
-    var User = new user();
+    var User = new user(req.body);
     console.log(req.body);
     User.save(function(err){
         if(err) {

@@ -1,8 +1,8 @@
 var db = require('./db');
-var api = require('./apiParameters');
+var api = require('./apiStrings');
 var models = require('./modelStrings');
 var scores = require('./scoreStrings');
-
+var apiParamVerifier = require('./methods');
 
 module.exports = function(value){
     switch (value) {
@@ -14,5 +14,7 @@ module.exports = function(value){
         return models;
     case 'scores':
         return scores;
+    case 'apiVerfier':
+        return apiParamVerifier;
     }
 }

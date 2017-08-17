@@ -194,7 +194,9 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             $scope.eduDetails = [];
             console.log("Positive Init");
             var responseData = response.data;
-            var responseArray = angular.fromJson(responseData["educationData"]);
+            var responseArray = angular.fromJson(responseData["deedData"]);
+            console.log("This is Repsonse Unaltered");
+            console.log(responseData);
             console.log("This is Repsonse");
             console.log(responseArray);
             $scope.eduDetails.extend(responseArray);

@@ -1,11 +1,11 @@
 'use strict';
-var parameters = require('../strings/apiParameters');
+//var parameters =  require('../strings/apiParameters');
 var adders = require('../models/addMethods');
 var addJSONSchema = require('../jsonSchemas')('addition');
-var validatorClass = require('jsonschema').Validator; 
-var validator = new validatorClass();
-
-
+//This is to check if the parameter that is called in the API is valid or not
+var verifier = require('../strings')('apiVerfier').verifier;
+var JSONValidator = require('./commonMethods').JSONValidator;
+/*
 var JSONValidator = function (validationSchema, req, res, callback) {
     var result = validator.validate(req.body, validationSchema);
     if(result.valid) {
@@ -20,9 +20,51 @@ var JSONValidator = function (validationSchema, req, res, callback) {
         res.status(500).send(result.errors);
         return;
     }
-}
+};*/
 
 
+
+//This Module is Written to Eliminate Redundant Method implementation
+
+module.exports = function (app) {
+    console.log("Addition API");
+    app.post('/api/deeds/:id', function (req, res) {
+        if (!(req.params === 0)) {
+            console.log("Inside the Combined Addition");
+            var requestId = req.params.id;
+            if (verifier.has(requestId)) {
+                if (JSONValidator(addJSONSchema[requestId], req.body)) {
+                    adders.addDeed(req, requestId, function (err, sendJsonData){
+                        if (err) {
+                            console.log("Error in Addition" + err);
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).send(JSON.stringify(sendJson));
+                        }
+                    });
+                //Failure Condition - Validation Failed
+                } else {
+                    res.status(500).send(JSON.stringify({err:"Incorrect JSON"}));
+                }
+            // Failure Condition - If 'REQUEST MADE OR PARAMETER IS WRONG' is Wrong
+            } else {
+                res.status(404).send();
+                return;
+            }
+        // Failure Condition - If Params Not Present 
+        } else {
+            console.log("Empty Parameter");
+            res.status(404).send();
+            return;
+        }
+    });
+};
+
+
+/*
 module.exports = function (app) {
     console.log("Addition Ran");
     app.post('/api/deeds/:id', function (req, res) {
@@ -221,23 +263,33 @@ module.exports = function (app) {
                 });
                 break;
             case parameters.TOOLS:
-                adders.addTools(req, function (err) {
-                    if (err) {
-                        console.log("Error in Tools");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Tools Added"});
-                    }
+                JSONValidator( addJSONSchema.tools, req, res, function(req, res){
+                    adders.addTools(req, function(err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Tools");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJson));
+                        }
+                    });
                 });
                 break;
             case parameters.SKILLS:
-                adders.addSkills(req, function (err) {
-                    if (err) {
-                        console.log("Error in SKILLS");
-                        res.status(500).send(err.message);
-                    } else {
-                        res.status(201).json({"operation": "Skill Added"})
-                    }
+                JSONValidator(addJSONSchema.skills, req, res, function(req, res) {
+                    adders.addSkills(req, function(err, sendJsonData) {
+                        if (err) {
+                            console.log("Error in Skills");
+                            res.status(500).send(err.message);
+                        } else {
+                            var sendJson = {
+                                dbid: sendJsonData
+                            };
+                            res.status(201).json(JSON.stringify(sendJsonData));
+                        }
+                    });
                 });
                 break;
             case parameters.POINTS:
@@ -251,4 +303,4 @@ module.exports = function (app) {
             res.status(404).json({"error": "Please Enter a Parameter"});
         }
     })
-}
+}*/
