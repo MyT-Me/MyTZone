@@ -1,7 +1,7 @@
 <div class="control-group">
     <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger">Logout</a></span>
 </div>
-<section>
+<section ng-init = "skillsInit()">
     <nav1>
         <ol class="cd-multi-steps text-bottom count" id="status-buttons">
             <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.login">Login</a></li>
@@ -82,8 +82,8 @@
                                     </td>
                                     <td style="width: 30px;">
                                         <select ng-model="personalDetail.category" required>
-                                            <option value="professional">Professional Methods/Skills</option>
-                                            <option value="personal">Personal Enrichment Skills</option>
+                                            <option value="Professional Methods / Skills">Professional Methods/Skills</option>
+                                            <option value="Personal Enrichment Skills">Personal Enrichment Skills</option>
                                         </select>
                                     </td>
                                     <td style="width: 30px;">

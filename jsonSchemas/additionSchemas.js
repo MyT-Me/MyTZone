@@ -373,7 +373,7 @@ module.exports = {
         "description": "Tools Addition JSON",
         "properties": {
             "category": {
-                "enum": ["Professional Methods / Skills", "Personal Enrichment Skills"]
+                "enum": ["Software - USER", "Software - Programming", "Device Operation"]
             },
             "softwareDeviceName": {
                 "type": "string"

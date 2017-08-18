@@ -125,15 +125,39 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
 
     //Common Functions
 
-    var getIndex = function(detailsObject) {
-        var lengthValue = detailsObject.length;
-        if(lengthValue === 0) {
-            return lengthValue+1;
+    var getMaximumIndex = function(detailsObject){
+        var max = 0;
+        detailsObject.forEach(function(each){
+            if(each.ind !== null){
+                if(max<each.ind){
+                    max = each.ind;
+                };
+            };
+        });
+        return max;
+    }
+
+    var getIndex = function(detailsObject, indexValue) {
+        for(var i = 0; i<detailsObject.length; i++){
+            if(detailsObject[i].ind === indexValue){
+                return i;
+            }
+        }
+    }
+
+    var setBoolean = function(input){
+        if(input.toLowerCase() === 'no'){
+            return false;
         } else {
-            var IndexToReturn = detailsObject[lengthValue-1].ind + 1;
-            console.log("Returning Index");
-            console.log(IndexToReturn);
-            return IndexToReturn;
+            return true;
+        }
+    }
+
+    var getFromBoolean = function(input){
+        if(input){
+            return "Yes";
+        } else {
+            return "No";
         }
     }
 
@@ -711,28 +735,125 @@ $scope.dropDownColorSetter = function(value , proficiencyType) {
     return returnValue;
 }
 
+var skillsToolsJSONBuilder = function(receivedObject){
+    var returnJSON =  {
+        'category': receivedObject.category,
+        'software': receivedObject.software,
+        'vendor': receivedObject.vendor,
+        'linkedin': receivedObject.linkedin,
+        'basicyear': "",
+        'interyear': "",
+        'advancedyear': "",
+        'expertyear': "",
+        'formal': getFromBoolean(receivedObject.formal),
+        'usage':  getFromBoolean(receivedObject.usage),
+        'ind':receivedObject.ind
+    }
+    returnJSON[receivedObject.proficiencyType+'year'] = receivedObject.proficiencyYear;
+    return returnJSON;
+}
+
 //Skills Controller
 
     $scope.personalDetailsSkills = [];
     $scope.reverseSortSkills = false;
-    $scope.addNewSkill = function(){
-        console.log("Skills is Called");
 
+    $scope.skillsInit = function(){
+        $http.get('/api/skills').then(function(response) {
+            //Positive Response
+            $scope.personalDetailsTools = [];
+            console.log("Positive Init");
+            var responseData = response.data;
+            var responseArray = angular.fromJson(responseData["deedData"]);
+            console.log("This is Repsonse Unaltered");
+            console.log(responseData);
+            console.log("This is Repsonse");
+            console.log(responseArray);
+            //$scope.eduDetails.extend(responseArray);
+            responseArray.forEach(function(eachResponse){
+                $scope.personalDetailsSkills.push(skillsToolsJSONBuilder(eachResponse));
+            })
+            addNewBlankTools();
+        }, function(response) {
+            //Negative Response
+            console.log("Negative Init");
+            console.log(response);
+        });
+    };
+
+    $scope.addNewSkill = function() {
+        var skillListLength = $scope.personalDetailsSkills.length;
+        if(!(skillListLength>0)) {
+            console.log("Blank Tools List");
+            addNewBlankSkills();
+        } else {
+            console.log("Data Present in Tools List");
+            var latestIndex = getMaximumIndex($scope.personalDetailsSkills);
+            var latestSkillDetail = $scope.personalDetailsSkills.find(function(skillDetail){
+                return skillDetail.ind === latestIndex;
+            });
+            var toSend = {
+                category: latestSkillDetail.category,
+                softwareDeviceName: latestSkillDetail.software,
+                vendorDistributor: latestSkillDetail.vendor ,
+                numberOfLinkedEndorsments: latestSkillDetail.linkedin,
+                formalCertification: setBoolean(latestSkillDetail.formal),
+                usagein3Years: setBoolean(latestSkillDetail.usage)
+            }
+            var proficiencyType, proficiencyYear;
+            if(latestSkillDetail.basicyear !== ""){
+                proficiencyType = "basic";
+                proficiencyYear = latestSkillDetail.basicyear;
+            }else if(latestSkillDetail.interyear){
+                proficiencyType = "inter";
+                proficiencyYear = latestSkillDetail.interyear;
+            }else if(latestSkillDetail.advancedyear){
+                proficiencyType = "advanced";
+                proficiencyYear = latestSkillDetail.advancedyear;
+            }else if(latestSkillDetail.expertyear){
+                proficiencyType = "expert";
+                proficiencyYear = latestSkillDetail.expertyear;
+            }
+            toSend["proficiencyType"] = proficiencyType;
+            toSend["proficiencyYear"] = proficiencyYear;
+            console.log(toSend);
+            $http.post('/api/deeds/skills', toSend, config.headers).then(function(response){
+                //Success handling
+                console.log(response.data);
+                console.log($scope.personalDetailsSkills);
+                var currentIndex = getIndex($scope.personalDetailsSkills,latestIndex);
+                console.log(currentIndex);
+                $scope.personalDetailsSkills[currentIndex]['id'] = response.data.dbid;
+                $scope.personalDetailsSkills[currentIndex]['timestamp'] = response.data.timestamp;
+                addNewBlankSkills();
+            },function(response){
+                //Failure Handing
+                console.log(response);
+                alert("Sorry Could Not Add to Database");
+            });
+        }
+    };
+
+
+    addNewBlankSkills = function() {
+        console.log("Being Called");
         $scope.personalDetailsSkills = sortByKey($scope.personalDetailsSkills, "ind");
         $scope.personalDetailsSkills.push({
             'category': "",
             'software': "",
             'vendor': "",
             'linkedin': "",
-            'proficiency': "",
-            'year': "",
+            'basicyear': "",
+            'interyear': "",
+            'advancedyear': "",
+            'expertyear': "",
             'formal': "",
             'usage': "",
-            'ind': $scope.personalDetailsSkills.length
+            'ind': getMaximumIndex($scope.personalDetailsSkills) + 1
         });
+    console.log($scope.personalDetailsSkills);
+    }
 
-        console.log($scope.personalDetailsSkills);
-    };
 
     $scope.removeSkills = function(){
         var newDataList=[];
@@ -760,9 +881,29 @@ $scope.dropDownColorSetter = function(value , proficiencyType) {
     $scope.personalDetailsTools = [];
     $scope.reverseSortTools = false;
 
-    $scope.toolsInit = function() {
-        //pass
-    }
+
+    $scope.toolsInit = function(){
+        $http.get('/api/tools').then(function(response) {
+            //Positive Response
+            $scope.personalDetailsTools = [];
+            console.log("Positive Init");
+            var responseData = response.data;
+            var responseArray = angular.fromJson(responseData["deedData"]);
+            console.log("This is Repsonse Unaltered");
+            console.log(responseData);
+            console.log("This is Repsonse");
+            console.log(responseArray);
+            //$scope.eduDetails.extend(responseArray);
+            responseArray.forEach(function(eachResponse){
+                $scope.personalDetailsTools.push(skillsToolsJSONBuilder(eachResponse));
+            })
+            addNewBlankTools();
+        }, function(response) {
+            //Negative Response
+            console.log("Negative Init");
+            console.log(response);
+        });
+    };
 
     addNewBlankTools = function() {
         console.log("Being Called");
@@ -779,14 +920,14 @@ $scope.dropDownColorSetter = function(value , proficiencyType) {
             'year': "",
             'formal': "",
             'usage': "",
-            'ind': $scope.personalDetailsTools.length + 1
+            'ind': getMaximumIndex($scope.personalDetailsSkills) + 1
         });
     }
 
     $scope.skillsClearDropDowns = function(value, index) {
         toolsSkillsClearDropDowns(value,index, "skills");
     };
-    
+
     $scope.toolsClearDropDowns = function(value, index) {
         toolsSkillsClearDropDowns(value,index, "tools");
     };
@@ -847,7 +988,7 @@ $scope.dropDownColorSetter = function(value , proficiencyType) {
                 break;
         };
     }
-
+    /*
     $scope.addNewtools = function(){
         console.log("Length Of Tool Details");
         var toolListLength = $scope.personalDetailsTools.length;
@@ -866,7 +1007,59 @@ $scope.dropDownColorSetter = function(value , proficiencyType) {
             addNewBlankTools();
         }
 
-    };  
+    };*/
+    $scope.addNewtools = function() {
+        var toolListLength = $scope.personalDetailsTools.length;
+        if(!(toolListLength>0)) {
+            console.log("Blank Tools List");
+            addNewBlankTools();
+        } else {
+            console.log("Data Present in Tools List");
+            var latestIndex = getMaximumIndex($scope.personalDetailsTools);
+            var latestToolDetail = $scope.personalDetailsTools.find(function(toolDetail){
+                return toolDetail.ind === latestIndex;
+            });
+            var toSend = {
+                category: latestToolDetail.category,
+                softwareDeviceName: latestToolDetail.software,
+                vendorDistributor: latestToolDetail.vendor ,
+                numberOfLinkedEndorsments: latestToolDetail.linkedin,
+                formalCertification: setBoolean(latestToolDetail.formal),
+                usagein3Years: setBoolean(latestToolDetail.usage)
+            }
+            var proficiencyType, proficiencyYear;
+            if(latestToolDetail.basicyear !== ""){
+                proficiencyType = "basic";
+                proficiencyYear = latestToolDetail.basicyear;
+            }else if(latestToolDetail.interyear){
+                proficiencyType = "inter";
+                proficiencyYear = latestToolDetail.interyear;
+            }else if(latestToolDetail.advancedyear){
+                proficiencyType = "advanced";
+                proficiencyYear = latestToolDetail.advancedyear;
+            }else if(latestToolDetail.expertyear){
+                proficiencyType = "expert";
+                proficiencyYear = latestToolDetail.expertyear;
+            }
+            toSend["proficiencyType"] = proficiencyType;
+            toSend["proficiencyYear"] = proficiencyYear;
+            console.log(toSend);
+            $http.post('/api/deeds/tools', toSend, config.headers).then(function(response){
+                //Success handling
+                console.log(response.data);
+                console.log($scope.personalDetailsTools);
+                var currentIndex = getIndex($scope.personalDetailsTools,latestIndex);
+                console.log(currentIndex);
+                $scope.personalDetailsTools[currentIndex]['id'] = response.data.dbid;
+                $scope.personalDetailsTools[currentIndex]['timestamp'] = response.data.timestamp;
+                addNewBlankTools();
+            },function(response){
+                //Failure Handing
+                console.log(response);
+                alert("Sorry Could Not Add to Database");
+            });
+        }
+    };
 
     $scope.removeTools = function(){
         var newDataList=[];

@@ -23,6 +23,8 @@ var PatentsScore = models.PatentsScore;
 var LanguagesScore = models.LanguagesScore;
 var LeisureTravelScore = models.LeisureTravelScore;
 var WorkExperience = models.WorkExperience;
+var ToolsScore = models.ToolsScore;
+var SkillsScore = models.SkillsScore;
 
 //Common Methods
 
@@ -62,6 +64,10 @@ var schemaLoader = function (deedName, deedBody){
         return new LeisureTravelScore(deedBody);
     case stringValues.WORK_EXPERIENCE:
         return null;
+    case stringValues.TOOLS:
+        return new ToolsScore(deedBody);
+    case stringValues.SKILLS:
+        return new SkillsScore(deedBody);
     }
 };
 
@@ -77,7 +83,6 @@ exports.addDeed = function (req, deedName, callback){
         } else {
             var newDeed = schemaLoader(deedName, req.body);
             //Testing this because of Async Problems
-
             console.log("Ideally After");
             newDeed.score = 10;
             var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');

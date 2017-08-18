@@ -1,5 +1,9 @@
 'use strict';
 var strings = require('../strings')('api');
+
+//Schema Design Principles
+
+
 var getSchemas = {
     education: {
         school: "schoolUniversityName",
@@ -10,7 +14,7 @@ var getSchemas = {
         status: "degreeProgramStatus",
         honor: "honors",
         timestamp: "timeStamp",
-        id: "customId" 
+        id: "customId"
     },
     workExperience: {
     },
@@ -25,10 +29,30 @@ var getSchemas = {
         'art': ""
     },
     skills: {
+        category: "category",
+        software: "softwareDeviceName",
+        vendor: "vendorDistributor",
+        linkedin: "numberOfLinkedEndorsments",
+        formal: "formalCertification",
+        usage: "usagein3Years",
+        timestamp: "timeStamp",
+        id: "customId",
+        proficiencyType: "proficiencyType",
+        proficiencyYear:"proficiencyYear"
     },
     tools: {
-        }
+        category: "category",
+        software: "softwareDeviceName",
+        vendor: "vendorDistributor",
+        linkedin: "numberOfLinkedEndorsments",
+        formal: "formalCertification",
+        usage: "usagein3Years",
+        timestamp: "timeStamp",
+        id: "customId",
+        proficiencyType: "proficiencyType",
+        proficiencyYear:"proficiencyYear"
     }
+};
 
 module.exports = function (value) {
     

@@ -192,7 +192,7 @@ var skillsScoreSchema = new mongoose.Schema({
 var toolsScoreSchema = new mongoose.Schema({
     customId:{type:String},
     category: {type:String, required:true},
-    methodSkillName: {type:String, required:true},
+    softwareDeviceName: {type:String, required:true},
     vendorDistributor: {type:String,required:true},
     numberOfLinkedEndorsments: {type:Number, required:true},
     proficiencyType: {type: String, required: true},
@@ -351,7 +351,7 @@ module.exports = {
     LanguagesScore: LanguagesScore,
     LeisureTravelScore: LeisureTravelScore,
     ToolsScore: ToolsScore,
-    SkillsScore:SkillsScore,
-    WorkExperience:WorkExperienceScore,
-}
+    SkillsScore: SkillsScore,
+    WorkExperience:WorkExperienceScore
+};
 

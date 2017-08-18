@@ -19,8 +19,9 @@ module.exports = function (app) {
                     res.status(200).send(deedData);
                 }
             })
+        } else {
+            res.status(404).send();
         }
-
     });
 };
 

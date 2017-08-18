@@ -24,11 +24,9 @@ var getJSONProducer = function (jsonSchema, modelObject) {
     console.log("");
     console.log(modelObject);
     for (var key in ourSchema) {
-        if(ourSchema.hasOwnProperty(key)) {
             if(modelObject[ourSchema[key]] !== undefined) {
                 returnJSON[key] = modelObject[ourSchema[key]];
             }
-        }
     }
     return returnJSON;
 };
