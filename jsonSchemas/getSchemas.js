@@ -38,7 +38,7 @@ var getSchemas = {
         timestamp: "timeStamp",
         id: "customId",
         proficiencyType: "proficiencyType",
-        proficiencyYear:"proficiencyYear"
+        proficiencyYear: "proficiencyYear"
     },
     tools: {
         category: "category",
@@ -50,19 +50,21 @@ var getSchemas = {
         timestamp: "timeStamp",
         id: "customId",
         proficiencyType: "proficiencyType",
-        proficiencyYear:"proficiencyYear"
+        proficiencyYear: "proficiencyYear"
     }
 };
 
 module.exports = function (value) {
-    
-    
     switch (value) {
     case strings.EDUCATION:
         console.log(getSchemas.EDUCATION);
         return getSchemas.education;
     case strings.DEEDS:
         return getSchemas.deeds;
+    case strings.SKILLS:
+        return getSchemas.skills;
+    case strings.TOOLS:
+        return getSchemas.tools;
     default:
         return null;
     }

@@ -35,6 +35,9 @@ module.exports = function (app) {
             case parameters.TOOLS:
                 res.render('tools');
                 break;
+            case parameters.CHARTS:
+                res.render('chart');
+                break;
             default:
                 res.render('index');
                 break;

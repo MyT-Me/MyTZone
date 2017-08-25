@@ -1,4 +1,4 @@
-<div class="control-group">
+<div class="control-group" xmlns="http://www.w3.org/1999/html">
     <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger">Logout</a></span>
 </div>
 <section ng-init = "skillsInit()">
@@ -10,7 +10,7 @@
             <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.deeds">Deeds</a></li>
             <li class="current"><a href="#0" ui-sref-active="active" ui-sref="base.skills">Skills</a></li>
             <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.tools">Tools</a></li>
-            <li class="not"><a href="#0">T-Score</a></li>
+            <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.chart">T-Score</a></li>
         </ol>
     </nav1>
 </section>
@@ -120,8 +120,8 @@
                                     <td style="width: 30px; margin-left:14px;">
                                     <div ng-init = "personalDetail.formal = 'No'">
 
-                                        <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.formal"> Yes
-                                        <input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.formal"> No<br>
+                                        <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.formal" > Yes</input>
+                                        <input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.formal"> No</input><br>
                                     </div>
                                     </td>
                                     <!--<td style="padding-left: 4px;">

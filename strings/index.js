@@ -2,7 +2,7 @@ var db = require('./db');
 var api = require('./apiStrings');
 var models = require('./modelStrings');
 var scores = require('./scoreStrings');
-var apiParamVerifier = require('./methods');
+var apiParamVerifier = require('./verifiers');
 
 module.exports = function(value){
     switch (value) {

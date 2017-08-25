@@ -3,7 +3,7 @@
 var adders = require('../models/addMethods');
 var addJSONSchema = require('../jsonSchemas')('addition');
 //This is to check if the parameter that is called in the API is valid or not
-var verifier = require('../strings')('apiVerfier').verifier;
+var verifier = require('../strings')('apiVerfier').addVerifier;
 var JSONValidator = require('./commonMethods').JSONValidator;
 /*
 var JSONValidator = function (validationSchema, req, res, callback) {

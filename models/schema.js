@@ -27,11 +27,11 @@ var educationScoreSchema = new mongoose.Schema({
 });
 
 var workExperienceScoreSchema = new mongoose.Schema({
-    customId: {type:String},
+    customId: { type: String },
     employerSectionOfFocus: {type: String, required: true},
     employerOrganizationName: {type: String, required: true},
     locationRegion: {type: String, required: true},
-    startDate: {type: Date,required: true},
+    startDate: {type: Date, required: true},
     endDate: {type: Date, required: true},
     positionDescription: {type: String, required: true},
     primaryFunction: {type: String, required: true},

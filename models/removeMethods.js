@@ -1,91 +1,39 @@
 
 var models = require('./schema');
-
+var common = require('./common');
 var User = models.User;
 
-exports.removeEducation = function(req,callback){
-    console.log("removing Education");
-    User.findOne({'userName':'revaries'},function(err,profile){
+exports.removeDeed = function (req, deedName, ids, callabck) {
+    //Checking if ids is Empty. If it is we have to delete whole Deed Sectios - All Education Section, all Tools Section etc
+    User.findOne({"email": "revanthpenugonda@gmail.com"}, function (err, profile) {
+        var deletedIds = [];
         if(err){
-            console.log("Error Block");
-            callback(err);
-        } else if(profile == null) {
-            console.log("Profile Empty");
-            callback(new Error("No User Found"));
+            callabck(err);
+        } else if(profile === undefined || profile === null){
+            callabck(new Error("Empty Profile"), null);
         } else {
-            console.log("User FOund")
-            console.log(profile.userName);
-            console.log(req.body)
-            profile.education.pull(req.body)
-            profile.save(function(err){
-                callback(err)
-            })
+            if(Object.keys(ids).length === 0){
+                // Singlifies Empty ids hence need to delete Whole Array section
+                callabck(new Error("Empty IDS"), null);
+            } else {
+                //This Section says there is at least one Object Key hence only will delete that particular deed
+                for (var DeedNames in ids){
+                    if(ids.hasOwnProperty(DeedNames)){
+                        // For Each Deed Section in the Id's Part
+                        var idsToRemove = ids[DeedNames];
+                        idsToRemove.forEach(function (eachId) {
+                            //Finding Index for Each Id
+                            var currentDeedIndex = common.searchFunction(profile[DeedNames].deedData, eachId);
+                            if(currentDeedIndex > -1) {
+                                profile[DeedNames].deedData.splice(currentDeedIndex,1);
+                            }
+                        });
+                    };
+                }
+                profile.save(function (err) {
+                    callabck(err);
+                })
+            }
         }
-    })
-}
-
-
-exports.removeWorkExperience = function(req,callback){
-        console.log("removing Work Experience");
-    User.findOne({'userName':'revaries'},function(err,profile){
-        if(err){
-            console.log("Error Block");
-            callback(err);
-        } else if(profile == null) {
-            console.log("Profile Empty");
-            callback(new Error("No User Found"));
-        } else {
-            console.log("User FOund")
-            console.log(profile.userName);
-            console.log(req.body)
-            profile.workExperience.pull(req.body)
-            profile.save(function(err){
-                callback(err)
-            })
-        }
-    })
-}
-
-exports.removeCertificates = function(req,callback){
-     console.log("removing Cerificates");
-    User.findOne({'userName':'revaries'},function(err,profile){
-        if(err){
-            console.log("Error Block");
-            callback(err);
-        } else if(profile == null) {
-            console.log("Profile Empty");
-            callback(new Error("No User Found"));
-        } else {
-            console.log("User FOund")
-            console.log(profile.userName);
-            console.log(req.body)
-            profile.certificates.pull(req.body)
-            profile.save(function(err){
-                callback(err)
-            })
-        }
-    })
-}
-
-
-
-exports.removeCertificates = function(req,callback){
-     console.log("removing Cerificates");
-    User.findOne({'userName':'revaries'},function(err,profile){
-        if(err){
-            console.log("Error Block");
-            callback(err);
-        } else if(profile == null) {
-            console.log("Profile Empty");
-            callback(new Error("No User Found"));
-        } else {
-            console.log("User FOund")
-            console.log(profile.userName);
-            console.log(req.body)
-            profile.certificates.pull(req.body)
-            profile.save(function(err){
-                callback(err)
-            })
-        }
-    })
+    });
 }

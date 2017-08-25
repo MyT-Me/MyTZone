@@ -32,7 +32,7 @@ app.use(bodyParser.json({extend:true}));
 mongoose.connect(dbconfig.getMongoUrl()).then(
     () => {console.log("Connected To Database")},
     err => {
-    console.log("Error in Connection -> " + err)
+    console.log("Error in Connection -> " + err);
 });
 
 
@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 });
 
 
-
+``
 //Passport Settings 
 app.use(passport.initialize());
 

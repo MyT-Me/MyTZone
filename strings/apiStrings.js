@@ -23,7 +23,8 @@ var apiStrings = {
     TOOLS: 'tools',
     SKILLS: 'skills',
     POINTS: 'points',
-    DEEDS: 'deeds'
+    DEEDS: 'deeds',
+    CHARTS: 'chart'
 };
 
 module.exports = apiStrings;

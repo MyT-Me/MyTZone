@@ -321,19 +321,6 @@ module.exports = {
         "required": ['specificActivity', 'description', 'month', 'year'],
         "additionalProperties": false
     },
-
-    /*
-    customId:{type:String},
-    
-    softwareDeviceName: {type:String,required:true},
-    vendorDistributor: {type:String, required:true},
-    numberOfLinkedEndorsments: {type:Number, required: true},
-    proficiencyType: {type: String, required: true},
-    proficiencyYear: {type: Number, required: true},
-    formalCertification: {type:Boolean, required:true},
-    usagein3Years:{type:Boolean,required:true},
-    skillsScore:{type:Number}
-    */
     skills: {
         "type": "object",
         "title": "Skills",
@@ -404,10 +391,189 @@ module.exports = {
         "type": "object",
         "title": "Tools",
         "description": "Tools Addition JSON",
-        "properties": {
-
+        "definitions":{
+            "PromptAnswers": {
+                "enum":['Yes','Some','No']
+            },
+            "operationsResponsibilities": {
+                "type": "object",
+                "properties": {
+                    "OR_selectLocations": {"$ref":"#/definitions/PromptAnswers"},
+                    "OR_selectEquipment": {"$ref":"#/definitions/PromptAnswers"},
+                    "OR_selectManagingLabor": {"$ref":"#/definitions/PromptAnswers"},
+                    "OR_determineProcessing":{"$ref":"#/definitions/PromptAnswers"}
+                },
+                "required": ["OR_selectLocations",
+                            "OR_selectEquipment",
+                            "OR_selectManagingLabor",
+                            "OR_determineProcessing"],
+                "additionalProperties": false
+            },
+            "criticalThinking":{
+                "type": "object",
+                "properties":{
+                    "CT_requiredMetoFormGoals": {"$ref":"#/definitions/PromptAnswers"},
+                    "CT_requiredSystematicApproach": {"$ref":"#/definitions/PromptAnswers"},
+                    "CT_requiredInquisitive": {"$ref":"#/definitions/PromptAnswers"},
+                    "CT_requiredPrioritize": {"$ref":"#/definitions/PromptAnswers"},
+                    "CT_requiredConfidence": {"$ref":"#/definitions/PromptAnswers"}
+                },
+                "required": ["CT_requiredMetoFormGoals",
+                            "CT_requiredSystematicApproach",
+                            "CT_requiredInquisitive",
+                            "CT_requiredPrioritize",
+                            "CT_requiredConfidence"],
+                "additionalProperties": false
+            },
+            "systemAndOperationInnovation":{
+                "type": "object",
+                "properties":{
+                    "SOI_evaluateApplications": {"$ref":"#/definitions/PromptAnswers"},
+                    "SOI_selectApplicationsAndSolutions": {"$ref":"#/definitions/PromptAnswers"},                    
+                    "SOI_specificApplicationsAndSolutions": {"$ref":"#/definitions/PromptAnswers"},
+                    "SOI_buildApplicationsAndSolutions": {"$ref":"#/definitions/PromptAnswers"},
+                    "SOI_accessBenifitCostValueSolutions": {"$ref":"#/definitions/PromptAnswers"}
+                },
+                "required": ["SOI_evaluateApplications",
+                            "SOI_selectApplicationsAndSolutions",
+                            "SOI_specificApplicationsAndSolutions",
+                            "SOI_buildApplicationsAndSolutions",
+                            "SOI_accessBenifitCostValueSolutions"],
+                "additionalProperties": false
+            }
         },
-        "required": [],
+        "properties": {
+           "employerSectionOfFocus" :{
+            "enum":[
+                "Agriculture",
+                "Building & Construction",
+                "Education",
+                "Entertainment",
+                "Energy & Electric",
+                "Financial & Business Consulting",
+                "Fitness and Well Being",
+                "Government",
+                "Health Care Delivery",
+                "Hospitality",
+                "Information & Communications Technology",
+                "Manufacturing",
+                "Religious",
+                "Retail",
+                "Social",
+                "Trade/Professional",
+                "Water & Utilities",
+                "Other",
+            ]
+           },
+           "employerOrganizationName" :{
+            "type": "string"
+           },
+           "locationRegion" :{
+            "enum": [
+                "North America",
+                "Caribbean",
+                "Central America",
+                "South America",
+                "Eastern Africa",
+                "Middle Africa",
+                "North Africa",
+                "Western Africa",
+                "Sub Saharan Africa",
+                "Eastern Asia",
+                "Central Asia",
+                "South-Eastern Asia",
+                "Western Asia (Middle East)",
+                "Central Asia",
+                "Southern Asia",
+                "Eastern Europe",
+                "Northern Europe",
+                "Southern Europe",
+                "Western Europe",
+                "Austrailia/New Zealand",
+                "Melanesia",
+                "Micronesia",
+                "Polynesia",
+            ]
+           },
+           "startDate" :{
+            "type": "string"
+           },
+           "endDate" :{
+            "type": "string"
+           }, 
+           "positionDescription" :{
+            "type": "string"
+           },
+           "primaryFunction" :{
+               "enum": [
+                   "Business Development",
+                   "Consulting - External",
+                   "Consulting - Internal",
+                   "CSR Corporate Social Responsibility",
+                   "Customer Service (Student/Patient/Client/Member)",
+                   "Education",
+                   "Engineering  - Software",
+                   "Engineering - Products/Services",
+                   "Engineering - Structures",
+                   "Finance and Accounting",
+                   "Headquarters & Administration",
+                   "Health / Safety",
+                   "Human Resources",
+                   "Information Technology",
+                   "Innovation",
+                   "Legal",
+                   "Operations",
+                   "Public Relations",
+                   "Quality",
+                   "Research and Development",
+                   "Sales",
+                   "Strategy",
+                   "Supply Chain",
+                   "Other"
+               ]
+           },
+           "teamSize" :{
+               "enum":[
+                   "Myself alone - no collaborators",
+                    "2 -3 team members/collaborators",
+                    "4 - 8 team members/collaborators",
+                    "9 or more team members/collaborators"
+                ]
+           },
+           "multiDisciplinaryMakeup" :{
+               "enum":[
+                   "Very low 0 - 15% of team members/collaborators/clients",
+                   "Low 16 - 35% of team members/collaborators/clients",
+                   "Moderate 36 - 50% of team members/collaborators/clients",
+                   "High 51 - 75% of team members/collaborators/clients",
+                   "Very High >76% of team members/collaborators/clients",
+                ]
+           },
+           "multiCulturalMakeup" :{
+            "enum":[
+                "Very low 0 - 15% of team members/collaborators/clients",
+                "Low 16 - 35% of team members/collaborators/clients",
+                "Moderate 36 - 50% of team members/collaborators/clients",
+                "High 51 - 75% of team members/collaborators/clients",
+                "Very High >76% of team members/collaborators/clients",
+             ]
+           },
+           "operationsResponsibilities":{"$ref":"#/definitions/operationsResponsibilities"},
+           "criticalThinking": {"$ref":"#/definitions/criticalThinking"},
+           "systemAndOperationInnovation": {"$ref":"#/definitions/systemAndOperationInnovation"},
+           "paidUnpaid" :{
+               "enum":[
+                   "For-Profit Paid",
+                   "Non-Profit Paid",
+                   "For-Profit Unpaid",
+                   "Non-Profit Unpaid",
+               ]
+           }
+        },
+        "required": ["employerSectionOfFocus","employerOrganizationName",],
         "additionalProperties": false
     }
+
+
+
 }

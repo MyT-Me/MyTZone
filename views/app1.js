@@ -69,7 +69,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('base.tools', {
             url: '/tools',
             templateUrl: '/sub/tools'
-        });
+        })
+
+        .state('base.chart',{
+            url: '/chart',
+            templateUrl: '/sub/chart'
+        })
 
 
     // catch all route
@@ -159,6 +164,38 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         } else {
             return "No";
         }
+    };
+
+    var remover = function (arayObject, deedName) {
+        console.log("Inside the Remover");
+        console.log(arayObject);
+        var ids = [];
+        arayObject.forEach(function (eachObject) {
+            console.log((eachObject.selected));
+            if(eachObject.selected){
+                ids.push(eachObject.id);
+            }
+        });
+        var queryParam="";
+        console.log("Ids Length");
+        console.log(ids.length );
+        if(ids.length === 0){
+            return;
+        }
+        for(i=0; i<ids.length-1;i++){
+            queryParam = queryParam + 'ids='+ids[i]+'&';
+        }
+
+        queryParam=queryParam+'ids='+ids[ids.length-1];
+        var url = '/api/'+deedName;
+        url = url+'?' + queryParam;
+        console.log("URL");
+        console.log(url);
+        $http.delete(url).then(function (response) {
+            console.log(response);
+        }, function (response) {
+            console.log(response);
+        });
     }
 
     Array.prototype.extend = function(newArray) {
@@ -169,6 +206,17 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     }
 
 
+    $scope.removeSkills = function(){
+        remover($scope.personalDetailsSkills, "skills");
+        var newDataList=[];
+        $scope.selectedAll = false;
+        angular.forEach($scope.personalDetailsSkills, function(selected){
+            if(!selected.selected){
+                newDataList.push(selected);
+            }
+        });
+        $scope.personalDetailsSkills = newDataList;
+    };
 
     // LOGIN
     $scope.loginDetails = [];
@@ -219,8 +267,6 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             console.log("Positive Init");
             var responseData = response.data;
             var responseArray = angular.fromJson(responseData["deedData"]);
-            console.log("This is Repsonse Unaltered");
-            console.log(responseData);
             console.log("This is Repsonse");
             console.log(responseArray);
             $scope.eduDetails.extend(responseArray);
@@ -236,7 +282,8 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
 
     addNewBlankEduField = function() {
        $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
-        var ind = getIndex($scope.eduDetails);
+        //var ind = getIndex($scope.eduDetails);
+        var ind = getMaximumIndex($scope.eduDetails);
         $scope.eduDetails.push({
             'school': "",
             'field': "",
@@ -246,7 +293,7 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             'status': "",
             'honor': "",
             'id': "",
-            'ind': ind
+            'ind': ind +1
         });
     }
 
@@ -255,8 +302,9 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         var eduListLength = $scope.eduDetails.length;
         if(eduListLength>0) {
             console.log("Grater Than 0");
+            var latestIndex = getMaximumIndex($scope.eduDetails);
             var latestEduDetail = $scope.eduDetails.find(function(eduDetail){
-                return eduDetail.ind === eduListLength;
+                return eduDetail.ind === latestIndex;
             });
             console.log(latestEduDetail);
             var toSend = {
@@ -292,6 +340,7 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     };
 
     $scope.removeEdu = function(){
+        remover($scope.eduDetails, "education");
         var newDataList=[];
         $scope.selectedAll = false;
         angular.forEach($scope.eduDetails, function(selected){
@@ -747,7 +796,8 @@ var skillsToolsJSONBuilder = function(receivedObject){
         'expertyear': "",
         'formal': getFromBoolean(receivedObject.formal),
         'usage':  getFromBoolean(receivedObject.usage),
-        'ind':receivedObject.ind
+        'ind':receivedObject.ind,
+        'id': receivedObject.id
     }
     returnJSON[receivedObject.proficiencyType+'year'] = receivedObject.proficiencyYear;
     return returnJSON;
@@ -761,19 +811,18 @@ var skillsToolsJSONBuilder = function(receivedObject){
     $scope.skillsInit = function(){
         $http.get('/api/skills').then(function(response) {
             //Positive Response
-            $scope.personalDetailsTools = [];
-            console.log("Positive Init");
+            $scope.personalDetailsSkills = [];
+            console.log("Positive Init skills");
             var responseData = response.data;
             var responseArray = angular.fromJson(responseData["deedData"]);
             console.log("This is Repsonse Unaltered");
             console.log(responseData);
             console.log("This is Repsonse");
             console.log(responseArray);
-            //$scope.eduDetails.extend(responseArray);
             responseArray.forEach(function(eachResponse){
                 $scope.personalDetailsSkills.push(skillsToolsJSONBuilder(eachResponse));
             })
-            addNewBlankTools();
+            addNewBlankSkills();
         }, function(response) {
             //Negative Response
             console.log("Negative Init");
@@ -849,22 +898,17 @@ var skillsToolsJSONBuilder = function(receivedObject){
             'expertyear': "",
             'formal': "",
             'usage': "",
+            'id': "",
             'ind': getMaximumIndex($scope.personalDetailsSkills) + 1
         });
     console.log($scope.personalDetailsSkills);
     }
 
 
-    $scope.removeSkills = function(){
-        var newDataList=[];
-        $scope.selectedAll = false;
-        angular.forEach($scope.personalDetailsSkills, function(selected){
-            if(!selected.selected){
-                newDataList.push(selected);
-            }
-        });
-        $scope.personalDetailsSkills = newDataList;
-    };
+
+
+
+
 
     $scope.checkAllSkills = function () {
         if (!$scope.selectedAll) {
@@ -920,6 +964,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
             'year': "",
             'formal': "",
             'usage': "",
+            "id": "",
             'ind': getMaximumIndex($scope.personalDetailsSkills) + 1
         });
     }
@@ -1062,6 +1107,9 @@ var skillsToolsJSONBuilder = function(receivedObject){
     };
 
     $scope.removeTools = function(){
+        console.log("From Inside the Tools Function")
+        console.log($scope.personalDetailsTools);
+        remover($scope.personalDetailsTools, "tools");
         var newDataList=[];
         $scope.selectedAll = false;
         angular.forEach($scope.personalDetailsTools, function(selected){

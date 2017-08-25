@@ -5,12 +5,15 @@ var addParameterChecker = new Set([apiStrings.EDUCATION, apiStrings.WORK_EXPERIE
         apiStrings.CONFERENCES, apiStrings.AWARDS, apiStrings.RECOGNIZED_EXPERTISE, apiStrings.PATENTS, apiStrings.LANGUAGES, apiStrings.LEISURE_TRAVEL, apiStrings.TOOLS,
         apiStrings.SKILLS, apiStrings.POINTS]);
 
+var removeParameterChecker = new Set([apiStrings.EDUCATION, apiStrings.WORK_EXPERIENCE, apiStrings.DEEDS, apiStrings.TOOLS, apiStrings.SKILLS]);
+
+
+
 module.exports = {
-    verifier: addParameterChecker,
+    addVerifier: addParameterChecker,
     edit: {
     },
-    remove: {
-    },
-    getMethods: {
-    }   
+    removeVerifiers: removeParameterChecker,
+    getVerifier: addParameterChecker,
+    deleteIdsVerifier: addParameterChecker
 }
