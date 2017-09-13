@@ -11,6 +11,7 @@ var momemtTime = require('moment-timezone-all');
 var schema = mongoose.Schema();
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+var uniquePlugin = require('mongoose-unique-validator');
 
 //With Score for Each section
 var educationScoreSchema = new mongoose.Schema({
@@ -213,8 +214,8 @@ var UserProfileSchema = new mongoose.Schema({
     lastName: {type:String, required:true},
     middleName: {type:String},
     userName: {type:String, required: true, unique:true},
-    email: {type:mongoose.SchemaTypes.Email, required:true, unique:true},
-    //password:{type:String,required:true},
+    email: {type:mongoose.SchemaTypes.Email, required:true, unique:true, index:true },
+    password:{type:String,required:true},
     salt: {type:String},
     hash: {type: String},
     firstYear: {type:Date},
@@ -286,11 +287,13 @@ var UserProfileSchema = new mongoose.Schema({
 });
 
 
+//Applying Plugin Test to verify uniqueness
+UserProfileSchema.plugin(uniquePlugin);
 //Methods that Set and Validate Password
 
 UserProfileSchema.methods.setPassword = function(password) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
 
 
@@ -298,7 +301,7 @@ UserProfileSchema.methods.setPassword = function(password) {
 
 
 UserProfileSchema.methods.vaildPassword = function(password){
-    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
     return this.hash === hash;
 };
 
@@ -312,6 +315,7 @@ UserProfileSchema.methods.generateJWT = function(){
         email: this.email,
         firstName: this.firstName,
         lastName: this.lastName,
+        userName: this.userName,
         exp: parseInt(expiry.getTime()/1000)
     },"myTZone");
 }
@@ -353,5 +357,6 @@ module.exports = {
     ToolsScore: ToolsScore,
     SkillsScore: SkillsScore,
     WorkExperience:WorkExperienceScore
+    
 };
 

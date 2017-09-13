@@ -14,7 +14,7 @@ var apiStrings = {
     CONDUCTING_CLASSES: 'conductingClasses',
     MENTORING: 'mentoring',
     WRITINGS: 'writings',
-    CONFERENCES: 'confrences',
+    CONFERENCES: 'conferences',
     AWARDS: 'awards',
     RECOGNIZED_EXPERTISE: 'recognizedExpertise',
     PATENTS: 'patents',

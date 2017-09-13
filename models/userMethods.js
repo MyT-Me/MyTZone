@@ -6,12 +6,15 @@ var passportLocal = require('passport-local');
 
 exports.createUser = function(req,callback) {
     var User = new user(req.body);
-    console.log(req.body);
+    //console.log(req.body);
+    //Need To set password for validation Purposes
+    User.setPassword(req.body.password);
     User.save(function(err){
         if(err) {
             console.log(err);
         }
-        callback(err);
+        var token = User.generateJWT();
+        callback(token, err);
     });
 }
 

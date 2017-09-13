@@ -55,8 +55,8 @@ exports.getDeeds = function (req, deedName, callback) {
                 //Real Processing Starts
                 var deedData = profile[deedName].deedData;
                 var ourSchema = getSchemas(deedName);
-                console.log("Get Deeds Our Schema");
-                console.log(ourSchema);
+                //console.log("Get Deeds Our Schema");
+                //console.log(ourSchema);
                 var toSendArray = getArrayJSONBuilder(ourSchema, deedData);
                 toSendArray.sort(sorter);
                 var ind = 1;

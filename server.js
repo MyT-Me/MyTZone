@@ -18,6 +18,7 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
+mongoose.Promise = require('bluebird');
 
 /*Setting Parameters */
 app.set('port', (process.env.PORT || 8080));
@@ -44,7 +45,6 @@ app.use(function(req, res, next) {
 });
 
 
-``
 //Passport Settings 
 app.use(passport.initialize());
 

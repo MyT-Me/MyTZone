@@ -10,7 +10,7 @@
 <h1 id="heading_login">Sign-Up</h1>
 
     <div ng-app="FormlyApp" id="smallcon2" class="container col-md-10 col-md-offset-1">
-    <form ng-submit="addNew();" name="myForm"  novalidate>
+    <form ng-submit="registerUser();" name="myForm"  novalidate>
 
 
 <form class="form-horizontal" action='' method="POST">
@@ -20,10 +20,18 @@
                 </div>-->
 
                 <div class="control-group">
+                    <!-- UserName -->
+                    <label class="control-label"  for="username">User Name</label>
+                    <div class="controls">
+                        <input type="text" id="username" name="username" ng-model="registration.username" placeholder="" class="form-control-login">
+                    </div>
+                </div>
+
+                <div class="control-group">
                     <!-- LastName -->
                     <label class="control-label"  for="lastname">Last Name</label>
                     <div class="controls">
-                        <input type="text" id="lastname" name="lastname" placeholder="" class="form-control-login">
+                        <input type="text" id="lastname" name="lastname" ng-model="registration.lastname" placeholder="" class="form-control-login">
                     </div>
                 </div>
 
@@ -31,7 +39,7 @@
                     <!-- FirstName -->
                     <label class="control-label"  for="firstname">First Name</label>
                     <div class="controls">
-                        <input type="text" id="firstname" name="firstname" placeholder="" class="form-control-login">
+                        <input type="text" id="firstname" name="firstname" ng-model="registration.firstname" placeholder="" class="form-control-login">
                     </div>
                 </div>
 
@@ -39,7 +47,7 @@
                     <!-- Middle Initial -->
                     <label class="control-label"  for="middlename">Middle Initial</label>
                     <div class="controls">
-                        <input type="text" id="middlename" name="middlename" placeholder="" class="form-control-login">
+                        <input type="text" id="middlename" name="middlename" ng-model="registration.middlename" placeholder="" class="form-control-login">
                     </div>
                 </div>
 
@@ -47,7 +55,7 @@
                     <!-- Firstyear for Entry -->
                     <label class="control-label" >First Year - myTE Scoring Information Entry</label>
                     <div class="controls">
-                        <select id="year" ng-options="year for year in years" ng-model="personalDetail.year" required></select>
+                        <select id="year" ng-options="year for year in years" ng-model="registration.startyear" required></select>
                     </div>
                 </div>
 
@@ -55,7 +63,7 @@
                     <!-- DOB -->
                     <label class="control-label"  for="dateofbirth">Date Of Birth</label>
                     <div class="controls">
-                        <input type="text" id="dateofbirth" name="dateofbirth" placeholder="" class="form-control-login">
+                        <input type="text" id="dateofbirth" name="dateofbirth" ng-model="registration.dateofBirth" placeholder="" class="form-control-login">
                     </div>
                 </div>
 
@@ -63,7 +71,7 @@
                     <!-- E-mail -->
                     <label class="control-label" for="email">E-mail</label>
                     <div class="controls">
-                        <input type="text" id="email" name="email" placeholder="" class="form-control-login">
+                        <input type="text" id="email" name="email"  ng-model="registration.email" placeholder="" class="form-control-login">
                     </div>
                 </div>
 
@@ -71,7 +79,7 @@
                     <!-- Password-->
                     <label class="control-label" for="password">Password</label>
                     <div class="controls">
-                        <input type="password" id="password" name="password" placeholder="" class="form-control-login">
+                        <input type="password" id="password" name="password" ng-model="registration.password" placeholder="" class="form-control-login">
                     </div>
                 </div>
 
@@ -79,7 +87,7 @@
                     <!-- Password-->
                     <label class="control-label" for="password">Confirm Password</label>
                     <div class="controls">
-                        <input type="password" id="password" name="password" placeholder="" class="form-control-login">
+                        <input type="password" id="password" name="password" ng-model= "registration.confirmPassword" placeholder="" class="form-control-login">
                     </div>
                 </div>
 
@@ -88,9 +96,11 @@
                     <!--<div class="controls">
                         <button class="btn btn-success">Register</button>
                     </div>-->
+                    <!--
                     <a ui-sref="base.login" class="btn btn-info">
                         Register <span class="glyphicon glyphicon-circle-arrow-right"></span>
-                    </a>
+                    </a>-->
+                    <input type="submit" class="glyphicon glyphicon-circle-arrow-right" value="Register">
                 </div>
             </fieldset>
         </form>

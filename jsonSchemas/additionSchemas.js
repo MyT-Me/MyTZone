@@ -43,7 +43,7 @@ module.exports = {
         "required": ['schoolUniversityName', 'majorFiedOfStudy', 'typeOfDegree', 'startYear', 'degreeProgramStatus'],
         "additionalProperties": false
     },
-    Certificate: {
+    certificates: {
         "type": "object",
         "title": "Certificate",
         "description": "Certificate Addition JSON",
@@ -66,7 +66,7 @@ module.exports = {
         "additionalProperties": false
     },
 
-    TakingClasses: {
+    takingClasses: {
         "type": "object",
         "title": "Taking Classes",
         "description": "Taking Classes Addition JSON",
@@ -91,7 +91,7 @@ module.exports = {
         "required": ['specificActivity', 'description', 'month', 'year'],
         "additionalProperties": false
     },
-    ConductingClasses: {
+    conductingClasses: {
         "type": "object",
         "title": "Conducting Classes",
         "description": "Conducting Classes Addition JSON",
@@ -116,7 +116,7 @@ module.exports = {
         "required": ['specificActivity', 'description', 'month', 'year'],
         "additionalProperties": false
     },
-    Mentoring: {
+    mentoring: {
         "type": "object",
         "title": "Mentoring",
         "description": "Mentoring Addition JSON",
@@ -139,7 +139,7 @@ module.exports = {
         "required": ['specificActivity', 'description', 'month', 'year'],
         "additionalProperties": false
     },
-    Writing: {
+    writings: {
         "type": "object",
         "title": "Writing",
         "description": "Writing Addition JSON",
@@ -168,7 +168,7 @@ module.exports = {
         "required": ['specificActivity', 'PublicationName', 'ArticleTitle', 'month', 'year'],
         "additionalProperties": false
     },
-    Confrences: {
+    conferences: {
         "type": "object",
         "title": "Confrences",
         "description": "Confrences Addition JSON",
@@ -194,7 +194,7 @@ module.exports = {
         "required": ['specificActivity', 'ConferenceSponsor', 'PresentationTitle', 'month', 'year'],
         "additionalProperties": false
     },
-    Awards: {
+    awards: {
         "type": "object",
         "title": "Awards",
         "description": "Awards Addition JSON",
@@ -225,9 +225,9 @@ module.exports = {
         "required": ['specificActivity', 'AwardSponsor', 'AwardTitle', 'month', 'year'],
         "additionalProperties": false
     },
-    RecognizedExperties: {
+    recognizedExpertise: {
         "type": "object",
-        "title": "Recognized Experties",
+        "title": "Recognized Expertise",
         "description": "Education Addition JSON",
         "properties": {
             "specificActivity":{
@@ -249,7 +249,7 @@ module.exports = {
         "required": ['specificActivity', 'description', 'month', 'year'],
         "additionalProperties": false
     },
-    Patents: {
+    patents: {
         "type": "object",
         "title": "Patents",
         "description": "Patents Addition JSON",
@@ -273,7 +273,7 @@ module.exports = {
         "required": ['specificActivity', 'description', 'month', 'year'],
         "additionalProperties": false
     },
-    LeisureTravel: {
+    leisureTravel: {
         "type": "object",
         "title": "Leisure Travel",
         "description": "Leisure Travel Addition JSON",
@@ -298,7 +298,7 @@ module.exports = {
         "required": ['specificActivity', 'description', 'month', 'year'],
         "additionalProperties": false
     },
-    Languages: {
+    languages: {
         "type": "object",
         "title": "Languages",
         "description": "Languages Addition JSON",

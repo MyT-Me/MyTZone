@@ -104,7 +104,7 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         CONDUCTING_CLASSES:'conductingClasses',
         MENTORING:'mentoring',
         WRITINGS:'writings',
-        CONFERENCES:'confrences',
+        CONFERENCES:'conferences',
         AWARDS:'awards',
         RECOGNIZED_EXPERTISE:'recognizedExpertise',
         PATENTS:'patents',
@@ -246,6 +246,34 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
             }
 
     };
+
+    //REGISTRATION
+    $scope.registration = {
+    }
+
+    $scope.registerUser = function(){
+        console.log($scope.registration);
+        //JSON For Registration
+        registerUser = {
+            "userName": $scope.registration.username,
+            "lastName": $scope.registration.lastname,
+            "firstName": $scope.registration.firstname,
+            "firstYear": $scope.registration.startyear,
+            "dateOfBirth": $scope.registration.dateofBirth,
+            "email": $scope.registration.email,
+            "password": $scope.registration.password
+        }
+        //Calling Registration
+        //Sending JSON to API - /signUp
+        $http.post('/signUp',registerUser,config.headers).then(function(response){
+            console.log("Success Response");
+            console.log(response);
+        }, function(response){
+            console.log("Failure Response");
+            console.log(response);
+        });
+
+    }
 
     // EDUCATION
     $scope.eduDetails = [];
@@ -554,35 +582,37 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     //Adding A Blank Deed
     var addBlankDeed = function() {
 
-    }
+    };
 
 
     $scope.addNewdeed = function (category) {
         console.log("Submit Clicked");
+        console.log("CATEGORY check");
+        console.log(category);
         var formDatadeed = $scope.formDatadeed;
         console.log($scope.formDatadeed);
         //Loading the Common JSON parameters now 
         var toSend = {
-            specificActivity: formDatadeed.activity,
-            month: formDatadeed.smonth,
-            year: formDatadeed.syear
+            specificActivity: this.formDatadeed.activity,
+            month: this.formDatadeed.smonth,
+            year: this.formDatadeed.syear
         }
 
         switch(category){
             case config.WRITINGS:
-                toSend["PublicationName"] = formDatadeed.publication ;
-                toSend["ArticleTitle"] =  formDatadeed.deeddes;
+                toSend["PublicationName"] = this.formDatadeed.publication ;
+                toSend["ArticleTitle"] =  this.formDatadeed.deeddes;
             break;
             case config.CONFERENCES:
-                toSend["ConferenceSponsor"] = formDatadeed.publication;
-                toSend["PresentationTitle"] = formDatadeed.deeddes;
+                toSend["ConferenceSponsor"] = this.formDatadeed.publication;
+                toSend["PresentationTitle"] = this.formDatadeed.deeddes;
             break;
             case config.AWARDS:
-                toSend["AwardSponsor"] = formDatadeed.publication;
-                toSend["AwardTitle"] = formDatadeed.deeddes;
+                toSend["AwardSponsor"] = this.formDatadeed.publication;
+                toSend["AwardTitle"] = this.formDatadeed.deeddes;
             break;
             default:
-                toSend['description'] = formDatadeed.deeddes;
+                toSend['description'] = this.formDatadeed.deeddes;
             break;
         }
         console.log("Trying to Print Sending JSON");
@@ -595,8 +625,7 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         }, function(response){
             //Negative
             alert("Didn't Add");
-            console.log(response); 
-
+            console.log(response);
         });
 
 
@@ -614,7 +643,6 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
                 'pub':this.formDatadeed.pub,
                 'art':this.formDatadeed.art
             };
-
             $scope.model.deeds.push(tmpDeed);
 
             $scope.model.deeds = sortByKey($scope.model.deeds, "id");
