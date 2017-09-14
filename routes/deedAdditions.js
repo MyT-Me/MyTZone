@@ -5,13 +5,13 @@ var addJSONSchema = require('../jsonSchemas')('addition');
 //This is to check if the parameter that is called in the API is valid or not
 var verifier = require('../strings')('apiVerfier').addVerifier;
 var JSONValidator = require('./commonMethods').JSONValidator;
-
+var auth = require('../authentication/authjwt');
 
 //This Module is Written to Eliminate Redundant Method implementation
 
 module.exports = function (app) {
     console.log("Addition API");
-    app.post('/api/deeds/:id', function (req, res) {
+    app.post('/api/deeds/:id',function (req, res) {
         if (!(req.params === 0)) {
             console.log("Inside the Combined Addition");
             var requestId = req.params.id;

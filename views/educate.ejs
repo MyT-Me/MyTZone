@@ -1,10 +1,9 @@
 <div class="control-group">
-    <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger">Logout</a></span>
+    <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
 </div>
 <section ng-init = "eduInit()">
     <nav1>
         <ol class="cd-multi-steps text-bottom count" id="status-buttons">
-            <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.login">Login</a></li>
             <li class="current"><a href="#0" ui-sref-active="active" ui-sref="base.educate">Education</a></li>
             <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.work">Work</a></li>
             <li class="not"><a href="#0" ui-sref-active="active" ui-sref="base.deeds">Deeds</a></li>

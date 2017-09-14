@@ -1,11 +1,11 @@
-"use strict"
+"use strict";
 var parameters = require('../strings')('api');
+var auth = require('../authentication/authjwt');
 module.exports = function (app) {
     app.get('/', function(req,res){
         res.render('index');
     });
-
-    app.get('/sub/:id', function(req, res){
+    app.get('/pages/:id', function(req, res){
         if(req.params === 0)
         {
             res.render('index');
@@ -20,6 +20,16 @@ module.exports = function (app) {
             case parameters.REGISTRATION:
                 res.render('registration');
                 break;
+        }
+    });
+    app.get('/sub/:id', auth , function(req, res){
+        if(req.params === 0)
+        {
+            res.render('index');
+        }
+        console.log(req.user);
+    
+        switch (req.params.id) {
             case parameters.EDUCATION:
                 res.render('educate');
                 break;

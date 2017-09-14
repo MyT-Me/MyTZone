@@ -14,7 +14,7 @@ module.exports = function (app){
     addDeeds(app);
     testing(app);
     createUser(app);
-    modifyDeeds(app);
+    //modifyDeeds(app);
     deleteDeeds(app);
     getRoutes(app);
 }

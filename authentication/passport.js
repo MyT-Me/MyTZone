@@ -49,10 +49,10 @@ passport.use('with-username', new localStatergy({
 ));
 //One with Email Because We don't Know the user Preference
 passport.use('with-Email', new localStatergy({
-    usernameField: 'email'
+    usernameField: 'userName'
     },
-    function(email, password, done) {
-        User.findOne({email: email}, function(err, userProfile){
+    function(userName, password, done) {
+        User.findOne({email: userName}, function(err, userProfile){
            if(err){
                return done(err);
            }

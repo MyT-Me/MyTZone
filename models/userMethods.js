@@ -17,7 +17,7 @@ exports.createUser = function(req,callback) {
         callback(token, err);
     });
 }
-
+/*
 exports.login = function (req, res) {
     passport.authenticate('local', function(err, user, info){
         //To Return To the User
@@ -40,3 +40,4 @@ exports.login = function (req, res) {
         }
     })(req, res);
   };
+  */

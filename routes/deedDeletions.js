@@ -1,10 +1,10 @@
 var verifier = require('../strings')('apiVerfier').removeVerifiers;
 var idVerifier = require('../strings')('apiVerfier').deleteIdsVerifier;
 var removers = require('../models/removeMethods');
-
+var auth = require('../authentication/authjwt');
 
 module.exports = function (app) {
-    app.delete('/api/:removalDeed',function (req,res) {
+    app.delete('/api/:removalDeed',auth,function (req,res) {
 
         //Checking if any Parameters are sent
         if(req.params === 0){

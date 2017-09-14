@@ -44,7 +44,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-
+//Loading Schemas before Passport loading
+require('./models/schema');
+require('./authentication/passport');
 //Passport Settings 
 app.use(passport.initialize());
 
@@ -61,6 +63,26 @@ app.use(flash());
 /*Adding Routes*/
 //require('./authentication/passport')(passport);
 require('./routes')(app);
+
+
+
+
+//Handling UnAuthorized Entries with the Custom Error Handler
+app.use(function(err, req, res, next){
+    if(err) {
+        console.log(err);
+    }
+    console.log(req.url);
+    var url = req.url
+    if (err.name === 'UnauthorizedError') {
+        if (url.startsWith('/sub')) {
+            res.redirect('../pages/login');
+        } else {
+            res.status(401);
+            res.json({"message" : err.name + ": " + err.message});
+        }
+    }
+});
 
 
 app.listen(app.get('port'),function () {

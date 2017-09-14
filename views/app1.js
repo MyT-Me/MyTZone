@@ -19,6 +19,67 @@ $(function() {
 
 var app = angular.module('formlyApp', ['ui.router']);
 
+//Building A Custom Service For Authentication
+angular.module('formlyApp').service('authentication', authentication);
+authentication.$inject = ['$window'];
+function authentication ($window){
+    var saveToken = function(token){
+        $window.localStorage['my-t-me'] = token;
+    };
+    var getToken = function() {
+        return $window.localStorage['my-t-me'];
+    };
+    var logout = function() {
+        $window.localStorage.removeItem('my-t-me');
+    };
+    var login = function(token) {
+        saveToken(token);
+    };
+    var isLoggedIn = function(){
+        var token = getToken()
+        if(token){
+            payload = token.split('.')[1];
+            payload = $window.atob(payload);
+            payload = JSON.parse(payload);
+            return payload.exp>Date.now() / 1000;
+        } else {
+            return false;
+        }
+    };
+    var test = function(){
+        alert("AUthentication Ran :)");
+    };
+    return {
+        saveToken: saveToken,
+        getToken: getToken,
+        logout: logout,
+        login: login,
+        isLoggedIn: isLoggedIn,
+        test: test
+    };
+}
+
+//Building A HTTP Interceptor to add Authentication Values
+angular.module('formlyApp').service('authenticationAdder', authenticationAdder);
+authenticationAdder.$inject = ['authentication'];
+function authenticationAdder(authentication){
+    var request = function(config){
+        console.log("HTTP REQUEST RAN");
+        if(authentication.isLoggedIn()) {
+            config.headers.Authorization = 'Bearer ' + authentication.getToken() 
+        }
+        return config;
+    }
+    return {
+        'request': request
+    }
+}
+
+app.config(['$httpProvider', function($httpProvider){
+    $httpProvider.interceptors.push(authenticationAdder);
+}])
+
+
 app.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
@@ -26,28 +87,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
     // route to show our basic form (/form)
         .state('base', {
             url: '/base',
-            templateUrl: '/sub/base',
+            templateUrl: '/pages/base',
             controller: 'Controller'
         })
-
         // nested states
         // each of these sections will have their own view
         // url will be nested (/form/profile)
         .state('base.login', {
             url: '/login',
-            templateUrl: '/sub/login'
+            templateUrl: '/pages/login'
         })
 
         //Url for resiterations
         .state('base.registration', {
             url: '/registration',
-            templateUrl: '/sub/registration',
+            templateUrl: '/pages/registration',
         })
 
         // url will be /form/interests
         .state('base.educate', {
             url: '/educate',
-            templateUrl: '/sub/education'
+            templateUrl: '/sub/education',
         })
 
         // url will be /form/payment
@@ -75,6 +135,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/chart',
             templateUrl: '/sub/chart'
         })
+        .state('test',{
+            url:'/test',
+            templateUrl: '/test'
+        })
 
 
     // catch all route
@@ -83,7 +147,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
 
 
-app.controller("Controller", ['$scope','$http', function($scope,$http) {
+
+
+app.controller("Controller", ['$scope','$http','$location','authentication', function ($scope,$http,$location,authentication) {
 
 
     var year = 2021;
@@ -219,37 +285,59 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     };
 
     // LOGIN
-    $scope.loginDetails = [];
+    $scope.login = {}
 
-    $scope.addNewLogin = function(loginDetails){
-        $scope.loginDetails.push({
-            'user': "",
-            'password': ""
+    $scope.loginInit = function(){
+        if(authentication.isLoggedIn()){
+            $location.path("/base/educate");
+        }
+    }
+
+    $scope.loginUser = function(){  
+        loginJson = {
+            "userName": $scope.login.user,
+            "password": $scope.login.password
+        }
+        console.log(loginJson);
+        $http.post('/login', loginJson, config.headers).then(function(response){
+            console.log("Success Response");
+            console.log(response);
+            if(response.data.token){
+                var token = response.data.token
+                authentication.saveToken(token);
+            }
+            console.log("Trying to Set the Path");
+            $location.path("/base/educate");
+        }, function(response){
+            alert("Incorrect UserName or Password - Please try again");
+            console.log("Failure Response");
+            console.log(response);
         });
-    };
+    }
 
     $scope.checkEmail = function(){
 
             var email = document.getElementById('username');
             var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
             if (!filter.test(email.value)) {
                 email.focus;
                 document.getElementById('username').style.borderColor = "red";
                 return false;
-
             }
             else{
-
                 document.getElementById('username').style.borderColor = "#a6a6a6";
                 return true;
             }
 
     };
 
-    //REGISTRATION
-    $scope.registration = {
+    //SCope Logout
+    $scope.Logout = function(){
+        authentication.logout()
+        $location.path('/base/login');
     }
+    //REGISTRATION
+    $scope.registration = {}
 
     $scope.registerUser = function(){
         console.log($scope.registration);
@@ -266,11 +354,11 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         //Calling Registration
         //Sending JSON to API - /signUp
         $http.post('/signUp',registerUser,config.headers).then(function(response){
-            console.log("Success Response");
-            console.log(response);
+            authentication.saveToken(response.data.token);
+            alert("User Creation Done");
+            $location.path("/base/educate");
         }, function(response){
-            console.log("Failure Response");
-            console.log(response);
+            alert("Unable To Register Now");
         });
 
     }
@@ -308,7 +396,7 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
         });
     };
 
-    addNewBlankEduField = function() {
+    var addNewBlankEduField = function() {
        $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
         //var ind = getIndex($scope.eduDetails);
         var ind = getMaximumIndex($scope.eduDetails);
@@ -912,7 +1000,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
     };
 
 
-    addNewBlankSkills = function() {
+    var addNewBlankSkills = function() {
         console.log("Being Called");
         $scope.personalDetailsSkills = sortByKey($scope.personalDetailsSkills, "ind");
         $scope.personalDetailsSkills.push({
@@ -977,7 +1065,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
         });
     };
 
-    addNewBlankTools = function() {
+    var addNewBlankTools = function() {
         console.log("Being Called");
         $scope.personalDetailsTools = sortByKey($scope.personalDetailsTools, "ind");
         $scope.personalDetailsTools.push({

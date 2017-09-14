@@ -12,6 +12,7 @@ var schema = mongoose.Schema();
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 var uniquePlugin = require('mongoose-unique-validator');
+var authStrings = require('../strings')('auth');
 
 //With Score for Each section
 var educationScoreSchema = new mongoose.Schema({
@@ -317,7 +318,7 @@ UserProfileSchema.methods.generateJWT = function(){
         lastName: this.lastName,
         userName: this.userName,
         exp: parseInt(expiry.getTime()/1000)
-    },"myTZone");
+    },authStrings.secret);
 }
 
 

@@ -42,7 +42,12 @@ var getArrayJSONBuilder = function (jsonSchema, modelObject) {
 
 exports.getDeeds = function (req, deedName, callback) {
     try {
-        User.findOne({"email": "revanthpenugonda@gmail.com"}, function (err, profile) {
+        if(!req.user){
+            callback(new Error("Internal error"),null);
+            return;
+        }
+        var userEmail = req.user.email;
+        User.findOne({"email": userEmail}, function (err, profile) {
             if (err){
                 // Can be any error - ex: Error Due to Connection
                 console.log("Error" + err);

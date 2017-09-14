@@ -73,7 +73,13 @@ var schemaLoader = function (deedName, deedBody){
 
 
 exports.addDeed = function (req, deedName, callback){
-    User.findOne({"email": "revanthpenugonda@gmail.com"}, function (err, profile) {
+    try {     
+        if(!req.user){
+            callback(new Error("Internal error"),null);
+            return;
+        }
+        var userEmail = req.user.email;
+        User.findOne({"email": userEmail}, function (err, profile) {
         if (err) {
             console.log("Err Block");
             callback(err, null);
@@ -96,4 +102,7 @@ exports.addDeed = function (req, deedName, callback){
             });
         }
     });
+    } catch (error) {
+        callback(error, null);
+    }
 };

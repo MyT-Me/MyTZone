@@ -1,10 +1,12 @@
+'use strict';
 var db = require('./db');
 var api = require('./apiStrings');
 var models = require('./modelStrings');
 var scores = require('./scoreStrings');
 var apiParamVerifier = require('./verifiers');
+var authenticationConfig = require('./authenticationConfig')
 
-module.exports = function(value){
+module.exports = function (value) {
     switch (value) {
     case 'db':
         return db;
@@ -16,5 +18,7 @@ module.exports = function(value){
         return scores;
     case 'apiVerfier':
         return apiParamVerifier;
+    case 'auth':
+        return authenticationConfig;
     }
-}
+};
