@@ -11,7 +11,7 @@ var auth = require('../authentication/authjwt');
 
 module.exports = function (app) {
     console.log("Addition API");
-    app.post('/api/deeds/:id',function (req, res) {
+    app.post('/api/deeds/:id', auth, function (req, res) {
         if (!(req.params === 0)) {
             console.log("Inside the Combined Addition");
             var requestId = req.params.id;

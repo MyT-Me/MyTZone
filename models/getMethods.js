@@ -42,6 +42,8 @@ var getArrayJSONBuilder = function (jsonSchema, modelObject) {
 
 exports.getDeeds = function (req, deedName, callback) {
     try {
+        console.log("Trying to Print User");
+        console.log(req.user)
         if(!req.user){
             callback(new Error("Internal error"),null);
             return;
