@@ -383,6 +383,11 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             console.log("Positive Init");
             var responseData = response.data;
             var responseArray = angular.fromJson(responseData["deedData"]);
+            //Checking the Start and End Years
+            angular.forEach(responseArray, function(eachResponse, index) {
+                responseArray[index].start = parseInt(responseArray[index].start)
+                responseArray[index].end = parseInt(responseArray[index].end)
+            });
             console.log("This is Repsonse");
             console.log(responseArray);
             $scope.eduDetails.extend(responseArray);
@@ -692,6 +697,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
                 toSend["ArticleTitle"] =  this.formDatadeed.deeddes;
             break;
             case config.CONFERENCES:
+                alert("Inside COnfrences");
                 toSend["ConferenceSponsor"] = this.formDatadeed.publication;
                 toSend["PresentationTitle"] = this.formDatadeed.deeddes;
             break;
@@ -1020,12 +1026,6 @@ var skillsToolsJSONBuilder = function(receivedObject){
     console.log($scope.personalDetailsSkills);
     }
 
-
-
-
-
-
-
     $scope.checkAllSkills = function () {
         if (!$scope.selectedAll) {
             $scope.selectedAll = true;
@@ -1246,4 +1246,8 @@ var skillsToolsJSONBuilder = function(receivedObject){
             personalDetail.selected = $scope.selectedAll;
         });
     };
+    //SCore COmputing Engine
+    $scope.scoreRunner = function(){
+        console.log('%c You will get your score here ', 'background: #222; color: #bada55');
+    }
     }]);

@@ -1,5 +1,24 @@
-module.exports = {  
+module.exports = {
+    Top: {
+        PROJECT_MANAGEMENT: 'Project management',
+        ORGANIZATIONAL_DESIGN: 'Organizational design',
+        COMMUNICATIONS: 'Communications',
+        CRITICAL_THINKING: 'Critical Thinking',
+        TEAMWORK: 'Teamwork',
+        NETWORKING: 'Networking',
+        EMPATHY: 'Empathy',
+        PERSPECTIVE: 'Perspective',
+        GLOBAL_UNDERSTANDING: 'Global understandng'
+    },
+    Stem: {
+        MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS: 'Memberships, Authorships, and Recognitions',
+        EDUCATION_BRIEFINGS_TEACHING: 'Education, Briefings, and Teaching',
+        OPERATION_RESPONSIBILITIES_EXPERTISE: 'Operations responsibilities and expertise',
+        SOFTWARE_DEVICE_PROFICIENCY: 'Software/Device Proficiency',
+        METHODS_SKILLS_PROFIECIENCY: 'Methods/Skills Proficiency'
+    },
     education: {
+        IN_PROGRESS: '',
         EARNED_DEGREE_AWARDED: 'Earned degree awarded',
         EARNED_DEGREE_ADDITIONAL_FIELD_OF_STUDY: 'Earned degree - additional field of study'
     },

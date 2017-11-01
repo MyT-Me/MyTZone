@@ -23,10 +23,10 @@ module.exports = {
                         "LLD"]
             },
             "startYear": {
-                "type": "number"
+                "type": ["number", "string"]
             },
             "endYear": {
-                "type": "number"
+                "type": ["number", "string"]
             },
             "degreeProgramStatus": {
                 "enum": ["In progress",
@@ -429,7 +429,7 @@ module.exports = {
                 "type": "object",
                 "properties":{
                     "SOI_evaluateApplications": {"$ref":"#/definitions/PromptAnswers"},
-                    "SOI_selectApplicationsAndSolutions": {"$ref":"#/definitions/PromptAnswers"},                    
+                    "SOI_selectApplicationsAndSolutions": {"$ref":"#/definitions/PromptAnswers"},          
                     "SOI_specificApplicationsAndSolutions": {"$ref":"#/definitions/PromptAnswers"},
                     "SOI_buildApplicationsAndSolutions": {"$ref":"#/definitions/PromptAnswers"},
                     "SOI_accessBenifitCostValueSolutions": {"$ref":"#/definitions/PromptAnswers"}
@@ -573,7 +573,4 @@ module.exports = {
         "required": ["employerSectionOfFocus","employerOrganizationName",],
         "additionalProperties": false
     }
-
-
-
 }

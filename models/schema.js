@@ -13,6 +13,7 @@ var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 var uniquePlugin = require('mongoose-unique-validator');
 var authStrings = require('../strings')('auth');
+var findOrCreatePlugin = require('mongoose-findorcreate');
 
 //With Score for Each section
 var educationScoreSchema = new mongoose.Schema({
@@ -20,8 +21,8 @@ var educationScoreSchema = new mongoose.Schema({
    schoolUniversityName: {type:String, required:true},
    majorFiedOfStudy: {type:String,required:true},
    typeOfDegree:{type:String,required:true},
-   startYear: {type: Date, required:true},
-   endYear:{type: Date, required:true},
+   startYear: {type: String, required:true},
+   endYear:{type: String, required:true},
    degreeProgramStatus:{type: String, required:true},
    honors:{type: String},
    timeStamp:{type:String, required: true},
@@ -288,8 +289,10 @@ var UserProfileSchema = new mongoose.Schema({
 });
 
 
-//Applying Plugin Test to verify uniqueness
+//Applying Plugin Test to verify uniqueness and
 UserProfileSchema.plugin(uniquePlugin);
+//Applying Plugins For User Create Functionlaity
+UserProfileSchema.plugin(findOrCreatePlugin);
 //Methods that Set and Validate Password
 
 UserProfileSchema.methods.setPassword = function(password) {

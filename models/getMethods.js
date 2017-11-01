@@ -17,7 +17,6 @@ var sorter = function(a, b){
     return 0;
 };
 
-
 var getJSONProducer = function (jsonSchema, modelObject) {
     var ourSchema = JSON.parse(JSON.stringify(jsonSchema));
     var returnJSON = {};

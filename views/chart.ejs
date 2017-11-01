@@ -1,5 +1,5 @@
 <div class="control-group">
-    <span style="padding-left:73em"><a ui-sref="base.login" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
+    <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
 </div>
 
 
@@ -16,23 +16,13 @@
     </nav1>
 </section>
 
-<div id="headingmain" ng-app="FormlyApp"></div>
-    <h1 id="heading_login">T-Score</h1>
-    <div id="c1" class="tscore">
-    <h3>My T-score</h3>
-    <input class="score" type="number" name="score"><br>
-</div>
-<div id="golden-top">
-    <div class="w3-container w3-center" style="height:20px;width:0" id="golden-top1"></div>
-</div><br>
+<div id="headingmain" ng-app="FormlyApp" ng-init= "scoreRunner()"></div>
+    <h1 id="heading_login">Charts</h1>
+    <div id="inside" class="container">
 
-<div class="w3-light-grey">
-    <div class="w3-container w3-center" style="height:20px;width:0" id="top"></div>
-</div><br>
+<div id="chartContainer1" style="height: 239px;width:200px"></div>
 
-<div id="chartContainer1" style="height: 200px;"></div>
-
-<div class="tscore">
+<div class="tscore" id="lower">
     <h3>My T-Top score</h3>
     <input class="score" type="number" name="score"><br>
 </div>
@@ -40,12 +30,12 @@
     <h3>My T-Stem score</h3>
     <input class="score" type="number" name="score"><br>
 </div>
-<div id="chartContainer" style="height: 300px;"></div>
+<div id="chartContainer" style="height: 300px;width:149px"></div>
 <div id='myChart'></div>
 
 <div id='myChart1'></div>
 <div id="w3" class="w3-light-grey">
-    <div class="w3-container w3-center" style="height:20px;width:0" id="bottom"></div>
+    <div class="w3-container w3-center" style="height:20px;width:50px" id="bottom"></div>
 </div><br>
 <div>
     <form id="tscoretop" name="form1" method="post" action="" >
@@ -79,6 +69,7 @@
         </table>
     </form>
 </div>
+    </div>
 </body>
 </html>
 
