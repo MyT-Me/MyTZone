@@ -82,3 +82,7 @@ exports.getDeeds = function (req, deedName, callback) {
     }
 
 };
+
+exports.getScores = function(req, callback) {
+    
+}

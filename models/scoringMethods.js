@@ -1,107 +1,28 @@
 'use strict';
+var models = require('./schema');
 var User = models.User;
+var scorer = require('../scorecomputer/index');
 
-MyTTop_Headers = {
-        "ProjectManagement": computeProjectManagementScore,
-        "OrganizationalDesign": getOrganizationalDesignScore,
-        "Communications": getCommunicationsScore,
-        "CriticalThinking": getCriticalThinkingScore,
-        "Teamwork": getTeamworkScore,
-        "Networking": getNetworkingScore,
-        "Empathy": getEmpathyScore,
-        "Perspective": getPerspectiveScore,
-        "GlobalUnderstandng": getGlobalUnderstandngScore
-}
+// MyTTop_Headers = {
+//         "ProjectManagement": computeProjectManagementScore,
+//         "OrganizationalDesign": getOrganizationalDesignScore,
+//         "Communications": getCommunicationsScore,
+//         "CriticalThinking": getCriticalThinkingScore,
+//         "Teamwork": getTeamworkScore,
+//         "Networking": getNetworkingScore,
+//         "Empathy": getEmpathyScore,
+//         "Perspective": getPerspectiveScore,
+//         "GlobalUnderstandng": getGlobalUnderstandngScore
+// }
 
-MyTStem_Headers = {
-        "MembershipsAuthorshipsRecognitions" : getMembershipAuthorshipsRecognitionsScore,
-        "EducationDegreesCertifications": getEducationDegreesCertificationsScore,
-        "OperationsResponsibilitiesExpertise": getOperationsResponsibilitiesExpertiseScore,
-        "SoftwareDeviceProficiency": getSoftwareDeviceProficiencyScore,
-        "MethodsSkillsProficiency": getMethodsSkillsProficiencyScore
-}
+// MyTStem_Headers = {
+//         "MembershipsAuthorshipsRecognitions" : getMembershipAuthorshipsRecognitionsScore,
+//         "EducationDegreesCertifications": getEducationDegreesCertificationsScore,
+//         "OperationsResponsibilitiesExpertise": getOperationsResponsibilitiesExpertiseScore,
+//         "SoftwareDeviceProficiency": getSoftwareDeviceProficiencyScore,
+//         "MethodsSkillsProficiency": getMethodsSkillsProficiencyScore
+// }
 
-
-
-
-// All the T Top Scoring Engines
-var computeProjectManagementScore = function(userProfile) {
-        return 0;
-};
-
-var getOrganizationalDesignScore = function(userProfile) {
-        return 0;
-};
-
-var getCommunicationsScore = function(userProfile) {
-        return 0;
-};
-
-var getCriticalThinkingScore = function(userProfile) {
-        return 0;
-};
-
-var getTeamworkScore = function(userProfile) {
-        return 0;
-};
-
-var getNetworkingScore = function(userProfile) {
-        return 0;
-};
-
-var getEmpathyScore = function(userProfile) {
-        return 0;
-};
-
-var getPerspectiveScore = function(userProfile) {
-        return 0;
-};
-
-var getGlobalUnderstandngScore = function(userProfile) {
-        return 0;
-};
-
-
-//All the T STem SCore ComputingEngines
-var getMembershipAuthorshipsRecognitionsScore = function(userProfile) {
-        return 0;
-}
-
-var getEducationDegreesCertificationsScore = function(userProfile) {
-        return 0;
-};
-
-var getOperationsResponsibilitiesExpertiseScore = function(userProfile) {
-        return 0;
-};
-
-var getSoftwareDeviceProficiencyScore = function(userProfile) {
-        return 0;
-};
-
-var getMethodsSkillsProficiencyScore = function(userProfile) {
-        return 0;
-};
-
-var myTTopScorer  = function(userData){
-    returnJSON = {};
-    for( var key in MyTTop_Headers) {
-        returnJSON[key] = MyTTop_Headers[key](userData);
-    }
-    return returnJSON
-}
-
-var myTStemScorer = function(userData){
-    returnJSON = {};
-    for(var key in MyTStem_Headers) {
-        returnJSON[key] = MyTStem_Headers[key](userData);
-    }
-    return returnJSON
-}
-
-var myTScorer = function(myT_Top,myT_Stem){
-        return 0
-}
 
 exports.scorer = function(req,callback){
     try {
@@ -122,10 +43,7 @@ exports.scorer = function(req,callback){
                 callback (new Error("No User Found"), null);
             } else {
                 var returnJSON = {};
-                returnJSON['MyT_Top'] = myTTopScorer (profile);
-                returnJSON['MyT_Stem'] = myTStemScorer (profile);
-                returnJSON['MYT_Score'] = 
-                callback(null, returnJSON);
+                scorer(profile,callback)
             }
         });
         } catch (err) {

@@ -1,19 +1,20 @@
 var apiStrings = require('../strings')('api');
-var scoreValues = require('../scoreWeights/values');
-var deeds = [
-    apiStrings.EDUCATION,
-    apiStrings.CONFERENCES,
-    apiStrings.CERTIFICATES,
-    apiStrings.TAKING_CLASSES,
-    apiStrings.CONDUCTING_CLASSES,
-    apiStrings.MENTORING,
-    apiStrings.WRITINGS,
-    apiStrings.CONFERENCES,
-    apiStrings.
-    apiStrings.LEISURE_TRAVEL,
+var scoreValues = require('./values');
+var scorerValuesHelper = require('../scoreWeights/values')
+// var deeds = [
+//     apiStrings.EDUCATION,
+//     apiStrings.CONFERENCES,
+//     apiStrings.CERTIFICATES,
+//     apiStrings.TAKING_CLASSES,
+//     apiStrings.CONDUCTING_CLASSES,
+//     apiStrings.MENTORING,
+//     apiStrings.WRITINGS,
+//     apiStrings.CONFERENCES,
+//     apiStrings.
+//     apiStrings.LEISURE_TRAVEL,
 
 
-];
+// ];
 
 var top = {
     PROJECT_MANAGEMENT: 'Project management',
@@ -47,32 +48,43 @@ var scorer = function(userProfile) {
     for(var eachStem in Stem) {
         this.My_T_Stem[Stem[eachStem]] = 0
     }
+    var parent = this;
     //Education Scoring
     var eduData = userProfile[apiStrings.EDUCATION].deedData;
     for(var index= 0;index<eduData.length;index++) {
-        scoreHelper(apiStrings.EDUCATION,eduData[index],index++);
+        scoreHelper(scorerValuesHelper,apiStrings.EDUCATION,eduData[index],"degreeProgramStatus");
     }
     //Deed Scoring
+    /*
     for(var index=0;index <deeds.length;index++){
         var currentDeed = userProfile[deeds[index]];
         
-    }
+    }*/
 
 
     //Work Experience Scoring
     //Tools Skills Scoring
     //Skills Scoring
+    console.log("First");
 
-    function scoreHelper(deedCategory, deed, identifier) {
-        if(scoreValues[deedCategory].contents.has(deed[identifier])){
-            var scoreValues =  scoreValues[deedCategory].contents.scores;
-            var currentScore = deed[score] * scoreValues.score[0]
-            if(scores[2]!==null) {
-                My_T_Stem[scores[2]] =  My_T_Stem[scores[2]] + currentScore;
+    function scoreHelper(scoreValues,deedCategory, deed, identifier) {
+        var currentContents = scoreValues[deedCategory].contents;
+        console.log(currentContents)
+        console.log(deed[identifier])
+        console.log(currentContents.hasOwnProperty(deed[identifier]))
+        if(currentContents.hasOwnProperty(deed[identifier])){
+            console.log("Second")
+            var scoreArray =  currentContents[deed[identifier]].scores;
+            console.log(deed)
+            var currentScore = deed['score'] * scoreArray[0]
+            if(scoreArray[2]!==null) {
+                console.log(parent);
+                console.log(parent['My_T_Stem']);
+                parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
             }
-            if(scores[1]!==null){
+            if(scoreArray[1]!==null){
                 for(var i = 0 ;i<9;i++){
-                    My_T_Top[i] = My_T_Top[i] + (currentScore*scores[1][i])
+                    parent['My_T_Top'][i] = parent['My_T_Top'][i] + (currentScore*scoreArray[1][i])
                 }
             }
         }
@@ -80,19 +92,19 @@ var scorer = function(userProfile) {
 }
 
 scorer.prototype.buildJSON = function(){
-    
-    return {
+    console.log("Three");
+    returnJSON = {
         My_T_Score: this.My_T_Score,
         My_T_Top: this.My_T_Top,
         My_T_Stem: this.My_T_Stem,
 
     }
+    return returnJSON; 
 }
 
-module.exports = function( userProfile ) {
+module.exports = function( userProfile, callback ) {
     var userScore = new scorer(userProfile);
-    
-    
-    return userScore.buildJSON();
-
+    var returnJSON = userScore.buildJSON()
+    console.log(callback)
+    callback(null,returnJSON)
 }

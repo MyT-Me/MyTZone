@@ -16,7 +16,7 @@ var Stem = {
     MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS: 'Memberships, Authorships, and Recognitions',
     EDUCATION_BRIEFINGS_TEACHING: 'Education, Briefings, and Teaching',
     OPERATION_RESPONSIBILITIES_EXPERTISE: 'Operations responsibilities and expertise',
-    SOFTWARE_DEVICE_PROFICIENCY: 'Software/Device Profixciency',
+    SOFTWARE_DEVICE_PROFICIENCY: 'Software/Device Proficiency',
     METHODS_SKILLS_PROFIECIENCY: 'Methods/Skills Proficiency'
 }
 
@@ -38,11 +38,11 @@ module.exports = {
         value: apiString.EDUCATION,
         contents: {
             "Degree Awarded": {
-                name: 'Earned degree awarded',
+                name: "Degree Awarded",
                 scores: [0.5, null, Stem.EDUCATION_BRIEFINGS_TEACHING] 
             },
             "Degree - Add'l field of Study": {
-                name: 'Earned degree - additional field of study',
+                name: "Degree - Add'l field of Study",
                 scores: [2.0, [0,0,0,5,0,3,2,10,0], Stem.EDUCATION_BRIEFINGS_TEACHING]
             }
         }

@@ -15,14 +15,18 @@ module.exports = function (app) {
         }
         var requestId = req.params.id;
         if(verifier.has(requestId)){
-            getters.getDeeds(req, requestId, function (err, deedData) {
-                if(err !==null){
-                    console.log(err);
-                    res.status(500).send(JSON.stringify({error: err.toString()}));
-                } else {
-                    res.status(200).send(deedData);
-                }
-            })
+            if(requestId === parameters.SCORES) {
+                
+            } else {
+                getters.getDeeds(req, requestId, function (err, deedData) {
+                    if(err !==null){
+                        console.log(err);
+                        res.status(500).send(JSON.stringify({error: err.toString()}));
+                    } else {
+                        res.status(200).send(deedData);
+                    }
+                })
+            }
         } else {
             res.status(404).send();
         }
