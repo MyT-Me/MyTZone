@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/revaries/MyTZone-Backend#readme",
   "dependencies": {
+    "angular-chart.js": "^1.1.1",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",

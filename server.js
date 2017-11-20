@@ -58,6 +58,7 @@ app.use(session({secret:'myTzone'}))
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
 
 
 /*Adding Routes*/

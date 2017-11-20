@@ -24,18 +24,12 @@ var scorer = require('../scorecomputer/index');
 // }
 
 
-exports.scorer = function(req,callback){
+exports.scorer = function(req,email,callback){
     try {
         console.log("Trying to Access User Data");
-           /*
-                Uncomment when it gets working with different users
-                if(!req.user){
-                callback(new Error("Internal error"),null);
-                return;
-                }
-                var userEmail = req.user.emmail;
-           */
-        User.findOne({"email": /*userEmail*/"revanthpenugonda@gmail.com"},function(err,profile){
+        //Uncomment when it gets working with different users
+
+        User.findOne({"email": email/*"revanthpenugonda@gmail.com"*/},function(err,profile){
             if (err) {
                 callback(err,null);
             } else if (profile === null){

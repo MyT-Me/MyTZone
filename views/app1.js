@@ -17,7 +17,7 @@ $(function() {
 
 });
 
-var app = angular.module('formlyApp', ['ui.router']);
+var app = angular.module('formlyApp', ['ui.router','chart.js']);
 
 //Building A Custom Service For Authentication
 angular.module('formlyApp').service('authentication', authentication);
@@ -788,6 +788,10 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     //     $scope.myForm.$setPristine(); // this line will update status of your form, but will not clean your data, where `registrForm` - name of form.
     // };
 
+
+    //Adding SCore Section
+    
+
     $scope.getTemplatedeed= function (deed) {
         if (deed.id === $scope.model.selected.id) return 'edit';
         else return 'display';
@@ -1169,6 +1173,11 @@ var skillsToolsJSONBuilder = function(receivedObject){
         }
 
     };*/
+
+
+
+
+
     $scope.addNewtools = function() {
         var toolListLength = $scope.personalDetailsTools.length;
         if(!(toolListLength>0)) {
@@ -1249,5 +1258,14 @@ var skillsToolsJSONBuilder = function(receivedObject){
     //SCore COmputing Engine
     $scope.scoreRunner = function(){
         console.log('%c You will get your score here ', 'background: #222; color: #bada55');
+        $http.get('/api/scores').then(function(response) {
+            //Positive Response
+            console.log(response["data"]);
+        }, function(response) {
+            //Negative Response
+            console.log("Negative Init");
+            console.log(response);
+        });
+
     }
     }]);

@@ -3,7 +3,7 @@
 </div>
 
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-<section>
+<section ng-init = "scoreRunner()">
     <nav1>
         <ol class="cd-multi-steps text-bottom count" id="status-buttons">
             <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.educate">Education</a></li>
@@ -85,7 +85,7 @@
 <div id="w3" class="w3-light-grey">
     <div class="w3-container w3-center" style="height:20px;width:50px" id="bottom"></div>
 </div><br>
-<div>
+<div >
     <form id="tscoretop" name="form1" method="post" action="" >
         <table>
             <thead><b>T-Top Scores</b></thead>
