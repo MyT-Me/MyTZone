@@ -19,6 +19,7 @@ module.exports = function (app) {
             if (verifier.has(requestId)) {
                 if (JSONValidator(addJSONSchema[requestId], req.body)) {
                     var userId = "revanthpenugonda@gmail.com";
+                    req.user = {}
                     req.user.email = userId;
                     adders.addDeed(req, requestId, function (err, sendJsonData){
                         if (err) {
