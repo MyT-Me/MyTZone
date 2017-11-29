@@ -10,8 +10,9 @@ var getRoutes = require('./getRoutes');
 var userAuthentication = require('./userAuthentication');
 var viewHandlers = require('./viewHandlers');
 var scores = require('./scores');
-var v2 = require('./v2');
-
+var ex = require('./checking');
+var v2Get = require('./v2get');
+var v2Post = require('./v2post');
 module.exports = function (app){
     viewHandlers(app);
     userAuthentication(app);
@@ -22,5 +23,7 @@ module.exports = function (app){
     deleteDeeds(app);
     getRoutes(app);
     scores(app);
-    v2(app);
+    v2Get(app);
+    v2Post(app);
+    ex(app);
 }
