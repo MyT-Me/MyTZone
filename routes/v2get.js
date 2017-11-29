@@ -1,11 +1,9 @@
 'use strict';
-//var parameters =  require('../strings/apiParameters');
-var adders = require('../models/addMethods');
-var addJSONSchema = require('../jsonSchemas')('addition');
-//This is to check if the parameter that is called in the API is valid or not
-var verifier = require('../strings')('apiVerfier').addVerifier;
-var JSONValidator = require('./commonMethods').JSONValidator;
+var parameters = require('../strings/apiStrings');
+var getters = require('../models/getMethods');
+var verifier = require('../strings')('apiVerfier').getVerifier;
 var auth = require('../authentication/authjwt');
+var scoringMethods = require('../models/scoringMethods')
 
 //This Module is Written to Eliminate Redundant Method implementation
 
@@ -17,9 +15,10 @@ module.exports = function (app) {
           return;
         }
         var requestId = req.params.id;
+        req.user = {}
+        req.user.email = "revanthpenugonda@gmail.com";
         if(verifier.has(requestId)){
             if(requestId === parameters.SCORES) {
-                req.user.email = "revanthpenugonda@gmail.com";
                 if(!req.user){
                     res.status(500).send(JSON.stringify({error: "No User Found"}));
                     return;
