@@ -6,8 +6,8 @@ module.exports = function (app) {
     app.post('/test', function (req, res) {
         console.log(req.params);
         console.log(req.body);
-        console.log(v.validate(req.body, ourJsonSchema.login));
-        console.log(v.validate(req.body, ourJsonSchema.login).valid);
+        //console.log(v.validate(req.body, ourJsonSchema.login));
+        //console.log(v.validate(req.body, ourJsonSchema.login).valid);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({"request": "received"}));
     });
