@@ -7,20 +7,24 @@ var verifier = require('../strings')('apiVerfier').addVerifier;
 var JSONValidator = require('./commonMethods').JSONValidator;
 var auth = require('../authentication/authjwt');
 
+//This Module is Written to Eliminate Redundant Method implementation
 
 module.exports = function (app) {
-    console.log("I am running v2 POST");
-    app.post('/api/v2/:id', function (req, res) {
-        console.log("Hit this")
+    console.log("Addition API");
+    console.log("Addition v1");
+    app.post('/v2Post/:id', function (req, res) {
+        req.user = {
+            email: 'revanthpenugonda@gmail.com',
+            firstName: 'Revanth',
+            lastName: 'Penugonda',
+            userName: 'revaries'
+        }
         if (!(req.params === 0)) {
             console.log("Inside the Combined Addition");
             var requestId = req.params.id;
             console.log("Request Id " + requestId)
             if (verifier.has(requestId)) {
                 if (JSONValidator(addJSONSchema[requestId], req.body)) {
-                    var userId = "revanthpenugonda@gmail.com";
-                    req.user = {}
-                    req.user.email = userId;
                     adders.addDeed(req, requestId, function (err, sendJsonData){
                         if (err) {
                             console.log("Error in Addition" + err);
@@ -50,3 +54,5 @@ module.exports = function (app) {
         }
     });
 };
+
+

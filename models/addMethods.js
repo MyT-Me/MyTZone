@@ -74,7 +74,9 @@ var schemaLoader = function (deedName, deedBody){
 
 exports.addDeed = function (req, deedName, callback){
     try {
+        console.log(req.user);
         if(!req.user){
+            console.log("Error With User");
             callback(new Error("Error With User"),null);
             return;
         }

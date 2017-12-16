@@ -15,6 +15,7 @@ module.exports = function (app) {
         }
         var requestId = req.params.id;
         if(verifier.has(requestId)){
+            console.log("Getter Request Received");
             if(requestId === parameters.SCORES) {
                 if(!req.user){
                     res.status(500).send(JSON.stringify({error: "No User Found"}));

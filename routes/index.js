@@ -1,5 +1,3 @@
-
-
 'use strict';
 var addDeeds = require('./deedAdditions');
 var deleteDeeds = require('./deedDeletions');
@@ -10,9 +8,9 @@ var getRoutes = require('./getRoutes');
 var userAuthentication = require('./userAuthentication');
 var viewHandlers = require('./viewHandlers');
 var scores = require('./scores');
-var ex = require('./checking');
 var v2Get = require('./v2get');
-var v2Post = require('./v2post');
+var v2Post = require('./v2Post');
+
 module.exports = function (app){
     viewHandlers(app);
     userAuthentication(app);
@@ -25,5 +23,5 @@ module.exports = function (app){
     scores(app);
     v2Get(app);
     v2Post(app);
-    ex(app);
+    testing(app);
 }

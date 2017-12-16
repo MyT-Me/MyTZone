@@ -440,9 +440,13 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             if(latestEduDetail.honor !== "") {
                 toSend["honors"] = latestEduDetail.honor;
             }
-
-            $http.post('/api/deeds/education', toSend, config.headers).then(function(response){
+            var deedURL = "/api/deeds/"
+            var v2testURL = "/v2Post/"
+            console.log(toSend) 
+            $http.post(v2testURL+'education', toSend, config.headers).then(function(response){
+                
                 //Success handling
+
                 console.log(response.data);
                 $scope.eduDetails[$scope.eduDetails.length-1]['id'] = response.data.dbid;
                 $scope.eduDetails[$scope.eduDetails.length-1]['timestamp'] = response.data.timestamp;

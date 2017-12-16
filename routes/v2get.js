@@ -8,7 +8,7 @@ var scoringMethods = require('../models/scoringMethods')
 //This Module is Written to Eliminate Redundant Method implementation
 
 module.exports = function (app) {
-    console.log("I am running V2 Get");
+    //console.log("I am running V2 Get");
     app.get('/api/v2/:id' ,function (req,res) {
         if(req.params === 0) {
           res.status(422).send();
