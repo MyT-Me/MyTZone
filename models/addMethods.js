@@ -92,7 +92,7 @@ exports.addDeed = function (req, deedName, callback){
             var newDeed = schemaLoader(deedName, req.body);
             //Testing this because of Async Problems
             console.log("Ideally After");
-            newDeed.score = 10;
+            newDeed.score = 1;
             var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
             newDeed.customId = deedName + time;
             newDeed.timeStamp = time;

@@ -39,11 +39,13 @@ module.exports = {
         contents: {
             "Degree Awarded": {
                 name: "Degree Awarded",
-                scores: [0.5, null, Stem.EDUCATION_BRIEFINGS_TEACHING] 
+                scores: [10.0, 
+                    null,
+                    Stem.EDUCATION_BRIEFINGS_TEACHING] 
             },
             "Degree - Add'l field of Study": {
                 name: "Degree - Add'l field of Study",
-                scores: [2.0, [0,0,0,5,0,3,2,10,0], Stem.EDUCATION_BRIEFINGS_TEACHING]
+                scores: [12.0, [0,0,0,5,0,3,2,10,0], Stem.EDUCATION_BRIEFINGS_TEACHING]
             }
         }
     },
