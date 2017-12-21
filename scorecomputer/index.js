@@ -1,20 +1,19 @@
 var apiStrings = require('../strings')('api');
-var scoreValues = require('./values');
-var scorerValuesHelper = require('../scoreWeights/values')
-// var deeds = [
-//     apiStrings.EDUCATION,
-//     apiStrings.CONFERENCES,
-//     apiStrings.CERTIFICATES,
-//     apiStrings.TAKING_CLASSES,
-//     apiStrings.CONDUCTING_CLASSES,
-//     apiStrings.MENTORING,
-//     apiStrings.WRITINGS,
-//     apiStrings.CONFERENCES,
-//     apiStrings.
-//     apiStrings.LEISURE_TRAVEL,
+//var scoreValues = require('./values');
+var scorerValuesHelper = require('./values')
 
 
-// ];
+var topIter = [
+    'Project management',
+    'Organizational design',
+    'Communications',
+    'Critical Thinking',
+    'Teamwork',
+    'Networking',
+    'Empathy',
+    'Perspective',
+    'Global understandng'
+]
 
 var top = {
     PROJECT_MANAGEMENT: 'Project management',
@@ -54,38 +53,49 @@ var scorer = function(userProfile) {
     for(var index= 0;index<eduData.length;index++) {
         scoreHelper(scorerValuesHelper,apiStrings.EDUCATION,eduData[index],"degreeProgramStatus");
     }
+
     //Deed Scoring
-    /*
-    for(var index=0;index <deeds.length;index++){
-        var currentDeed = userProfile[deeds[index]];
-        
-    }*/
+    var allDeeds = [
+        apiStrings.CERTIFICATES,
+        apiStrings.TAKING_CLASSES,
+        apiStrings.CONDUCTING_CLASSES,
+        apiStrings.MENTORING,
+        apiStrings.WRITINGS,
+        //apiStrings.RECOGNIZED_EXPERTIESE,
+        apiStrings.PATENTS,
+        apiStrings.LEISURE_TRAVEL,
+        apiStrings.LANGUAGES
+    ];
+    for( var deedIndex = 0; deedIndex < allDeeds.length ; deedIndex ++){
+        //For each deed
+        console.log(allDeeds[deedIndex])
+        var currentDeed = userProfile[allDeeds[deedIndex]].deedData;
+        console.log(currentDeed.length)
+        for(var index=0; index<currentDeed.length; index++) {
+            scoreHelper(scorerValuesHelper,allDeeds[deedIndex],currentDeed[index], "specificActivity")
+        }
+    }
 
 
     //Work Experience Scoring
     //Tools Skills Scoring
     //Skills Scoring
-    console.log("First");
 
     function scoreHelper(scoreValues,deedCategory, deed, identifier) {
         var currentContents = scoreValues[deedCategory].contents;
-        console.log(currentContents)
-        console.log(deed[identifier])
-        console.log(currentContents.hasOwnProperty(deed[identifier]))
         if(currentContents.hasOwnProperty(deed[identifier])){
-            console.log("Second")
             var scoreArray =  currentContents[deed[identifier]].scores;
-            console.log(deed)
             var currentScore = deed['score'] * scoreArray[0]
             if(scoreArray[2]!==null) {
-                console.log(parent);
-                console.log(parent['My_T_Stem']);
                 parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
             }
+            
             if(scoreArray[1]!==null){
-                for(var i = 0 ;i<9;i++){
-                    parent['My_T_Top'][i] = parent['My_T_Top'][i] + (currentScore*scoreArray[1][i])
+                var topScore = scoreArray[1];
+                for(var i = 0; i<topIter.length ; i++){
+                    parent['My_T_Top'][topIter[i]] = parent['My_T_Top'][topIter[i]] + (currentScore * topScore[i]);
                 }
+
             }
         }
     }

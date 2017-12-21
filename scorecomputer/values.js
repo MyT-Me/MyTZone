@@ -16,36 +16,25 @@ var Stem = {
     MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS: 'Memberships, Authorships, and Recognitions',
     EDUCATION_BRIEFINGS_TEACHING: 'Education, Briefings, and Teaching',
     OPERATION_RESPONSIBILITIES_EXPERTISE: 'Operations responsibilities and expertise',
-    SOFTWARE_DEVICE_PROFICIENCY: 'Software/Device Proficiency',
+    SOFTWARE_DEVICE_PROFICIENCY: 'Software/Device Profixciency',
     METHODS_SKILLS_PROFIECIENCY: 'Methods/Skills Proficiency'
 }
-
-/*
-Copiers
-value: '',
-contents: {
-
-}
-====================
-{
-    name: '',
-    scores: []
-}
-*/
 
 module.exports = {
     education: {
         value: apiString.EDUCATION,
         contents: {
             "Degree Awarded": {
-                name: "Degree Awarded",
+                name: 'Earned degree awarded',
                 scores: [10.0, 
-                    null,
+                    null, 
                     Stem.EDUCATION_BRIEFINGS_TEACHING] 
             },
             "Degree - Add'l field of Study": {
-                name: "Degree - Add'l field of Study",
-                scores: [12.0, [0,0,0,5,0,3,2,10,0], Stem.EDUCATION_BRIEFINGS_TEACHING]
+                name: 'Earned degree - additional field of study',
+                scores: [12.0, 
+                    [0,0,0,5,0,3,2,10,0], 
+                    Stem.EDUCATION_BRIEFINGS_TEACHING]
             }
         }
     },
@@ -107,14 +96,14 @@ module.exports = {
             CONDUCT_1_HOUR_OR_LONGER_BRIEFING_INVITED_LECTURE : {
                 name: 'Conduct 1 hour or longer Briefing/Invited lecture',
                 scores: [1.0,
-                    [],
+                    [3,0,10,3,0,0,2,2,0],
                     null]
             },
             CONDUCT_1_2_DAY_BRIEFING_WORKSHOP : {
                 name: 'Conduct 1 - 2 day briefing/workshop',
                 scores: [
                     2.0,
-                    [],
+                    [3,0,10,3,0,0,2,2,0],
                     null
                 ]
             }, 
@@ -122,7 +111,7 @@ module.exports = {
                 name: 'Conduct 3 - 5 day briefing / workshop',
                 scores: [
                     3.0,
-                    [],
+                    [3,0,10,3,0,0,2,2,0],
                     null
                 ]
             },
@@ -130,7 +119,7 @@ module.exports = {
                 name: 'Teaching Assistant /Lab Assistant for Sem course',
                 scores: [
                     3.0,
-                    [],
+                    [3,0,10,3,0,0,2,2,0],
                     null
                 ]
             },
@@ -138,7 +127,7 @@ module.exports = {
                 name: 'Teacher for full Semester course',
                 scores: [
                     5.0,
-                    [],
+                    [3,0,10,3,0,0,2,2,0],
                     null
                 ]
             }
@@ -151,7 +140,7 @@ module.exports = {
                 name: 'Employee/student/colleague',
                 scores: [
                     2.0,
-                    [],
+                    [2,0,3,1,0,0,10,4,0],
                     null
                 ]
             },
@@ -159,7 +148,7 @@ module.exports = {
                 name: 'Sponsor student or employee project',
                 scores: [
                     1.5,
-                    [],
+                    [2,0,3,1,0,0,10,4,0],
                     null
                 ]
             },
@@ -167,7 +156,7 @@ module.exports = {
                 name: 'Group leader',
                 scores: [
                     5.0,
-                    [],
+                    [2,0,3,1,0,0,10,4,0],
                     null
                 ]
             }
@@ -180,7 +169,7 @@ module.exports = {
                 name: 'Apply for regional competitive grant or contest',
                 scores: [
                     2.0,
-                    [],
+                    [3,0,10,4,0,0,0,3,0],
                     null
                 ]
             },
@@ -188,7 +177,7 @@ module.exports = {
                 name: 'Apply for national/international grant or contest',
                 scores: [
                     2.0,
-                    [],
+                    [3,0,10,4,0,0,0,3,0],
                     null
                 ]
             },
@@ -240,16 +229,16 @@ module.exports = {
             ATTENDEE:{
                 name: 'Attendee',
                 scores: [
-                    0.5,
-                    [],
+                    1.0,
+                    [0,0,4,0,0,8,0,4,4],
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
             PRESENTER:{
                 name: 'Presenter',
                 scores: [
-                    1.0,
-                    [],
+                    1.5,
+                    [0,0,4,0,0,8,0,4,4],
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
@@ -270,7 +259,7 @@ module.exports = {
                 name: 'Regular blog related to professional information',
                 scores: [
                     1.0,
-                    [],
+                    [0,0,10,4,0,0,0,4,2],
                     null
                 ]
             },
@@ -294,7 +283,7 @@ module.exports = {
                 name: 'Editorial Board of refereed journal',
                 scores: [
                     1.0,
-                    [],
+                    [0,0,10,4,0,0,2,3,1],
                     null
                 ]
             },
@@ -302,7 +291,7 @@ module.exports = {
                 name: 'Special issue editor',
                 scores: [
                     3.0,
-                    [],
+                    [3,0,10,3,0,2,0,2,0],
                     null
                 ]
             },
@@ -310,7 +299,7 @@ module.exports = {
                 name: 'Journal editor',
                 scores: [
                     4.0,
-                    [],
+                    [3,0,10,3,0,2,0,2,0],
                     null
                 ]
             },
@@ -326,7 +315,7 @@ module.exports = {
                 name: 'Book author/Editor / PhD-DSc Dissertation',
                 scores: [
                     3.0,
-                    [],
+                    [2,0,10,3,0,0,0,3,2],
                     null
                 ]
             },
@@ -345,40 +334,125 @@ module.exports = {
         contents: {
             TEAM_MEMBER: {
                 name:'Team member',
-                scores: [
-
+                scores: [1.5,
+                    null,
+                    Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
             POSITION_CONSULTANCY: {
                 name:'Position/Consultancy',
-                scores:[
-                    
+                scores:[2.0,
+                    null,
+                    Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
             EXPERT_TESTIMONY: {
                 name: 'Expert testimony',
-                scores: [
-
+                scores: [2.0,
+                    null,
+                    Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
+            PANEL_TALK_AUTHORSHIP: {
+                name: 'Panel/talk/authorship',
+                scores: [1.0,
+                    null,
+                    Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
+                ]
+            }
         }
     },
     patents:{
         value: apiString.PATENTS,
         contents: {
-        
+            PUBLISH : {
+                name: 'Publish',
+                scores: [ 1.0,
+                    null,
+                    Stem.SOFTWARE_DEVICE_PROFICIENCY
+                ]
+            },
+            FILE: {
+                name: 'File',
+                scores: [2.0,
+                    null,
+                    Stem.SOFTWARE_DEVICE_PROFICIENCY
+                ]
+            },
+            PROVISIONAL: {
+                name: 'Provisional',
+                scores: [ 2.5,
+                    null,
+                    Stem.SOFTWARE_DEVICE_PROFICIENCY ]
+            },
+            AWARD: {
+                name: 'Award',
+                scores: [
+                    3.0,
+                    null,
+                    Stem.SOFTWARE_DEVICE_PROFICIENCY
+                ]
+            }
         }
     },
     languages:{
         value: apiString.LANGUAGES,
         contents: {
-        
+            SECOND: {
+                name: 'Fluent in 2nd language',
+                scores: [2.0,
+                    [0,0,10,0,0,0,0,5,5],
+                    null]
+            },
+            THIRD: {
+                name: 'Fluent in 3rd language',
+                scores: [2.0,
+                    [0,0,10,0,0,0,0,5,5],
+                    null
+                ]
+            },
+            FOUR : {
+                name: 'Fluent in 4th or more language',
+                scores: [2.0,
+                    [0,0,10,0,0,0,0,5,5],
+                    null
+                ]
+            }
         }
     },
     leisureTravel:{
         value: apiString.LEISURE_TRAVEL,
         contents: {
-        
+            NATIONAL_LESSTHAN_1_MONTH : {
+                name: "National < 1 month cumulative",
+                scores: [2.0,
+                        [0,0,5,0,0,0,5,10,0],
+                        null]
+            },
+            NATIONAL_GRATERTHAN_1_MONTH: {
+                name: "National > 1 month cumulative",
+                scores: [4.0,
+                        [0,0,5,0,0,0,5,10,0],
+                        null]
+            },
+            INTERNATIONAL_LESSTHAN_2_WEEKS: {
+                name: "International < 2 weeks cumulative",
+                scores: [3.0,
+                        [0,0,0,0,0,0,5,5,10],
+                        null]
+            },
+            INTERNATIONAL_2_4_WEEKS: {
+                name: "International 2 - 4 weeks cumulative",
+                scores: [6.0,
+                        [0,0,0,0,0,0,5,5,10],
+                        null]
+            },
+            INTERATIONAL_GRATERTHAN_4_WEEKS :{
+                name: "International >4 weeks cumulative",
+                scores: [8.0,
+                        [0,0,0,0,0,0,5,5,10],
+                        null]
+            }
         }
     }
 }
