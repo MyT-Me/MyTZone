@@ -49,7 +49,9 @@ var scorer = function(userProfile) {
     }
     var parent = this;
     //Education Scoring
+
     var eduData = userProfile[apiStrings.EDUCATION].deedData;
+    
     for(var index= 0;index<eduData.length;index++) {
         scoreHelper(scorerValuesHelper,apiStrings.EDUCATION,eduData[index],"degreeProgramStatus");
     }
@@ -61,19 +63,29 @@ var scorer = function(userProfile) {
         apiStrings.CONDUCTING_CLASSES,
         apiStrings.MENTORING,
         apiStrings.WRITINGS,
-        //apiStrings.RECOGNIZED_EXPERTIESE,
+        apiStrings.RECOGNIZED_EXPERTISE,
         apiStrings.PATENTS,
         apiStrings.LEISURE_TRAVEL,
-        apiStrings.LANGUAGES
+        apiStrings.LANGUAGES,
+        apiStrings.AWARDS,
+        apiStrings.CONFERENCES
+
     ];
     for( var deedIndex = 0; deedIndex < allDeeds.length ; deedIndex ++){
         //For each deed
-        console.log(allDeeds[deedIndex])
-        var currentDeed = userProfile[allDeeds[deedIndex]].deedData;
-        console.log(currentDeed.length)
-        for(var index=0; index<currentDeed.length; index++) {
+        // try{
+            var currentDeed = userProfile[allDeeds[deedIndex]].deedData;
+            for(var index=0; index<currentDeed.length; index++) {
+                console.log(allDeeds[deedIndex])
             scoreHelper(scorerValuesHelper,allDeeds[deedIndex],currentDeed[index], "specificActivity")
-        }
+            }
+        // } catch(err) {
+        //     console.log("Inside Error Block");
+        //     console.log(deedIndex)
+        //     console.log(allDeeds[deedIndex])
+        //     console.log(currentDeed);
+        // } 
+        
     }
 
 
@@ -83,9 +95,13 @@ var scorer = function(userProfile) {
 
     function scoreHelper(scoreValues,deedCategory, deed, identifier) {
         var currentContents = scoreValues[deedCategory].contents;
+        console.log(currentContents)
+        console.log(deed[identifier])
         if(currentContents.hasOwnProperty(deed[identifier])){
+            console.log(deed[identifier])
             var scoreArray =  currentContents[deed[identifier]].scores;
             var currentScore = deed['score'] * scoreArray[0]
+
             if(scoreArray[2]!==null) {
                 parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
             }

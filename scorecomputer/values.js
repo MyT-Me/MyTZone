@@ -41,13 +41,13 @@ module.exports = {
     certificates: {
         value: apiString.CERTIFICATES,
         contents: {
-            STATE_FEDERAL_CERTIFICATION: {
+            "Certification: State/Federal/Professional": {
                 name: 'State/Federal Certification',
                 scores: [3.0,
                 null,
                 Stem.EDUCATION_BRIEFINGS_TEACHING]
             },
-            STATE_FEDERAL_LICENSE_AWARDED: {
+            "License awarded": {
                 name: 'State/Federal License awarded',
                 scores: [5.0,
                 null,
@@ -58,31 +58,31 @@ module.exports = {
     takingClasses : {
         value: apiString.TAKING_CLASSES,
         contents: {
-            _1_2_DAY :{
+            "1 - 2 day" :{
                 name: '1 - 2 day',
                 scores: [0.5,
                 null,
                 Stem.EDUCATION_BRIEFINGS_TEACHING]
             },
-            _3_5_DAY:{
+            "3 - 5 day":{
                 name: '3 - 5 day',
                 scores: [2.0,
                 null,
                 Stem.EDUCATION_BRIEFINGS_TEACHING]
             },
-            _1_4_WEEK:{
+            "1 - 4 week":{
                 name: '1 - 4 week',
                 scores: [2.0,
                 null,
                 Stem.EDUCATION_BRIEFINGS_TEACHING]
             },
-            GT_4_WEEK :{
+            "> 4 week / semester course" :{
                 name: ' > 4 week / semester course',
                 scores: [3.0,
                 null,
                 Stem.EDUCATION_BRIEFINGS_TEACHING]
             } ,
-            MARK_FOR_EACH_CERTIFICATE_OF_COMPLETION_RECEIVED:{
+            "Mark for each Certificate of completion received":{
                 name: 'Mark for each Certificate of completion received',
                 scores: [4.0,
                 null,
@@ -93,13 +93,13 @@ module.exports = {
     conductingClasses: {
         value: apiString.CONDUCTING_CLASSES,
         contents: {
-            CONDUCT_1_HOUR_OR_LONGER_BRIEFING_INVITED_LECTURE : {
+            "Conduct 1 hour or longer Briefing/Invited lecture" : {
                 name: 'Conduct 1 hour or longer Briefing/Invited lecture',
                 scores: [1.0,
                     [3,0,10,3,0,0,2,2,0],
                     null]
             },
-            CONDUCT_1_2_DAY_BRIEFING_WORKSHOP : {
+            "Conduct 1 - 2 day briefing/workshop" : {
                 name: 'Conduct 1 - 2 day briefing/workshop',
                 scores: [
                     2.0,
@@ -107,7 +107,7 @@ module.exports = {
                     null
                 ]
             }, 
-            CONDUCT_3_5_DAY_BRIEFING_WORKSHOP :{
+            "Conduct 3 - 5 day briefing/workshop" :{
                 name: 'Conduct 3 - 5 day briefing / workshop',
                 scores: [
                     3.0,
@@ -115,7 +115,7 @@ module.exports = {
                     null
                 ]
             },
-            TEACHING_ASSISTANT_LAB_ASSISTANT_FOR_SEM : {
+            "Teaching Assistant/Lab Assistant for Sem/Qtr course" : {
                 name: 'Teaching Assistant /Lab Assistant for Sem course',
                 scores: [
                     3.0,
@@ -123,7 +123,7 @@ module.exports = {
                     null
                 ]
             },
-            TEACHER_FOR_FULL_SEMESTER_COURSE : {
+            "Teacher for full Semester course" : {
                 name: 'Teacher for full Semester course',
                 scores: [
                     5.0,
@@ -136,7 +136,7 @@ module.exports = {
     mentoring:{
         value: apiString.MENTORING,
         contents: {
-            EMPLOYEE_STUDENT_COLLEAGUE: {
+            "Employee/student/colleague": {
                 name: 'Employee/student/colleague',
                 scores: [
                     2.0,
@@ -144,7 +144,7 @@ module.exports = {
                     null
                 ]
             },
-            SPONSOR_STUDENT_OR_EMPLOYEE_PROJECT: {
+            "Sponsor student or employee project": {
                 name: 'Sponsor student or employee project',
                 scores: [
                     1.5,
@@ -152,7 +152,7 @@ module.exports = {
                     null
                 ]
             },
-            GROUP_LEADER:{
+            "Group leader":{
                 name: 'Group leader',
                 scores: [
                     5.0,
@@ -165,7 +165,7 @@ module.exports = {
     awards:{
         value: apiString.AWARDS,
         contents: {
-            APPLY_FOR_REGIONAL_COMPETITIVE_GRANT_OR_CONTEST:{
+            "Apply for regional competitive grant or contest":{
                 name: 'Apply for regional competitive grant or contest',
                 scores: [
                     2.0,
@@ -173,7 +173,7 @@ module.exports = {
                     null
                 ]
             },
-            APPLY_FOR_NATIONAL_INTERNATIONAL_GRANT_OR_CONTEST:{
+            "Apply for national / international grant or contest":{
                 name: 'Apply for national/international grant or contest',
                 scores: [
                     2.0,
@@ -181,7 +181,7 @@ module.exports = {
                     null
                 ]
             },
-            WIN_GRANT_AWARD_OR_PLACE_1ST_IN_PUBLICATION_PRESENTATION_OR_INNOVATION_CONTEST:{
+            "Win grant award or place 1st in publication, presentation, or innovation contest":{
                 name: 'Win grant award or place 1st in publication, presentation, or innovation contest',
                 scores: [
                     4.0,
@@ -189,7 +189,7 @@ module.exports = {
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            WIN_2ND_OR_3RD_IN_PUBLICATION_PRESENTATION_OR_INNOVATION_CONTEST:{
+            "Win 2nd or 3rd in publication, presentation, or innovation contest":{
                 name: 'Win 2nd or 3rd in publication, presentation, or innovation contest',
                 scores: [
                     2.0,
@@ -197,7 +197,7 @@ module.exports = {
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            OTHER_LOCAL_HONOR_OR_AWARD_CONFERRED:{
+            "Other Local honor or award conferred":{
                 name: 'Other Local honor or award conferred',
                 scores: [
                     2.0,
@@ -205,7 +205,7 @@ module.exports = {
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            OTHER_NATIONAL_HONOR_OR_AWARD_CONFERRED:{
+            "Other National honor or award conferred":{
                 name: 'Other National honor or award conferred',
                 scores: [
                     4.0,
@@ -213,20 +213,28 @@ module.exports = {
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            OTHER_INTERNATIONAL_HONOR_OR_AWARD_CONFERRED:{
+            "Other International honor or award conferred":{
                 name: 'Other International honor or award conferred',
                 scores: [
                     3.0,
                     null,
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
+            }, 
+            "Fellow/Diplomate" : {
+                name: 'Fellow/Diplomate',
+                scores: [
+                    0,
+                    null,
+                    null
+                ]
             }
         }
     },
-    confrences:{
+    conferences:{
         value: apiString.CONFERENCES,
         contents: {
-            ATTENDEE:{
+            "Attendee":{
                 name: 'Attendee',
                 scores: [
                     1.0,
@@ -234,7 +242,7 @@ module.exports = {
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            PRESENTER:{
+            "Presenter":{
                 name: 'Presenter',
                 scores: [
                     1.5,
@@ -242,7 +250,7 @@ module.exports = {
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            CO_AUTHOR_OF_PRESENTATION_NO_ATTEND:{
+            "Co-author of presentation -no attend":{
                 name: 'Co-author of presentation -no attend',
                 scores: [
                     0.5,
@@ -255,7 +263,7 @@ module.exports = {
     writings:{
         value: apiString.WRITINGS,
         contents: {
-            REGULAR_BLOG_RELATED_TO_PROFESSIONAL_INFORMATION:{
+            "Regular blog related to professional information":{
                 name: 'Regular blog related to professional information',
                 scores: [
                     1.0,
@@ -263,7 +271,7 @@ module.exports = {
                     null
                 ]
             },
-            REVIEWED_PAPER_JOURNAL_OR_CONFERENCE_PROCEEDINGS_MS_MA_CULMINATING_PROJECT:{
+            "Reviewed paper - Journal or Conference Proceedings/MS-MA Culminating Project":{
                 name: 'Reviewed paper - Journal or Conference Proceedings / MS-MA Culminating Project',
                 scores: [
                     2.0,
@@ -271,7 +279,7 @@ module.exports = {
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            REFEREED_PAPER_MS_MA_THESIS:{
+            "Refereed paper/MS-MA Thesis":{
                 name: 'Refereed paper / MS-MA Thesis',
                 scores: [
                     4.0,
@@ -303,7 +311,7 @@ module.exports = {
                     null
                 ]
             },
-            WHITE_PAPER_BOOK_CHAPTER_BS_BA_INDIVIDUAL_CAPSTONE_PROJECT:{
+            "White Paper/Book chapter/BS-BA Individual capstone project":{
                 name: 'White Paper/Book chapter / BS-BA Individual capstone project',
                 scores: [
                     2.0,
@@ -311,7 +319,7 @@ module.exports = {
                     Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            BOOK_AUTHOR_EDITOR_PHD_DSC_DISSERTATION:{
+            "Book author/Editor/PhD-DSc Dissertation":{
                 name: 'Book author/Editor / PhD-DSc Dissertation',
                 scores: [
                     3.0,
@@ -319,7 +327,7 @@ module.exports = {
                     null
                 ]
             },
-            INTERNAL_TECH_REPORT_INTERNAL_PROJECT_REPORT_BS_BA_TEAM_CAPSTONE_PROJECT:{
+            "Internal Tech report/Internal project report/BS-BA team capstone project":{
                 name: 'Internal Tech report / Internal project report / BS-BA team capstone project',
                 scores: [
                     2.0,
@@ -329,31 +337,31 @@ module.exports = {
             }
         },
     },
-    recognizedExpertiese:{
-        value: apiString.RECOGNIZED_EXPERTIESE,
+    recognizedExpertise:{
+        value: apiString.RECOGNIZED_EXPERTISE,
         contents: {
-            TEAM_MEMBER: {
+            "Team member": {
                 name:'Team member',
                 scores: [1.5,
                     null,
                     Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
-            POSITION_CONSULTANCY: {
+            "Position/Consultancy": {
                 name:'Position/Consultancy',
                 scores:[2.0,
                     null,
                     Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
-            EXPERT_TESTIMONY: {
+            "Expert testimony": {
                 name: 'Expert testimony',
                 scores: [2.0,
                     null,
                     Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
-            PANEL_TALK_AUTHORSHIP: {
+            "Panel/talk/authorship": {
                 name: 'Panel/talk/authorship',
                 scores: [1.0,
                     null,
@@ -365,32 +373,33 @@ module.exports = {
     patents:{
         value: apiString.PATENTS,
         contents: {
-            PUBLISH : {
+            "Publish" : {
                 name: 'Publish',
                 scores: [ 1.0,
                     null,
-                    Stem.SOFTWARE_DEVICE_PROFICIENCY
+                    Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            FILE: {
+            "File": {
                 name: 'File',
                 scores: [2.0,
                     null,
-                    Stem.SOFTWARE_DEVICE_PROFICIENCY
+                    Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             },
-            PROVISIONAL: {
+            "Provisional": {
                 name: 'Provisional',
                 scores: [ 2.5,
                     null,
-                    Stem.SOFTWARE_DEVICE_PROFICIENCY ]
+                    Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
+                ]
             },
-            AWARD: {
+            "Award": {
                 name: 'Award',
                 scores: [
                     3.0,
                     null,
-                    Stem.SOFTWARE_DEVICE_PROFICIENCY
+                    Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             }
         }
@@ -398,20 +407,20 @@ module.exports = {
     languages:{
         value: apiString.LANGUAGES,
         contents: {
-            SECOND: {
+            "Fluent in 2nd language": {
                 name: 'Fluent in 2nd language',
                 scores: [2.0,
                     [0,0,10,0,0,0,0,5,5],
                     null]
             },
-            THIRD: {
+            "Fluent in 3rd language": {
                 name: 'Fluent in 3rd language',
                 scores: [2.0,
                     [0,0,10,0,0,0,0,5,5],
                     null
                 ]
             },
-            FOUR : {
+            "Fluent in 4th or more language" : {
                 name: 'Fluent in 4th or more language',
                 scores: [2.0,
                     [0,0,10,0,0,0,0,5,5],
@@ -423,31 +432,31 @@ module.exports = {
     leisureTravel:{
         value: apiString.LEISURE_TRAVEL,
         contents: {
-            NATIONAL_LESSTHAN_1_MONTH : {
+            "National < 1 month cumulative" : {
                 name: "National < 1 month cumulative",
                 scores: [2.0,
                         [0,0,5,0,0,0,5,10,0],
                         null]
             },
-            NATIONAL_GRATERTHAN_1_MONTH: {
+            "National > 1 month cumulative": {
                 name: "National > 1 month cumulative",
                 scores: [4.0,
                         [0,0,5,0,0,0,5,10,0],
                         null]
             },
-            INTERNATIONAL_LESSTHAN_2_WEEKS: {
+            "International < 2 weeks cumulative": {
                 name: "International < 2 weeks cumulative",
                 scores: [3.0,
                         [0,0,0,0,0,0,5,5,10],
                         null]
             },
-            INTERNATIONAL_2_4_WEEKS: {
+            "International 2 - 4 weeks cumulative": {
                 name: "International 2 - 4 weeks cumulative",
                 scores: [6.0,
                         [0,0,0,0,0,0,5,5,10],
                         null]
             },
-            INTERATIONAL_GRATERTHAN_4_WEEKS :{
+            "International >4 weeks cumulative" :{
                 name: "International >4 weeks cumulative",
                 scores: [8.0,
                         [0,0,0,0,0,0,5,5,10],

@@ -38,7 +38,6 @@ exports.createUser = function (req,callback) {
 var schemaLoader = function (deedName, deedBody){
     switch (deedName) {
     case stringValues.EDUCATION:
-        console.log("Ideally before");
         return (new EducationScore(deedBody));
     case stringValues.CERTIFICATES:
         return new CertificateScore(deedBody);
@@ -51,6 +50,7 @@ var schemaLoader = function (deedName, deedBody){
     case stringValues.WRITINGS:
         return new WritingsScore(deedBody);
     case stringValues.CONFERENCES:
+        console.log("I am here mofos");
         return new ConferencesScore(deedBody);
     case stringValues.AWARDS:
         return new AwardsScore(deedBody);
@@ -90,15 +90,15 @@ exports.addDeed = function (req, deedName, callback){
             callback(new Error("No User Found"), null);
         } else {
             var newDeed = schemaLoader(deedName, req.body);
-            //Testing this because of Async Problems
-            console.log("Ideally After");
+            console.log(" New Deed Description");
+            console.log(newDeed);
             newDeed.score = 1;
             var time = moment().tz("America/Los_Angeles").format('YYYYMMDDHHmmss');
             newDeed.customId = deedName + time;
             newDeed.timeStamp = time;
-            console.log(profile);
+            //console.log(profile);
             profile[deedName].deedData.push(newDeed);
-            //Score Compute Addition Here
+            
             profile.save(function (err) {
                 callback(err, newDeed.customId);
             });

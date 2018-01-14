@@ -10,8 +10,6 @@ var auth = require('../authentication/authjwt');
 //This Module is Written to Eliminate Redundant Method implementation
 
 module.exports = function (app) {
-    console.log("Addition API");
-    console.log("Addition v1");
     app.post('/api/deeds/:id', auth, function (req, res) {
         if (!(req.params === 0)) {
             console.log("Inside the Combined Addition");

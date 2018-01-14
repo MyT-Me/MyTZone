@@ -29,16 +29,3 @@ var apiStrings = {
 };
 
 module.exports = apiStrings;
-
-/*
-Copiers
-value: '',
-contents: {
-
-}
-====================
-{
-    name: '',
-    scores: []
-}
-*/
