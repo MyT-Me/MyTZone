@@ -9,7 +9,7 @@ var userAuthentication = require('./userAuthentication');
 var viewHandlers = require('./viewHandlers');
 var scores = require('./scores');
 var v2Get = require('./v2get');
-var v2Post = require('./v2Post');
+//var v2Post = require('./v2Post');
 
 module.exports = function (app){
     viewHandlers(app);
@@ -22,6 +22,6 @@ module.exports = function (app){
     getRoutes(app);
     scores(app);
     v2Get(app);
-    v2Post(app);
+    //v2Post(app);
     testing(app);
 }
