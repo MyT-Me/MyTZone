@@ -53,7 +53,7 @@ var scorer = function(userProfile) {
     var eduData = userProfile[apiStrings.EDUCATION].deedData;
     
     for(var index= 0;index<eduData.length;index++) {
-        scoreHelper(scorerValuesHelper,apiStrings.EDUCATION,eduData[index],"degreeProgramStatus");
+        deedScoreHelper(scorerValuesHelper,apiStrings.EDUCATION,eduData[index],"degreeProgramStatus");
     }
 
     //Deed Scoring
@@ -77,23 +77,30 @@ var scorer = function(userProfile) {
             var currentDeed = userProfile[allDeeds[deedIndex]].deedData;
             for(var index=0; index<currentDeed.length; index++) {
                 console.log(allDeeds[deedIndex])
-            scoreHelper(scorerValuesHelper,allDeeds[deedIndex],currentDeed[index], "specificActivity")
-            }
-        // } catch(err) {
-        //     console.log("Inside Error Block");
-        //     console.log(deedIndex)
-        //     console.log(allDeeds[deedIndex])
-        //     console.log(currentDeed);
-        // } 
-        
+                deedScoreHelper(scorerValuesHelper,allDeeds[deedIndex],currentDeed[index], "specificActivity")
+
+        }
     }
 
 
     //Work Experience Scoring
     //Tools Skills Scoring
+    var toolsData = userProfile[apiStrings.TOOLS].deedData;
+    var toolScoretillNow = userProfile[apiStrings.TOOLS]["totalScore"];
+    for(var index = 0; index <toolsData.length; index++){
+        toolScoretillNow = toolsSkillsScoreHelper(toolsData[index],apiStrings.TOOLS,toolScoretillNow);
+    }
+    parent.My_T_Stem[Stem.SOFTWARE_DEVICE_PROFICIENCY] += (40*toolScoretillNow);
     //Skills Scoring
+    var skillsData = userProfile[apiStrings.SKILLS].deedData;
+    var skillScoretillNow = userProfile[apiStrings.SKILLS]["totalScore"];
+    for(var index = 0;index<skillsData.length; index++){
+        skillScoretillNow = toolsSkillsScoreHelper(skillsData[index],apiStrings.SKILLS,skillScoretillNow);
+    }
+    parent.My_T_Stem[Stem.METHODS_SKILLS_PROFIECIENCY] += (40*skillScoretillNow)
 
-    function scoreHelper(scoreValues,deedCategory, deed, identifier) {
+
+    function deedScoreHelper(scoreValues,deedCategory, deed, identifier) {
         var currentContents = scoreValues[deedCategory].contents;
         console.log(currentContents)
         console.log(deed[identifier])
@@ -105,7 +112,6 @@ var scorer = function(userProfile) {
             if(scoreArray[2]!==null) {
                 parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
             }
-            
             if(scoreArray[1]!==null){
                 var topScore = scoreArray[1];
                 for(var i = 0; i<topIter.length ; i++){
@@ -115,6 +121,52 @@ var scorer = function(userProfile) {
             }
         }
     }
+
+
+    //Tools and SKills Score Helper
+    function toolsSkillsScoreHelper(currentToolSkill,toolsOrSkills,scoreTillNow){
+            //Gotto change with Moment Year
+            var currentYear = 2018;
+            var yearsGained = currentYear - currentToolSkill["proficiencyYear"];
+            var localScores = { 
+                                basic: 0.5,
+                                inter: 1.75,
+                                advanced: 3.25,
+                                expert:4.75 };
+            var proficiencyPoints = localScores[currentToolSkill["proficiencyType"]]
+            var currentToolSkillScore = 0;
+            var usedInLastThreeYears = currentToolSkill["usagein3Years"];
+            var certiciation = currentToolSkill["formalCertification"];
+            var endorsments = currentToolSkill["numberOfLinkedEndorsments"]
+            var unweightedScore = 0
+            //Implying the formula
+            if(yearsGained>=12) {
+                if(usedInLastThreeYears===true) {
+                    unweightedScore = proficiencyPoints * ((yearsGained)/10);
+                }
+            } else if(yearsGained>7) {
+                if(usedInLastThreeYears===true) {
+                    unweightedScore = proficiencyPoints * ((yearsGained)/10);
+                }
+            } else if(yearsGained >3) {
+                if(usedInLastThreeYears===true) {
+                    unweightedScore = proficiencyPoints * ((12-yearsGained)/10);
+                } else {
+                    unweightedScore = proficiencyPoints * ((7-yearsGained)/4);
+                }
+            } else {
+                unweightedScore = proficiencyPoints
+            }
+            //Adding Certification Weight
+            if(certiciation===true) {
+                unweightedScore * 1.5;
+            }
+            //Adding LinkedIn
+            if(endorsments>0) {
+                unweightedScore = unweightedScore + (endorsments/20);
+            }
+            return scoreTillNow + unweightedScore;
+    };
 }
 
 scorer.prototype.buildJSON = function(){
