@@ -910,7 +910,7 @@ $scope.dropDownColorSetter = function(value , proficiencyType) {
                 break;
         }
     }
-    console.log(returnValue);
+   // console.log(returnValue);
     return returnValue;
 }
 
@@ -1183,6 +1183,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
 
     $scope.addNewtools = function() {
+        console.log("add new tools from app1||||||||||||||||");
         var toolListLength = $scope.personalDetailsTools.length;
         if(!(toolListLength>0)) {
             console.log("Blank Tools List");
@@ -1190,9 +1191,14 @@ var skillsToolsJSONBuilder = function(receivedObject){
         } else {
             console.log("Data Present in Tools List");
             var latestIndex = getMaximumIndex($scope.personalDetailsTools);
-            var latestToolDetail = $scope.personalDetailsTools.find(function(toolDetail){
-                return toolDetail.ind === latestIndex;
-            });
+            console.log("latest Ind");
+            console.log(latestIndex);
+            var latestToolDetail = $scope.personalDetailsTools[toolListLength-1]
+            // find(function(toolDetail){
+            //     return toolDetail.ind === latestIndex;
+            // });
+            console.log("latest tool detail");
+            console.log(latestToolDetail);
             var toSend = {
                 category: latestToolDetail.category,
                 softwareDeviceName: latestToolDetail.software,

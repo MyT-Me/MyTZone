@@ -157,10 +157,14 @@ var scorer = function(userProfile) {
             } else {
                 unweightedScore = proficiencyPoints
             }
+            console.log("unweighted score in console before multiplying");
+            console.log(unweightedScore);
             //Adding Certification Weight
             if(certiciation===true) {
                 unweightedScore * 1.5;
             }
+            console.log("unweighted score in console");
+            console.log(unweightedScore);
             //Adding LinkedIn
             if(endorsments>0) {
                 unweightedScore = unweightedScore + (endorsments/20);
