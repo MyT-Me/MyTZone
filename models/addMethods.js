@@ -50,7 +50,7 @@ var schemaLoader = function (deedName, deedBody){
     case stringValues.WRITINGS:
         return new WritingsScore(deedBody);
     case stringValues.CONFERENCES:
-        console.log("I am here mofos");
+        //console.log("I am here mofos");
         return new ConferencesScore(deedBody);
     case stringValues.AWARDS:
         return new AwardsScore(deedBody);
@@ -63,7 +63,7 @@ var schemaLoader = function (deedName, deedBody){
     case stringValues.LEISURE_TRAVEL:
         return new LeisureTravelScore(deedBody);
     case stringValues.WORK_EXPERIENCE:
-        return null;
+        return new WorkExperience(deedBody);
     case stringValues.TOOLS:
         return new ToolsScore(deedBody);
     case stringValues.SKILLS:
@@ -73,6 +73,7 @@ var schemaLoader = function (deedName, deedBody){
 
 
 exports.addDeed = function (req, deedName, callback){
+    console.log("||||||||||||||||||||||||||||||");
     try {
         console.log(req.user);
         if(!req.user){
@@ -89,6 +90,7 @@ exports.addDeed = function (req, deedName, callback){
             console.log("Profile Empty log");
             callback(new Error("No User Found"), null);
         } else {
+            console.log("schema loader before");
             var newDeed = schemaLoader(deedName, req.body);
             console.log(" New Deed Description");
             console.log(newDeed);

@@ -387,13 +387,14 @@ module.exports = {
         "required": ["category", "softwareDeviceName", "vendorDistributor", "numberOfLinkedEndorsments", "proficiencyType", "proficiencyYear", "formalCertification", "usagein3Years"],
         "additionalProperties": false
     },
+
     workExperience: {
         "type": "object",
-        "title": "Tools",
-        "description": "Tools Addition JSON",
+        "title": "Work Experience Schema",
+        "description": "Work Experience Addition JSON",
         "definitions":{
             "PromptAnswers": {
-                "enum":['Yes','Some','No']
+                "enum":['yes','some','no']
             },
             "operationsResponsibilities": {
                 "type": "object",
@@ -496,9 +497,15 @@ module.exports = {
             ]
            },
            "startDate" :{
-            "type": "string"
+            "type": "number"
            },
            "endDate" :{
+            "type": "number"
+           }, 
+           "startMonth" :{
+            "type": "string"
+           },
+           "endMonth" :{
             "type": "string"
            }, 
            "positionDescription" :{
@@ -534,28 +541,28 @@ module.exports = {
            },
            "teamSize" :{
                "enum":[
-                   "Myself alone - no collaborators",
-                    "2 -3 team members/collaborators",
-                    "4 - 8 team members/collaborators",
-                    "9 or more team members/collaborators"
+                   "1",
+                    "2-3",
+                    "4-8",
+                    ">9"
                 ]
            },
            "multiDisciplinaryMakeup" :{
                "enum":[
-                   "Very low 0 - 15% of team members/collaborators/clients",
-                   "Low 16 - 35% of team members/collaborators/clients",
-                   "Moderate 36 - 50% of team members/collaborators/clients",
-                   "High 51 - 75% of team members/collaborators/clients",
-                   "Very High >76% of team members/collaborators/clients",
+                   "Very low",
+                   "Low",
+                   "Moderate",
+                   "High",
+                   "VeryHigh"
                 ]
            },
            "multiCulturalMakeup" :{
             "enum":[
-                "Very low 0 - 15% of team members/collaborators/clients",
-                "Low 16 - 35% of team members/collaborators/clients",
-                "Moderate 36 - 50% of team members/collaborators/clients",
-                "High 51 - 75% of team members/collaborators/clients",
-                "Very High >76% of team members/collaborators/clients",
+                "Very low",
+                "Low",
+                "Moderate",
+                "High",
+                "VeryHigh",
              ]
            },
            "operationsResponsibilities":{"$ref":"#/definitions/operationsResponsibilities"},
@@ -563,10 +570,10 @@ module.exports = {
            "systemAndOperationInnovation": {"$ref":"#/definitions/systemAndOperationInnovation"},
            "paidUnpaid" :{
                "enum":[
-                   "For-Profit Paid",
-                   "Non-Profit Paid",
-                   "For-Profit Unpaid",
-                   "Non-Profit Unpaid",
+                   "Profit-paid",
+                   "Non-profit-Paid",
+                   "Profit-unpaid",
+                   "Non-profit-Unpaid",
                ]
            }
         },

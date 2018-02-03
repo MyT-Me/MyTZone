@@ -19,7 +19,7 @@ module.exports = function (app) {
                 if (JSONValidator(addJSONSchema[requestId], req.body)) {
                     adders.addDeed(req, requestId, function (err, sendJsonData){
                         if (err) {
-                            console.log("Error in Addition" + err);
+                            console.log("Error in Addition>>>" + err);
                             res.status(500).send(err.message);
                         } else {
                             var sendJson = {

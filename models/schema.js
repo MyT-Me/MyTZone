@@ -38,30 +38,29 @@ var workExperienceScoreSchema = new mongoose.Schema({
     endDate: {type: Date, required: true},
     positionDescription: {type: String, required: true},
     primaryFunction: {type: String, required: true},
-    yourRole: {type: String, required: true},
-    teamSize: {type: Number, required: true},
+    teamSize: {type: String, required: true},
     multiDisciplinaryMakeup: {type: String, required: true},
     multiCulturalMakeup: {type: String, required: true},
     paidUnpaid: {type:String, required: true},
     operationsResponsibilities:{
-        selectLocations: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        selectEquipment: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        selectManagingLabor: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        determineProcessing: {type: String, required: true, possibleValues: ['Yes','Some','No']}
+        OR_selectLocations: {type: String, required: true, possibleValues: ['yes','some','no']},
+        OR_selectEquipment: {type: String, required: true, possibleValues: ['yes','some','no']},
+        OR_selectManagingLabor: {type: String, required: true, possibleValues: ['yes','some','no']},
+        OR_determineProcessing: {type: String, required: true, possibleValues: ['yes','some','no']}
     },
     criticalThinking: {
-        requiredMetoFormGoals: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        requiredSystematicApproach: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        requiredInquisitive: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        requiredPrioritize: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        requiredConfidence: {type: String, required: true, possibleValues: ['Yes','Some','No']}
+        CT_requiredMetoFormGoals: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        CT_requiredSystematicApproach: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        CT_requiredInquisitive: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        CT_requiredPrioritize: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        CT_requiredConfidence: {type: String, required: true, possibleValues: ['Yes','Some','No']}
     },
     systemAndOperationInnovation:{
-        evaluateApplications: {type: String, required: true ,possibleValues: ['Yes','Some','No']},
-        selectApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        specificApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        buildApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
-        accessBenifitCostValueSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']}
+        SOI_evaluateApplications: {type: String, required: true ,possibleValues: ['Yes','Some','No']},
+        SOI_selectApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        SOI_specificApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        SOI_buildApplicationsAndSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']},
+        SOI_accessBenifitCostValueSolutions: {type: String, required: true, possibleValues: ['Yes','Some','No']}
     },
     score :{type:Number,required:true,default:0}
 });

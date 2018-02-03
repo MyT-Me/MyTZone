@@ -524,8 +524,8 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         if ($scope.editIndexWork !== null) {
             $scope.saveWork();
         } else {
-            var tmp = this.workData;
-            console.log(tmp);
+            var tem = this.workData;
+            console.log(tem);
             console.log($scope);
             var toSend = {
                 "operationsResponsibilities" :{ 
@@ -557,11 +557,25 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
                 "primaryFunction" : tem.primary,
                 "teamSize" : tem.team,
                 "multiDisciplinaryMakeup" : tem.multidis,
+                "multiCulturalMakeup" : tem.multicul,
+                "paidUnpaid" : tem.paid
 
             };
+            console.log("to send");
+            console.log(toSend);
+             $http.post('/api/deeds/workExperience', toSend, config.headers).then(function(response) {
+            //Positive 
+                alert("Worked Added");
+                console.log("Worked");
+            }, function(response){
+                //Negative
+                alert("Didn't Add");
+                console.log(response);
+            });
 
-            tmp["id"] = $scope.model.user.length + 1;
-            $scope.model.user.unshift(tmp);
+
+            tem["id"] = $scope.model.user.length + 1;
+            $scope.model.user.unshift(tem);
 
             $scope.workDataList.unshift(this.workData);
             $scope.model.recent = this.workData;
