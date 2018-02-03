@@ -524,11 +524,59 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         if ($scope.editIndexWork !== null) {
             $scope.saveWork();
         } else {
-            var tmp = this.workData;
-            console.log(tmp);
+            var tem = this.workData;
+            console.log(tem);
             console.log($scope);
-            tmp["id"] = $scope.model.user.length + 1;
-            $scope.model.user.unshift(tmp);
+
+            var toSend = {
+                "operationsResponsibilities" :{ 
+                    "OR_selectLocations": tem.q1,
+                    "OR_selectEquipment": tem.q2,
+                    "OR_selectManagingLabor": tem.q3,
+                    "OR_determineProcessing": tem.q4,
+                },
+                "criticalThinking" : {
+                    "CT_requiredMetoFormGoals": tem.q5,
+                    "CT_requiredSystematicApproach": tem.q6,
+                    "CT_requiredInquisitive": tem.q7,
+                    "CT_requiredPrioritize": tem.q8,
+                    "CT_requiredConfidence": tem.q9
+                },
+                "systemAndOperationInnovation":{
+                    "SOI_evaluateApplications": tem.q10,
+                    "SOI_selectApplicationsAndSolutions": tem.q11, 
+                    "SOI_specificApplicationsAndSolutions": tem.q12,
+                    "SOI_buildApplicationsAndSolutions": tem.q13,
+                    "SOI_accessBenifitCostValueSolutions": tem.q14
+                },
+                "employerSectionOfFocus" : tem.esector,
+                "employerOrganizationName" : tem.ename,
+                "locationRegion" : tem.region,
+                "startDate" : tem.syear,
+                "endDate" : tem.eyear,
+                "positionDescription" : tem.position,
+                "primaryFunction" : tem.primary,
+                "teamSize" : tem.team,
+                "multiDisciplinaryMakeup" : tem.multidis,
+                "multiCulturalMakeup" : tem.multicul,
+                "paidUnpaid" : tem.paid
+
+            };
+            console.log("to send");
+            console.log(toSend);
+             $http.post('/api/deeds/workExperience', toSend, config.headers).then(function(response) {
+            //Positive 
+                alert("Worked Added");
+                console.log("Worked");
+            }, function(response){
+                //Negative
+                alert("Didn't Add");
+                console.log(response);
+            });
+
+
+            tem["id"] = $scope.model.user.length + 1;
+            $scope.model.user.unshift(tem);
 
             $scope.workDataList.unshift(this.workData);
             $scope.model.recent = this.workData;
