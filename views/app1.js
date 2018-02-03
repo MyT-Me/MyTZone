@@ -443,7 +443,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             var deedURL = "/api/deeds/"
             var v2testURL = "/v2Post/"
             console.log(toSend) 
-            $http.post(v2testURL+'education', toSend, config.headers).then(function(response){
+            $http.post(deedURL+'education', toSend, config.headers).then(function(response){
                 
                 //Success handling
 
@@ -527,6 +527,39 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             var tmp = this.workData;
             console.log(tmp);
             console.log($scope);
+            var toSend = {
+                "operationsResponsibilities" :{ 
+                    "OR_selectLocations": tem.q1,
+                    "OR_selectEquipment": tem.q2,
+                    "OR_selectManagingLabor": tem.q3,
+                    "OR_determineProcessing": tem.q4,
+                },
+                "criticalThinking" : {
+                    "CT_requiredMetoFormGoals": tem.q5,
+                    "CT_requiredSystematicApproach": tem.q6,
+                    "CT_requiredInquisitive": tem.q7,
+                    "CT_requiredPrioritize": tem.q8,
+                    "CT_requiredConfidence": tem.q9
+                },
+                "systemAndOperationInnovation":{
+                    "SOI_evaluateApplications": tem.q10,
+                    "SOI_selectApplicationsAndSolutions": tem.q11, 
+                    "SOI_specificApplicationsAndSolutions": tem.q12,
+                    "SOI_buildApplicationsAndSolutions": tem.q13,
+                    "SOI_accessBenifitCostValueSolutions": tem.q14
+                },
+                "employerSectionOfFocus" : tem.esector,
+                "employerOrganizationName" : tem.ename,
+                "locationRegion" : tem.region,
+                "startDate" : tem.syear,
+                "endDate" : tem.eyear,
+                "positionDescription" : tem.position,
+                "primaryFunction" : tem.primary,
+                "teamSize" : tem.team,
+                "multiDisciplinaryMakeup" : tem.multidis,
+
+            };
+
             tmp["id"] = $scope.model.user.length + 1;
             $scope.model.user.unshift(tmp);
 
