@@ -13,7 +13,7 @@ var topIter = [
     'Empathy',
     'Perspective',
     'Global understandng'
-]
+];
 
 var top = {
     PROJECT_MANAGEMENT: 'Project management',
@@ -25,7 +25,7 @@ var top = {
     EMPATHY: 'Empathy',
     PERSPECTIVE: 'Perspective',
     GLOBAL_UNDERSTANDING: 'Global understandng'
-}
+};
 
 var Stem = {
     MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS: 'Memberships, Authorships, and Recognitions',
@@ -33,6 +33,21 @@ var Stem = {
     OPERATION_RESPONSIBILITIES_EXPERTISE: 'Operations responsibilities and expertise',
     SOFTWARE_DEVICE_PROFICIENCY: 'Software/Device Proficiency',
     METHODS_SKILLS_PROFIECIENCY: 'Methods/Skills Proficiency'
+};
+
+var monthDict = {
+    'jan' : 1,
+    'feb': 2,
+    'mar' : 3,
+    'apr': 4,
+    'may': 5,
+    'jun': 6,
+    'jul': 7,
+    'aug': 8,
+    'sep': 9,
+    'oct': 10,
+    'nov': 11,
+    'dec': 12
 }
 
 var scorer = function(userProfile) {
@@ -71,6 +86,8 @@ var scorer = function(userProfile) {
         apiStrings.CONFERENCES
 
     ];
+
+
     for( var deedIndex = 0; deedIndex < allDeeds.length ; deedIndex ++){
         //For each deed
         // try{
@@ -99,6 +116,12 @@ var scorer = function(userProfile) {
     }
     parent.My_T_Stem[Stem.METHODS_SKILLS_PROFIECIENCY] += (40*skillScoretillNow)
 
+    //WorkExperience Scoring
+    var workData = userProfile[apiStrings.WORK_EXPERIENCE].deedData;
+    var workScore = 0
+    for(var index = 0;index < workData.length; index++) {
+        workScore += workExperienceScoreHelper(workData[index]);
+    }
 
     function deedScoreHelper(scoreValues,deedCategory, deed, identifier) {
         var currentContents = scoreValues[deedCategory].contents;
@@ -140,28 +163,29 @@ var scorer = function(userProfile) {
             var endorsments = currentToolSkill["numberOfLinkedEndorsments"]
             var unweightedScore = 0
             //Implying the formula
-            if(yearsGained>=12) {
+            if(yearsGained>12) {
                 if(usedInLastThreeYears===true) {
                     unweightedScore = proficiencyPoints * ((yearsGained)/10);
-                }
-            } else if(yearsGained>7) {
-                if(usedInLastThreeYears===true) {
-                    unweightedScore = proficiencyPoints * ((yearsGained)/10);
-                }
-            } else if(yearsGained >3) {
-                if(usedInLastThreeYears===true) {
-                    unweightedScore = proficiencyPoints * ((12-yearsGained)/10);
-                } else {
-                    unweightedScore = proficiencyPoints * ((7-yearsGained)/4);
                 }
             } else {
-                unweightedScore = proficiencyPoints
+                if(yearsGained<=3) {
+                    unweightedScore = proficiencyPoints;
+                } else {
+                    if(usedInLastThreeYears===true) {
+                        unweightedScore = proficiencyPoints * ((12-yearsGained)/10);
+                    } else {
+                        if(yearsGained <= 7)
+                        unweightedScore = proficiencyPoints * ((7-yearsGained)/4);
+                    }
+                }
             }
+
             console.log("unweighted score in console before multiplying");
             console.log(unweightedScore);
+            console.log(certiciation);
             //Adding Certification Weight
             if(certiciation===true) {
-                unweightedScore * 1.5;
+                unweightedScore *= 1.5;
             }
             console.log("unweighted score in console");
             console.log(unweightedScore);
@@ -171,6 +195,65 @@ var scorer = function(userProfile) {
             }
             return scoreTillNow + unweightedScore;
     };
+
+
+    function timeElapsed(startYear,endYear, startMonth ,endMonth){
+        var years = 0;
+        var months = 0;
+        months = (monthDict[endMonth] + (12-monthDict[startMonth]))
+        years = (endYear-startYear)
+        return {
+            years: years,
+            months: months
+        };
+    }
+
+    //Work Experience Helper
+    function workExperienceScoreHelper(currentWorkDeed){
+        //Change to Moment
+        var timeElapsed = timeElapsed(currentWorkDeed['startYear'],currentWorkDeed['endYear'],currentWorkDeed['startMonth'],currentWorkDeed['endMonth']);
+
+        var years = timeElapsed.years;
+        var months = timeElapsed.months;
+
+        var rolepoints = 0
+        
+        if(timeElapsed.years<200) {
+            rolepoints = timeElapsed
+        } else {
+            rolepoints = 1
+        }
+
+
+        function selectionScorer(selections){
+            var thisSelectionScore = 0;
+            for (var index = 0; index<selections.length;index++) {
+                if(selections[index] == "yes") {
+                    thisSelectionScore += years + (months/12)
+                } else if(selections[index] == "some") {
+                    thisSelectionScore += years + (months/(12*2))
+                }
+            }
+            return thisSelectionScore;
+        }
+
+        var selectionsScore = 0;
+
+        //For OR Selections
+        selectionsScore += selectionScorer(currentWorkDeed["operationsResponsibilities"]);
+        //For CT Selections
+        selectionScorer += selectionsScore(currentWorkDeed["criticalThinking"]);
+        //For SOI Selections
+        selectionScorer += selectionsScore(currentWorkDeed["systemAndOperationInnovation"]);
+
+        return selectionScorer+rolepoints;
+    }
+
+
+
+
+
+
 }
 
 scorer.prototype.buildJSON = function(){

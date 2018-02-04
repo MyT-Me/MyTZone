@@ -443,7 +443,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             var deedURL = "/api/deeds/"
             var v2testURL = "/v2Post/"
             console.log(toSend) 
-            $http.post(v2testURL+'education', toSend, config.headers).then(function(response){
+            $http.post(deedURL+'education', toSend, config.headers).then(function(response){
                 
                 //Success handling
 
@@ -527,7 +527,6 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             var tem = this.workData;
             console.log(tem);
             console.log($scope);
-
             var toSend = {
                 "operationsResponsibilities" :{ 
                     "OR_selectLocations": tem.q1,
