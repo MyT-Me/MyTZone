@@ -38,6 +38,7 @@ var workExperienceScoreSchema = new mongoose.Schema({
     endDate: {type: Date, required: true},
     positionDescription: {type: String, required: true},
     primaryFunction: {type: String, required: true},
+    role: {type: String, required: true},
     teamSize: {type: String, required: true},
     multiDisciplinaryMakeup: {type: String, required: true},
     multiCulturalMakeup: {type: String, required: true},

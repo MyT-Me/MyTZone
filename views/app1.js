@@ -558,7 +558,8 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
                 "teamSize" : tem.team,
                 "multiDisciplinaryMakeup" : tem.multidis,
                 "multiCulturalMakeup" : tem.multicul,
-                "paidUnpaid" : tem.paid
+                "paidUnpaid" : tem.paid,
+                "role" : tem.role
 
             };
             console.log("to send");

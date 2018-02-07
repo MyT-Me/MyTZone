@@ -511,6 +511,9 @@ module.exports = {
            "positionDescription" :{
             "type": "string"
            },
+           "role" :{
+            "type": "string"
+           },
            "primaryFunction" :{
                "enum": [
                    "Business Development",
