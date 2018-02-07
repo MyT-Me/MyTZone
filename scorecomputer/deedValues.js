@@ -463,7 +463,7 @@ module.exports = {
                         null]
             }
         }
-    }
+    },
 }
 
 

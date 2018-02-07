@@ -1,6 +1,7 @@
 var apiStrings = require('../strings')('api');
 //var scoreValues = require('./values');
-var scorerValuesHelper = require('./values')
+var scorerValuesHelper = require('./deedValues');
+var workDeedScoreValues = require('./workValues');
 
 
 var topIter = [
@@ -36,18 +37,19 @@ var Stem = {
 };
 
 var monthDict = {
-    'jan' : 1,
-    'feb': 2,
-    'mar' : 3,
-    'apr': 4,
-    'may': 5,
-    'jun': 6,
-    'jul': 7,
-    'aug': 8,
-    'sep': 9,
-    'oct': 10,
-    'nov': 11,
-    'dec': 12
+
+    "january": 1,
+    "february":2,
+    "march":3,
+    "april":4,
+    "may":5,
+    "june":6,
+    "july":7,
+    "august":8,
+    "september":9,
+    "october":10,
+    "november":11,
+    "december":12
 }
 
 var scorer = function(userProfile) {
@@ -122,6 +124,7 @@ var scorer = function(userProfile) {
     for(var index = 0;index < workData.length; index++) {
         workScore += workExperienceScoreHelper(workData[index]);
     }
+    parent.My_T_Stem[Stem.OPERATION_RESPONSIBILITIES_EXPERTISE] += workScore
 
     function deedScoreHelper(scoreValues,deedCategory, deed, identifier) {
         var currentContents = scoreValues[deedCategory].contents;
@@ -197,62 +200,149 @@ var scorer = function(userProfile) {
     };
 
 
-    function timeElapsed(startYear,endYear, startMonth ,endMonth){
+    function timeElapsedHelper(startYear,endYear, startMonth ,endMonth){
         var years = 0;
         var months = 0;
-        months = (monthDict[endMonth] + (12-monthDict[startMonth]))
-        years = (endYear-startYear)
+        var sMonth = monthDict[startMonth.toLowerCase()];
+        var eMonth = monthDict[endMonth.toLowerCase()];
+        if(eMonth>=sMonth) {
+            years = endYear - startYear;
+            months = eMonth - sMonth + 1;
+        } else {
+            years = endYear -startYear -1;
+            months = 12-sMonth + eMonth +1;
+        }
+
+        if(years<0) {
+            years = 0;
+            months = 0;
+        }
+
         return {
             years: years,
             months: months
         };
     }
+    function WorkIndividualScoreHelper(timeElapsed,option){
+        var years = timeElapsed.years;
+        var months = timeElapsed.months;
+        if(option == "years") {
+            if(timeElapsed.years<200) {
+                return timeElapsed.years;
+            } else {
+                return 1;
+            }
+        } else if(option == "yes") {
+            return (years + (months/12));
+        } else if(option == "some") {
+            return years + ((months/12)/2);
+        } else {
+            return 0;
+        }
+    }
+
+    function workExpericeSubScorer(timeElapsed,workDeed,currentWorkDeedValue,workDeedScoreValues,scoreOption) {
+        console.log("|||||||||");
+        console.log("workdeed",workDeed);
+        if(workDeedScoreValues.hasOwnProperty(workDeed)) {
+            var currentWorkDeed = workDeedScoreValues[workDeed]['contents'];
+            // console.log("");
+            // console.log(currentWorkDeed);
+            // console.log("has ?");
+            // console.log(currentWorkDeedValue);
+            if(currentWorkDeed.hasOwnProperty(currentWorkDeedValue)) {
+                var scoreArray = currentWorkDeed[currentWorkDeedValue]['scores'];
+                console.log(">>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<actually comming in to calculate");
+                if(scoreOption===null) {
+                    scoreOption = scoreArray[0];
+                }
+                // console.log(">>>>>>>>>><<<<<<<<<");
+                // console.log("calculating for");
+                // console.log(workDeedScoreValues);
+                var currentScore = WorkIndividualScoreHelper(timeElapsed,scoreOption);
+                console.log("?????????? score aray [2]",scoreArray[2]);
+                if(scoreArray[2]!==null) {  
+                    parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
+                    console.log("value at ",scoreArray[2], "is", parent['My_T_Stem'][scoreArray[2]]);
+                }
+                if(scoreArray[1]!==null){
+                    var topScore = scoreArray[1];
+                for(var i = 0; i<topIter.length ; i++){
+                    parent['My_T_Top'][topIter[i]] = parent['My_T_Top'][topIter[i]] + (currentScore * topScore[i]);
+                }
+
+            }
+        }
+    }
+    }
 
     //Work Experience Helper
     function workExperienceScoreHelper(currentWorkDeed){
-        //Change to Moment
-        var timeElapsed = timeElapsed(currentWorkDeed['startYear'],currentWorkDeed['endYear'],currentWorkDeed['startMonth'],currentWorkDeed['endMonth']);
-
-        var years = timeElapsed.years;
-        var months = timeElapsed.months;
-
-        var rolepoints = 0
         
-        if(timeElapsed.years<200) {
-            rolepoints = timeElapsed
-        } else {
-            rolepoints = 1
+        var timeElapsed = timeElapsedHelper(currentWorkDeed['startYear'],currentWorkDeed['endYear'],currentWorkDeed['startMonth'],currentWorkDeed['endMonth']);
+        //Scoring For Role
+        workExpericeSubScorer(timeElapsed,'role',currentWorkDeed['role'],workDeedScoreValues,null);
+        workExpericeSubScorer(timeElapsed, 'teamSize', currentWorkDeed['teamSize'],workDeedScoreValues,null);
+        workExpericeSubScorer(timeElapsed,'multiDisciplinaryMakeup',currentWorkDeed['multiDisciplinaryMakeup'],workDeedScoreValues,null);
+        workExpericeSubScorer(timeElapsed,'multiCulturalMakeup',currentWorkDeed['multiCulturalMakeup'],workDeedScoreValues,null);
+        
+        var systemAndOperationInnovation = [
+            "SOI_evaluateApplications",
+            "SOI_selectApplicationsAndSolutions",
+            "SOI_specificApplicationsAndSolutions",
+            "SOI_buildApplicationsAndSolutions",
+            "SOI_accessBenifitCostValueSolutions"
+        ]
+        
+        var criticalThinking = [
+            "CT_requiredMetoFormGoals",
+            "CT_requiredSystematicApproach",
+            "CT_requiredInquisitive",
+            "CT_requiredPrioritize",
+            "CT_requiredConfidence",
+        ]
+        
+        var operationsResponsibilities = [
+            "OR_selectLocations",
+            "OR_selectEquipment",
+            "OR_selectManagingLabor",
+            "OR_determineProcessing"
+        ]
+        // For systemAndOperationInnovationCheck
+        var currentSystemAndOperationInnovation = currentWorkDeed['systemAndOperationInnovation'];
+        var currentCriticalThinking = currentWorkDeed['criticalThinking'];
+        var currentOperationsResponsibilities = currentWorkDeed['operationsResponsibilities'];
+
+        function loopSelections(currentLoopSelection,name,currentWorkDeed,len) {
+            // var local = len;
+            // for(var i = 0; i<len; i++) {
+            //     console.log("PARAMETERRRRRRRRRRRR",currentWorkDeed[name])
+            //     workExpericeSubScorer(timeElapsed,name,currentWorkDeed[name],workDeedScoreValues,currentWorkDeed[name][currentLoopSelection[i]]);
+            // }
         }
+        //Operational responsibilites
+        workExpericeSubScorer(timeElapsed,"operationsResponsibilities","OR_selectLocations",workDeedScoreValues,currentWorkDeed["operationsResponsibilities"]["OR_selectLocations"]);
+        workExpericeSubScorer(timeElapsed,"operationsResponsibilities","OR_selectEquipment",workDeedScoreValues,currentWorkDeed["operationsResponsibilities"]["OR_selectEquipment"]);
+        workExpericeSubScorer(timeElapsed,"operationsResponsibilities","OR_selectManagingLabor",workDeedScoreValues,currentWorkDeed["operationsResponsibilities"]["OR_selectManagingLabor"]);
+        workExpericeSubScorer(timeElapsed,"operationsResponsibilities","OR_determineProcessing",workDeedScoreValues,currentWorkDeed["operationsResponsibilities"]["OR_determineProcessing"]);
 
+        //systemOperation Innovation
+        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_selectApplicationsAndSolutions",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_selectApplicationsAndSolutions"]);
+        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_evaluateApplications",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_evaluateApplications"]);
+        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_specificApplicationsAndSolutions",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_specificApplicationsAndSolutions"]);
+        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_buildApplicationsAndSolutions",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_buildApplicationsAndSolutions"]);
+        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_accessBenifitCostValueSolutions",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_accessBenifitCostValueSolutions"]);
+        //
+        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredMetoFormGoals",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredMetoFormGoals"]);
+        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredSystematicApproach",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredSystematicApproach"]);
+        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredInquisitive",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredInquisitive"]);
+        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredPrioritize",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredPrioritize"]);
+        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredConfidence",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredConfidence"]);
+        // loopSelections(currentSystemAndOperationInnovationCheck,'systemAndOperationInnovation',currentWorkDeed,5);
+        // loopSelections(currentCriticalThinking,'criticalThinking',currentWorkDeed,5);
+        // loopSelections(currentOperationsResponsibilities,'operationsResponsibilities',currentWorkDeed,5);
 
-        function selectionScorer(selections){
-            var thisSelectionScore = 0;
-            for (var index = 0; index<selections.length;index++) {
-                if(selections[index] == "yes") {
-                    thisSelectionScore += years + (months/12)
-                } else if(selections[index] == "some") {
-                    thisSelectionScore += years + (months/(12*2))
-                }
-            }
-            return thisSelectionScore;
-        }
-
-        var selectionsScore = 0;
-
-        //For OR Selections
-        selectionsScore += selectionScorer(currentWorkDeed["operationsResponsibilities"]);
-        //For CT Selections
-        selectionScorer += selectionsScore(currentWorkDeed["criticalThinking"]);
-        //For SOI Selections
-        selectionScorer += selectionsScore(currentWorkDeed["systemAndOperationInnovation"]);
-
-        return selectionScorer+rolepoints;
     }
-
-
-
-
-
 
 }
 

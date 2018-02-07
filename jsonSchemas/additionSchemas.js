@@ -496,11 +496,11 @@ module.exports = {
                 "Polynesia",
             ]
            },
-           "startDate" :{
-            "type": "number"
+           "startYear" :{
+            "type": "string"
            },
-           "endDate" :{
-            "type": "number"
+           "endYear" :{
+            "type": "string"
            }, 
            "startMonth" :{
             "type": "string"
