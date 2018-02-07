@@ -511,6 +511,22 @@ module.exports = {
            "positionDescription" :{
             "type": "string"
            },
+           "role" :{
+            "enum": [
+                "Employee",
+                "Team Leader",
+                "Manager",
+                "Executive/Founder",
+                "Consultant/Subject matter expert",
+                "Board of Dir",
+                "Member(Student or Full membership)",
+                "Local or student committee",
+                "Local or student officer",
+                "National Committee",
+                "National Officer",
+                "Fellow"
+            ]
+           },
            "primaryFunction" :{
                "enum": [
                    "Business Development",
