@@ -122,8 +122,10 @@ var scorer = function(userProfile) {
     var workData = userProfile[apiStrings.WORK_EXPERIENCE].deedData;
     var workScore = 0
     for(var index = 0;index < workData.length; index++) {
-        workScore += workExperienceScoreHelper(workData[index]);
+        workExperienceScoreHelper(workData[index]);
     }
+
+    
     parent.My_T_Stem[Stem.OPERATION_RESPONSIBILITIES_EXPERTISE] += workScore
 
     function deedScoreHelper(scoreValues,deedCategory, deed, identifier) {
@@ -242,28 +244,16 @@ var scorer = function(userProfile) {
     }
 
     function workExpericeSubScorer(timeElapsed,workDeed,currentWorkDeedValue,workDeedScoreValues,scoreOption) {
-        console.log("|||||||||");
-        console.log("workdeed",workDeed);
         if(workDeedScoreValues.hasOwnProperty(workDeed)) {
             var currentWorkDeed = workDeedScoreValues[workDeed]['contents'];
-            // console.log("");
-            // console.log(currentWorkDeed);
-            // console.log("has ?");
-            // console.log(currentWorkDeedValue);
             if(currentWorkDeed.hasOwnProperty(currentWorkDeedValue)) {
                 var scoreArray = currentWorkDeed[currentWorkDeedValue]['scores'];
-                console.log(">>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<actually comming in to calculate");
                 if(scoreOption===null) {
                     scoreOption = scoreArray[0];
                 }
-                // console.log(">>>>>>>>>><<<<<<<<<");
-                // console.log("calculating for");
-                // console.log(workDeedScoreValues);
                 var currentScore = WorkIndividualScoreHelper(timeElapsed,scoreOption);
-                console.log("?????????? score aray [2]",scoreArray[2]);
                 if(scoreArray[2]!==null) {  
                     parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
-                    console.log("value at ",scoreArray[2], "is", parent['My_T_Stem'][scoreArray[2]]);
                 }
                 if(scoreArray[1]!==null){
                     var topScore = scoreArray[1];
@@ -313,34 +303,19 @@ var scorer = function(userProfile) {
         var currentCriticalThinking = currentWorkDeed['criticalThinking'];
         var currentOperationsResponsibilities = currentWorkDeed['operationsResponsibilities'];
 
-        function loopSelections(currentLoopSelection,name,currentWorkDeed,len) {
-            // var local = len;
-            // for(var i = 0; i<len; i++) {
-            //     console.log("PARAMETERRRRRRRRRRRR",currentWorkDeed[name])
-            //     workExpericeSubScorer(timeElapsed,name,currentWorkDeed[name],workDeedScoreValues,currentWorkDeed[name][currentLoopSelection[i]]);
-            // }
-        }
-        //Operational responsibilites
-        workExpericeSubScorer(timeElapsed,"operationsResponsibilities","OR_selectLocations",workDeedScoreValues,currentWorkDeed["operationsResponsibilities"]["OR_selectLocations"]);
-        workExpericeSubScorer(timeElapsed,"operationsResponsibilities","OR_selectEquipment",workDeedScoreValues,currentWorkDeed["operationsResponsibilities"]["OR_selectEquipment"]);
-        workExpericeSubScorer(timeElapsed,"operationsResponsibilities","OR_selectManagingLabor",workDeedScoreValues,currentWorkDeed["operationsResponsibilities"]["OR_selectManagingLabor"]);
-        workExpericeSubScorer(timeElapsed,"operationsResponsibilities","OR_determineProcessing",workDeedScoreValues,currentWorkDeed["operationsResponsibilities"]["OR_determineProcessing"]);
 
-        //systemOperation Innovation
-        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_selectApplicationsAndSolutions",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_selectApplicationsAndSolutions"]);
-        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_evaluateApplications",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_evaluateApplications"]);
-        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_specificApplicationsAndSolutions",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_specificApplicationsAndSolutions"]);
-        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_buildApplicationsAndSolutions",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_buildApplicationsAndSolutions"]);
-        workExpericeSubScorer(timeElapsed,"systemAndOperationInnovation","SOI_accessBenifitCostValueSolutions",workDeedScoreValues,currentWorkDeed["systemAndOperationInnovation"]["SOI_accessBenifitCostValueSolutions"]);
-        //
-        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredMetoFormGoals",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredMetoFormGoals"]);
-        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredSystematicApproach",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredSystematicApproach"]);
-        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredInquisitive",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredInquisitive"]);
-        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredPrioritize",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredPrioritize"]);
-        workExpericeSubScorer(timeElapsed,"criticalThinking","CT_requiredConfidence",workDeedScoreValues,currentWorkDeed["criticalThinking"]["CT_requiredConfidence"]);
-        // loopSelections(currentSystemAndOperationInnovationCheck,'systemAndOperationInnovation',currentWorkDeed,5);
-        // loopSelections(currentCriticalThinking,'criticalThinking',currentWorkDeed,5);
-        // loopSelections(currentOperationsResponsibilities,'operationsResponsibilities',currentWorkDeed,5);
+
+        function loopSelections(currentSelections,currentSelectionName,currentWorkDeed) {
+            var currentLength = currentSelections.length;
+            var selectionWorkDeedScoreValues = workDeedScoreValues[currentSelectionName]
+            for(var index = 0; index < currentLength; index++) {
+                workExpericeSubScorer(timeElapsed, currentSelectionName,currentSelections[index],selectionWorkDeedScoreValues,currentWorkDeed[currentSelectionName][currentSelections[index]])
+            }
+        }
+
+        loopSelections(currentSystemAndOperationInnovation,'systemAndOperationInnovation',currentWorkDeed);
+        loopSelections(currentCriticalThinking,'criticalThinking',currentWorkDeed);
+        loopSelections(currentOperationsResponsibilities,'operationsResponsibilities',currentWorkDeed);
 
     }
 

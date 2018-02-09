@@ -25,7 +25,7 @@ module.exports = {
             "Employee" : {
                 scores: [
                     "years",
-                    [0,0,0,0,0,0,0,0,0],
+                    null,
                     Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
@@ -71,28 +71,28 @@ module.exports = {
             "OR_selectLocations": {
                 scores : [
                     "yes",
-                    [0,0,0,0,0,0,0,0,0],
+                    null,
                     Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
             "OR_selectEquipment": {
                 scores : [
                     "yes",
-                    [0,0,0,0,0,0,0,0,0],
+                    null,
                     Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
             "OR_selectManagingLabor": {
                 scores : [
                     "yes",
-                    [0,0,0,0,0,0,0,0,0],
+                    null,
                     Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             },
             "OR_determineProcessing": {
                 scores : [
                     "yes",
-                    [0,0,0,0,0,0,0,0,0],
+                    null,
                     Stem.OPERATION_RESPONSIBILITIES_EXPERTISE
                 ]
             }
@@ -181,7 +181,7 @@ module.exports = {
             "1":{
                 scores : [
                     "yes",
-                    [0,0,0,0,0,0,0,0,0],
+                    null,
                     Stem.METHODS_SKILLS_PROFIECIENCY
                 ]
             },
@@ -213,7 +213,7 @@ module.exports = {
             "Very low": {
                 scores : [
                     "yes",
-                    [0,0,0,0,0,0,0,0,0],
+                    null,
                     Stem.METHODS_SKILLS_PROFIECIENCY
                 ]
             },
@@ -252,7 +252,7 @@ module.exports = {
             "Very low": {
                 scores : [
                     "yes",
-                    [0,0,0,0,0,0,0,0,0],
+                    null,
                     Stem.METHODS_SKILLS_PROFIECIENCY
                 ]
             },
