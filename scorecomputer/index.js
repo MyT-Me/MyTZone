@@ -269,8 +269,8 @@ var scorer = function(userProfile) {
     //Work Experience Helper
     function workExperienceScoreHelper(currentWorkDeed){
         
-        var timeElapsed = timeElapsedHelper(currentWorkDeed['startYear'],currentWorkDeed['endYear'],currentWorkDeed['startMonth'],currentWorkDeed['endMonth']);
-        //Scoring For Role
+         var timeElapsed = timeElapsedHelper(currentWorkDeed['startYear'],currentWorkDeed['endYear'],currentWorkDeed['startMonth'],currentWorkDeed['endMonth']);
+        // //Scoring For Role
         workExpericeSubScorer(timeElapsed,'role',currentWorkDeed['role'],workDeedScoreValues,null);
         workExpericeSubScorer(timeElapsed, 'teamSize', currentWorkDeed['teamSize'],workDeedScoreValues,null);
         workExpericeSubScorer(timeElapsed,'multiDisciplinaryMakeup',currentWorkDeed['multiDisciplinaryMakeup'],workDeedScoreValues,null);
@@ -299,17 +299,18 @@ var scorer = function(userProfile) {
             "OR_determineProcessing"
         ]
         // For systemAndOperationInnovationCheck
-        var currentSystemAndOperationInnovation = currentWorkDeed['systemAndOperationInnovation'];
-        var currentCriticalThinking = currentWorkDeed['criticalThinking'];
-        var currentOperationsResponsibilities = currentWorkDeed['operationsResponsibilities'];
+        var currentSystemAndOperationInnovation = systemAndOperationInnovation;
+        var currentCriticalThinking = criticalThinking;
+        var currentOperationsResponsibilities = operationsResponsibilities;
 
 
 
         function loopSelections(currentSelections,currentSelectionName,currentWorkDeed) {
-            var currentLength = currentSelections.length;
+            var currentLength = 4;//currentSelections.length;
             var selectionWorkDeedScoreValues = workDeedScoreValues[currentSelectionName]
             for(var index = 0; index < currentLength; index++) {
-                workExpericeSubScorer(timeElapsed, currentSelectionName,currentSelections[index],selectionWorkDeedScoreValues,currentWorkDeed[currentSelectionName][currentSelections[index]])
+                //console.log("calling",currentSelectionName);
+                workExpericeSubScorer(timeElapsed, currentSelectionName,currentSelections[index],workDeedScoreValues,currentWorkDeed[currentSelectionName][currentSelections[index]])
             }
         }
 

@@ -1,8 +1,31 @@
+<head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="chartshelper.js"></script>
+</head>
+
 <div class="control-group">
     <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
 </div>
 
-<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<!-- <script src="https://cdn.zingchart.com/zingchart.min.js"></script> -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="chart_div"></div>
+<body ng-controller="myController">
+        <div id="high-container">Placeholder for chart</div>
+    
+      </body>
+       
+    
+
+
+
+    
+
+
+<!--ending  G charts-->
+
 <section ng-init = "scoreRunner()">
     <nav1>
         <ol class="cd-multi-steps text-bottom count" id="status-buttons">
@@ -20,11 +43,16 @@
     <h1 id="heading_login">Charts</h1>
     <div id="inside" class="container">
 
-<div id="chartContainer1" style="height: 239px;width:200px"></div>
+<!-- <div id="chartContainer1" style="height: 239px;width:200px"></div> -->
+<!-- <h1>{{educationScore}}</h1>
+<h1>{{membershipScore}}</h1>
+<h1>{{methodsScore}}</h1>
+<h1>{{operationalScore}}</h1>
+<h1>{{proficiencyScore}}</h1> -->
 
 <div class="tscore" id="lower">
     <h3>My T-Top score</h3>
-    <input class="score" type="number" name="score"><br>
+    <input class="score" type="number" name="score" value={{fulltTOP}}><br>
 </div>
 <div class="new_right">
 		<div id ='chartDiv'  class="right"></div>
@@ -33,13 +61,22 @@
 
 <div class="tscore" id="topper">
     <h3>My T-Stem score</h3>
-    <input class="score" type="number" name="score"><br>
+    <input class="score" type="number" name="score" value={{fulltStem}}><br>
 </div>
 <div class="new_right">
 		<div id ='chartDiv2'  class="right"></div>
 </div>
+
+<div class="tscore" id="topper">
+        <h3>My T-Score</h3>
+        <input class="score" type="number" name="score" value={{fullTscore}}><br>
+    </div>
+    <div class="new_right">
+            <div id ='chartDiv2'  class="right"></div>
+    </div>
+
 <!--Script for charts-->
-<script>
+<!-- <script>
     var chartData={
       "type":"bar", 
       "plot": {
@@ -77,9 +114,9 @@
       height:400,
       width:400,  
     });
-</script>
-<div id="chartContainer" style="height: 300px;width:149px"></div>
-<div id='myChart'></div>
+</script> -->
+<!-- <div id="chartContainer" style="height: 300px;width:149px"></div>
+<div id='myChart'></div> -->
 
 <div id='myChart1'></div>
 <div id="w3" class="w3-light-grey">
@@ -89,16 +126,16 @@
     <form id="tscoretop" name="form1" method="post" action="" >
         <table>
             <thead><b>T-Top Scores</b></thead>
-            <tr><td>Project Management</td><td><input type="text" name="num1" id="num1" /></td></tr>
-            <tr><td>Organizational Design</td><td><input type="text" name="num2" id="num2" /></td></tr>
-            <tr><td>Communications</td><td><input type="text" name="num1" id="num3" /></td></tr>
-            <tr><td>Critical Thinking</td><td><input type="text" name="num2" id="num4" /></td></tr>
-            <tr><td>Teamwork</td><td><input type="text" name="num1" id="num5" /></td></tr>
-            <tr><td>Networking</td><td><input type="text" name="num2" id="num6" /></td></tr>
-            <tr><td>Empathy</td><td><input type="text" name="num1" id="num7" /></td></tr>
-            <tr><td>Perspective</td><td><input type="text" name="num2" id="num8" /></td></tr>
-            <tr><td>Global Understanding</td><td><input type="text" name="num1" id="num9" /></td></tr>
-            <tr><td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly /></td></tr>
+            <tr><td>Project Management</td><td><input type="text" name="num1" id="num1" value= {{managementScore}}></td></tr>
+            <tr><td>Organizational Design</td><td><input type="text" name="num2" id="num2" value= {{designScore}}></td></tr>
+            <tr><td>Communications</td><td><input type="text" name="num1" id="num3" value= {{communicationScore}}></td></tr>
+            <tr><td>Critical Thinking</td><td><input type="text" name="num2" id="num4"  value= {{criticalScore}}></td></tr>
+            <tr><td>Teamwork</td><td><input type="text" name="num1" id="num5"  value= {{teamworkScore}}></td></tr>
+            <tr><td>Networking</td><td><input type="text" name="num2" id="num6"  value= {{networkingScore}}></td></tr>
+            <tr><td>Empathy</td><td><input type="text" name="num1" id="num7"  value= {{empathyScore}}></td></tr>
+            <tr><td>Perspective</td><td><input type="text" name="num2" id="num8"  value= {{perspectiveScore}}></td></tr>
+            <tr><td>Global Understanding</td><td><input type="text" name="num1" id="num9"  value= {{globalUnderstandScore}}></td></tr>
+            <tr><td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly  value= {{fulltTOP}}></td></tr>
         </table>
     </form>
 </div>
@@ -108,12 +145,12 @@
     <form id="tscorebot" name="form2" method="post" action="" >
         <table>
             <thead><b>T-Stem Scores</b></thead>
-            <tr><td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" /></td></tr>
-            <tr><td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" /></td></tr>
-            <tr><td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" /></td></tr>
-            <tr><td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" /></td></tr>
-            <tr><td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" /></td></tr>
-            <tr><td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly /></td></tr>
+            <tr><td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" value={{membershipScore}}></td></tr>
+            <tr><td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" value={{educationScore}}></td></tr>
+            <tr><td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" value={{operationalScore}}></td></tr>
+            <tr><td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" value={{proficiencyScore}}></td></tr>
+            <tr><td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" value={{methodsScore}}></td></tr>
+            <tr><td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly value={{fulltStem}}></td></tr>
         </table>
     </form>
 </div>

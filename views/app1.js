@@ -1,3 +1,4 @@
+
 $(function() {
 
     $('#login-form-link').click(function(e) {
@@ -16,6 +17,12 @@ $(function() {
     });
 
 });
+// var Highcharts = require('highcharts'); 
+// import Highcharts from '../highcharts';
+
+// Load module after Highcharts is loaded
+//require('highcharts/modules/exporting')(Highcharts);
+
 
 var app = angular.module('formlyApp', ['ui.router','chart.js']);
 
@@ -443,7 +450,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             var deedURL = "/api/deeds/"
             var v2testURL = "/v2Post/"
             console.log(toSend) 
-            $http.post(deedURL+'education', toSend, config.headers).then(function(response){
+            $http.post('/api/deeds/education', toSend, config.headers).then(function(response){
                 
                 //Success handling
 
@@ -1316,16 +1323,67 @@ var skillsToolsJSONBuilder = function(receivedObject){
         });
     };
     //SCore COmputing Engine
+    $scope.computedScores = [];
     $scope.scoreRunner = function(){
         console.log('%c You will get your score here ', 'background: #222; color: #bada55');
         $http.get('/api/scores').then(function(response) {
             //Positive Response
             console.log(response["data"]);
+            $scope.fulltStem = 0
+            $scope.educationScore = response["data"]["My_T_Stem"]["Education, Briefings, and Teaching"];
+            $scope.fulltStem = $scope.fulltStem+$scope.educationScore
+            $scope.membershipScore = response["data"]["My_T_Stem"]["Memberships, Authorships, and Recognitions"];
+            $scope.fulltStem = $scope.fulltStem+$scope.membershipScore
+            $scope.methodsScore = response["data"]["My_T_Stem"]["Methods/Skills Proficiency"];
+            $scope.fulltStem = $scope.fulltStem+$scope.methodsScore
+            $scope.operationalScore = response["data"]["My_T_Stem"]["Operations responsibilities and expertise"];
+            $scope.fulltStem = $scope.fulltStem+$scope.operationalScore
+            $scope.proficiencyScore = response["data"]["My_T_Stem"]["Software/Device Proficiency"];
+            $scope.fulltStem = $scope.fulltStem+$scope.proficiencyScore
+            //T-top
+            $scope.fulltTOP = 0;
+            $scope.communicationScore = response["data"]["My_T_Top"]["Communications"];
+            $scope.fulltTOP = $scope.fulltTOP+$scope.communicationScore;
+            $scope.criticalScore = response["data"]["My_T_Top"]["Critical Thinking"];
+            $scope.fulltTOP = $scope.fulltTOP+$scope.criticalScore;
+            $scope.empathyScore = response["data"]["My_T_Top"]["Empathy"];
+            $scope.fulltTOP = $scope.fulltTOP+$scope.empathyScore;
+            $scope.globalUnderstandScore = response["data"]["My_T_Top"]["Global understandng"];
+            $scope.fulltTOP = $scope.fulltTOP+$scope.globalUnderstandScore;
+            $scope.networkingScore = response["data"]["My_T_Top"]["Networking"];
+            $scope.fulltTOP = $scope.fulltTOP+$scope.networkingScore;
+            $scope.designScore = response["data"]["My_T_Top"]["Organizational design"];
+            $scope.fulltTOP = $scope.fulltTOP+ $scope.designScore;
+            $scope.perspectiveScore = response["data"]["My_T_Top"]["Perspective"];
+            $scope.fulltTOP = $scope.fulltTOP+$scope.perspectiveScore;
+            $scope.managementScore = response["data"]["My_T_Top"]["Project management"];
+            $scope.fulltTOP = $scope.fulltTOP+ $scope.managementScore; 
+            $scope.teamworkScore = response["data"]["My_T_Top"]["Teamwork"];
+            $scope.fulltTOP = $scope.fulltTOP+$scope.teamworkScore;
+            $scope.fullTscore = $scope.fulltTOP+ $scope.fulltStem;
         }, function(response) {
             //Negative Response
             console.log("Negative Init");
-            console.log(response);
         });
 
     }
+
+    //charts
+    
+    // Highcharts.chart('high-container', {
+    //     title: {
+    //       text: 'Temperature Data'
+    //     },
+  
+    //     xAxis: {
+    //       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    //         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    //       ]
+    //     },
+  
+    //     series: [{
+    //       data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+    //     }]
+    //   })
+
     }]);
