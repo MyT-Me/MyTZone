@@ -24,10 +24,14 @@ $(function() {
 //require('highcharts/modules/exporting')(Highcharts);
 
 
-var app = angular.module('formlyApp', ['ui.router','chart.js']);
+var app = angular.module('formlyApp', ['ui.router','chart.js']).run(['$rootScope', function($rootScope){
+    $rootScope.concessionLoadingScreen = true;
+}])
 
 //Building A Custom Service For Authentication
-angular.module('formlyApp').service('authentication', authentication);
+angular.module('formlyApp').service('authentication', authentication).run(['$rootScope', function($rootScope){
+    $rootScope.concessionLoadingScreen = true;
+}]);
 authentication.$inject = ['$window'];
 function authentication ($window){
     var saveToken = function(token){
@@ -67,7 +71,9 @@ function authentication ($window){
 }
 
 //Building A HTTP Interceptor to add Authentication Values
-angular.module('formlyApp').service('authenticationAdder', authenticationAdder);
+angular.module('formlyApp').service('authenticationAdder', authenticationAdder).run(['$rootScope', function($rootScope){
+    $rootScope.concessionLoadingScreen = true;
+}]);
 authenticationAdder.$inject = ['authentication'];
 function authenticationAdder(authentication){
     var request = function(config){
@@ -1322,45 +1328,91 @@ var skillsToolsJSONBuilder = function(receivedObject){
             personalDetail.selected = $scope.selectedAll;
         });
     };
-    //SCore COmputing Engine
+    //SCore Cmputing Engine
     $scope.computedScores = [];
+    $scope.educationScore = 0;
+    $scope.membershipScore = 0;
+    $scope.methodsScore =0;
+    $scope.operationalScore =0;
+    $scope.proficiencyScore =0;
     $scope.scoreRunner = function(){
+         
         console.log('%c You will get your score here ', 'background: #222; color: #bada55');
         $http.get('/api/scores').then(function(response) {
             //Positive Response
             console.log(response["data"]);
-            $scope.fulltStem = 0
+              
+            $scope.fulltStem = 0; 
+            // var educationScore = $scope.educationScore;
+            // var membershipScore = $scope.membershipScore;
+            // var methodsScore =$scope.methodsScore;
+            // var operationalScore =$scope.operationalScore;
+            // var proficiencyScore =$scope.proficiencyScore;
+            $scope.scoreflag = false;
+            $scope.educationScore = 0;
+            if($scope.scoreflag){
+                $scope.educationScoreBefore = JSON.parse(JSON.stringify($score.educationScore));
+                $scope.membershipScoreBefore = JSON.parse(JSON.stringify($score.membershipScore));  
+                $scope.methodsScoreBefore = JSON.parse(JSON.stringify($score.methodsScore));
+                $scope.operationalScoreBefore = JSON.parse(JSON.stringify($score.operationalScore));
+                $scope.proficiencyScoreBefore = JSON.parse(JSON.stringify($score.proficiencyScore));
+
+                $scope.communicationScoreBefore = JSON.parse(JSON.stringify($score.communicationScore));
+                $scope.criticalScoreBefore = JSON.parse(JSON.stringify($score.criticalScore));
+                $scope.empathyScoreBefore = JSON.parse(JSON.stringify($score.empathyScore));
+                $scope.globalUnderstandScoreBefore = JSON.parse(JSON.stringify($score.globalUnderstandScore));
+                $scope.networkingScoreBefore = JSON.parse(JSON.stringify($score.networkingScore));
+                $scope.designScoreBefore = JSON.parse(JSON.stringify($score.designScore));
+                $scope.perspectiveScoreBefore = JSON.parse(JSON.stringify($score.perspectiveScore));
+                $scope.teamworkScoreBefore = JSON.parse(JSON.stringify($score.teamworkScore));
+                $scope.managementScoreBefore = JSON.parse(JSON.stringify($score.managementScore));
+                
+                
+            }
+
             $scope.educationScore = response["data"]["My_T_Stem"]["Education, Briefings, and Teaching"];
             $scope.fulltStem = $scope.fulltStem+$scope.educationScore
             $scope.membershipScore = response["data"]["My_T_Stem"]["Memberships, Authorships, and Recognitions"];
             $scope.fulltStem = $scope.fulltStem+$scope.membershipScore
             $scope.methodsScore = response["data"]["My_T_Stem"]["Methods/Skills Proficiency"];
-            $scope.fulltStem = $scope.fulltStem+$scope.methodsScore
+            $scope.fulltStem = $scope.fulltStem+$scope.methodsScore;
             $scope.operationalScore = response["data"]["My_T_Stem"]["Operations responsibilities and expertise"];
             $scope.fulltStem = $scope.fulltStem+$scope.operationalScore
+            $scope.proficiencyScoreBefore = $scope.proficiencyScore; 
             $scope.proficiencyScore = response["data"]["My_T_Stem"]["Software/Device Proficiency"];
             $scope.fulltStem = $scope.fulltStem+$scope.proficiencyScore
             //T-top
-            $scope.fulltTOP = 0;
+
+            $scope.fulltTOP=0;
+            //$scope.communicationScoreBefore = $scope.communicationScore; 
             $scope.communicationScore = response["data"]["My_T_Top"]["Communications"];
             $scope.fulltTOP = $scope.fulltTOP+$scope.communicationScore;
+            //$scope.criticalScoreBefore = $scope.criticalScore;
             $scope.criticalScore = response["data"]["My_T_Top"]["Critical Thinking"];
             $scope.fulltTOP = $scope.fulltTOP+$scope.criticalScore;
+            //$scope.empathyScoreBefore = $scope.empathyScore;
             $scope.empathyScore = response["data"]["My_T_Top"]["Empathy"];
             $scope.fulltTOP = $scope.fulltTOP+$scope.empathyScore;
+            //$scope.globalUnderstandScoreBefore = $scope.globalUnderstandScore;
             $scope.globalUnderstandScore = response["data"]["My_T_Top"]["Global understandng"];
             $scope.fulltTOP = $scope.fulltTOP+$scope.globalUnderstandScore;
+            //$scope.networkingScoreBefore = $scope.networkingScore
             $scope.networkingScore = response["data"]["My_T_Top"]["Networking"];
             $scope.fulltTOP = $scope.fulltTOP+$scope.networkingScore;
+            //$scope.designScoreBefore = $scope.designScore;
             $scope.designScore = response["data"]["My_T_Top"]["Organizational design"];
             $scope.fulltTOP = $scope.fulltTOP+ $scope.designScore;
+            //$scope.perspectiveScoreBefore = $scope.perspectiveScore;
             $scope.perspectiveScore = response["data"]["My_T_Top"]["Perspective"];
             $scope.fulltTOP = $scope.fulltTOP+$scope.perspectiveScore;
+           // $scope.managementScoreBefore = $scope.managementScore;
             $scope.managementScore = response["data"]["My_T_Top"]["Project management"];
             $scope.fulltTOP = $scope.fulltTOP+ $scope.managementScore; 
+            //$scope.teamworkScoreBefore = $scope.teamworkScore;
             $scope.teamworkScore = response["data"]["My_T_Top"]["Teamwork"];
             $scope.fulltTOP = $scope.fulltTOP+$scope.teamworkScore;
             $scope.fullTscore = $scope.fulltTOP+ $scope.fulltStem;
+            $scope.scoreflag = true;
         }, function(response) {
             //Negative Response
             console.log("Negative Init");

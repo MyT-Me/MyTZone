@@ -34,7 +34,7 @@
             <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.deeds">Deeds</a></li>
             <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.skills">Skills</a></li>
             <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.tools">Tools</a></li>
-            <li class="current"><a href="#0" ui-sref-active="active" ui-sref="base1.chart">T-Score</a></li>
+            <li class="current"><a href="#0" ui-sref-active="active" ui-sref="base.chart">T-Score</a></li>
         </ol>
     </nav1>
 </section>
@@ -122,39 +122,82 @@
 <div id="w3" class="w3-light-grey">
     <div class="w3-container w3-center" style="height:20px;width:50px" id="bottom"></div>
 </div><br>
-<div >
-    <form id="tscoretop" name="form1" method="post" action="" >
-        <table>
-            <thead><b>T-Top Scores</b></thead>
-            <tr><td>Project Management</td><td><input type="text" name="num1" id="num1" value= {{managementScore}}></td></tr>
-            <tr><td>Organizational Design</td><td><input type="text" name="num2" id="num2" value= {{designScore}}></td></tr>
-            <tr><td>Communications</td><td><input type="text" name="num1" id="num3" value= {{communicationScore}}></td></tr>
-            <tr><td>Critical Thinking</td><td><input type="text" name="num2" id="num4"  value= {{criticalScore}}></td></tr>
-            <tr><td>Teamwork</td><td><input type="text" name="num1" id="num5"  value= {{teamworkScore}}></td></tr>
-            <tr><td>Networking</td><td><input type="text" name="num2" id="num6"  value= {{networkingScore}}></td></tr>
-            <tr><td>Empathy</td><td><input type="text" name="num1" id="num7"  value= {{empathyScore}}></td></tr>
-            <tr><td>Perspective</td><td><input type="text" name="num2" id="num8"  value= {{perspectiveScore}}></td></tr>
-            <tr><td>Global Understanding</td><td><input type="text" name="num1" id="num9"  value= {{globalUnderstandScore}}></td></tr>
-            <tr><td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly  value= {{fulltTOP}}></td></tr>
-        </table>
-    </form>
-</div>
+<div class="col-md-6">
+    <h4> Updated score</h4>
+    <div>
+        <form id="tscoretop" name="form1" method="post" action="" >
+            <table>
+                <thead><b>T-Top Scores</b></thead>
+                <tr><td>Project Management</td><td><input type="text" name="num1" id="num1" value= {{managementScore}}></td></tr>
+                <tr><td>Organizational Design</td><td><input type="text" name="num2" id="num2" value= {{designScore}}></td></tr>
+                <tr><td>Communications</td><td><input type="text" name="num1" id="num3" value= {{communicationScore}}></td></tr>
+                <tr><td>Critical Thinking</td><td><input type="text" name="num2" id="num4"  value= {{criticalScore}}></td></tr>
+                <tr><td>Teamwork</td><td><input type="text" name="num1" id="num5"  value= {{teamworkScore}}></td></tr>
+                <tr><td>Networking</td><td><input type="text" name="num2" id="num6"  value= {{networkingScore}}></td></tr>
+                <tr><td>Empathy</td><td><input type="text" name="num1" id="num7"  value= {{empathyScore}}></td></tr>
+                <tr><td>Perspective</td><td><input type="text" name="num2" id="num8"  value= {{perspectiveScore}}></td></tr>
+                <tr><td>Global Understanding</td><td><input type="text" name="num1" id="num9"  value= {{globalUnderstandScore}}></td></tr>
+                <tr><td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly  value= {{fulltTOP}}></td></tr>
+            </table>
+        </form>
+    </div>
 <br>
 
-<div id="right">
-    <form id="tscorebot" name="form2" method="post" action="" >
-        <table>
-            <thead><b>T-Stem Scores</b></thead>
-            <tr><td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" value={{membershipScore}}></td></tr>
-            <tr><td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" value={{educationScore}}></td></tr>
-            <tr><td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" value={{operationalScore}}></td></tr>
-            <tr><td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" value={{proficiencyScore}}></td></tr>
-            <tr><td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" value={{methodsScore}}></td></tr>
-            <tr><td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly value={{fulltStem}}></td></tr>
-        </table>
-    </form>
+    <div id="right">
+        <form id="tscorebot" name="form2" method="post" action="" >
+            <table>
+                <thead><b>T-Stem Scores</b></thead>
+                <tr><td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" value={{membershipScore}}></td></tr>
+                <tr><td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" value={{educationScore}}></td></tr>
+                <tr><td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" value={{operationalScore}}></td></tr>
+                <tr><td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" value={{proficiencyScore}}></td></tr>
+                <tr><td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" value={{methodsScore}}></td></tr>
+                <tr><td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly value={{fulltStem}}></td></tr>
+            </table>
+        </form>
+    </div>    
 </div>
+
+
+<!---->
+
+<div class="col-md-6">
+        <h4>delta</h4>
+        <div>
+            <form id="tscoretop" name="form1" method="post" action="" >
+                <table>
+                    <thead><b>T-Top Scores</b></thead>
+                    <tr><td>Project Management</td><td><input type="text" name="num1" id="num1" value= {{managementScore-managementScoreBefore}}></td></tr>
+                    <tr><td>Organizational Design</td><td><input type="text" name="num2" id="num2" value= {{designScore-designScoreBefore}}></td></tr>
+                    <tr><td>Communications</td><td><input type="text" name="num1" id="num3" value= {{communicationScore-communicationScoreBefore}}></td></tr>
+                    <tr><td>Critical Thinking</td><td><input type="text" name="num2" id="num4"  value= {{criticalScore-criticalScoreBefore}}></td></tr>
+                    <tr><td>Teamwork</td><td><input type="text" name="num1" id="num5"  value= {{teamworkScore-teamworkScoreBefore}}></td></tr>
+                    <tr><td>Networking</td><td><input type="text" name="num2" id="num6"  value= {{networkingScore-networkingScoreBefore}}></td></tr>
+                    <tr><td>Empathy</td><td><input type="text" name="num1" id="num7"  value= {{empathyScore-empathyScoreBefore}}></td></tr>
+                    <tr><td>Perspective</td><td><input type="text" name="num2" id="num8"  value= {{perspectiveScore-perspectiveScoreBefore}}></td></tr>
+                    <tr><td>Global Understanding</td><td><input type="text" name="num1" id="num9"  value= {{globalUnderstandScore-globalUnderstandScoreBefore}}></td></tr>
+                    <tr><td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly  value= {{fulltTOP}}></td></tr>
+                </table>
+            </form>
+        </div>
+    <br>
+    
+        <div id="right">
+            <form id="tscorebot" name="form2" method="post" action="" >
+                <table>
+                    <thead><b>T-Stem Scores</b></thead>
+                    <tr><td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" value={{membershipScore-membershipScoreBefore}}></td></tr>
+                    <tr><td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" value={{educationScore-educationScoreBefore}}></td></tr>
+                    <tr><td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" value={{operationalScore-operationalScoreBefore}}></td></tr>
+                    <tr><td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" value={{proficiencyScore-proficiencyScoreBefore}}></td></tr>
+                    <tr><td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" value={{methodsScore-methodsScoreBefore}}></td></tr>
+                    <tr><td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly value={{fulltStem-fulltStemBefore}}></td></tr>
+                </table>
+            </form>
+        </div>    
     </div>
+
+</div>
 </body>
 </html>
 
