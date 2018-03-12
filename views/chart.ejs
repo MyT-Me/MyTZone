@@ -38,8 +38,8 @@
         </ol>
     </nav1>
 </section>
-
-<div id="headingmain" ng-app="FormlyApp" ng-init= "scoreRunner()"></div>
+<!-- Deleted this from line below: ng-init= "scoreRunner()"" -->
+<div id="headingmain" ng-app="FormlyApp"></div>
     <h1 id="heading_login">Charts</h1>
     <div id="inside" class="container">
 
@@ -52,7 +52,9 @@
 
 <div class="tscore" id="lower">
     <h3>My T-Top score</h3>
-    <input class="score" type="number" name="score" value={{fulltTOP}}><br>
+    <input class="score" type="number" name="score" value={{fulltTop}}><br>
+    <p>Delta: {{fulltTopDelta}}</p>
+    <p>Previous Values: {{fulltTopPreString}}</p>
 </div>
 <div class="new_right">
 		<div id ='chartDiv'  class="right"></div>
@@ -62,6 +64,8 @@
 <div class="tscore" id="topper">
     <h3>My T-Stem score</h3>
     <input class="score" type="number" name="score" value={{fulltStem}}><br>
+    <p>Delta: {{fulltStemDelta}}</p>
+    <p>Previous Values: {{fulltStemPreString}}</p>
 </div>
 <div class="new_right">
 		<div id ='chartDiv2'  class="right"></div>
@@ -69,7 +73,9 @@
 
 <div class="tscore" id="topper">
         <h3>My T-Score</h3>
-        <input class="score" type="number" name="score" value={{fullTscore}}><br>
+        <input class="score" type="number" name="score" value={{fulltScore}}><br>
+        <p>Delta: {{fulltScoreDelta}}</p>
+        <p>Previous Values: {{fulltScorePreString}}</p>
     </div>
     <div class="new_right">
             <div id ='chartDiv2'  class="right"></div>
@@ -126,16 +132,54 @@
     <form id="tscoretop" name="form1" method="post" action="" >
         <table>
             <thead><b>T-Top Scores</b></thead>
-            <tr><td>Project Management</td><td><input type="text" name="num1" id="num1" value= {{managementScore}}></td></tr>
-            <tr><td>Organizational Design</td><td><input type="text" name="num2" id="num2" value= {{designScore}}></td></tr>
-            <tr><td>Communications</td><td><input type="text" name="num1" id="num3" value= {{communicationScore}}></td></tr>
-            <tr><td>Critical Thinking</td><td><input type="text" name="num2" id="num4"  value= {{criticalScore}}></td></tr>
-            <tr><td>Teamwork</td><td><input type="text" name="num1" id="num5"  value= {{teamworkScore}}></td></tr>
-            <tr><td>Networking</td><td><input type="text" name="num2" id="num6"  value= {{networkingScore}}></td></tr>
-            <tr><td>Empathy</td><td><input type="text" name="num1" id="num7"  value= {{empathyScore}}></td></tr>
-            <tr><td>Perspective</td><td><input type="text" name="num2" id="num8"  value= {{perspectiveScore}}></td></tr>
-            <tr><td>Global Understanding</td><td><input type="text" name="num1" id="num9"  value= {{globalUnderstandScore}}></td></tr>
-            <tr><td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly  value= {{fulltTOP}}></td></tr>
+            <tr>
+                <td>Project Management</td><td><input type="text" name="num1" id="num1" value= {{managementScore}}></td>
+                <td>Delta: {{managementScoreDelta}} Previous: {{managementScorePrevious}}</td>
+            </tr>
+            <tr>
+                <td>Organizational Design</td><td><input type="text" name="num2" id="num2" value= {{designScore}}></td>
+                <td>Delta: {{designScoreDelta}} Previous: {{designScorePrevious}}</td>
+            </tr>
+            <tr>
+                <td>Communications</td><td><input type="text" name="num1" id="num3" value= {{communicationScore}}></td>
+                <td>Delta: {{communicationScoreDelta}} Previous: {{communicationScorePrevious}}</td>
+
+            </tr>
+            <tr>
+                <td>Critical Thinking</td><td><input type="text" name="num2" id="num4"  value= {{criticalScore}}></td>
+                <td>Delta: {{communicationScoreDelta}} Previous: {{communicationScorePrevious}}</td>
+
+            </tr>
+            <tr>
+                <td>Teamwork</td><td><input type="text" name="num1" id="num5"  value= {{teamworkScore}}></td>
+                <td>Delta: {{teamworkScoreDelta}} Previous: {{teamworkScorePrevious}}</td>
+
+            </tr>
+            <tr>
+                <td>Networking</td><td><input type="text" name="num2" id="num6"  value= {{networkingScore}}></td>
+                <td>Delta: {{teamworkScoreDelta}} Previous: {{teamworkScorePrevious}}</td>
+
+            </tr>
+            <tr>
+                <td>Empathy</td><td><input type="text" name="num1" id="num7"  value= {{empathyScore}}></td>
+                <td>Delta: {{empathyScoreDelta}} Previous: {{empathyScorePrevious}}</td>
+
+            </tr>
+            <tr>
+                <td>Perspective</td><td><input type="text" name="num2" id="num8"  value= {{perspectiveScore}}></td>
+                <td>Delta: {{perspectiveScoreDelta}} Previous: {{perspectiveScorePrevious}}</td>
+
+            </tr>
+            <tr>
+                <td>Global Understanding</td><td><input type="text" name="num1" id="num9"  value= {{globalUnderstandScore}}></td>
+                <td>Delta: {{globalUnderstandScoreDelta}} Previous: {{globalUnderstandScorePrevious}}</td>
+
+            </tr>
+            <tr>
+                <td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly  value= {{fulltTop}}></td>
+                <td>Delta: {{fulltTopDelta}} Previous: {{fulltTopPreString}}</td>
+
+            </tr>
         </table>
     </form>
 </div>
@@ -145,12 +189,35 @@
     <form id="tscorebot" name="form2" method="post" action="" >
         <table>
             <thead><b>T-Stem Scores</b></thead>
-            <tr><td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" value={{membershipScore}}></td></tr>
-            <tr><td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" value={{educationScore}}></td></tr>
-            <tr><td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" value={{operationalScore}}></td></tr>
-            <tr><td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" value={{proficiencyScore}}></td></tr>
-            <tr><td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" value={{methodsScore}}></td></tr>
-            <tr><td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly value={{fulltStem}}></td></tr>
+            <tr>
+                <td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" value={{membershipScore}}></td>
+                <td>Delta: {{membershipScoreDelta}} Previous: {{membershipScorePreString}}</td>
+
+            </tr>
+            <tr>
+                <td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" value={{educationScore}}></td>
+                <td>Delta: {{educationScoreDelta}} Previous: {{educationScorePreString}}</td>
+
+            </tr>
+            <tr>
+                <td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" value={{operationalScore}}></td>
+                <td>Delta: {{operationalScoreDelta}} Previous: {{operationalScorePreString}}</td>
+
+            </tr>
+            <tr>
+                <td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" value={{proficiencyScore}}></td>
+                <td>Delta: {{proficiencyScoreDelta}} Previous: {{proficiencyScorePreString}}</td>
+
+            </tr>
+            <tr>
+                <td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" value={{methodsScore}}></td>
+                <td>Delta: {{methodsScoreDelta}} Previous: {{methodsScorePreString}}</td>
+
+            </tr>
+            <tr>
+                <td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly value={{fulltStem}}></td>
+                <td>Delta: {{designScoreDelta}} Previous: {{fulltStemPreString}}</td>
+            </tr>
         </table>
     </form>
 </div>
