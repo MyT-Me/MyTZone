@@ -775,7 +775,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         //Sending http POST request to the backend 
         $http.post('/api/deeds/'+category, toSend, config.headers).then(function(response) {
             //Positive 
-            alert("Worked Added");
+            // alert("Worked Added");
             console.log("Worked");
         }, function(response){
             //Negative
