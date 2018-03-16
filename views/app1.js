@@ -758,7 +758,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
                 toSend["ArticleTitle"] =  this.formDatadeed.deeddes;
             break;
             case config.CONFERENCES:
-                alert("Inside COnfrences");
+                // alert("Inside COnfrences");
                 toSend["ConferenceSponsor"] = this.formDatadeed.publication;
                 toSend["PresentationTitle"] = this.formDatadeed.deeddes;
             break;
