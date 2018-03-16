@@ -13,7 +13,7 @@
 
 <div id="chart_div"></div>
 <body ng-controller="myController">
-        <div id="high-container">Placeholder for chart</div>
+        <!-- <div id="high-container">Placeholder for chart</div> -->
     
       </body>
        
@@ -52,7 +52,7 @@
 
 <div class="tscore" id="lower">
     <h3>My T-Top score</h3>
-    <input class="score" type="number" name="score" value={{fulltTop}}><br>
+    <input class="score" type="number" name="score" value={{roundMe(fulltTop)}}><br>
     <p>Delta: {{fulltTopDelta}}</p>
     <p>Previous Values: {{fulltTopPreString}}</p>
 </div>
@@ -63,7 +63,7 @@
 
 <div class="tscore" id="topper">
     <h3>My T-Stem score</h3>
-    <input class="score" type="number" name="score" value={{fulltStem}}><br>
+    <input class="score" type="number" name="score" value={{roundMe(fulltStem)}}><br>
     <p>Delta: {{fulltStemDelta}}</p>
     <p>Previous Values: {{fulltStemPreString}}</p>
 </div>
@@ -73,7 +73,7 @@
 
 <div class="tscore" id="topper">
         <h3>My T-Score</h3>
-        <input class="score" type="number" name="score" value={{fulltScore}}><br>
+        <input class="score" type="number" name="score" value={{roundMe(fulltScore)}}><br>
         <p>Delta: {{fulltScoreDelta}}</p>
         <p>Previous Values: {{fulltScorePreString}}</p>
     </div>
@@ -133,50 +133,50 @@
         <table>
             <thead><b>T-Top Scores</b></thead>
             <tr>
-                <td>Project Management</td><td><input type="text" name="num1" id="num1" value= {{managementScore}}></td>
+                <td>Project Management</td><td><input type="text" name="num1" id="num1" value= {{roundMe(managementScore)}}></td>
                 <td>Delta: {{managementScoreDelta}} Previous: {{managementScorePreString}}</td>
             </tr>
             <tr>
-                <td>Organizational Design</td><td><input type="text" name="num2" id="num2" value= {{designScore}}></td>
+                <td>Organizational Design</td><td><input type="text" name="num2" id="num2" value= {{roundMe(designScore)}}></td>
                 <td>Delta: {{designScoreDelta}} Previous: {{designScorePreString}}</td>
             </tr>
             <tr>
-                <td>Communications</td><td><input type="text" name="num1" id="num3" value= {{communicationScore}}></td>
+                <td>Communications</td><td><input type="text" name="num1" id="num3" value= {{roundMe(communicationScore)}}></td>
                 <td>Delta: {{communicationScoreDelta}} Previous: {{communicationScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Critical Thinking</td><td><input type="text" name="num2" id="num4"  value= {{criticalScore}}></td>
+                <td>Critical Thinking</td><td><input type="text" name="num2" id="num4"  value= {{roundMe(criticalScore)}}></td>
                 <td>Delta: {{criticalScoreDelta}} Previous: {{criticalScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Teamwork</td><td><input type="text" name="num1" id="num5"  value= {{teamworkScore}}></td>
+                <td>Teamwork</td><td><input type="text" name="num1" id="num5"  value= {{roundMe(teamworkScore)}}></td>
                 <td>Delta: {{teamworkScoreDelta}} Previous: {{teamworkScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Networking</td><td><input type="text" name="num2" id="num6"  value= {{networkingScore}}></td>
+                <td>Networking</td><td><input type="text" name="num2" id="num6"  value= {{roundMe(networkingScore)}}></td>
                 <td>Delta: {{networkingScoreDelta}} Previous: {{networkingScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Empathy</td><td><input type="text" name="num1" id="num7"  value= {{empathyScore}}></td>
+                <td>Empathy</td><td><input type="text" name="num1" id="num7"  value= {{roundMe(empathyScore)}}></td>
                 <td>Delta: {{empathyScoreDelta}} Previous: {{empathyScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Perspective</td><td><input type="text" name="num2" id="num8"  value= {{perspectiveScore}}></td>
+                <td>Perspective</td><td><input type="text" name="num2" id="num8"  value= {{roundMe(perspectiveScore)}}></td>
                 <td>Delta: {{perspectiveScoreDelta}} Previous: {{perspectiveScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Global Understanding</td><td><input type="text" name="num1" id="num9"  value= {{globalUnderstandScore}}></td>
+                <td>Global Understanding</td><td><input type="text" name="num1" id="num9"  value= {{roundMe(globalUnderstandScore)}}></td>
                 <td>Delta: {{globalUnderstandScoreDelta}} Previous: {{globalUnderstandScorePreString}}</td>
 
             </tr>
             <tr>
-                <td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly  value= {{fulltTop}}></td>
+                <td><b>Total T-Top Score</b></td><td><input type="text" name="sum" id="sum" readonly  value= {{roundMe(fulltTop)}}></td>
                 <td>Delta: {{fulltTopDelta}} Previous: {{fulltTopPreString}}</td>
 
             </tr>
@@ -190,32 +190,32 @@
         <table>
             <thead><b>T-Stem Scores</b></thead>
             <tr>
-                <td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" value={{membershipScore}}></td>
+                <td>Memberships, authorships and recognition</td><td><input type="text" name="num10" id="num10" value={{roundMe(membershipScore)}}></td>
                 <td>Delta: {{membershipScoreDelta}} Previous: {{membershipScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" value={{educationScore}}></td>
+                <td>Education and degrees and certification</td><td><input type="text" name="num11" id="num11" value={{roundMe(educationScore)}}></td>
                 <td>Delta: {{educationScoreDelta}} Previous: {{educationScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" value={{operationalScore}}></td>
+                <td>Operation responsibilities and Expertise</td><td><input type="text" name="num12" id="num12" value={{roundMe(operationalScore)}}></td>
                 <td>Delta: {{operationalScoreDelta}} Previous: {{operationalScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" value={{proficiencyScore}}></td>
+                <td>Software/ Device Proficiency</td><td><input type="text" name="num13" id="num13" value={{roundMe(proficiencyScore)}}></td>
                 <td>Delta: {{proficiencyScoreDelta}} Previous: {{proficiencyScorePreString}}</td>
 
             </tr>
             <tr>
-                <td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" value={{methodsScore}}></td>
+                <td>Methods/Skills Proficiency</td><td><input type="text" name="num14" id="num14" value={{roundMe(methodsScore)}}></td>
                 <td>Delta: {{methodsScoreDelta}} Previous: {{methodsScorePreString}}</td>
 
             </tr>
             <tr>
-                <td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly value={{fulltStem}}></td>
+                <td><b>Total T-Stem Score</b></td><td><input type="text" name="sum1" id="sum1" readonly value={{roundMe(fulltStem)}}></td>
                 <td>Delta: {{fulltStemDelta}} Previous: {{fulltStemPreString}}</td>
             </tr>
         </table>

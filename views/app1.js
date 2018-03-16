@@ -1395,24 +1395,24 @@ var skillsToolsJSONBuilder = function(receivedObject){
             
 
             //String to hold all previous values 
-            $scope.fulltStemPreString = [roundMe($scope.fulltStemPrevious)];
-            $scope.fulltTopPreString = [roundMe($scope.fulltTopPrevious)];
-            $scope.fulltScorePreString = [roundMe($scope.fulltScorePrevious)];
-            $scope.educationScorePreString = [roundMe($scope.educationScorePrevious)];
-            $scope.membershipScorePreString = [roundMe($scope.membershipScorePrevious)];
-            $scope.methodsScorePreString = [roundMe($scope.methodsScorePrevious)];
-            $scope.operationalScorePreString = [roundMe($scope.operationalScorePrevious)];
-            $scope.proficiencyScorePreString = [roundMe($scope.proficiencyScorePrevious)];
+            $scope.fulltStemPreString = [$scope.roundMe($scope.fulltStemPrevious)];
+            $scope.fulltTopPreString = [$scope.roundMe($scope.fulltTopPrevious)];
+            $scope.fulltScorePreString = [$scope.roundMe($scope.fulltScorePrevious)];
+            $scope.educationScorePreString = [$scope.roundMe($scope.educationScorePrevious)];
+            $scope.membershipScorePreString = [$scope.roundMe($scope.membershipScorePrevious)];
+            $scope.methodsScorePreString = [$scope.roundMe($scope.methodsScorePrevious)];
+            $scope.operationalScorePreString = [$scope.roundMe($scope.operationalScorePrevious)];
+            $scope.proficiencyScorePreString = [$scope.roundMe($scope.proficiencyScorePrevious)];
 
-            $scope.communicationScorePreString = [roundMe($scope.communicationScorePrevious)];
-            $scope.criticalScorePreString = [roundMe($scope.criticalScorePrevious)];
-            $scope.empathyScorePreString = [roundMe($scope.empathyScorePrevious)];
-            $scope.globalUnderstandScorePreString = [roundMe($scope.globalUnderstandScorePrevious)];
-            $scope.networkingScorePreString = [roundMe($scope.networkingScorePrevious)];
-            $scope.designScorePreString = [roundMe($scope.designScorePrevious)];
-            $scope.perspectiveScorePreString = [roundMe($scope.perspectiveScorePrevious)];
-            $scope.managementScorePreString = [roundMe($scope.managementScorePrevious)];
-            $scope.teamworkScorePreString = [roundMe($scope.teamworkScorePrevious)];
+            $scope.communicationScorePreString = [$scope.roundMe($scope.communicationScorePrevious)];
+            $scope.criticalScorePreString = [$scope.roundMe($scope.criticalScorePrevious)];
+            $scope.empathyScorePreString = [$scope.roundMe($scope.empathyScorePrevious)];
+            $scope.globalUnderstandScorePreString = [$scope.roundMe($scope.globalUnderstandScorePrevious)];
+            $scope.networkingScorePreString = [$scope.roundMe($scope.networkingScorePrevious)];
+            $scope.designScorePreString = [$scope.roundMe($scope.designScorePrevious)];
+            $scope.perspectiveScorePreString = [$scope.roundMe($scope.perspectiveScorePrevious)];
+            $scope.managementScorePreString = [$scope.roundMe($scope.managementScorePrevious)];
+            $scope.teamworkScorePreString = [$scope.roundMe($scope.teamworkScorePrevious)];
 
             //Variables to hold Delta score values
             $scope.fulltStemDelta = 0;
@@ -1470,7 +1470,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
     }
 
-    function roundMe(num){
+    $scope.roundMe = function(num){
         return +(Math.round(num + "e+2")  + "e-2");
         }
     function computeAnalytics(curVal, preVal, preString, deltaVal, id){
@@ -1478,10 +1478,10 @@ var skillsToolsJSONBuilder = function(receivedObject){
     
             if (curVal != preVal){
                 //compute delta
-                deltaVal = roundMe(curVal - preVal);
+                deltaVal = $scope.roundMe(curVal - preVal);
                 console.log(preString[0]);
-                if (preString[preString.length-1] != roundMe(preVal)){
-                preString.push(roundMe(preVal));     
+                if (preString[preString.length-1] != $scope.roundMe(preVal)){
+                preString.push($scope.roundMe(preVal));     
                 }
                 preVal=curVal;
                 console.log(id,deltaVal, preString,curVal);
