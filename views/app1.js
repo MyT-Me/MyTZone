@@ -1391,25 +1391,28 @@ var skillsToolsJSONBuilder = function(receivedObject){
             $scope.managementScorePrevious = $scope.managementScore;
             $scope.teamworkScorePrevious = $scope.teamworkScore;
 
-            //String to hold all previous values 
-            $scope.fulltStemPreString = JSON.stringify($scope.fulltStemPrevious) + ",";
-            $scope.fulltTopPreString = JSON.stringify($scope.fulltTopPrevious) + ",";
-            $scope.fulltScorePreString = JSON.stringify($scope.fulltScorePrevious) + ",";
-            $scope.educationScorePreString = JSON.stringify($scope.educationScorePrevious) + ",";
-            $scope.membershipScorePreString = JSON.stringify($scope.membershipScorePrevious) + ",";
-            $scope.methodsScorePreString = JSON.stringify($scope.methodsScorePrevious) + ",";
-            $scope.operationalScorePreString = JSON.stringify($scope.operationalScorePrevious) + ",";
-            $scope.proficiencyScorePreString = JSON.stringify($scope.proficiencyScorePrevious) + ",";
 
-            $scope.communicationScorePreString = JSON.stringify($scope.communicationScorePrevious) + ",";
-            $scope.criticalScorePreString = JSON.stringify($scope.criticalScorePrevious) + ",";
-            $scope.empathyScorePreString = JSON.stringify($scope.empathyScorePrevious) + ",";
-            $scope.globalUnderstandScorePreString = JSON.stringify($scope.globalUnderstandScorePrevious) + ",";
-            $scope.networkingScorePreString = JSON.stringify($scope.networkingScorePrevious) + ",";
-            $scope.designScorePreString = JSON.stringify($scope.designScorePrevious) + ",";
-            $scope.perspectiveScorePreString = JSON.stringify($scope.perspectiveScorePrevious) + ",";
-            $scope.managementScorePreString = JSON.stringify($scope.managementScorePrevious) + ",";
-            $scope.teamworkScorePreString = JSON.stringify($scope.teamworkScorePrevious) + ",";
+            
+
+            //String to hold all previous values 
+            $scope.fulltStemPreString = [roundMe($scope.fulltStemPrevious)];
+            $scope.fulltTopPreString = [roundMe($scope.fulltTopPrevious)];
+            $scope.fulltScorePreString = [roundMe($scope.fulltScorePrevious)];
+            $scope.educationScorePreString = [roundMe($scope.educationScorePrevious)];
+            $scope.membershipScorePreString = [roundMe($scope.membershipScorePrevious)];
+            $scope.methodsScorePreString = [roundMe($scope.methodsScorePrevious)];
+            $scope.operationalScorePreString = [roundMe($scope.operationalScorePrevious)];
+            $scope.proficiencyScorePreString = [roundMe($scope.proficiencyScorePrevious)];
+
+            $scope.communicationScorePreString = [roundMe($scope.communicationScorePrevious)];
+            $scope.criticalScorePreString = [roundMe($scope.criticalScorePrevious)];
+            $scope.empathyScorePreString = [roundMe($scope.empathyScorePrevious)];
+            $scope.globalUnderstandScorePreString = [roundMe($scope.globalUnderstandScorePrevious)];
+            $scope.networkingScorePreString = [roundMe($scope.networkingScorePrevious)];
+            $scope.designScorePreString = [roundMe($scope.designScorePrevious)];
+            $scope.perspectiveScorePreString = [roundMe($scope.perspectiveScorePrevious)];
+            $scope.managementScorePreString = [roundMe($scope.managementScorePrevious)];
+            $scope.teamworkScorePreString = [roundMe($scope.teamworkScorePrevious)];
 
             //Variables to hold Delta score values
             $scope.fulltStemDelta = 0;
@@ -1437,23 +1440,23 @@ var skillsToolsJSONBuilder = function(receivedObject){
                 console.log("Checking Values");
                 
                 //Compute Deltas and Previous Values of T Dataset
-                [$scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString ,$scope.fulltStemDelta] = computeAnalytics($scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString ,$scope.fulltStemDelta);
-                [$scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString ,$scope.fulltTopDelta] = computeAnalytics($scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString ,$scope.fulltTopDelta);
-                [$scope.fulltScore, $scope.fulltScore, $scope.fulltScorePreString ,$scope.fulltScoreDelta] = computeAnalytics($scope.fulltScore, $scope.fulltScore, $scope.fulltScorePreString ,$scope.fulltScoreDelta); 
-                [$scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta] = computeAnalytics($scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educaitonScoreDelta);
-                [$scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta] = computeAnalytics($scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta);
-                [$scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta] = computeAnalytics($scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta)                
-                [$scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta] = computeAnalytics($scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta);                
-                [$scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta] = computeAnalytics($scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta); 
-                [$scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta] = computeAnalytics($scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta);
-                [$scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString ,$scope.criticalScoreDelta] = computeAnalytics($scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString ,$scope.criticalScoreDelta);
-                [$scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString ,$scope.empathyScoreDelta] = computeAnalytics($scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString ,$scope.empathyScoreDelta);
-                [$scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString ,$scope.globalUnderstandScoreDelta] = computeAnalytics($scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString ,$scope.globalUnderstandScoreDelta);
-                [$scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString ,$scope.networkingScoreDelta] = computeAnalytics($scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString ,$scope.networkingScoreDelta);
-                [$scope.designScore, $scope.designScorePrevious, $scope.designScorePreString ,$scope.designScoreDelta] = computeAnalytics($scope.designScore, $scope.designScorePrevious, $scope.designScorePreString ,$scope.designScoreDelta);
-                [$scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString ,$scope.perspectiveScoreDelta] = computeAnalytics($scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString ,$scope.perspectiveScoreDelta);              
-                [$scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString ,$scope.managementScoreDelta] = computeAnalytics($scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString ,$scope.managementScoreDelta);
-                [$scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString ,$scope.teamworkScoreDelta] = computeAnalytics($scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString ,$scope.teamworkScoreDelta);
+                [$scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString ,$scope.fulltStemDelta] = computeAnalytics($scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString ,$scope.fulltStemDelta,"fullTStem");
+                [$scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString ,$scope.fulltTopDelta] = computeAnalytics($scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString ,$scope.fulltTopDelta,"fulltTopDelta");
+                [$scope.fulltScore, $scope.fulltScore, $scope.fulltScorePreString ,$scope.fulltScoreDelta] = computeAnalytics($scope.fulltScore, $scope.fulltScore, $scope.fulltScorePreString ,$scope.fulltScoreDelta,"fulltScore"); 
+                [$scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta] = computeAnalytics($scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta,"education");
+                [$scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta] = computeAnalytics($scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta,"membership");
+                [$scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta] = computeAnalytics($scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta,"methods")                
+                [$scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta] = computeAnalytics($scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta,"operational");                
+                [$scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta] = computeAnalytics($scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta,"proficiency"); 
+                [$scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta] = computeAnalytics($scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta,"comms");
+                [$scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString ,$scope.criticalScoreDelta] = computeAnalytics($scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString ,$scope.criticalScoreDelta,"critical");
+                [$scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString ,$scope.empathyScoreDelta] = computeAnalytics($scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString ,$scope.empathyScoreDelta,"empathy");
+                [$scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString ,$scope.globalUnderstandScoreDelta] = computeAnalytics($scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString ,$scope.globalUnderstandScoreDelta,"understand");
+                [$scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString ,$scope.networkingScoreDelta] = computeAnalytics($scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString ,$scope.networkingScoreDelta,"networking");
+                [$scope.designScore, $scope.designScorePrevious, $scope.designScorePreString ,$scope.designScoreDelta] = computeAnalytics($scope.designScore, $scope.designScorePrevious, $scope.designScorePreString ,$scope.designScoreDelta,"design");
+                [$scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString ,$scope.perspectiveScoreDelta] = computeAnalytics($scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString ,$scope.perspectiveScoreDelta,"perspective");              
+                [$scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString ,$scope.managementScoreDelta] = computeAnalytics($scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString ,$scope.managementScoreDelta,"management");
+                [$scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString ,$scope.teamworkScoreDelta] = computeAnalytics($scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString ,$scope.teamworkScoreDelta,"teamwork");
 
                 console.log($scope.fulltStemDelta);
                 console.log("String: " ,$scope.fulltStemPreString);
@@ -1466,20 +1469,22 @@ var skillsToolsJSONBuilder = function(receivedObject){
         });
 
     }
-    var firstCompute = 0;
-    function computeAnalytics(curVal, preVal, preString, deltaVal){
-        
+
+    function roundMe(num){
+        return +(Math.round(num + "e+2")  + "e-2");
+        }
+    function computeAnalytics(curVal, preVal, preString, deltaVal, id){
+            console.log(id, curVal, preVal, preString, deltaVal)
     
             if (curVal != preVal){
                 //compute delta
-                console.log(curVal, preVal);
-                deltaVal = curVal - preVal;
-                console.log(deltaVal);
-                if (firstCompute != 0){
-                    preString += JSON.stringify(preVal, null, ',') + ",";
+                deltaVal = roundMe(curVal - preVal);
+                console.log(preString[0]);
+                if (preString[preString.length-1] != roundMe(preVal)){
+                preString.push(roundMe(preVal));     
                 }
                 preVal=curVal;
-                firstCompute = 1;
+                console.log(id,deltaVal, preString,curVal);
             }
             else{
                 console.log("All Values Unchanged");
