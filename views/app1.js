@@ -575,7 +575,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             console.log(toSend);
              $http.post('/api/deeds/workExperience', toSend, config.headers).then(function(response) {
             //Positive 
-                alert("Worked Added");
+                //alert("Worked Added");
                 console.log("Worked");
             }, function(response){
                 //Negative
@@ -1445,7 +1445,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
                 [$scope.fulltScore, $scope.fulltScorePrevious, $scope.fulltScorePreString ,$scope.fulltScoreDelta] = computeAnalytics($scope.fulltScore, $scope.fulltScorePrevious, $scope.fulltScorePreString ,$scope.fulltScoreDelta,"fulltScore"); 
                 [$scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta] = computeAnalytics($scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta,"education");
                 [$scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta] = computeAnalytics($scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta,"membership");
-                [$scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta] = computeAnalytics($scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta,"methods")                
+                [$scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta] = computeAnalytics($scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta,"methods");                
                 [$scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta] = computeAnalytics($scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta,"operational");                
                 [$scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta] = computeAnalytics($scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta,"proficiency"); 
                 [$scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta] = computeAnalytics($scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta,"comms");
