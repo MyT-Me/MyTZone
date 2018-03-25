@@ -565,7 +565,7 @@ module.exports = {
            },
            "multiDisciplinaryMakeup" :{
                "enum":[
-                   "Very low",
+                   "Very Low",
                    "Low",
                    "Moderate",
                    "High",
@@ -574,7 +574,7 @@ module.exports = {
            },
            "multiCulturalMakeup" :{
             "enum":[
-                "Very low",
+                "Very Low",
                 "Low",
                 "Moderate",
                 "High",
