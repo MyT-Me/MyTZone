@@ -1470,19 +1470,21 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
     }
 
-    $scope.roundMe = function(num){
-        return +(Math.round(num + "e+2")  + "e-2");
-        }
+   $scope.roundMe = function(value, decimals=1) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      }
     function computeAnalytics(curVal, preVal, preString, deltaVal, id){
             console.log(id, curVal, preVal, preString, deltaVal)
     
             if (curVal != preVal){
                 //compute delta
-                deltaVal = $scope.roundMe(curVal - preVal);
+                // deltaVal = $scope.roundMe(curVal - preVal);
                 console.log(preString[0]);
                 if (preString[preString.length-1] != $scope.roundMe(preVal)){
                 preString.push($scope.roundMe(preVal));     
                 }
+                deltaVal = $scope.roundMe(curVal - preVal);
+
                 preVal=curVal;
                 console.log(id,deltaVal, preString,curVal);
             }
