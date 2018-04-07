@@ -190,8 +190,18 @@ var scorer = function(userProfile) {
             console.log(certiciation);
             //Adding Certification Weight
             if(certiciation===true) {
+                if(usedInLastThreeYears===true){
+                    unweightedScore = unweightedScore*2;
+                }
+                else{
+                    unweightedScore = unweightedScore*1.25;
+                }
                 unweightedScore *= 1.5;
             }
+            else if(usedInLastThreeYears===true){
+                unweightedScore = unweightedScore*1.5;
+            }
+
             console.log("unweighted score in console");
             console.log(unweightedScore);
             //Adding LinkedIn
@@ -253,12 +263,12 @@ var scorer = function(userProfile) {
                 }
                 var currentScore = WorkIndividualScoreHelper(timeElapsed,scoreOption);
                 if(scoreArray[2]!==null) {  
-                    parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
+                    parent['My_T_Stem'][scoreArray[2]] = Math.round((parent['My_T_Stem'][scoreArray[2]] + currentScore)*100)/100;
                 }
                 if(scoreArray[1]!==null){
                     var topScore = scoreArray[1];
                 for(var i = 0; i<topIter.length ; i++){
-                    parent['My_T_Top'][topIter[i]] = parent['My_T_Top'][topIter[i]] + (currentScore * topScore[i]);
+                    parent['My_T_Top'][topIter[i]] = Math.round((parent['My_T_Top'][topIter[i]] + (currentScore * topScore[i]))*100)/100;
                 }
 
             }

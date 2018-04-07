@@ -24,10 +24,14 @@ $(function() {
 //require('highcharts/modules/exporting')(Highcharts);
 
 
-var app = angular.module('formlyApp', ['ui.router','chart.js']);
+var app = angular.module('formlyApp', ['ui.router','chart.js']).run(['$rootScope', function($rootScope){
+    $rootScope.concessionLoadingScreen = true;
+}])
 
 //Building A Custom Service For Authentication
-angular.module('formlyApp').service('authentication', authentication);
+angular.module('formlyApp').service('authentication', authentication).run(['$rootScope', function($rootScope){
+    $rootScope.concessionLoadingScreen = true;
+}]);
 authentication.$inject = ['$window'];
 function authentication ($window){
     var saveToken = function(token){
@@ -67,7 +71,9 @@ function authentication ($window){
 }
 
 //Building A HTTP Interceptor to add Authentication Values
-angular.module('formlyApp').service('authenticationAdder', authenticationAdder);
+angular.module('formlyApp').service('authenticationAdder', authenticationAdder).run(['$rootScope', function($rootScope){
+    $rootScope.concessionLoadingScreen = true;
+}]);
 authenticationAdder.$inject = ['authentication'];
 function authenticationAdder(authentication){
     var request = function(config){
@@ -1322,6 +1328,13 @@ var skillsToolsJSONBuilder = function(receivedObject){
             personalDetail.selected = $scope.selectedAll;
         });
     };
+    //SCore Cmputing Engine
+    $scope.computedScores = [];
+    $scope.educationScore = 0;
+    $scope.membershipScore = 0;
+    $scope.methodsScore =0;
+    $scope.operationalScore =0;
+    $scope.proficiencyScore =0;
     //SCore COmputing Engine
 
     
@@ -1330,6 +1343,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
     $scope.scoreInitialized;
     $scope.scoreRunner = function(){
+         
         console.log('%c You will get your score here ', 'background: #222; color: #bada55');
         console.log("I run when page is loaded!");
         $http.get('/api/scores').then(function(response) {
@@ -1342,9 +1356,10 @@ var skillsToolsJSONBuilder = function(receivedObject){
             $scope.membershipScore = response["data"]["My_T_Stem"]["Memberships, Authorships, and Recognitions"];
             $scope.fulltStem = $scope.fulltStem+$scope.membershipScore
             $scope.methodsScore = response["data"]["My_T_Stem"]["Methods/Skills Proficiency"];
-            $scope.fulltStem = $scope.fulltStem+$scope.methodsScore
+            $scope.fulltStem = $scope.fulltStem+$scope.methodsScore;
             $scope.operationalScore = response["data"]["My_T_Stem"]["Operations responsibilities and expertise"];
             $scope.fulltStem = $scope.fulltStem+$scope.operationalScore
+            $scope.proficiencyScoreBefore = $scope.proficiencyScore; 
             $scope.proficiencyScore = response["data"]["My_T_Stem"]["Software/Device Proficiency"];
             $scope.fulltStem = $scope.fulltStem+$scope.proficiencyScore
             //T-top
@@ -1470,19 +1485,21 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
     }
 
-    $scope.roundMe = function(num){
-        return +(Math.round(num + "e+2")  + "e-2");
-        }
+   $scope.roundMe = function(value, decimals=1) {
+        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+      }
     function computeAnalytics(curVal, preVal, preString, deltaVal, id){
             console.log(id, curVal, preVal, preString, deltaVal)
     
             if (curVal != preVal){
                 //compute delta
-                deltaVal = $scope.roundMe(curVal - preVal);
+                // deltaVal = $scope.roundMe(curVal - preVal);
                 console.log(preString[0]);
                 if (preString[preString.length-1] != $scope.roundMe(preVal)){
                 preString.push($scope.roundMe(preVal));     
                 }
+                deltaVal = $scope.roundMe(curVal - preVal);
+
                 preVal=curVal;
                 console.log(id,deltaVal, preString,curVal);
             }
