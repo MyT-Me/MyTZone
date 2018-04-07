@@ -190,8 +190,18 @@ var scorer = function(userProfile) {
             console.log(certiciation);
             //Adding Certification Weight
             if(certiciation===true) {
+                if(usedInLastThreeYears===true){
+                    unweightedScore = unweightedScore*2;
+                }
+                else{
+                    unweightedScore = unweightedScore*1.25;
+                }
                 unweightedScore *= 1.5;
             }
+            else if(usedInLastThreeYears===true){
+                unweightedScore = unweightedScore*1.5;
+            }
+
             console.log("unweighted score in console");
             console.log(unweightedScore);
             //Adding LinkedIn
