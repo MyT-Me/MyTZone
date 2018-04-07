@@ -58,7 +58,7 @@ function authentication ($window){
         }
     };
     var test = function(){
-        alert("AUthentication Ran :)");
+        alert("Authentication Ran :)");
     };
     return {
         saveToken: saveToken,
@@ -764,7 +764,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
                 toSend["ArticleTitle"] =  this.formDatadeed.deeddes;
             break;
             case config.CONFERENCES:
-                alert("Inside COnfrences");
+                // alert("Inside COnfrences");
                 toSend["ConferenceSponsor"] = this.formDatadeed.publication;
                 toSend["PresentationTitle"] = this.formDatadeed.deeddes;
             break;
@@ -781,7 +781,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         //Sending http POST request to the backend 
         $http.post('/api/deeds/'+category, toSend, config.headers).then(function(response) {
             //Positive 
-            alert("Worked Added");
+            // alert("Worked Added");
             console.log("Worked");
         }, function(response){
             //Negative
@@ -1328,6 +1328,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
             personalDetail.selected = $scope.selectedAll;
         });
     };
+<<<<<<< HEAD
     //SCore Cmputing Engine
     $scope.computedScores = [];
     $scope.educationScore = 0;
@@ -1335,12 +1336,23 @@ var skillsToolsJSONBuilder = function(receivedObject){
     $scope.methodsScore =0;
     $scope.operationalScore =0;
     $scope.proficiencyScore =0;
+=======
+    //SCore COmputing Engine
+
+    
+
+    $scope.computedScores = [];
+
+    $scope.scoreInitialized;
+>>>>>>> cf6a8c0599e115bbc5e888924beb5e8a2c67c837
     $scope.scoreRunner = function(){
          
         console.log('%c You will get your score here ', 'background: #222; color: #bada55');
+        console.log("I run when page is loaded!");
         $http.get('/api/scores').then(function(response) {
             //Positive Response
             console.log(response["data"]);
+<<<<<<< HEAD
               
             $scope.fulltStem = 0; 
             // var educationScore = $scope.educationScore;
@@ -1370,6 +1382,10 @@ var skillsToolsJSONBuilder = function(receivedObject){
                 
             }
 
+=======
+
+            $scope.fulltStem = 0
+>>>>>>> cf6a8c0599e115bbc5e888924beb5e8a2c67c837
             $scope.educationScore = response["data"]["My_T_Stem"]["Education, Briefings, and Teaching"];
             $scope.fulltStem = $scope.fulltStem+$scope.educationScore
             $scope.membershipScore = response["data"]["My_T_Stem"]["Memberships, Authorships, and Recognitions"];
@@ -1382,6 +1398,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
             $scope.proficiencyScore = response["data"]["My_T_Stem"]["Software/Device Proficiency"];
             $scope.fulltStem = $scope.fulltStem+$scope.proficiencyScore
             //T-top
+<<<<<<< HEAD
 
             $scope.fulltTOP=0;
             //$scope.communicationScoreBefore = $scope.communicationScore; 
@@ -1413,12 +1430,154 @@ var skillsToolsJSONBuilder = function(receivedObject){
             $scope.fulltTOP = $scope.fulltTOP+$scope.teamworkScore;
             $scope.fullTscore = $scope.fulltTOP+ $scope.fulltStem;
             $scope.scoreflag = true;
+=======
+            $scope.fulltTop = 0;
+            $scope.communicationScore = response["data"]["My_T_Top"]["Communications"];
+            $scope.fulltTop = $scope.fulltTop+$scope.communicationScore;
+            $scope.criticalScore = response["data"]["My_T_Top"]["Critical Thinking"];
+            $scope.fulltTop = $scope.fulltTop+$scope.criticalScore;
+            $scope.empathyScore = response["data"]["My_T_Top"]["Empathy"];
+            $scope.fulltTop = $scope.fulltTop+$scope.empathyScore;
+            $scope.globalUnderstandScore = response["data"]["My_T_Top"]["Global understandng"];
+            $scope.fulltTop = $scope.fulltTop+$scope.globalUnderstandScore;
+            $scope.networkingScore = response["data"]["My_T_Top"]["Networking"];
+            $scope.fulltTop = $scope.fulltTop+$scope.networkingScore;
+            $scope.designScore = response["data"]["My_T_Top"]["Organizational design"];
+            $scope.fulltTop = $scope.fulltTop+ $scope.designScore;
+            $scope.perspectiveScore = response["data"]["My_T_Top"]["Perspective"];
+            $scope.fulltTop = $scope.fulltTop+$scope.perspectiveScore;
+            $scope.managementScore = response["data"]["My_T_Top"]["Project management"];
+            $scope.fulltTop = $scope.fulltTop+ $scope.managementScore; 
+            $scope.teamworkScore = response["data"]["My_T_Top"]["Teamwork"];
+            $scope.fulltTop = $scope.fulltTop+$scope.teamworkScore;
+            $scope.fulltScore = $scope.fulltTop+ $scope.fulltStem;
+
+            if ($scope.scoreInitialized != 1){
+                console.log("Tracking Variables Initialized!");
+            //Variables to hold previous score values and initialize to current values
+            $scope.fulltStemPrevious = $scope.fulltStem;
+            $scope.fulltTopPrevious = $scope.fulltTop;
+            $scope.fulltScorePrevious = $scope.fulltScore;
+            $scope.educationScorePrevious = $scope.educationScore;
+            $scope.membershipScorePrevious = $scope.membershipScore;
+            $scope.methodsScorePrevious = $scope.methodsScore;
+            $scope.operationalScorePrevious = $scope.operationalScore;
+            $scope.proficiencyScorePrevious = $scope.proficiencyScore;
+
+            $scope.communicationScorePrevious =  $scope.communicationScore;
+            $scope.criticalScorePrevious = $scope.criticalScore;
+            $scope.empathyScorePrevious =  $scope.empathyScore;
+            $scope.globalUnderstandScorePrevious = $scope.globalUnderstandScore;
+            $scope.networkingScorePrevious =   $scope.networkingScore;
+            $scope.designScorePrevious = $scope.designScore;
+            $scope.perspectiveScorePrevious = $scope.perspectiveScore;
+            $scope.managementScorePrevious = $scope.managementScore;
+            $scope.teamworkScorePrevious = $scope.teamworkScore;
+
+
+            
+
+            //String to hold all previous values 
+            $scope.fulltStemPreString = [$scope.roundMe($scope.fulltStemPrevious)];
+            $scope.fulltTopPreString = [$scope.roundMe($scope.fulltTopPrevious)];
+            $scope.fulltScorePreString = [$scope.roundMe($scope.fulltScorePrevious)];
+            $scope.educationScorePreString = [$scope.roundMe($scope.educationScorePrevious)];
+            $scope.membershipScorePreString = [$scope.roundMe($scope.membershipScorePrevious)];
+            $scope.methodsScorePreString = [$scope.roundMe($scope.methodsScorePrevious)];
+            $scope.operationalScorePreString = [$scope.roundMe($scope.operationalScorePrevious)];
+            $scope.proficiencyScorePreString = [$scope.roundMe($scope.proficiencyScorePrevious)];
+
+            $scope.communicationScorePreString = [$scope.roundMe($scope.communicationScorePrevious)];
+            $scope.criticalScorePreString = [$scope.roundMe($scope.criticalScorePrevious)];
+            $scope.empathyScorePreString = [$scope.roundMe($scope.empathyScorePrevious)];
+            $scope.globalUnderstandScorePreString = [$scope.roundMe($scope.globalUnderstandScorePrevious)];
+            $scope.networkingScorePreString = [$scope.roundMe($scope.networkingScorePrevious)];
+            $scope.designScorePreString = [$scope.roundMe($scope.designScorePrevious)];
+            $scope.perspectiveScorePreString = [$scope.roundMe($scope.perspectiveScorePrevious)];
+            $scope.managementScorePreString = [$scope.roundMe($scope.managementScorePrevious)];
+            $scope.teamworkScorePreString = [$scope.roundMe($scope.teamworkScorePrevious)];
+
+            //Variables to hold Delta score values
+            $scope.fulltStemDelta = 0;
+            $scope.fulltTopDelta = 0;
+            $scope.fulltScoreDelta = 0;
+            $scope.educationScoreDelta = 0;
+            $scope.membershipScoreDelta = 0;
+            $scope.methodsScoreDelta = 0;
+            $scope.operationalScoreDelta = 0;
+            $scope.proficiencyScoreDelta = 0;
+            
+            $scope.communicationScoreDelta = 0;
+            $scope.criticalScoreDelta = 0;
+            $scope.empathyScoreDelta = 0;
+            $scope.globalUnderstandScoreDelta = 0;
+            $scope.networkingScoreDelta = 0;
+            $scope.designScoreDelta = 0;
+            $scope.perspectiveScoreDelta = 0;
+            $scope.managementScoreDelta = 0;
+            $scope.teamworkScoreDelta = 0;
+
+            $scope.scoreInitialized = 1;
+            }
+            else{
+                console.log("Checking Values");
+                
+                //Compute Deltas and Previous Values of T Dataset
+                [$scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString ,$scope.fulltStemDelta] = computeAnalytics($scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString ,$scope.fulltStemDelta,"fullTStem");
+                [$scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString ,$scope.fulltTopDelta] = computeAnalytics($scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString ,$scope.fulltTopDelta,"fulltTopDelta");
+                [$scope.fulltScore, $scope.fulltScorePrevious, $scope.fulltScorePreString ,$scope.fulltScoreDelta] = computeAnalytics($scope.fulltScore, $scope.fulltScorePrevious, $scope.fulltScorePreString ,$scope.fulltScoreDelta,"fulltScore"); 
+                [$scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta] = computeAnalytics($scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta,"education");
+                [$scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta] = computeAnalytics($scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta,"membership");
+                [$scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta] = computeAnalytics($scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta,"methods")                
+                [$scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta] = computeAnalytics($scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta,"operational");                
+                [$scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta] = computeAnalytics($scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta,"proficiency"); 
+                [$scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta] = computeAnalytics($scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta,"comms");
+                [$scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString ,$scope.criticalScoreDelta] = computeAnalytics($scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString ,$scope.criticalScoreDelta,"critical");
+                [$scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString ,$scope.empathyScoreDelta] = computeAnalytics($scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString ,$scope.empathyScoreDelta,"empathy");
+                [$scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString ,$scope.globalUnderstandScoreDelta] = computeAnalytics($scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString ,$scope.globalUnderstandScoreDelta,"understand");
+                [$scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString ,$scope.networkingScoreDelta] = computeAnalytics($scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString ,$scope.networkingScoreDelta,"networking");
+                [$scope.designScore, $scope.designScorePrevious, $scope.designScorePreString ,$scope.designScoreDelta] = computeAnalytics($scope.designScore, $scope.designScorePrevious, $scope.designScorePreString ,$scope.designScoreDelta,"design");
+                [$scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString ,$scope.perspectiveScoreDelta] = computeAnalytics($scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString ,$scope.perspectiveScoreDelta,"perspective");              
+                [$scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString ,$scope.managementScoreDelta] = computeAnalytics($scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString ,$scope.managementScoreDelta,"management");
+                [$scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString ,$scope.teamworkScoreDelta] = computeAnalytics($scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString ,$scope.teamworkScoreDelta,"teamwork");
+
+                console.log($scope.fulltStemDelta);
+                console.log("String: " ,$scope.fulltStemPreString);
+
+            }
+
+>>>>>>> cf6a8c0599e115bbc5e888924beb5e8a2c67c837
         }, function(response) {
             //Negative Response
             console.log("Negative Init");
         });
 
     }
+
+    $scope.roundMe = function(num){
+        return +(Math.round(num + "e+2")  + "e-2");
+        }
+    function computeAnalytics(curVal, preVal, preString, deltaVal, id){
+            console.log(id, curVal, preVal, preString, deltaVal)
+    
+            if (curVal != preVal){
+                //compute delta
+                deltaVal = $scope.roundMe(curVal - preVal);
+                console.log(preString[0]);
+                if (preString[preString.length-1] != $scope.roundMe(preVal)){
+                preString.push($scope.roundMe(preVal));     
+                }
+                preVal=curVal;
+                console.log(id,deltaVal, preString,curVal);
+            }
+            else{
+                console.log("All Values Unchanged");
+            }
+            
+            return [curVal,preVal,preString,deltaVal];
+    
+        }
+   
 
     //charts
     
