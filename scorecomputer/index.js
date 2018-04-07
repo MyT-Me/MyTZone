@@ -196,7 +196,6 @@ var scorer = function(userProfile) {
                 else{
                     unweightedScore = unweightedScore*1.25;
                 }
-                unweightedScore *= 1.5;
             }
             else if(usedInLastThreeYears===true){
                 unweightedScore = unweightedScore*1.5;
