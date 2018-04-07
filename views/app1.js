@@ -1328,7 +1328,6 @@ var skillsToolsJSONBuilder = function(receivedObject){
             personalDetail.selected = $scope.selectedAll;
         });
     };
-<<<<<<< HEAD
     //SCore Cmputing Engine
     $scope.computedScores = [];
     $scope.educationScore = 0;
@@ -1336,7 +1335,6 @@ var skillsToolsJSONBuilder = function(receivedObject){
     $scope.methodsScore =0;
     $scope.operationalScore =0;
     $scope.proficiencyScore =0;
-=======
     //SCore COmputing Engine
 
     
@@ -1344,7 +1342,6 @@ var skillsToolsJSONBuilder = function(receivedObject){
     $scope.computedScores = [];
 
     $scope.scoreInitialized;
->>>>>>> cf6a8c0599e115bbc5e888924beb5e8a2c67c837
     $scope.scoreRunner = function(){
          
         console.log('%c You will get your score here ', 'background: #222; color: #bada55');
@@ -1352,40 +1349,8 @@ var skillsToolsJSONBuilder = function(receivedObject){
         $http.get('/api/scores').then(function(response) {
             //Positive Response
             console.log(response["data"]);
-<<<<<<< HEAD
-              
-            $scope.fulltStem = 0; 
-            // var educationScore = $scope.educationScore;
-            // var membershipScore = $scope.membershipScore;
-            // var methodsScore =$scope.methodsScore;
-            // var operationalScore =$scope.operationalScore;
-            // var proficiencyScore =$scope.proficiencyScore;
-            $scope.scoreflag = false;
-            $scope.educationScore = 0;
-            if($scope.scoreflag){
-                $scope.educationScoreBefore = JSON.parse(JSON.stringify($score.educationScore));
-                $scope.membershipScoreBefore = JSON.parse(JSON.stringify($score.membershipScore));  
-                $scope.methodsScoreBefore = JSON.parse(JSON.stringify($score.methodsScore));
-                $scope.operationalScoreBefore = JSON.parse(JSON.stringify($score.operationalScore));
-                $scope.proficiencyScoreBefore = JSON.parse(JSON.stringify($score.proficiencyScore));
-
-                $scope.communicationScoreBefore = JSON.parse(JSON.stringify($score.communicationScore));
-                $scope.criticalScoreBefore = JSON.parse(JSON.stringify($score.criticalScore));
-                $scope.empathyScoreBefore = JSON.parse(JSON.stringify($score.empathyScore));
-                $scope.globalUnderstandScoreBefore = JSON.parse(JSON.stringify($score.globalUnderstandScore));
-                $scope.networkingScoreBefore = JSON.parse(JSON.stringify($score.networkingScore));
-                $scope.designScoreBefore = JSON.parse(JSON.stringify($score.designScore));
-                $scope.perspectiveScoreBefore = JSON.parse(JSON.stringify($score.perspectiveScore));
-                $scope.teamworkScoreBefore = JSON.parse(JSON.stringify($score.teamworkScore));
-                $scope.managementScoreBefore = JSON.parse(JSON.stringify($score.managementScore));
-                
-                
-            }
-
-=======
 
             $scope.fulltStem = 0
->>>>>>> cf6a8c0599e115bbc5e888924beb5e8a2c67c837
             $scope.educationScore = response["data"]["My_T_Stem"]["Education, Briefings, and Teaching"];
             $scope.fulltStem = $scope.fulltStem+$scope.educationScore
             $scope.membershipScore = response["data"]["My_T_Stem"]["Memberships, Authorships, and Recognitions"];
@@ -1398,39 +1363,6 @@ var skillsToolsJSONBuilder = function(receivedObject){
             $scope.proficiencyScore = response["data"]["My_T_Stem"]["Software/Device Proficiency"];
             $scope.fulltStem = $scope.fulltStem+$scope.proficiencyScore
             //T-top
-<<<<<<< HEAD
-
-            $scope.fulltTOP=0;
-            //$scope.communicationScoreBefore = $scope.communicationScore; 
-            $scope.communicationScore = response["data"]["My_T_Top"]["Communications"];
-            $scope.fulltTOP = $scope.fulltTOP+$scope.communicationScore;
-            //$scope.criticalScoreBefore = $scope.criticalScore;
-            $scope.criticalScore = response["data"]["My_T_Top"]["Critical Thinking"];
-            $scope.fulltTOP = $scope.fulltTOP+$scope.criticalScore;
-            //$scope.empathyScoreBefore = $scope.empathyScore;
-            $scope.empathyScore = response["data"]["My_T_Top"]["Empathy"];
-            $scope.fulltTOP = $scope.fulltTOP+$scope.empathyScore;
-            //$scope.globalUnderstandScoreBefore = $scope.globalUnderstandScore;
-            $scope.globalUnderstandScore = response["data"]["My_T_Top"]["Global understandng"];
-            $scope.fulltTOP = $scope.fulltTOP+$scope.globalUnderstandScore;
-            //$scope.networkingScoreBefore = $scope.networkingScore
-            $scope.networkingScore = response["data"]["My_T_Top"]["Networking"];
-            $scope.fulltTOP = $scope.fulltTOP+$scope.networkingScore;
-            //$scope.designScoreBefore = $scope.designScore;
-            $scope.designScore = response["data"]["My_T_Top"]["Organizational design"];
-            $scope.fulltTOP = $scope.fulltTOP+ $scope.designScore;
-            //$scope.perspectiveScoreBefore = $scope.perspectiveScore;
-            $scope.perspectiveScore = response["data"]["My_T_Top"]["Perspective"];
-            $scope.fulltTOP = $scope.fulltTOP+$scope.perspectiveScore;
-           // $scope.managementScoreBefore = $scope.managementScore;
-            $scope.managementScore = response["data"]["My_T_Top"]["Project management"];
-            $scope.fulltTOP = $scope.fulltTOP+ $scope.managementScore; 
-            //$scope.teamworkScoreBefore = $scope.teamworkScore;
-            $scope.teamworkScore = response["data"]["My_T_Top"]["Teamwork"];
-            $scope.fulltTOP = $scope.fulltTOP+$scope.teamworkScore;
-            $scope.fullTscore = $scope.fulltTOP+ $scope.fulltStem;
-            $scope.scoreflag = true;
-=======
             $scope.fulltTop = 0;
             $scope.communicationScore = response["data"]["My_T_Top"]["Communications"];
             $scope.fulltTop = $scope.fulltTop+$scope.communicationScore;
@@ -1546,7 +1478,6 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
             }
 
->>>>>>> cf6a8c0599e115bbc5e888924beb5e8a2c67c837
         }, function(response) {
             //Negative Response
             console.log("Negative Init");
