@@ -8,7 +8,7 @@ body       { padding-top:50px; font-family: "Trebuchet MS" }
   padding-bottom: 12px;
   padding-left: 7px;
 }
-.container {
+.customContainer {
   width:100% !important;
   background-color: #B1D9E7;
   font-family: "Trebuchet MS";
@@ -26,6 +26,10 @@ body       { padding-top:50px; font-family: "Trebuchet MS" }
   padding-right: 14px;
 }
 
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
 
 .content{
   width: 460px ;
