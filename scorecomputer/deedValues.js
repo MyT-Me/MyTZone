@@ -112,7 +112,7 @@ module.exports = {
                 scores: [
                     3.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null
+                    Stem.EDUCATION_BRIEFINGS_TEACHING
                 ]
             },
             "Teaching Assistant/Lab Assistant for Sem/Qtr course" : {
