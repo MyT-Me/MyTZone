@@ -224,9 +224,9 @@ module.exports = {
             "Fellow/Diplomate" : {
                 name: 'Fellow/Diplomate',
                 scores: [
-                    0,
-                    null,
-                    null
+                    3.0,
+                    [0,0,2,0,0,10,3,5,0],
+                    Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             }
         }
