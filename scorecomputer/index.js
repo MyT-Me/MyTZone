@@ -254,14 +254,22 @@ var scorer = function(userProfile) {
 
     function workExpericeSubScorer(timeElapsed,workDeed,currentWorkDeedValue,workDeedScoreValues,scoreOption) {
         if(workDeedScoreValues.hasOwnProperty(workDeed)) {
+            console.log(workDeed)
             var currentWorkDeed = workDeedScoreValues[workDeed]['contents'];
             if(currentWorkDeed.hasOwnProperty(currentWorkDeedValue)) {
-                var scoreArray = currentWorkDeed[currentWorkDeedValue]['scores'];
+                var currentWorkDeedWithValue = currentWorkDeed[currentWorkDeedValue];
+                var scoreArray = currentWorkDeedWithValue['scores'];
                 if(scoreOption===null) {
                     scoreOption = scoreArray[0];
                 }
                 var currentScore = WorkIndividualScoreHelper(timeElapsed,scoreOption);
-                if(scoreArray[2]!==null) {  
+                if(currentWorkDeedWithValue.hasOwnProperty('weight')){
+                    console.log("currentScore");
+                    currentScore *= currentWorkDeedWithValue['weight'];
+                    console.log(currentScore)
+
+                }
+                 if(scoreArray[2]!==null) {  
                     parent['My_T_Stem'][scoreArray[2]] = Math.round((parent['My_T_Stem'][scoreArray[2]] + currentScore)*100)/100;
                 }
                 if(scoreArray[1]!==null){
@@ -311,9 +319,6 @@ var scorer = function(userProfile) {
         var currentSystemAndOperationInnovation = systemAndOperationInnovation;
         var currentCriticalThinking = criticalThinking;
         var currentOperationsResponsibilities = operationsResponsibilities;
-
-
-
         function loopSelections(currentSelections,currentSelectionName,currentWorkDeed) {
             var currentLength = 4;//currentSelections.length;
             var selectionWorkDeedScoreValues = workDeedScoreValues[currentSelectionName]
@@ -322,11 +327,9 @@ var scorer = function(userProfile) {
                 workExpericeSubScorer(timeElapsed, currentSelectionName,currentSelections[index],workDeedScoreValues,currentWorkDeed[currentSelectionName][currentSelections[index]])
             }
         }
-
         loopSelections(currentSystemAndOperationInnovation,'systemAndOperationInnovation',currentWorkDeed);
         loopSelections(currentCriticalThinking,'criticalThinking',currentWorkDeed);
         loopSelections(currentOperationsResponsibilities,'operationsResponsibilities',currentWorkDeed);
-
     }
 
 }

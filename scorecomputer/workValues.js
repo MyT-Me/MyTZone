@@ -23,6 +23,7 @@ module.exports = {
     role: {
         contents: {
             "Employee" : {
+                weight : 1, 
                 scores: [
                     "years",
                     null,
@@ -30,6 +31,7 @@ module.exports = {
                 ]
             },
             "Consultant/Subject matter expert" : {
+                weight : 1, 
                 scores: [
                     "years",
                     [0,0,3,10,0,0,1,5,2],
@@ -37,6 +39,7 @@ module.exports = {
                 ]
             },
             "Team Leader" : {
+                weight : 2,
                 scores: [
                     "years",
                     [10,0,2,0,5,0,0,3,0],
@@ -44,6 +47,7 @@ module.exports = {
                 ]
             },
             "Manager" : {
+                weight : 3,
                 scores: [
                     "years",
                     [10,1,3,0,3,0,1,2,0],
@@ -51,6 +55,7 @@ module.exports = {
                 ]
             },
             "Executive/Founder" : {
+                weight : 5,
                 scores: [
                     "years",
                     [3,10,3,2,0,0,0,2,0],
@@ -58,6 +63,7 @@ module.exports = {
                 ]
             },
             "Fellow" : {
+                weight :3,
                 scores: [
                     "years",
                     [0,0,5,0,3,5,3,4,0],
@@ -69,6 +75,7 @@ module.exports = {
     operationsResponsibilities: {
         contents: {
             "OR_selectLocations": {
+                weight : 1.5,
                 scores : [
                     "yes",
                     null,
@@ -76,6 +83,7 @@ module.exports = {
                 ]
             },
             "OR_selectEquipment": {
+                weight : 1.5,
                 scores : [
                     "yes",
                     null,
@@ -83,6 +91,7 @@ module.exports = {
                 ]
             },
             "OR_selectManagingLabor": {
+                weight : 1.5,
                 scores : [
                     "yes",
                     null,
@@ -90,6 +99,7 @@ module.exports = {
                 ]
             },
             "OR_determineProcessing": {
+                weight : 5,
                 scores : [
                     "yes",
                     null,
@@ -101,6 +111,7 @@ module.exports = {
     criticalThinking: {
         contents: {
             "CT_requiredMetoFormGoals": {
+                weight : 2,
                 scores : [
                     "yes",
                     [0,0,0,5,0,0,0,0,0],
@@ -108,6 +119,7 @@ module.exports = {
                 ]
             },
             "CT_requiredSystematicApproach": {
+                weight : 2,
                 scores : [
                     "yes",
                     [0,0,0,5,0,0,0,0,0],
@@ -115,6 +127,7 @@ module.exports = {
                 ]
             },
             "CT_requiredInquisitive": {
+                weight : 1.5,
                 scores : [
                     "yes",
                     [0,0,0,5,0,0,0,0,0],
@@ -122,6 +135,7 @@ module.exports = {
                 ]
             },
             "CT_requiredPrioritize": {
+                weight : 2.0,
                 scores : [
                     "yes",
                     [0,0,0,5,0,0,0,0,0],
@@ -129,6 +143,7 @@ module.exports = {
                 ]
             },
             "CT_requiredConfidence": {
+                weight : 1.5,
                 scores : [
                     "yes",
                     [0,0,0,5,0,0,0,0,0],
@@ -140,6 +155,7 @@ module.exports = {
     systemAndOperationInnovation: {
         contents: {
             "SOI_evaluateApplications": {
+                weight : 1,
                 scores : [
                     "yes",
                     [2,2,2,10,0,0,0,4,0],
@@ -147,6 +163,7 @@ module.exports = {
                 ]
             },
             "SOI_selectApplicationsAndSolutions": {
+                weight : 2,
                 scores : [
                     "yes",
                     [2,0,3,10,0,0,0,5,0],
@@ -154,6 +171,7 @@ module.exports = {
                 ]
             },
             "SOI_specificApplicationsAndSolutions": {
+                weight : 2.0,
                 scores : [
                     "yes",
                     [2,4,0,10,0,0,0,4,0],
@@ -161,6 +179,7 @@ module.exports = {
                 ]
             },
             "SOI_buildApplicationsAndSolutions": {
+                weight : 5,
                 scores : [
                     "yes",
                     [0,10,2,5,0,0,0,3,0],
@@ -168,6 +187,7 @@ module.exports = {
                 ]
             },
             "SOI_accessBenifitCostValueSolutions":{
+                weight : 2,
                 scores : [
                     "yes",
                     [0,10,2,4,0,0,0,3,0],
@@ -179,6 +199,7 @@ module.exports = {
     teamSize: {
         contents: {
             "1":{
+                weight : 0, 
                 scores : [
                     "yes",
                     null,
@@ -186,6 +207,7 @@ module.exports = {
                 ]
             },
             "2-3":{
+                weight : 1, 
                 scores : [
                     "yes",
                     [0,0,0,0,20,0,0,0,0],
@@ -193,6 +215,7 @@ module.exports = {
                 ]
             },
             "4-8":{
+                weight : 1.5, 
                 scores : [
                     "yes",
                     [0,0,0,0,20,0,0,0,0],
@@ -200,6 +223,7 @@ module.exports = {
                 ]
             },
             ">9":{
+                weight : 2, 
                 scores : [
                     "yes",
                     [0,0,0,0,20,0,0,0,0],
@@ -211,6 +235,7 @@ module.exports = {
     multiDisciplinaryMakeup: {
         contents: {
             "Very low": {
+                weight : 0.5, 
                 scores : [
                     "yes",
                     null,
@@ -218,6 +243,7 @@ module.exports = {
                 ]
             },
             "Low":{
+                weight : 2,
                 scores : [
                     "yes",
                     [2,0,5,0,0,0,3,10,0],
@@ -225,6 +251,7 @@ module.exports = {
                 ]
             },
             "Moderate":{
+                weight : 3,
                 scores : [
                     "yes",
                     [2,0,5,0,0,0,3,10,0],
@@ -232,6 +259,7 @@ module.exports = {
                 ]
             },
             "High":{
+                weight : 4,
                 scores : [
                     "yes",
                     [2,0,5,0,0,0,3,10,0],
@@ -239,6 +267,7 @@ module.exports = {
                 ]
             },
             "VeryHigh":{
+                weight : 5,
                 scores : [
                     "yes",
                     [2,0,5,0,0,0,3,10,0],
@@ -250,6 +279,7 @@ module.exports = {
     multiCulturalMakeup: {
         contents: {
             "Very low": {
+                weight : 0.5, 
                 scores : [
                     "yes",
                     null,
@@ -257,6 +287,7 @@ module.exports = {
                 ]
             },
             "Low": {
+                weight : 2, 
                 scores : [
                     "yes",
                     [0,0,3,0,0,0,2,5,10],
@@ -264,6 +295,7 @@ module.exports = {
                 ]
             },
             "Moderate": {
+                weight : 3, 
                 scores : [
                     "yes",
                     [0,0,3,0,0,0,2,5,10],
@@ -271,6 +303,7 @@ module.exports = {
                 ]
             },
             "High": {
+                weight : 4, 
                 scores : [
                     "yes",
                     [0,0,3,0,0,0,2,5,10],
@@ -278,6 +311,7 @@ module.exports = {
                 ]
             },
             "VeryHigh": {
+                weight : 5, 
                 scores : [
                     "yes",
                     [0,0,3,0,0,0,2,5,10],
@@ -286,5 +320,4 @@ module.exports = {
             }
         }
     }
-
 }
