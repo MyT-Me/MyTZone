@@ -1,4 +1,3 @@
-
 $(function() {
 
     $('#login-form-link').click(function(e) {
@@ -24,17 +23,18 @@ $(function() {
 //require('highcharts/modules/exporting')(Highcharts);
 
 
-var app = angular.module('formlyApp', ['ui.router','chart.js']).run(['$rootScope', function($rootScope){
+var app = angular.module('formlyApp', ['ui.router', 'chart.js']).run(['$rootScope', function($rootScope) {
     $rootScope.concessionLoadingScreen = true;
 }])
 
 //Building A Custom Service For Authentication
-angular.module('formlyApp').service('authentication', authentication).run(['$rootScope', function($rootScope){
+angular.module('formlyApp').service('authentication', authentication).run(['$rootScope', function($rootScope) {
     $rootScope.concessionLoadingScreen = true;
 }]);
 authentication.$inject = ['$window'];
-function authentication ($window){
-    var saveToken = function(token){
+
+function authentication($window) {
+    var saveToken = function(token) {
         $window.localStorage['my-t-me'] = token;
     };
     var getToken = function() {
@@ -46,18 +46,18 @@ function authentication ($window){
     var login = function(token) {
         saveToken(token);
     };
-    var isLoggedIn = function(){
+    var isLoggedIn = function() {
         var token = getToken()
-        if(token){
+        if (token) {
             payload = token.split('.')[1];
             payload = $window.atob(payload);
             payload = JSON.parse(payload);
-            return payload.exp>Date.now() / 1000;
+            return payload.exp > Date.now() / 1000;
         } else {
             return false;
         }
     };
-    var test = function(){
+    var test = function() {
         alert("Authentication Ran :)");
     };
     return {
@@ -71,15 +71,16 @@ function authentication ($window){
 }
 
 //Building A HTTP Interceptor to add Authentication Values
-angular.module('formlyApp').service('authenticationAdder', authenticationAdder).run(['$rootScope', function($rootScope){
+angular.module('formlyApp').service('authenticationAdder', authenticationAdder).run(['$rootScope', function($rootScope) {
     $rootScope.concessionLoadingScreen = true;
 }]);
 authenticationAdder.$inject = ['authentication'];
-function authenticationAdder(authentication){
-    var request = function(config){
+
+function authenticationAdder(authentication) {
+    var request = function(config) {
         console.log("HTTP REQUEST RAN");
-        if(authentication.isLoggedIn()) {
-            config.headers.Authorization = 'Bearer ' + authentication.getToken() 
+        if (authentication.isLoggedIn()) {
+            config.headers.Authorization = 'Bearer ' + authentication.getToken()
         }
         return config;
     }
@@ -88,7 +89,7 @@ function authenticationAdder(authentication){
     }
 }
 
-app.config(['$httpProvider', function($httpProvider){
+app.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push(authenticationAdder);
 }])
 
@@ -97,7 +98,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
 
-    // route to show our basic form (/form)
+        // route to show our basic form (/form)
         .state('base', {
             url: '/base',
             templateUrl: '/pages/base',
@@ -144,12 +145,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: '/sub/tools'
         })
 
-        .state('base.chart',{
+        .state('base.chart', {
             url: '/chart',
             templateUrl: '/sub/chart'
         })
-        .state('test',{
-            url:'/test',
+        .state('test', {
+            url: '/test',
             templateUrl: '/test'
         })
 
@@ -162,7 +163,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 
 
-app.controller("Controller", ['$scope','$http','$location','authentication', function ($scope,$http,$location,authentication) {
+app.controller("Controller", ['$scope', '$http', '$location', 'authentication', function($scope, $http, $location, authentication) {
 
 
     var year = 2021;
@@ -170,36 +171,36 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     var range = [];
 
     var options = "";
-    for(var y=year; y>=till; y--){
+    for (var y = year; y >= till; y--) {
         range.push(y);
     }
     $scope.years = range;
 
     //Config Values 
     var config = {
-        headers:{headers:{'Content-Type':'application/json'}},
+        headers: { headers: { 'Content-Type': 'application/json' } },
         CERTIFICATES: 'certificates',
         TAKING_CLASSES: 'takingClasses',
-        CONDUCTING_CLASSES:'conductingClasses',
-        MENTORING:'mentoring',
-        WRITINGS:'writings',
-        CONFERENCES:'conferences',
-        AWARDS:'awards',
-        RECOGNIZED_EXPERTISE:'recognizedExpertise',
-        PATENTS:'patents',
-        LANGUAGES:'languages',
-        LEISURE_TRAVEL:'leisureTravel',
-        TOOLS:'tools',
-        SKILLS:'skills',
-        POINTS:'points'
+        CONDUCTING_CLASSES: 'conductingClasses',
+        MENTORING: 'mentoring',
+        WRITINGS: 'writings',
+        CONFERENCES: 'conferences',
+        AWARDS: 'awards',
+        RECOGNIZED_EXPERTISE: 'recognizedExpertise',
+        PATENTS: 'patents',
+        LANGUAGES: 'languages',
+        LEISURE_TRAVEL: 'leisureTravel',
+        TOOLS: 'tools',
+        SKILLS: 'skills',
+        POINTS: 'points'
     };
 
     var colorHex = {
-            EMRALD: '#2ecc71',
-            CARROT: '#e67e22',
-            AMETHIEST: '#9b59b6',
-            PETER: '#3498db'
-        };
+        EMRALD: '#2ecc71',
+        CARROT: '#e67e22',
+        AMETHIEST: '#9b59b6',
+        PETER: '#3498db'
+    };
     var colorSchemas = {
         BASIC: 'EMRALD',
         INTER: 'CARROT',
@@ -209,11 +210,11 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
 
     //Common Functions
 
-    var getMaximumIndex = function(detailsObject){
+    var getMaximumIndex = function(detailsObject) {
         var max = 0;
-        detailsObject.forEach(function(each){
-            if(each.ind !== null){
-                if(max<each.ind){
+        detailsObject.forEach(function(each) {
+            if (each.ind !== null) {
+                if (max < each.ind) {
                     max = each.ind;
                 };
             };
@@ -222,75 +223,75 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     }
 
     var getIndex = function(detailsObject, indexValue) {
-        for(var i = 0; i<detailsObject.length; i++){
-            if(detailsObject[i].ind === indexValue){
+        for (var i = 0; i < detailsObject.length; i++) {
+            if (detailsObject[i].ind === indexValue) {
                 return i;
             }
         }
     }
 
-    var setBoolean = function(input){
-        if(input.toLowerCase() === 'no'){
+    var setBoolean = function(input) {
+        if (input.toLowerCase() === 'no') {
             return false;
         } else {
             return true;
         }
     }
 
-    var getFromBoolean = function(input){
-        if(input){
+    var getFromBoolean = function(input) {
+        if (input) {
             return "Yes";
         } else {
             return "No";
         }
     };
 
-    var remover = function (arayObject, deedName) {
+    var remover = function(arayObject, deedName) {
         console.log("Inside the Remover");
         console.log(arayObject);
         var ids = [];
-        arayObject.forEach(function (eachObject) {
+        arayObject.forEach(function(eachObject) {
             console.log((eachObject.selected));
-            if(eachObject.selected){
+            if (eachObject.selected) {
                 ids.push(eachObject.id);
             }
         });
-        var queryParam="";
+        var queryParam = "";
         console.log("Ids Length");
-        console.log(ids.length );
-        if(ids.length === 0){
+        console.log(ids.length);
+        if (ids.length === 0) {
             return;
         }
-        for(i=0; i<ids.length-1;i++){
-            queryParam = queryParam + 'ids='+ids[i]+'&';
+        for (i = 0; i < ids.length - 1; i++) {
+            queryParam = queryParam + 'ids=' + ids[i] + '&';
         }
 
-        queryParam=queryParam+'ids='+ids[ids.length-1];
-        var url = '/api/'+deedName;
-        url = url+'?' + queryParam;
+        queryParam = queryParam + 'ids=' + ids[ids.length - 1];
+        var url = '/api/' + deedName;
+        url = url + '?' + queryParam;
         console.log("URL");
         console.log(url);
-        $http.delete(url).then(function (response) {
+        $http.delete(url).then(function(response) {
             console.log(response);
-        }, function (response) {
+        }, function(response) {
             console.log(response);
         });
     }
 
     Array.prototype.extend = function(newArray) {
-        newArray.forEach(function(element){
+        newArray.forEach(function(element) {
             console.log(element.ind);
             this.push(element);
-        },this);
+        }, this);
     }
 
 
-    $scope.removeSkills = function(){
+    $scope.removeSkills = function() {
         remover($scope.personalDetailsSkills, "skills");
-        var newDataList=[];
+        var newDataList = [];
         $scope.selectedAll = false;
-        angular.forEach($scope.personalDetailsSkills, function(selected){
-            if(!selected.selected){
+        angular.forEach($scope.personalDetailsSkills, function(selected) {
+            if (!selected.selected) {
                 newDataList.push(selected);
             }
         });
@@ -300,59 +301,58 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     // LOGIN
     $scope.login = {}
 
-    $scope.loginInit = function(){
-        if(authentication.isLoggedIn()){
+    $scope.loginInit = function() {
+        if (authentication.isLoggedIn()) {
             $location.path("/base/educate");
         }
     }
 
-    $scope.loginUser = function(){  
+    $scope.loginUser = function() {
         loginJson = {
             "userName": $scope.login.user,
             "password": $scope.login.password
         }
         console.log(loginJson);
-        $http.post('/login', loginJson, config.headers).then(function(response){
+        $http.post('/login', loginJson, config.headers).then(function(response) {
             console.log("Success Response");
             console.log(response);
-            if(response.data.token){
+            if (response.data.token) {
                 var token = response.data.token
                 authentication.saveToken(token);
             }
             console.log("Trying to Set the Path");
             $location.path("/base/educate");
-        }, function(response){
+        }, function(response) {
             alert("Incorrect UserName or Password - Please try again");
             console.log("Failure Response");
             console.log(response);
         });
     }
 
-    $scope.checkEmail = function(){
+    $scope.checkEmail = function() {
 
-            var email = document.getElementById('username');
-            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            if (!filter.test(email.value)) {
-                email.focus;
-                document.getElementById('username').style.borderColor = "red";
-                return false;
-            }
-            else{
-                document.getElementById('username').style.borderColor = "#a6a6a6";
-                return true;
-            }
+        var email = document.getElementById('username');
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!filter.test(email.value)) {
+            email.focus;
+            document.getElementById('username').style.borderColor = "red";
+            return false;
+        } else {
+            document.getElementById('username').style.borderColor = "#a6a6a6";
+            return true;
+        }
 
     };
 
     //SCope Logout
-    $scope.Logout = function(){
+    $scope.Logout = function() {
         authentication.logout()
         $location.path('/base/login');
     }
     //REGISTRATION
     $scope.registration = {}
 
-    $scope.registerUser = function(){
+    $scope.registerUser = function() {
         console.log($scope.registration);
         //JSON For Registration
         registerUser = {
@@ -366,11 +366,11 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         }
         //Calling Registration
         //Sending JSON to API - /signUp
-        $http.post('/signUp',registerUser,config.headers).then(function(response){
+        $http.post('/signUp', registerUser, config.headers).then(function(response) {
             authentication.saveToken(response.data.token);
             alert("User Creation Done");
             $location.path("/base/educate");
-        }, function(response){
+        }, function(response) {
             alert("Unable To Register Now");
         });
 
@@ -382,12 +382,13 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
 
     function sortByKey(array, key) {
         return array.sort(function(a, b) {
-            var x = a[key]; var y = b[key];
+            var x = a[key];
+            var y = b[key];
             return ((x > y) ? -1 : ((x < y) ? 0 : 1));
         });
     }
 
-    $scope.eduInit = function(){
+    $scope.eduInit = function() {
         //Get Existing Data From the Database
 
         $http.get('/api/education').then(function(response) {
@@ -415,7 +416,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     };
 
     var addNewBlankEduField = function() {
-       $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
+        $scope.eduDetails = sortByKey($scope.eduDetails, "ind");
         //var ind = getIndex($scope.eduDetails);
         var ind = getMaximumIndex($scope.eduDetails);
         $scope.eduDetails.push({
@@ -427,17 +428,17 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             'status': "",
             'honor': "",
             'id': "",
-            'ind': ind +1
+            'ind': ind + 1
         });
     }
 
-    $scope.addNewEdu = function(){
-        
+    $scope.addNewEdu = function() {
+
         var eduListLength = $scope.eduDetails.length;
-        if(eduListLength>0) {
+        if (eduListLength > 0) {
             console.log("Grater Than 0");
             var latestIndex = getMaximumIndex($scope.eduDetails);
-            var latestEduDetail = $scope.eduDetails.find(function(eduDetail){
+            var latestEduDetail = $scope.eduDetails.find(function(eduDetail) {
                 return eduDetail.ind === latestIndex;
             });
             console.log(latestEduDetail);
@@ -450,22 +451,22 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
                 "degreeProgramStatus": latestEduDetail.status,
             };
 
-            if(latestEduDetail.honor !== "") {
+            if (latestEduDetail.honor !== "") {
                 toSend["honors"] = latestEduDetail.honor;
             }
             var deedURL = "/api/deeds/"
             var v2testURL = "/v2Post/"
-            console.log(toSend) 
-            $http.post('/api/deeds/education', toSend, config.headers).then(function(response){
-                
+            console.log(toSend)
+            $http.post('/api/deeds/education', toSend, config.headers).then(function(response) {
+
                 //Success handling
 
                 console.log(response.data);
-                $scope.eduDetails[$scope.eduDetails.length-1]['id'] = response.data.dbid;
-                $scope.eduDetails[$scope.eduDetails.length-1]['timestamp'] = response.data.timestamp;
+                $scope.eduDetails[$scope.eduDetails.length - 1]['id'] = response.data.dbid;
+                $scope.eduDetails[$scope.eduDetails.length - 1]['timestamp'] = response.data.timestamp;
                 addNewBlankEduField();
                 console.log($scope.eduDetails);
-            },function(response){
+            }, function(response) {
                 //Failure Handing
                 console.log(response);
                 alert("Sorry Could Not Add to Database");
@@ -477,19 +478,19 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         }
     };
 
-    $scope.removeEdu = function(){
+    $scope.removeEdu = function() {
         remover($scope.eduDetails, "education");
-        var newDataList=[];
+        var newDataList = [];
         $scope.selectedAll = false;
-        angular.forEach($scope.eduDetails, function(selected){
-            if(!selected.selected){
+        angular.forEach($scope.eduDetails, function(selected) {
+            if (!selected.selected) {
                 newDataList.push(selected);
             }
         });
         $scope.eduDetails = newDataList;
     };
 
-    $scope.checkAllEdu = function () {
+    $scope.checkAllEdu = function() {
         if (!$scope.selectedAll) {
             $scope.selectedAll = true;
         } else {
@@ -500,15 +501,14 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         });
     };
 
-    $scope.validate = function(){
+    $scope.validate = function() {
         var start = document.getElementById("start");
         var end = document.getElementById("end");
 
-        if(end.value < start.value){
+        if (end.value < start.value) {
             document.getElementById('end').style.borderColor = "red";
             return false;
-        }
-        else{
+        } else {
             document.getElementById('end').style.borderColor = "#a6a6a6";
             return true;
         }
@@ -533,7 +533,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     $scope.sameEmployer = false;
     $scope.editIndexWork = null;
 
-    $scope.addNewWork = function () {
+    $scope.addNewWork = function() {
         if ($scope.editIndexWork !== null) {
             $scope.saveWork();
         } else {
@@ -541,49 +541,49 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             console.log(tem);
             console.log($scope);
             var toSend = {
-                "operationsResponsibilities" :{ 
+                "operationsResponsibilities": {
                     "OR_selectLocations": tem.q1,
                     "OR_selectEquipment": tem.q2,
                     "OR_selectManagingLabor": tem.q3,
                     "OR_determineProcessing": tem.q4,
                 },
-                "criticalThinking" : {
+                "criticalThinking": {
                     "CT_requiredMetoFormGoals": tem.q5,
                     "CT_requiredSystematicApproach": tem.q6,
                     "CT_requiredInquisitive": tem.q7,
                     "CT_requiredPrioritize": tem.q8,
                     "CT_requiredConfidence": tem.q9
                 },
-                "systemAndOperationInnovation":{
+                "systemAndOperationInnovation": {
                     "SOI_evaluateApplications": tem.q10,
-                    "SOI_selectApplicationsAndSolutions": tem.q11, 
+                    "SOI_selectApplicationsAndSolutions": tem.q11,
                     "SOI_specificApplicationsAndSolutions": tem.q12,
                     "SOI_buildApplicationsAndSolutions": tem.q13,
                     "SOI_accessBenifitCostValueSolutions": tem.q14
                 },
-                "employerSectionOfFocus" : tem.esector,
-                "employerOrganizationName" : tem.ename,
-                "locationRegion" : tem.region,
-                "startYear" : String(tem.syear),
-                "endYear" : String(tem.eyear),
-                "startMonth" : tem.smonth,
-                "endMonth" : tem.emonth,
-                "positionDescription" : tem.position,
-                "primaryFunction" : tem.primary,
-                "teamSize" : tem.team,
-                "multiDisciplinaryMakeup" : tem.multidis,
-                "multiCulturalMakeup" : tem.multicul,
-                "paidUnpaid" : tem.paid,
-                "role" : tem.role
+                "employerSectionOfFocus": tem.esector,
+                "employerOrganizationName": tem.ename,
+                "locationRegion": tem.region,
+                "startYear": String(tem.syear),
+                "endYear": String(tem.eyear),
+                "startMonth": tem.smonth,
+                "endMonth": tem.emonth,
+                "positionDescription": tem.position,
+                "primaryFunction": tem.primary,
+                "teamSize": tem.team,
+                "multiDisciplinaryMakeup": tem.multidis,
+                "multiCulturalMakeup": tem.multicul,
+                "paidUnpaid": tem.paid,
+                "role": tem.role
 
             };
             console.log("to send");
             console.log(toSend);
-             $http.post('/api/deeds/workExperience', toSend, config.headers).then(function(response) {
-            //Positive 
+            $http.post('/api/deeds/workExperience', toSend, config.headers).then(function(response) {
+                //Positive 
                 //alert("Worked Added");
                 console.log("Worked");
-            }, function(response){
+            }, function(response) {
                 //Negative
                 alert("Didn't Add");
                 console.log(response);
@@ -605,20 +605,20 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         // $scope.showTheFormWork = this.showTheFormWork;
     };
 
-    $scope.setSameEmployerTrue = function () {
+    $scope.setSameEmployerTrue = function() {
         $scope.workData["ename"] = $scope.model.recent["ename"];
     };
 
-    $scope.setSameEmployerFalse = function () {
+    $scope.setSameEmployerFalse = function() {
         $scope.workData = {};
     };
 
-    $scope.removeWork = function (index) {
+    $scope.removeWork = function(index) {
         var tmpUser = [];
         var ind = 0;
         var tmpFormList = [];
 
-        angular.forEach($scope.workDataList, function (selected) {
+        angular.forEach($scope.workDataList, function(selected) {
             if (index != selected["id"]) {
                 selected["id"] = ind;
                 tmpUser.push(selected);
@@ -632,13 +632,13 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         $scope.editIndexWork = null;
     };
 
-    $scope.checkAllWork = function () {
+    $scope.checkAllWork = function() {
         if (!$scope.selectedAll) {
             $scope.selectedAll = true;
         } else {
             $scope.selectedAll = false;
         }
-        angular.forEach($scope.model.user, function (user) {
+        angular.forEach($scope.model.user, function(user) {
             user.selected = $scope.selectedAll;
         });
     };
@@ -648,28 +648,28 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     //     $scope.showTheFormWork = !$scope.showTheFormWork;
     // };
 
-    $scope.ShowHideWork = function () {
+    $scope.ShowHideWork = function() {
         //If DIV is visible it will be hidden and vice versa.
         $scope.showme = !$scope.showme;
     };
 
-    $scope.resetFormWork = function () {
+    $scope.resetFormWork = function() {
         $scope.regForm = angular.copy($scope.originForm); // Assign clear state to modified form
         $scope.myForm.$setPristine(); // this line will update status of your form, but will not clean your data, where `registrForm` - name of form.
     };
 
-    $scope.getTemplateWork = function (user) {
+    $scope.getTemplateWork = function(user) {
         if (user.id === $scope.model.selected.id) return 'edit';
         else return 'display';
     };
 
-    $scope.resetWork = function () {
+    $scope.resetWork = function() {
         $scope.model.selected = {};
         $scope.editIndexWork = null;
         $scope.workData = {};
     };
 
-    $scope.editWork = function (index) {
+    $scope.editWork = function(index) {
         $scope.editIndexWork = index;
         $scope.workData = $scope.workDataList[index];
 
@@ -689,7 +689,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         return true;
     };
 
-    $scope.questionWork = function (index) {
+    $scope.questionWork = function(index) {
         $scope.editIndexWork = index;
         $scope.workData = $scope.workDataList[index];
 
@@ -702,7 +702,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         return true;
     };
 
-    $scope.saveWork = function () {
+    $scope.saveWork = function() {
         console.log("inside save work");
         $scope.workDataList[$scope.editIndexWork] = angular.copy($scope.workData);
 
@@ -723,7 +723,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         $scope.resetWork();
     };
 
-    $scope.processForm1 = function () {
+    $scope.processForm1 = function() {
         // execute something
         $scope.showbutton = true;
         $scope.shownew = false;
@@ -745,7 +745,7 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     };
 
 
-    $scope.addNewdeed = function (category) {
+    $scope.addNewdeed = function(category) {
         console.log("Submit Clicked");
         console.log("CATEGORY check");
         console.log(category);
@@ -758,32 +758,32 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
             year: this.formDatadeed.syear
         }
 
-        switch(category){
+        switch (category) {
             case config.WRITINGS:
-                toSend["PublicationName"] = this.formDatadeed.publication ;
-                toSend["ArticleTitle"] =  this.formDatadeed.deeddes;
-            break;
+                toSend["PublicationName"] = this.formDatadeed.publication;
+                toSend["ArticleTitle"] = this.formDatadeed.deeddes;
+                break;
             case config.CONFERENCES:
                 // alert("Inside COnfrences");
                 toSend["ConferenceSponsor"] = this.formDatadeed.publication;
                 toSend["PresentationTitle"] = this.formDatadeed.deeddes;
-            break;
+                break;
             case config.AWARDS:
                 toSend["AwardSponsor"] = this.formDatadeed.publication;
                 toSend["AwardTitle"] = this.formDatadeed.deeddes;
-            break;
+                break;
             default:
                 toSend['description'] = this.formDatadeed.deeddes;
-            break;
+                break;
         }
         console.log("Trying to Print Sending JSON");
         console.log(toSend);
         //Sending http POST request to the backend 
-        $http.post('/api/deeds/'+category, toSend, config.headers).then(function(response) {
+        $http.post('/api/deeds/' + category, toSend, config.headers).then(function(response) {
             //Positive 
             // alert("Worked Added");
             console.log("Worked");
-        }, function(response){
+        }, function(response) {
             //Negative
             alert("Didn't Add");
             console.log(response);
@@ -801,8 +801,8 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
                 'category': category,
                 'activity': this.formDatadeed.activity,
                 'deeddes': this.formDatadeed.deeddes,
-                'pub':this.formDatadeed.pub,
-                'art':this.formDatadeed.art
+                'pub': this.formDatadeed.pub,
+                'art': this.formDatadeed.art
             };
             $scope.model.deeds.push(tmpDeed);
 
@@ -818,11 +818,11 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
     };
 
 
-    $scope.removedeed = function (deedId) {
+    $scope.removedeed = function(deedId) {
         var tmpDeed = [];
         var ind = 0;
 
-        angular.forEach($scope.model.deeds, function (selected) {
+        angular.forEach($scope.model.deeds, function(selected) {
             if (deedId != selected["id"]) {
                 selected["id"] = ind;
                 tmpDeed.push(selected);
@@ -857,24 +857,24 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
 
 
     //Adding SCore Section
-    
 
-    $scope.getTemplatedeed= function (deed) {
+
+    $scope.getTemplatedeed = function(deed) {
         if (deed.id === $scope.model.selected.id) return 'edit';
         else return 'display';
     };
 
-    $scope.resetdeed = function () {
+    $scope.resetdeed = function() {
         $scope.model.selected = {};
         $scope.editIndexdeed = null;
         $scope.formDatadeed = {};
     };
 
-    $scope.editDeed = function (deedId) {
+    $scope.editDeed = function(deedId) {
         $scope.editDeedId = deedId;
         $scope.formDatadeed = {};
 
-        angular.forEach($scope.model.deeds, function (selected) {
+        angular.forEach($scope.model.deeds, function(selected) {
             if (deedId == selected["id"]) {
                 $scope.formDatadeed = selected;
             }
@@ -895,43 +895,43 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         document.getElementById($scope.formDatadeed.category).style.display = "block";
     };
 
-    $scope.openDeed = function (event, deed) {
+    $scope.openDeed = function(event, deed) {
         var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(deed).style.display = "block";
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(deed).style.display = "block";
 
 
-            if(event){
-                event.currentTarget.className += " active";
-            } else {
-                if(document.getElementById('defaultOpen') !== null){
+        if (event) {
+            event.currentTarget.className += " active";
+        } else {
+            if (document.getElementById('defaultOpen') !== null) {
                 document.getElementById("defaultOpen").click();
-                }
             }
+        }
 
-        };
+    };
 
-        // Get the element with id="defaultOpen" and click on it
-        // document.getElementById("defaultOpen").click();
+    // Get the element with id="defaultOpen" and click on it
+    // document.getElementById("defaultOpen").click();
 
-    $scope.setDefaultDeed = function () {
+    $scope.setDefaultDeed = function() {
         $scope.openDeed(null, "certificates");
         document.getElementById("defaultOpen").click();
     };
 
-    $scope.setCategorydeed = function (category) {
+    $scope.setCategorydeed = function(category) {
         console.log(category);
         $scope.formDatadeed.category = category;
     };
 
-    $scope.saveDeed = function () {
+    $scope.saveDeed = function() {
         $scope.model.deeds[$scope.editIndexdeed] = angular.copy($scope.formDatadeed);
 
         $scope.model.deeds[$scope.editIndexdeed]["id"] = $scope.editIndexdeed;
@@ -945,63 +945,63 @@ app.controller("Controller", ['$scope','$http','$location','authentication', fun
         $scope.resetdeed();
     };
 
-    $scope.processForm1deed = function () {
+    $scope.processForm1deed = function() {
         // execute something
         $scope.showbutton = true;
         $scope.shownew = false;
     };
 
-//Common for SKills and Tools
+    //Common for SKills and Tools
 
-$scope.dropDownColorSetter = function(value , proficiencyType) {
-    var returnValue;
-    if(value === "" || value === undefined) {
-        returnValue = "None";
-    } else {
-        switch(proficiencyType) {
-            case 'basic':
-                returnValue = colorHex[colorSchemas.BASIC];
-                break;
-            case 'inter':
-                returnValue = colorHex[colorSchemas.INTER];
-                break;
-            case 'advanced':
-                returnValue = colorHex[colorSchemas.ADVANCED];
-                break;
-            case 'expert':
-                returnValue =  colorHex[colorSchemas.EXPERT];
-                break;
+    $scope.dropDownColorSetter = function(value, proficiencyType) {
+        var returnValue;
+        if (value === "" || value === undefined) {
+            returnValue = "None";
+        } else {
+            switch (proficiencyType) {
+                case 'basic':
+                    returnValue = colorHex[colorSchemas.BASIC];
+                    break;
+                case 'inter':
+                    returnValue = colorHex[colorSchemas.INTER];
+                    break;
+                case 'advanced':
+                    returnValue = colorHex[colorSchemas.ADVANCED];
+                    break;
+                case 'expert':
+                    returnValue = colorHex[colorSchemas.EXPERT];
+                    break;
+            }
         }
+        // console.log(returnValue);
+        return returnValue;
     }
-   // console.log(returnValue);
-    return returnValue;
-}
 
-var skillsToolsJSONBuilder = function(receivedObject){
-    var returnJSON =  {
-        'category': receivedObject.category,
-        'software': receivedObject.software,
-        'vendor': receivedObject.vendor,
-        'linkedin': receivedObject.linkedin,
-        'basicyear': "",
-        'interyear': "",
-        'advancedyear': "",
-        'expertyear': "",
-        'formal': getFromBoolean(receivedObject.formal),
-        'usage':  getFromBoolean(receivedObject.usage),
-        'ind':receivedObject.ind,
-        'id': receivedObject.id
+    var skillsToolsJSONBuilder = function(receivedObject) {
+        var returnJSON = {
+            'category': receivedObject.category,
+            'software': receivedObject.software,
+            'vendor': receivedObject.vendor,
+            'linkedin': receivedObject.linkedin,
+            'basicyear': "",
+            'interyear': "",
+            'advancedyear': "",
+            'expertyear': "",
+            'formal': getFromBoolean(receivedObject.formal),
+            'usage': getFromBoolean(receivedObject.usage),
+            'ind': receivedObject.ind,
+            'id': receivedObject.id
+        }
+        returnJSON[receivedObject.proficiencyType + 'year'] = receivedObject.proficiencyYear;
+        return returnJSON;
     }
-    returnJSON[receivedObject.proficiencyType+'year'] = receivedObject.proficiencyYear;
-    return returnJSON;
-}
 
-//Skills Controller
+    //Skills Controller
 
     $scope.personalDetailsSkills = [];
     $scope.reverseSortSkills = false;
 
-    $scope.skillsInit = function(){
+    $scope.skillsInit = function() {
         $http.get('/api/skills').then(function(response) {
             //Positive Response
             $scope.personalDetailsSkills = [];
@@ -1012,7 +1012,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
             console.log(responseData);
             console.log("This is Repsonse");
             console.log(responseArray);
-            responseArray.forEach(function(eachResponse){
+            responseArray.forEach(function(eachResponse) {
                 $scope.personalDetailsSkills.push(skillsToolsJSONBuilder(eachResponse));
             })
             addNewBlankSkills();
@@ -1025,50 +1025,50 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
     $scope.addNewSkill = function() {
         var skillListLength = $scope.personalDetailsSkills.length;
-        if(!(skillListLength>0)) {
+        if (!(skillListLength > 0)) {
             console.log("Blank Tools List");
             addNewBlankSkills();
         } else {
             console.log("Data Present in Tools List");
             var latestIndex = getMaximumIndex($scope.personalDetailsSkills);
-            var latestSkillDetail = $scope.personalDetailsSkills.find(function(skillDetail){
+            var latestSkillDetail = $scope.personalDetailsSkills.find(function(skillDetail) {
                 return skillDetail.ind === latestIndex;
             });
             var toSend = {
                 category: latestSkillDetail.category,
                 softwareDeviceName: latestSkillDetail.software,
-                vendorDistributor: latestSkillDetail.vendor ,
+                vendorDistributor: latestSkillDetail.vendor,
                 numberOfLinkedEndorsments: latestSkillDetail.linkedin,
                 formalCertification: setBoolean(latestSkillDetail.formal),
                 usagein3Years: setBoolean(latestSkillDetail.usage)
             }
             var proficiencyType, proficiencyYear;
-            if(latestSkillDetail.basicyear !== ""){
+            if (latestSkillDetail.basicyear !== "") {
                 proficiencyType = "basic";
                 proficiencyYear = latestSkillDetail.basicyear;
-            }else if(latestSkillDetail.interyear){
+            } else if (latestSkillDetail.interyear) {
                 proficiencyType = "inter";
                 proficiencyYear = latestSkillDetail.interyear;
-            }else if(latestSkillDetail.advancedyear){
+            } else if (latestSkillDetail.advancedyear) {
                 proficiencyType = "advanced";
                 proficiencyYear = latestSkillDetail.advancedyear;
-            }else if(latestSkillDetail.expertyear){
+            } else if (latestSkillDetail.expertyear) {
                 proficiencyType = "expert";
                 proficiencyYear = latestSkillDetail.expertyear;
             }
             toSend["proficiencyType"] = proficiencyType;
             toSend["proficiencyYear"] = proficiencyYear;
             console.log(toSend);
-            $http.post('/api/deeds/skills', toSend, config.headers).then(function(response){
+            $http.post('/api/deeds/skills', toSend, config.headers).then(function(response) {
                 //Success handling
                 console.log(response.data);
                 console.log($scope.personalDetailsSkills);
-                var currentIndex = getIndex($scope.personalDetailsSkills,latestIndex);
+                var currentIndex = getIndex($scope.personalDetailsSkills, latestIndex);
                 console.log(currentIndex);
                 $scope.personalDetailsSkills[currentIndex]['id'] = response.data.dbid;
                 $scope.personalDetailsSkills[currentIndex]['timestamp'] = response.data.timestamp;
                 addNewBlankSkills();
-            },function(response){
+            }, function(response) {
                 //Failure Handing
                 console.log(response);
                 alert("Sorry Could Not Add to Database");
@@ -1094,10 +1094,10 @@ var skillsToolsJSONBuilder = function(receivedObject){
             'id': "",
             'ind': getMaximumIndex($scope.personalDetailsSkills) + 1
         });
-    console.log($scope.personalDetailsSkills);
+        console.log($scope.personalDetailsSkills);
     }
 
-    $scope.checkAllSkills = function () {
+    $scope.checkAllSkills = function() {
         if (!$scope.selectedAll) {
             $scope.selectedAll = true;
         } else {
@@ -1108,12 +1108,12 @@ var skillsToolsJSONBuilder = function(receivedObject){
         });
     };
 
-///ToolsController
+    ///ToolsController
     $scope.personalDetailsTools = [];
     $scope.reverseSortTools = false;
 
 
-    $scope.toolsInit = function(){
+    $scope.toolsInit = function() {
         $http.get('/api/tools').then(function(response) {
             //Positive Response
             $scope.personalDetailsTools = [];
@@ -1125,7 +1125,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
             console.log("This is Repsonse");
             console.log(responseArray);
             //$scope.eduDetails.extend(responseArray);
-            responseArray.forEach(function(eachResponse){
+            responseArray.forEach(function(eachResponse) {
                 $scope.personalDetailsTools.push(skillsToolsJSONBuilder(eachResponse));
             })
             addNewBlankTools();
@@ -1157,33 +1157,33 @@ var skillsToolsJSONBuilder = function(receivedObject){
     }
 
     $scope.skillsClearDropDowns = function(value, index) {
-        toolsSkillsClearDropDowns(value,index, "skills");
+        toolsSkillsClearDropDowns(value, index, "skills");
     };
 
     $scope.toolsClearDropDowns = function(value, index) {
-        toolsSkillsClearDropDowns(value,index, "tools");
+        toolsSkillsClearDropDowns(value, index, "tools");
     };
 
-    var toolsSkillsClearDropDowns = function (value, index , page) {
+    var toolsSkillsClearDropDowns = function(value, index, page) {
         id = event.target.id;
         console.log("Inside our cleaner");
         console.log(value);
-        if(value === "" || value === undefined){
+        if (value === "" || value === undefined) {
             return;
         }
         var proficiencyObject;
-        if(page === 'skills') {
-            proficiencyObject = $scope.personalDetailsSkills; 
-        } else if(page === 'tools') {
+        if (page === 'skills') {
+            proficiencyObject = $scope.personalDetailsSkills;
+        } else if (page === 'tools') {
             proficiencyObject = $scope.personalDetailsTools;
         }
-        switch(id) {
+        switch (id) {
             case 'basicyear':
-            /*
-                document.getElementById('interyear').value = "";
-                document.getElementById('advancedyear').value = "";
-                document.getElementById('expertyear').value = "";
-            */
+                /*
+                    document.getElementById('interyear').value = "";
+                    document.getElementById('advancedyear').value = "";
+                    document.getElementById('expertyear').value = "";
+                */
                 proficiencyObject[index].interyear = "";
                 proficiencyObject[index].advancedyear = "";
                 proficiencyObject[index].expertyear = "";
@@ -1199,21 +1199,21 @@ var skillsToolsJSONBuilder = function(receivedObject){
                 proficiencyObject[index].expertyear = "";
                 break;
             case 'advancedyear':
-            /*
-                document.getElementById('basicyear').value = "";
-                document.getElementById('interyear').value = "";
-                document.getElementById('expertyear').value = "";
-            */
+                /*
+                    document.getElementById('basicyear').value = "";
+                    document.getElementById('interyear').value = "";
+                    document.getElementById('expertyear').value = "";
+                */
                 proficiencyObject[index].interyear = "";
                 proficiencyObject[index].basicyear = "";
                 proficiencyObject[index].expertyear = "";
                 break;
             case 'expertyear':
-            /*
-                document.getElementById('basicyear').value = "";
-                document.getElementById('interyear').value = "";
-                document.getElementById('advancedyear').value = "";
-            */
+                /*
+                    document.getElementById('basicyear').value = "";
+                    document.getElementById('interyear').value = "";
+                    document.getElementById('advancedyear').value = "";
+                */
                 proficiencyObject[index].basicyear = "";
                 proficiencyObject[index].interyear = "";
                 proficiencyObject[index].advancedyear = "";
@@ -1248,7 +1248,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
     $scope.addNewtools = function() {
         console.log("add new tools from app1||||||||||||||||");
         var toolListLength = $scope.personalDetailsTools.length;
-        if(!(toolListLength>0)) {
+        if (!(toolListLength > 0)) {
             console.log("Blank Tools List");
             addNewBlankTools();
         } else {
@@ -1256,7 +1256,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
             var latestIndex = getMaximumIndex($scope.personalDetailsTools);
             console.log("latest Ind");
             console.log(latestIndex);
-            var latestToolDetail = $scope.personalDetailsTools[toolListLength-1]
+            var latestToolDetail = $scope.personalDetailsTools[toolListLength - 1]
             // find(function(toolDetail){
             //     return toolDetail.ind === latestIndex;
             // });
@@ -1265,38 +1265,38 @@ var skillsToolsJSONBuilder = function(receivedObject){
             var toSend = {
                 category: latestToolDetail.category,
                 softwareDeviceName: latestToolDetail.software,
-                vendorDistributor: latestToolDetail.vendor ,
+                vendorDistributor: latestToolDetail.vendor,
                 numberOfLinkedEndorsments: latestToolDetail.linkedin,
                 formalCertification: setBoolean(latestToolDetail.formal),
                 usagein3Years: setBoolean(latestToolDetail.usage)
             }
             var proficiencyType, proficiencyYear;
-            if(latestToolDetail.basicyear !== ""){
+            if (latestToolDetail.basicyear !== "") {
                 proficiencyType = "basic";
                 proficiencyYear = latestToolDetail.basicyear;
-            }else if(latestToolDetail.interyear){
+            } else if (latestToolDetail.interyear) {
                 proficiencyType = "inter";
                 proficiencyYear = latestToolDetail.interyear;
-            }else if(latestToolDetail.advancedyear){
+            } else if (latestToolDetail.advancedyear) {
                 proficiencyType = "advanced";
                 proficiencyYear = latestToolDetail.advancedyear;
-            }else if(latestToolDetail.expertyear){
+            } else if (latestToolDetail.expertyear) {
                 proficiencyType = "expert";
                 proficiencyYear = latestToolDetail.expertyear;
             }
             toSend["proficiencyType"] = proficiencyType;
             toSend["proficiencyYear"] = proficiencyYear;
             console.log(toSend);
-            $http.post('/api/deeds/tools', toSend, config.headers).then(function(response){
+            $http.post('/api/deeds/tools', toSend, config.headers).then(function(response) {
                 //Success handling
                 console.log(response.data);
                 console.log($scope.personalDetailsTools);
-                var currentIndex = getIndex($scope.personalDetailsTools,latestIndex);
+                var currentIndex = getIndex($scope.personalDetailsTools, latestIndex);
                 console.log(currentIndex);
                 $scope.personalDetailsTools[currentIndex]['id'] = response.data.dbid;
                 $scope.personalDetailsTools[currentIndex]['timestamp'] = response.data.timestamp;
                 addNewBlankTools();
-            },function(response){
+            }, function(response) {
                 //Failure Handing
                 console.log(response);
                 alert("Sorry Could Not Add to Database");
@@ -1304,21 +1304,21 @@ var skillsToolsJSONBuilder = function(receivedObject){
         }
     };
 
-    $scope.removeTools = function(){
+    $scope.removeTools = function() {
         console.log("From Inside the Tools Function")
         console.log($scope.personalDetailsTools);
         remover($scope.personalDetailsTools, "tools");
-        var newDataList=[];
+        var newDataList = [];
         $scope.selectedAll = false;
-        angular.forEach($scope.personalDetailsTools, function(selected){
-            if(!selected.selected){
+        angular.forEach($scope.personalDetailsTools, function(selected) {
+            if (!selected.selected) {
                 newDataList.push(selected);
             }
         });
         $scope.personalDetailsTools = newDataList;
     };
 
-    $scope.checkAllTools = function () {
+    $scope.checkAllTools = function() {
         if (!$scope.selectedAll) {
             $scope.selectedAll = true;
         } else {
@@ -1332,18 +1332,18 @@ var skillsToolsJSONBuilder = function(receivedObject){
     $scope.computedScores = [];
     $scope.educationScore = 0;
     $scope.membershipScore = 0;
-    $scope.methodsScore =0;
-    $scope.operationalScore =0;
-    $scope.proficiencyScore =0;
+    $scope.methodsScore = 0;
+    $scope.operationalScore = 0;
+    $scope.proficiencyScore = 0;
     //SCore COmputing Engine
 
-    
+
 
     $scope.computedScores = [];
 
     $scope.scoreInitialized;
-    $scope.scoreRunner = function(){
-         
+    $scope.scoreRunner = function() {
+
         console.log('%c You will get your score here ', 'background: #222; color: #bada55');
         console.log("I run when page is loaded!");
         $http.get('/api/scores').then(function(response) {
@@ -1352,129 +1352,128 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
             $scope.fulltStem = 0
             $scope.educationScore = response["data"]["My_T_Stem"]["Education, Briefings, and Teaching"];
-            $scope.fulltStem = $scope.fulltStem+$scope.educationScore
+            $scope.fulltStem = $scope.fulltStem + $scope.educationScore
             $scope.membershipScore = response["data"]["My_T_Stem"]["Memberships, Authorships, and Recognitions"];
-            $scope.fulltStem = $scope.fulltStem+$scope.membershipScore
+            $scope.fulltStem = $scope.fulltStem + $scope.membershipScore
             $scope.methodsScore = response["data"]["My_T_Stem"]["Methods/Skills Proficiency"];
-            $scope.fulltStem = $scope.fulltStem+$scope.methodsScore;
+            $scope.fulltStem = $scope.fulltStem + $scope.methodsScore;
             $scope.operationalScore = response["data"]["My_T_Stem"]["Operations responsibilities and expertise"];
-            $scope.fulltStem = $scope.fulltStem+$scope.operationalScore
-            $scope.proficiencyScoreBefore = $scope.proficiencyScore; 
+            $scope.fulltStem = $scope.fulltStem + $scope.operationalScore
+            $scope.proficiencyScoreBefore = $scope.proficiencyScore;
             $scope.proficiencyScore = response["data"]["My_T_Stem"]["Software/Device Proficiency"];
-            $scope.fulltStem = $scope.fulltStem+$scope.proficiencyScore
+            $scope.fulltStem = $scope.fulltStem + $scope.proficiencyScore
             //T-top
             $scope.fulltTop = 0;
             $scope.communicationScore = response["data"]["My_T_Top"]["Communications"];
-            $scope.fulltTop = $scope.fulltTop+$scope.communicationScore;
+            $scope.fulltTop = $scope.fulltTop + $scope.communicationScore;
             $scope.criticalScore = response["data"]["My_T_Top"]["Critical Thinking"];
-            $scope.fulltTop = $scope.fulltTop+$scope.criticalScore;
+            $scope.fulltTop = $scope.fulltTop + $scope.criticalScore;
             $scope.empathyScore = response["data"]["My_T_Top"]["Empathy"];
-            $scope.fulltTop = $scope.fulltTop+$scope.empathyScore;
+            $scope.fulltTop = $scope.fulltTop + $scope.empathyScore;
             $scope.globalUnderstandScore = response["data"]["My_T_Top"]["Global understandng"];
-            $scope.fulltTop = $scope.fulltTop+$scope.globalUnderstandScore;
+            $scope.fulltTop = $scope.fulltTop + $scope.globalUnderstandScore;
             $scope.networkingScore = response["data"]["My_T_Top"]["Networking"];
-            $scope.fulltTop = $scope.fulltTop+$scope.networkingScore;
+            $scope.fulltTop = $scope.fulltTop + $scope.networkingScore;
             $scope.designScore = response["data"]["My_T_Top"]["Organizational design"];
-            $scope.fulltTop = $scope.fulltTop+ $scope.designScore;
+            $scope.fulltTop = $scope.fulltTop + $scope.designScore;
             $scope.perspectiveScore = response["data"]["My_T_Top"]["Perspective"];
-            $scope.fulltTop = $scope.fulltTop+$scope.perspectiveScore;
+            $scope.fulltTop = $scope.fulltTop + $scope.perspectiveScore;
             $scope.managementScore = response["data"]["My_T_Top"]["Project management"];
-            $scope.fulltTop = $scope.fulltTop+ $scope.managementScore; 
+            $scope.fulltTop = $scope.fulltTop + $scope.managementScore;
             $scope.teamworkScore = response["data"]["My_T_Top"]["Teamwork"];
-            $scope.fulltTop = $scope.fulltTop+$scope.teamworkScore;
-            $scope.fulltScore = $scope.fulltTop+ $scope.fulltStem;
+            $scope.fulltTop = $scope.fulltTop + $scope.teamworkScore;
+            $scope.fulltScore = $scope.fulltTop + $scope.fulltStem;
 
-            if ($scope.scoreInitialized != 1){
+            if ($scope.scoreInitialized != 1) {
                 console.log("Tracking Variables Initialized!");
-            //Variables to hold previous score values and initialize to current values
-            $scope.fulltStemPrevious = $scope.fulltStem;
-            $scope.fulltTopPrevious = $scope.fulltTop;
-            $scope.fulltScorePrevious = $scope.fulltScore;
-            $scope.educationScorePrevious = $scope.educationScore;
-            $scope.membershipScorePrevious = $scope.membershipScore;
-            $scope.methodsScorePrevious = $scope.methodsScore;
-            $scope.operationalScorePrevious = $scope.operationalScore;
-            $scope.proficiencyScorePrevious = $scope.proficiencyScore;
+                //Variables to hold previous score values and initialize to current values
+                $scope.fulltStemPrevious = $scope.fulltStem;
+                $scope.fulltTopPrevious = $scope.fulltTop;
+                $scope.fulltScorePrevious = $scope.fulltScore;
+                $scope.educationScorePrevious = $scope.educationScore;
+                $scope.membershipScorePrevious = $scope.membershipScore;
+                $scope.methodsScorePrevious = $scope.methodsScore;
+                $scope.operationalScorePrevious = $scope.operationalScore;
+                $scope.proficiencyScorePrevious = $scope.proficiencyScore;
 
-            $scope.communicationScorePrevious =  $scope.communicationScore;
-            $scope.criticalScorePrevious = $scope.criticalScore;
-            $scope.empathyScorePrevious =  $scope.empathyScore;
-            $scope.globalUnderstandScorePrevious = $scope.globalUnderstandScore;
-            $scope.networkingScorePrevious =   $scope.networkingScore;
-            $scope.designScorePrevious = $scope.designScore;
-            $scope.perspectiveScorePrevious = $scope.perspectiveScore;
-            $scope.managementScorePrevious = $scope.managementScore;
-            $scope.teamworkScorePrevious = $scope.teamworkScore;
+                $scope.communicationScorePrevious = $scope.communicationScore;
+                $scope.criticalScorePrevious = $scope.criticalScore;
+                $scope.empathyScorePrevious = $scope.empathyScore;
+                $scope.globalUnderstandScorePrevious = $scope.globalUnderstandScore;
+                $scope.networkingScorePrevious = $scope.networkingScore;
+                $scope.designScorePrevious = $scope.designScore;
+                $scope.perspectiveScorePrevious = $scope.perspectiveScore;
+                $scope.managementScorePrevious = $scope.managementScore;
+                $scope.teamworkScorePrevious = $scope.teamworkScore;
 
 
-            
 
-            //String to hold all previous values 
-            $scope.fulltStemPreString = [$scope.roundMe($scope.fulltStemPrevious)];
-            $scope.fulltTopPreString = [$scope.roundMe($scope.fulltTopPrevious)];
-            $scope.fulltScorePreString = [$scope.roundMe($scope.fulltScorePrevious)];
-            $scope.educationScorePreString = [$scope.roundMe($scope.educationScorePrevious)];
-            $scope.membershipScorePreString = [$scope.roundMe($scope.membershipScorePrevious)];
-            $scope.methodsScorePreString = [$scope.roundMe($scope.methodsScorePrevious)];
-            $scope.operationalScorePreString = [$scope.roundMe($scope.operationalScorePrevious)];
-            $scope.proficiencyScorePreString = [$scope.roundMe($scope.proficiencyScorePrevious)];
 
-            $scope.communicationScorePreString = [$scope.roundMe($scope.communicationScorePrevious)];
-            $scope.criticalScorePreString = [$scope.roundMe($scope.criticalScorePrevious)];
-            $scope.empathyScorePreString = [$scope.roundMe($scope.empathyScorePrevious)];
-            $scope.globalUnderstandScorePreString = [$scope.roundMe($scope.globalUnderstandScorePrevious)];
-            $scope.networkingScorePreString = [$scope.roundMe($scope.networkingScorePrevious)];
-            $scope.designScorePreString = [$scope.roundMe($scope.designScorePrevious)];
-            $scope.perspectiveScorePreString = [$scope.roundMe($scope.perspectiveScorePrevious)];
-            $scope.managementScorePreString = [$scope.roundMe($scope.managementScorePrevious)];
-            $scope.teamworkScorePreString = [$scope.roundMe($scope.teamworkScorePrevious)];
+                //String to hold all previous values 
+                $scope.fulltStemPreString = [$scope.roundMe($scope.fulltStemPrevious)];
+                $scope.fulltTopPreString = [$scope.roundMe($scope.fulltTopPrevious)];
+                $scope.fulltScorePreString = [$scope.roundMe($scope.fulltScorePrevious)];
+                $scope.educationScorePreString = [$scope.roundMe($scope.educationScorePrevious)];
+                $scope.membershipScorePreString = [$scope.roundMe($scope.membershipScorePrevious)];
+                $scope.methodsScorePreString = [$scope.roundMe($scope.methodsScorePrevious)];
+                $scope.operationalScorePreString = [$scope.roundMe($scope.operationalScorePrevious)];
+                $scope.proficiencyScorePreString = [$scope.roundMe($scope.proficiencyScorePrevious)];
 
-            //Variables to hold Delta score values
-            $scope.fulltStemDelta = 0;
-            $scope.fulltTopDelta = 0;
-            $scope.fulltScoreDelta = 0;
-            $scope.educationScoreDelta = 0;
-            $scope.membershipScoreDelta = 0;
-            $scope.methodsScoreDelta = 0;
-            $scope.operationalScoreDelta = 0;
-            $scope.proficiencyScoreDelta = 0;
-            
-            $scope.communicationScoreDelta = 0;
-            $scope.criticalScoreDelta = 0;
-            $scope.empathyScoreDelta = 0;
-            $scope.globalUnderstandScoreDelta = 0;
-            $scope.networkingScoreDelta = 0;
-            $scope.designScoreDelta = 0;
-            $scope.perspectiveScoreDelta = 0;
-            $scope.managementScoreDelta = 0;
-            $scope.teamworkScoreDelta = 0;
+                $scope.communicationScorePreString = [$scope.roundMe($scope.communicationScorePrevious)];
+                $scope.criticalScorePreString = [$scope.roundMe($scope.criticalScorePrevious)];
+                $scope.empathyScorePreString = [$scope.roundMe($scope.empathyScorePrevious)];
+                $scope.globalUnderstandScorePreString = [$scope.roundMe($scope.globalUnderstandScorePrevious)];
+                $scope.networkingScorePreString = [$scope.roundMe($scope.networkingScorePrevious)];
+                $scope.designScorePreString = [$scope.roundMe($scope.designScorePrevious)];
+                $scope.perspectiveScorePreString = [$scope.roundMe($scope.perspectiveScorePrevious)];
+                $scope.managementScorePreString = [$scope.roundMe($scope.managementScorePrevious)];
+                $scope.teamworkScorePreString = [$scope.roundMe($scope.teamworkScorePrevious)];
 
-            $scope.scoreInitialized = 1;
-            }
-            else{
+                //Variables to hold Delta score values
+                $scope.fulltStemDelta = 0;
+                $scope.fulltTopDelta = 0;
+                $scope.fulltScoreDelta = 0;
+                $scope.educationScoreDelta = 0;
+                $scope.membershipScoreDelta = 0;
+                $scope.methodsScoreDelta = 0;
+                $scope.operationalScoreDelta = 0;
+                $scope.proficiencyScoreDelta = 0;
+
+                $scope.communicationScoreDelta = 0;
+                $scope.criticalScoreDelta = 0;
+                $scope.empathyScoreDelta = 0;
+                $scope.globalUnderstandScoreDelta = 0;
+                $scope.networkingScoreDelta = 0;
+                $scope.designScoreDelta = 0;
+                $scope.perspectiveScoreDelta = 0;
+                $scope.managementScoreDelta = 0;
+                $scope.teamworkScoreDelta = 0;
+
+                $scope.scoreInitialized = 1;
+            } else {
                 console.log("Checking Values");
-                
+
                 //Compute Deltas and Previous Values of T Dataset
-                [$scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString ,$scope.fulltStemDelta] = computeAnalytics($scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString ,$scope.fulltStemDelta,"fullTStem");
-                [$scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString ,$scope.fulltTopDelta] = computeAnalytics($scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString ,$scope.fulltTopDelta,"fulltTopDelta");
-                [$scope.fulltScore, $scope.fulltScorePrevious, $scope.fulltScorePreString ,$scope.fulltScoreDelta] = computeAnalytics($scope.fulltScore, $scope.fulltScorePrevious, $scope.fulltScorePreString ,$scope.fulltScoreDelta,"fulltScore"); 
-                [$scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta] = computeAnalytics($scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString ,$scope.educationScoreDelta,"education");
-                [$scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta] = computeAnalytics($scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString ,$scope.membershipScoreDelta,"membership");
-                [$scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta] = computeAnalytics($scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString ,$scope.methodsScoreDelta,"methods");                
-                [$scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta] = computeAnalytics($scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString ,$scope.operationalScoreDelta,"operational");                
-                [$scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta] = computeAnalytics($scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString ,$scope.proficiencyScoreDelta,"proficiency"); 
-                [$scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta] = computeAnalytics($scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString ,$scope.communicationScoreDelta,"comms");
-                [$scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString ,$scope.criticalScoreDelta] = computeAnalytics($scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString ,$scope.criticalScoreDelta,"critical");
-                [$scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString ,$scope.empathyScoreDelta] = computeAnalytics($scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString ,$scope.empathyScoreDelta,"empathy");
-                [$scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString ,$scope.globalUnderstandScoreDelta] = computeAnalytics($scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString ,$scope.globalUnderstandScoreDelta,"understand");
-                [$scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString ,$scope.networkingScoreDelta] = computeAnalytics($scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString ,$scope.networkingScoreDelta,"networking");
-                [$scope.designScore, $scope.designScorePrevious, $scope.designScorePreString ,$scope.designScoreDelta] = computeAnalytics($scope.designScore, $scope.designScorePrevious, $scope.designScorePreString ,$scope.designScoreDelta,"design");
-                [$scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString ,$scope.perspectiveScoreDelta] = computeAnalytics($scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString ,$scope.perspectiveScoreDelta,"perspective");              
-                [$scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString ,$scope.managementScoreDelta] = computeAnalytics($scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString ,$scope.managementScoreDelta,"management");
-                [$scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString ,$scope.teamworkScoreDelta] = computeAnalytics($scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString ,$scope.teamworkScoreDelta,"teamwork");
+                [$scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString, $scope.fulltStemDelta] = computeAnalytics($scope.fulltStem, $scope.fulltStemPrevious, $scope.fulltStemPreString, $scope.fulltStemDelta, "fullTStem");
+                [$scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString, $scope.fulltTopDelta] = computeAnalytics($scope.fulltTop, $scope.fulltTopPrevious, $scope.fulltTopPreString, $scope.fulltTopDelta, "fulltTopDelta");
+                [$scope.fulltScore, $scope.fulltScorePrevious, $scope.fulltScorePreString, $scope.fulltScoreDelta] = computeAnalytics($scope.fulltScore, $scope.fulltScorePrevious, $scope.fulltScorePreString, $scope.fulltScoreDelta, "fulltScore");
+                [$scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString, $scope.educationScoreDelta] = computeAnalytics($scope.educationScore, $scope.educationScorePrevious, $scope.educationScorePreString, $scope.educationScoreDelta, "education");
+                [$scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString, $scope.membershipScoreDelta] = computeAnalytics($scope.membershipScore, $scope.membershipScorePrevious, $scope.membershipScorePreString, $scope.membershipScoreDelta, "membership");
+                [$scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString, $scope.methodsScoreDelta] = computeAnalytics($scope.methodsScore, $scope.methodsScorePrevious, $scope.methodsScorePreString, $scope.methodsScoreDelta, "methods");
+                [$scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString, $scope.operationalScoreDelta] = computeAnalytics($scope.operationalScore, $scope.operationalScorePrevious, $scope.operationalScorePreString, $scope.operationalScoreDelta, "operational");
+                [$scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString, $scope.proficiencyScoreDelta] = computeAnalytics($scope.proficiencyScore, $scope.proficiencyScorePrevious, $scope.proficiencyScorePreString, $scope.proficiencyScoreDelta, "proficiency");
+                [$scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString, $scope.communicationScoreDelta] = computeAnalytics($scope.communicationScore, $scope.communicationScorePrevious, $scope.communicationScorePreString, $scope.communicationScoreDelta, "comms");
+                [$scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString, $scope.criticalScoreDelta] = computeAnalytics($scope.criticalScore, $scope.criticalScorePrevious, $scope.criticalScorePreString, $scope.criticalScoreDelta, "critical");
+                [$scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString, $scope.empathyScoreDelta] = computeAnalytics($scope.empathyScore, $scope.empathyScorePrevious, $scope.empathyScorePreString, $scope.empathyScoreDelta, "empathy");
+                [$scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString, $scope.globalUnderstandScoreDelta] = computeAnalytics($scope.globalUnderstandScore, $scope.globalUnderstandScorePrevious, $scope.globalUnderstandScorePreString, $scope.globalUnderstandScoreDelta, "understand");
+                [$scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString, $scope.networkingScoreDelta] = computeAnalytics($scope.networkingScore, $scope.networkingScorePrevious, $scope.networkingScorePreString, $scope.networkingScoreDelta, "networking");
+                [$scope.designScore, $scope.designScorePrevious, $scope.designScorePreString, $scope.designScoreDelta] = computeAnalytics($scope.designScore, $scope.designScorePrevious, $scope.designScorePreString, $scope.designScoreDelta, "design");
+                [$scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString, $scope.perspectiveScoreDelta] = computeAnalytics($scope.perspectiveScore, $scope.perspectiveScorePrevious, $scope.perspectiveScorePreString, $scope.perspectiveScoreDelta, "perspective");
+                [$scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString, $scope.managementScoreDelta] = computeAnalytics($scope.managementScore, $scope.managementScorePrevious, $scope.managementScorePreString, $scope.managementScoreDelta, "management");
+                [$scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString, $scope.teamworkScoreDelta] = computeAnalytics($scope.teamworkScore, $scope.teamworkScorePrevious, $scope.teamworkScorePreString, $scope.teamworkScoreDelta, "teamwork");
 
                 console.log($scope.fulltStemDelta);
-                console.log("String: " ,$scope.fulltStemPreString);
+                console.log("String: ", $scope.fulltStemPreString);
 
             }
 
@@ -1485,49 +1484,108 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
     }
 
-   $scope.roundMe = function(value, decimals=1) {
-        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-      }
-    function computeAnalytics(curVal, preVal, preString, deltaVal, id){
-            console.log(id, curVal, preVal, preString, deltaVal)
-    
-            if (curVal != preVal){
-                //compute delta
-                // deltaVal = $scope.roundMe(curVal - preVal);
-                console.log(preString[0]);
-                if (preString[preString.length-1] != $scope.roundMe(preVal)){
-                preString.push($scope.roundMe(preVal));     
-                }
-                deltaVal = $scope.roundMe(curVal - preVal);
+    $scope.roundMe = function(value, decimals = 1) {
+        return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+    }
 
-                preVal=curVal;
-                console.log(id,deltaVal, preString,curVal);
+    function computeAnalytics(curVal, preVal, preString, deltaVal, id) {
+        console.log(id, curVal, preVal, preString, deltaVal)
+
+        if (curVal != preVal) {
+            //compute delta
+            // deltaVal = $scope.roundMe(curVal - preVal);
+            console.log(preString[0]);
+            if (preString[preString.length - 1] != $scope.roundMe(preVal)) {
+                preString.push($scope.roundMe(preVal));
             }
-            else{
-                console.log("All Values Unchanged");
-            }
-            
-            return [curVal,preVal,preString,deltaVal];
-    
+            deltaVal = $scope.roundMe(curVal - preVal);
+
+            preVal = curVal;
+            console.log(id, deltaVal, preString, curVal);
+        } else {
+            console.log("All Values Unchanged");
         }
-   
+
+        return [curVal, preVal, preString, deltaVal];
+
+    }
+
+    $scope.tChartVals = function(item) {
+        switch (item) {
+            case "edu":
+                break;
+            case "met":
+                break;
+            case "ops":
+                break;
+
+            case "mem":
+                break;
+
+            case "pro":
+                break;
+
+            case "com":
+                break;
+
+            case "cri":
+                break;
+
+            case "emp":
+                break;
+
+            case "glo":
+                break;
+
+            case "net":
+                break;
+
+            case "des":
+                break;
+
+            case "per":
+                break;
+
+            case "man":
+                break;
+
+            case "tea":
+                break;
+                default:
+                print("Value Not Found!");
+
+        }
+
+    }
+$scope.dataTables = function(){
+        $('tStem').DataTable();
+    $('tTop').DataTable();
+    $('total').DataTable();
+}
+  
+  
+
+    $scope.tChartCalcs = function(){
+
+        return [memW, eduW, opsW,proW, metW, proH, desH, comH, criH, teaH, netH, empH, perH, gloH, topCenter, ]
+    }
 
     //charts
-    
+
     // Highcharts.chart('high-container', {
     //     title: {
     //       text: 'Temperature Data'
     //     },
-  
+
     //     xAxis: {
     //       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
     //         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     //       ]
     //     },
-  
+
     //     series: [{
     //       data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
     //     }]
     //   })
 
-    }]);
+}]);
