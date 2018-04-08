@@ -97,14 +97,14 @@ module.exports = {
                 name: 'Conduct 1 hour or longer Briefing/Invited lecture',
                 scores: [1.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null]
+                    Stem.EDUCATION_BRIEFINGS_TEACHING]
             },
             "Conduct 1 - 2 day briefing/workshop" : {
                 name: 'Conduct 1 - 2 day briefing/workshop',
                 scores: [
                     2.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null
+                    Stem.EDUCATION_BRIEFINGS_TEACHING
                 ]
             }, 
             "Conduct 3 - 5 day briefing/workshop" :{
@@ -120,7 +120,7 @@ module.exports = {
                 scores: [
                     3.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null
+                    Stem.EDUCATION_BRIEFINGS_TEACHING
                 ]
             },
             "Teacher for full Semester course" : {
@@ -128,7 +128,7 @@ module.exports = {
                 scores: [
                     5.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null
+                    Stem.EDUCATION_BRIEFINGS_TEACHING
                 ]
             }
         },
