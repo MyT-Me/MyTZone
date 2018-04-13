@@ -127,12 +127,15 @@
                                         <input type="radio" name="tick2_{{$index}}" value="Yes" ng-model="personalDetail.formal"> Yes &nbsp;
                                         <input type="radio" name="tick2_{{$index}}" value="No" ng-model="personalDetail.formal"> No<br>
                                     </td>-->
-                                    <td style="padding-left: 22px;">
-                                    <div ng-init = "personalDetail.usage = 'No'">
-                                        <input type="radio" name="tick4_{{$index}}" value="Yes" ng-model="personalDetail.usage"> Yes
-                                        <input type="radio" name="tick4_{{$index}}" value="No" ng-model="personalDetail.usage"> No<br>
-                                    </div>
+                                    <td style="width: auto; margin-left:14px;">
+                                    <div style="width:250px; margin-left:14px" ng-init = "personalDetail.usage = 'No'">                        
+                                            <input type="radio" name="tick4_{{$index}}" value="Often" ng-model="personalDetail.usage"> Often
+                                            <input type="radio" name="tick4_{{$index}}" value="No" ng-model="personalDetail.usage"> No
+                                            <input type="radio" name="tick4_{{$index}}" value="Rarely" ng-model="personalDetail.usage"> Rarely
+                                            <input type="radio" name="tick4_{{$index}}" value="Sometimes" ng-model="personalDetail.usage"> Sometimes
+                                            <br>    
                                     </td>
+                                    </div>
                                     <!--<td>-->
                                         <!--<input type="radio" name="tick2_{{$index}}" value="Yes" style="margin-left: 41px;" ng-model="personalDetail.usage"> Yes-->
                                         <!--<input type="radio" name="tick2_{{$index}}" value="No" ng-model="personalDetail.usage"> No<br>-->

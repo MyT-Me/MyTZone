@@ -190,7 +190,7 @@ var skillsScoreSchema = new mongoose.Schema({
     proficiencyType: {type: String, required: true},
     proficiencyYear: {type: Number, required: true},
     formalCertification: {type:Boolean, required:true},
-    usagein3Years:{type:Boolean,required:true},
+    usagein3Years:{type:String,required:true},
     score :{type:Number,required:true,default:0}     
 });
 
@@ -203,7 +203,7 @@ var toolsScoreSchema = new mongoose.Schema({
     proficiencyType: {type: String, required: true},
     proficiencyYear: {type: Number, required: true},
     formalCertification: {type:Boolean, required:true},
-    usagein3Years:{type:Boolean,required:true},
+    usagein3Years:{type:String,required:true},
     score :{type:Number,required:true,default:0}
 });
 

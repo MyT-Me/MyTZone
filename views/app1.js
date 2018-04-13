@@ -988,7 +988,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
         'advancedyear': "",
         'expertyear': "",
         'formal': getFromBoolean(receivedObject.formal),
-        'usage':  getFromBoolean(receivedObject.usage),
+        'usage':  receivedObject.usage,
         'ind':receivedObject.ind,
         'id': receivedObject.id
     }
@@ -1040,7 +1040,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
                 vendorDistributor: latestSkillDetail.vendor ,
                 numberOfLinkedEndorsments: latestSkillDetail.linkedin,
                 formalCertification: setBoolean(latestSkillDetail.formal),
-                usagein3Years: setBoolean(latestSkillDetail.usage)
+                usagein3Years: latestSkillDetail.usage
             }
             var proficiencyType, proficiencyYear;
             if(latestSkillDetail.basicyear !== ""){
@@ -1268,7 +1268,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
                 vendorDistributor: latestToolDetail.vendor ,
                 numberOfLinkedEndorsments: latestToolDetail.linkedin,
                 formalCertification: setBoolean(latestToolDetail.formal),
-                usagein3Years: setBoolean(latestToolDetail.usage)
+                usagein3Years:latestToolDetail.usage
             }
             var proficiencyType, proficiencyYear;
             if(latestToolDetail.basicyear !== ""){

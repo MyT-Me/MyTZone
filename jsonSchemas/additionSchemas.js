@@ -348,7 +348,7 @@ module.exports = {
                 "type": "boolean"
             },
             "usagein3Years": {
-                "type": "boolean"
+                "type": "string"
             }
         },
         "required": ["category", "softwareDeviceName", "vendorDistributor", "numberOfLinkedEndorsments", "proficiencyType", "proficiencyYear", "formalCertification", "usagein3Years"],
@@ -381,7 +381,7 @@ module.exports = {
                 "type": "boolean"
             },
             "usagein3Years": {
-                "type": "boolean"
+                "type": "string"
             }
         },
         "required": ["category", "softwareDeviceName", "vendorDistributor", "numberOfLinkedEndorsments", "proficiencyType", "proficiencyYear", "formalCertification", "usagein3Years"],

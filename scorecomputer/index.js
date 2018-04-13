@@ -167,22 +167,36 @@ var scorer = function(userProfile) {
             var certiciation = currentToolSkill["formalCertification"];
             var endorsments = currentToolSkill["numberOfLinkedEndorsments"]
             var unweightedScore = 0
-            //Implying the formula
+            //Implying the new formula- april-2018
+
+            var u3m = 0;
+            if(usedInLastThreeYears=="Often"){
+                if(proficiencyPoints!=0){
+                    u3m = 1;
+                }
+            }
+            else if(usedInLastThreeYears=="Sometimes"){
+                if(proficiencyPoints!=0){
+                    u3m=0.67;
+                }
+            }
+            else if(usedInLastThreeYears=="Rarely"){
+                if(proficiencyPoints!=0){
+                    u3m = 0.33;
+                }
+            }
+            else{
+                u3m = 0;
+            }
+            //u3m is set above, continuing with previous formula
+
             if(yearsGained>12) {
-                if(usedInLastThreeYears===true) {
-                    unweightedScore = proficiencyPoints * ((yearsGained)/10);
-                }
+                unweightedScore = u3m*proficiencyPoints * ((yearsGained)/10);
+            }
+            if(yearsGained<=3) {
+                unweightedScore = proficiencyPoints;
             } else {
-                if(yearsGained<=3) {
-                    unweightedScore = proficiencyPoints;
-                } else {
-                    if(usedInLastThreeYears===true) {
-                        unweightedScore = proficiencyPoints * ((12-yearsGained)/10);
-                    } else {
-                        if(yearsGained <= 7)
-                        unweightedScore = proficiencyPoints * ((7-yearsGained)/4);
-                    }
-                }
+                unweightedScore = u3m*proficiencyPoints;  
             }
 
             console.log("unweighted score in console before multiplying");
@@ -190,17 +204,13 @@ var scorer = function(userProfile) {
             console.log(certiciation);
             //Adding Certification Weight
             if(certiciation===true) {
-                if(usedInLastThreeYears===true){
+                if(u3m==1){
                     unweightedScore = unweightedScore*2;
                 }
                 else{
                     unweightedScore = unweightedScore*1.25;
                 }
             }
-            else if(usedInLastThreeYears===true){
-                unweightedScore = unweightedScore*1.5;
-            }
-
             console.log("unweighted score in console");
             console.log(unweightedScore);
             //Adding LinkedIn
