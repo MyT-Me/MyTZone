@@ -34,7 +34,7 @@ module.exports = {
                 weight : 1, 
                 scores: [
                     "years",
-                    [0,0,3,10,0,0,1,5,2],
+                    [0,0,3,10,0,0,0,5,2],
                     null
                 ]
             },
