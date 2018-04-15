@@ -69,6 +69,54 @@ module.exports = {
                     [0,0,5,0,3,5,3,4,0],
                     null
                 ]
+            },
+            "Board of Dir": {
+                weight: 5,
+                scores: [
+                    "years",
+                    [0,10,3,0,3,0,0,4,0],
+                    null
+                ]
+            },
+            "Member(Student or Full membership)": {
+                weight: 0.5,
+                scores: [
+                    "years",
+                    [0,0,2,0,0,10,3,5,0],
+                    Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
+                ]
+            },
+            "Local or student committee": {
+                weight : 0.7,
+                scores: [
+                    "years",
+                    [0,0,3,2,3,10,0,2,0],
+                    null
+                ]
+            },
+            "Local or student officer": {
+                weight : 1.0,
+                scores: [
+                    "years",
+                    [0,3,3,2,2,10,0,0,0],
+                    null
+                ]
+            },
+            "National Committee" : {
+                weight : 1.5,
+                scores: [
+                    "years",
+                    [0,0,3,2,2,10,0,0,0],
+                    null
+                ]
+            },
+            "National Officer" : {
+                weight: 3.0,
+                scores: [
+                    "years",
+                    [0,10,3,0,3,0,0,4,0],
+                    null
+                ]
             }
         }
     },
