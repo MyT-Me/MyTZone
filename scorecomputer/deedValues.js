@@ -409,20 +409,20 @@ module.exports = {
         contents: {
             "Fluent in 2nd language": {
                 name: 'Fluent in 2nd language',
-                scores: [2.0,
+                scores: [8.0,
                     [0,0,10,0,0,0,0,5,5],
                     null]
             },
             "Fluent in 3rd language": {
                 name: 'Fluent in 3rd language',
-                scores: [2.0,
+                scores: [8.0,
                     [0,0,10,0,0,0,0,5,5],
                     null
                 ]
             },
             "Fluent in 4th or more language" : {
                 name: 'Fluent in 4th or more language',
-                scores: [2.0,
+                scores: [8.0,
                     [0,0,10,0,0,0,0,5,5],
                     null
                 ]
