@@ -25,3 +25,19 @@
  cursor: pointer;
   font-family: Helvetica, sans-serif;
 }
+
+
+.quantChart .ct-series-a .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-series-b .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-series-c .ct-bar{
+	  stroke-width: 60px;
+
+}

@@ -2,6 +2,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript" src="chartshelper.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 </head>
 
 <body ng-controller="myController">
@@ -13,7 +14,7 @@
         </div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <div class="row">
-            <nav1 class="col-md-10 col-centered">
+            <nav1 class="col-md-12 col-centered">
                 <ol class="cd-multi-steps text-bottom count" id="status-buttons">
                     <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.educate">Education</a></li>
                     <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.work">Work</a></li>
@@ -30,17 +31,25 @@
         <div id="headingmain" ng-app="FormlyApp"></div>
         <section class="mainContent">
             <div class="row">
-                <div class="col-md-12">
-                    <svg class="tChart" width="600px" height="600px" aria-labelledby="title desc" role="img" style="padding-top: 20px; padding-bottom: 20px;">
-                        <title id="title">My T Chart</title>
-                        <desc id="desc">A T chart showing your breadth and depth skills</desc>
-                        <g class="bar">
-                            <rect width="600" height="60" x="0" y="0"></rect>
-                        </g>
-                        <g class="bar">
-                            <rect width="60" height="540" x="270" y="60"></rect>
-                        </g>
-                    </svg>
+                <div class="col-md-8  col-centered">
+                    <div class="ct-chart  quantChart" id="tTopBreak"></div>
+
+                </div>
+
+                 <div class="row">
+                <div class="col-md-8 col-centered">
+                    <div class="ct-chart" id="tTopQuant"></div>
+                </div>
+
+
+                <div class="row">
+                <div class="col-md-2 ">
+                    <div class="ct-chart  quantChart" id="tStemBreak"></div>
+
+                </div>
+                 <div class="col-md-2 ">
+                    <div class="ct-chart" id="tStemQuant"></div>
+
                 </div>
             </div>
             <div class="row">
@@ -55,41 +64,26 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Project Management</td>
-                                <td>{{roundMe(managementScore)}}</td>
+                                <td>Memberships</td>
+                                <td>{{roundMe(membershipScore)}}</td>
                             </tr>
                             <tr>
-                                <td>Organizational Design</td>
-                                <td>{{roundMe(designScore)}}</td>
+                                <td>Education</td>
+                                <td>{{roundMe(educationScore)}}</td>
                             </tr>
                             <tr>
-                                <td>Communications</td>
-                                <td>{{roundMe(communicationScore)}}</td>
+                                <td>Perspective Score</td>
+                                <td>{{roundMe(educationScore)}}</td>
                             </tr>
                             <tr>
-                                <td>Critical Thinking</td>
+                                <td>Management Score </td>
                                 <td>{{roundMe(criticalScore)}}</td>
                             </tr>
                             <tr>
-                                <td>Teamwork</td>
+                                <td>Teamwork Score</td>
                                 <td>{{roundMe(teamworkScore)}}</td>
                             </tr>
-                            <tr>
-                                <td>Networking</td>
-                                <td>{{roundMe(networkingScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Empathy</td>
-                                <td>{{roundMe(empathyScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Perspective</td>
-                                <td>{{roundMe(perspectiveScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Global Understanding</td>
-                                <td>{{roundMe(globalUnderstandScore)}}</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -170,6 +164,7 @@
                 
         </section>
     </div>
+
 </body>
 
 </html>
