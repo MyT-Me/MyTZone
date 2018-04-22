@@ -238,7 +238,7 @@ module.exports = {
                 weight : 2,
                 scores : [
                     "yes",
-                    [0,10,2,4,0,0,0,3,0],
+                    [0,10,3,4,0,0,0,3,0],
                     null
                 ]
             }
