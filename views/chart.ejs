@@ -2,7 +2,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript" src="chartshelper.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 </head>
 
 <body ng-controller="myController">
@@ -31,140 +30,132 @@
         <div id="headingmain" ng-app="FormlyApp"></div>
         <section class="mainContent">
             <div class="row">
-                <div class="col-md-8  col-centered">
+                <div class="col-md-8  col-centered" style="padding-top: 40px;">
                     <div class="ct-chart  quantChart" id="tTopBreak"></div>
-
                 </div>
-
-                 <div class="row">
                 <div class="col-md-8 col-centered">
-                    <div class="ct-chart" id="tTopQuant"></div>
+                    <div class="ct-chart totalChart" id="tTopQuant"></div>
                 </div>
-
-
                 <div class="row">
-                <div class="col-md-2 ">
-                    <div class="ct-chart  quantChart" id="tStemBreak"></div>
-
+                    <div class="col-centered">
+                        <div class="col-md-offset-4 col-md-2 ">
+                            <div class="ct-chart  quantChart" id="tStemBreak"></div>
+                        </div>
+                        <div class="col-md-2 ">
+                            <div class="ct-chart totalChart" id="tStemQuant"></div>
+                        </div>
+                    </div>
                 </div>
-                 <div class="col-md-2 ">
-                    <div class="ct-chart" id="tStemQuant"></div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <h2 style="text-align: center;">Stem Skills</h2>
-                    <table id="tStem" class="display col-centered">
-                        <thead>
-                            <tr>
-                                <th>Skill</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Memberships</td>
-                                <td>{{roundMe(membershipScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Education</td>
-                                <td>{{roundMe(educationScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Perspective Score</td>
-                                <td>{{roundMe(educationScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Management Score </td>
-                                <td>{{roundMe(criticalScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Teamwork Score</td>
-                                <td>{{roundMe(teamworkScore)}}</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-4">
-                    <h2 style="text-align: center;">Totals</h2>
-                    <table id="total" class="display col-centered">
-                        <thead>
-                            <tr>
-                                <th>Skill</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Total T Top Score</td>
-                                <td>{{roundMe(fulltTop)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total T Stem Score </td>
-                                <td>{{roundMe(fulltStem)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Full T Score</td>
-                                <td>{{roundMe(fulltScore)}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-4 ">
-                    <h2 style="text-align: center;">Top Skills</h2>
-                    <table id="tTop" class="display col-centered">
-                        <thead>
-                            <tr>
-                                <th>Skill</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Project Management</td>
-                                <td>{{roundMe(managementScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Organizational Design</td>
-                                <td>{{roundMe(designScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Communications</td>
-                                <td>{{roundMe(communicationScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Critical Thinking</td>
-                                <td>{{roundMe(criticalScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Teamwork</td>
-                                <td>{{roundMe(teamworkScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Networking</td>
-                                <td>{{roundMe(networkingScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Empathy</td>
-                                <td>{{roundMe(empathyScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Perspective</td>
-                                <td>{{roundMe(perspectiveScore)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Global Understanding</td>
-                                <td>{{roundMe(globalUnderstandScore)}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2 style="text-align: center;">Stem Skills</h2>
+                        <table id="tStem2" class="display col-centered">
+                            <thead>
+                                <tr>
+                                    <th>Skill</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Memberships</td>
+                                    <td>{{roundMe(membershipScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Education</td>
+                                    <td>{{roundMe(educationScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Operations</td>
+                                    <td>{{roundMe(operationalScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Software Proficiency </td>
+                                    <td>{{roundMe(proficiencyScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Methods/Skill Proficiency</td>
+                                    <td>{{roundMe(methodsScore)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <h2 style="text-align: center;">Totals</h2>
+                        <table id="total" class="display col-centered">
+                            <thead>
+                                <tr>
+                                    <th>Skill</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Total T Top Score</td>
+                                    <td>{{roundMe(fulltTop)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total T Stem Score </td>
+                                    <td>{{roundMe(fulltStem)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Full T Score</td>
+                                    <td>{{roundMe(fulltScore)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4 ">
+                        <h2 style="text-align: center;">Top Skills</h2>
+                        <table id="tTop" class="display col-centered">
+                            <thead>
+                                <tr>
+                                    <th>Skill</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Project Management</td>
+                                    <td>{{roundMe(managementScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Organizational Design</td>
+                                    <td>{{roundMe(designScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Communications</td>
+                                    <td>{{roundMe(communicationScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Critical Thinking</td>
+                                    <td>{{roundMe(criticalScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Teamwork</td>
+                                    <td>{{roundMe(teamworkScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Networking</td>
+                                    <td>{{roundMe(networkingScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Empathy</td>
+                                    <td>{{roundMe(empathyScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Perspective</td>
+                                    <td>{{roundMe(perspectiveScore)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Global Understanding</td>
+                                    <td>{{roundMe(globalUnderstandScore)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
         </section>
-    </div>
-
+        </div>
 </body>
 
 </html>
