@@ -1476,6 +1476,156 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
             }
 
+            //Calculate T Chart Percentage values
+            $scope.communicationScorePerc = $scope.roundMe(($scope.communicationScore / $scope.fulltTop) * 100);
+            $scope.criticalScorePerc = $scope.roundMe(($scope.criticalScore / $scope.fulltTop) * 100);
+            $scope.empathyScorePerc = $scope.roundMe(($scope.empathyScore / $scope.fulltTop) * 100);
+            $scope.globalUnderstandScorePerc = $scope.roundMe(($scope.globalUnderstandScore / $scope.fulltTop) * 100);
+            $scope.networkingScorePerc = $scope.roundMe(($scope.networkingScore / $scope.fulltTop) * 100);
+            $scope.designScorePerc = $scope.roundMe(($scope.designScore / $scope.fulltTop) * 100);
+            $scope.perspectiveScorePerc = $scope.roundMe(($scope.perspectiveScore / $scope.fulltTop) * 100);
+            $scope.managementScorePerc = $scope.roundMe(($scope.managementScore / $scope.fulltTop) * 100);
+            $scope.teamworkScorePerc = $scope.roundMe(($scope.teamworkScore / $scope.fulltTop) * 100);
+
+            $scope.educationScorePerc = $scope.roundMe(($scope.educationScore / $scope.fulltStem) * 100);
+            $scope.membershipScorePerc = $scope.roundMe(($scope.membershipScore / $scope.fulltStem) * 100);
+            $scope.operationalScorePerc = $scope.roundMe(($scope.operationalScore / $scope.fulltStem) * 100);
+            $scope.methodsScorePerc = $scope.roundMe(($scope.methodsScore / $scope.fulltStem) * 100);
+            $scope.proficiencyScorePerc = $scope.roundMe(($scope.proficiencyScore / $scope.fulltStem) * 100);
+            console.log($scope.proficiencyScore)
+            console.log($scope.proficiencyScorePerc)
+
+            console.log("T Top Skills");
+            console.log($scope.communicationScorePerc, $scope.networkingScorePerc, $scope.criticalScorePerc, $scope.empathyScorePerc, $scope.globalUnderstandScorePerc, $scope.designScorePerc, $scope.perspectiveScorePerc, $scope.managementScorePerc, $scope.teamworkScorePerc);
+            console.log("T Stem Skills")
+            console.log($scope.educationScorePerc, $scope.membershipScorePerc, $scope.methodsScorePerc, $scope.operationalScorePerc, $scope.proficiencyScorePerc);
+
+            //Calculate Upper Bounds for raw score charts
+            $scope.tTopUpper = Math.ceil($scope.fulltTop / 1000) * 1000;
+            $scope.tStemUpper = Math.ceil($scope.fulltStem / 1000) * 1000;
+
+            //Generate Charts
+
+            new Chartist.Bar('#tTopBreak', {
+                labels: ['Q1'],
+                series: [
+
+                    [$scope.communicationScorePerc],
+                    [$scope.criticalScorePerc],
+                    [$scope.empathyScorePerc],
+                    [$scope.globalUnderstandScorePerc],
+                    [$scope.networkingScorePerc],
+                    [$scope.designScorePerc],
+                    [$scope.perspectiveScorePerc],
+                    [$scope.managementScorePerc],
+                    [$scope.teamworkScorePerc]
+                ]
+            }, {
+                height: 70,
+                high: 100,
+                stackBars: true,
+        //         plugins: [
+        //     Chartist.plugins.legend()
+        // ],
+                horizontalBars: true,
+
+                axisX: {
+                    showLabel: false,
+                    showGrid: true,
+
+                },
+                axisY: {
+
+                    showLabel: false,
+                    showGrid: true,
+                }
+
+            })
+
+            var tTopTicks = [$scope.tTopUpper - 1000, $scope.tTopUpper];
+
+            new Chartist.Bar('#tTopQuant', {
+                series: [
+                    [$scope.fulltTop],
+
+                ]
+            }, {
+                horizontalBars: true,
+                height: 0,
+                high: $scope.tTopUpper,
+                low: $scope.tTopUpper-1000,
+                axisX: {
+                                        type: Chartist.FixedScaleAxis,
+                    ticks: tTopTicks,
+
+                    showLabel: true,
+                    showGrid: false,
+                    labelOffset: {
+      x: -15,
+      y: 0
+    },
+                },
+                axisY: {
+                    showGrid: false,
+                    showLabel: false,
+
+
+
+                }
+            })
+            // Create a new line chart object where as first parameter we pass in a selector
+            // that is resolving to our chart container element. The Second parameter
+            // is the actual data object.
+            // Initialize a Line chart in the container with the ID chart2
+            new Chartist.Bar('#tStemBreak', {
+                series: [
+                    [$scope.educationScorePerc],
+                    [$scope.membershipScorePerc],
+                    [$scope.methodsScorePerc],
+                    [$scope.operationalScorePerc],
+                    [$scope.proficiencyScorePerc],
+                ]
+            }, {
+                stackBars: true,
+                high: 100,
+                height: 600,
+                axisY: {
+
+                    showGrid: false,
+                    showLabel: false,
+
+                },
+                axisX: {
+                    showLabel: false,
+
+                    showGrid: false,
+                }
+            })
+
+            var tStemTicks = [$scope.tStemUpper - 1000, $scope.tStemUpper];
+console.log("tStem Ticks: ", tStemTicks)
+            new Chartist.Bar('#tStemQuant', {
+                series: [
+                    [$scope.fulltStem],
+                ]
+            }, {
+                height: 600,
+                high: $scope.tStemUpper,
+                axisX: {
+                    showLabel: false,
+
+                    showGrid: false,
+                },
+                axisY: {
+                    type: Chartist.FixedScaleAxis,
+                    position: 'end',
+                    showGrid: false,
+                    ticks: tStemTicks
+
+                },
+
+            })
+
         }, function(response) {
             //Negative Response
             console.log("Negative Init");
@@ -1509,84 +1659,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
 
     }
 
-    $scope.tChartVals = function(item) {
-        console.log("walrus")
-        switch (item) {
-            case "edu":
-                return ($scope.educationScore / $scope.fulltTop) * 100;
-                console.log(($scope.educationScore / $scope.fulltTop) * 100);
 
-                console.log("Potato")
-                break;
-            case "met":
-                per = ($scope.methodsScore / $scope.fulltTop) * 100;
-                break;
-            case "ops":
-                per = ($scope.operationalScore / $scope.fulltTop) * 100;
-
-                break;
-
-            case "mem":
-                per = ($scope.membershipScore / $scope.fulltTop) * 100;
-
-                break;
-
-            case "pro":
-                per = ($scope.proficiencyScore / $scope.fulltTop) * 100;
-
-                break;
-
-            case "com":
-                per = ($scope.communicationScore / $scope.fulltTop) * 100;
-
-                break;
-
-            case "cri":
-                per = ($scope.criticalScore / $scope.fulltTop) * 100;
-
-                break;
-
-            case "emp":
-                per = ($scope.empathyScore / $scope.fulltTop) * 100;
-
-                break;
-
-            case "glo":
-                per = ($scope.globalUnderstandScore / $scope.fulltTop) * 100;
-
-                break;
-
-            case "net":
-                per = ($scope.networkingScore / $scope.fulltStem) * 100;
-
-                break;
-
-            case "des":
-                per = ($scope.designScore / $scope.fulltStem) * 100;
-
-                break;
-
-            case "per":
-                per = ($scope.perspectiveScore / $scope.fulltStem) * 100;
-
-                break;
-
-            case "man":
-                per = ($scope.managementScore / $scope.fulltStem) * 100;
-
-                break;
-
-            case "tea":
-                per = ($scope.teamworkScore / $scope.fulltStem) * 100;
-
-                break;
-            default:
-                print("Value Not Found!");
-
-        }
-        return per;
-
-    }
     $scope.dataTables = function() {
         $('tStem').DataTable();
         $('tTop').DataTable();
@@ -1596,108 +1669,10 @@ var skillsToolsJSONBuilder = function(receivedObject){
     //Load MightyT Chart once DOM elements are loaded!
     angular.element(document).ready(function() {
         console.log('page loading completed');
-console.log($scope.educationScore)
-        new Chartist.Bar('#tTopBreak', {
-            labels: ['Q1'],
-            series: [
-                [$scope.tChartVals("edu")],
-                [$scope.tChartVals("met")],
-                [$scope.tChartVals("ops")],
-                [$scope.tChartVals("mem")],
-                [$scope.tChartVals("pro")],
-                [$scope.tChartVals("com")],
-                [$scope.tChartVals("cri")],
-                [$scope.tChartVals("emp")],
-                [$scope.tChartVals("glo")],
-            ]
-        }, {
-            height: 100,
-            high: 100,
-            stackBars: true,
-            horizontalBars: true,
-            position: 'start',
+        console.log($scope.educationScorePerc)
 
-            axisX: {
-                showLabel: false,
-                showGrid: false,
-                offset: 0,
 
-            },
-            axisY: {
-                offset: 0,
 
-                position: 'start',
-                showLabel: true,
-                showGrid: false,
-            }
-
-        })
-
-        new Chartist.Bar('#tTopQuant', {
-            labels: ['Q1'],
-            series: [
-                [800000],
-
-            ]
-        }, {
-            horizontalBars: true,
-            height: 70,
-            axisX: {
-                showLabel: true,
-                showGrid: false,
-
-            },
-            axisY: {
-
-                showGrid: false,
-
-            }
-        })
-        // Create a new line chart object where as first parameter we pass in a selector
-        // that is resolving to our chart container element. The Second parameter
-        // is the actual data object.
-        // Initialize a Line chart in the container with the ID chart2
-        new Chartist.Bar('#tStemBreak', {
-            labels: ['Q1', 'Q2'],
-            series: [
-                [80],
-                [10],
-                [10]
-            ]
-        }, {
-            stackBars: true,
-            high: 100,
-            width: 100,
-            axisY: {
-
-                showGrid: false,
-            },
-            axisX: {
-                showLabel: false,
-
-                showGrid: false,
-            }
-        })
-
-        new Chartist.Bar('#tStemQuant', {
-            labels: ['Q1'],
-            series: [
-                [800000],
-            ]
-        }, {
-            width: 60,
-            axisX: {
-                showLabel: false,
-
-                showGrid: false,
-            },
-            axisY: {
-                position: 'end',
-                showGrid: false,
-
-            },
-
-        })
 
     });
 

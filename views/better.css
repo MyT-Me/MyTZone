@@ -18,18 +18,16 @@
 	margin: auto;
 }
 
-.bar {
-  fill: red; /* changes the background */
-  height: 21px;
-/*  transition: fill .3s ease;*/ 
- cursor: pointer;
-  font-family: Helvetica, sans-serif;
-}
+
 
 
 .quantChart .ct-series-a .ct-bar{
 	  stroke-width: 60px;
 
+}
+
+.totalChart .ct-series-a .ct-bar{
+	stroke-width: 20px;
 }
 
 .ct-series-b .ct-bar{
@@ -40,4 +38,82 @@
 .ct-series-c .ct-bar{
 	  stroke-width: 60px;
 
+}
+
+.ct-series-c .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-series-d .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-series-e .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-series-f .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-series-g .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-series-h .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-series-i .ct-bar{
+	  stroke-width: 60px;
+
+}
+
+.ct-label{
+	font-size: 12px !important;
+}
+
+/*Chartist Legend Plugin CSS*/
+.ct-legend {
+    position: relative;
+    z-index: 10;
+
+    li {
+        position: relative;
+        padding-left: 23px;
+        margin-bottom: 3px;
+    }
+
+    li:before {
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        left: 0;
+        content: '';
+        border: 3px solid transparent;
+        border-radius: 2px;
+    }
+
+    li.inactive:before {
+        background: transparent;
+    }
+
+    &.ct-legend-inside {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    @for $i from 0 to length($ct-series-colors) {
+        .ct-series-#{$i}:before {
+            background-color: nth($ct-series-colors, $i + 1);
+            border-color: nth($ct-series-colors, $i + 1);
+        }
+    }
 }
