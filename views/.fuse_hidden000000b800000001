@@ -976,6 +976,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
         // console.log(returnValue);
         return returnValue;
     }
+
     var skillsToolsJSONBuilder = function(receivedObject) {
         var returnJSON = {
             'category': receivedObject.category,
@@ -993,7 +994,6 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
         }
         returnJSON[receivedObject.proficiencyType + 'year'] = receivedObject.proficiencyYear;
         return returnJSON;
-
     }
 
     //Skills Controller
@@ -1040,7 +1040,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
                 vendorDistributor: latestSkillDetail.vendor,
                 numberOfLinkedEndorsments: latestSkillDetail.linkedin,
                 formalCertification: setBoolean(latestSkillDetail.formal),
-                usagein3Years: latestSkillDetail.usage
+                usagein3Years: setBoolean(latestSkillDetail.usage)
             }
             var proficiencyType, proficiencyYear;
             if (latestSkillDetail.basicyear !== "") {
@@ -1268,7 +1268,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
                 vendorDistributor: latestToolDetail.vendor,
                 numberOfLinkedEndorsments: latestToolDetail.linkedin,
                 formalCertification: setBoolean(latestToolDetail.formal),
-                usagein3Years:latestToolDetail.usage
+                usagein3Years: setBoolean(latestToolDetail.usage)
             }
             var proficiencyType, proficiencyYear;
             if (latestToolDetail.basicyear !== "") {
@@ -1676,5 +1676,23 @@ console.log("tStem Ticks: ", tStemTicks)
 
 
     });
+
+    //charts
+
+    // Highcharts.chart('high-container', {
+    //     title: {
+    //       text: 'Temperature Data'
+    //     },
+
+    //     xAxis: {
+    //       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    //         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    //       ]
+    //     },
+
+    //     series: [{
+    //       data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+    //     }]
+    //   })
 
 }]);
