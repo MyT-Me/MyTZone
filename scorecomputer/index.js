@@ -242,14 +242,15 @@ var scorer = function(userProfile) {
         var months = timeElapsed.months;
         if(option == "years") {
             if(timeElapsed.years<200) {
-                return timeElapsed.years;
+                return (timeElapsed.years + (months/12));
             } else {
                 return 1;
             }
         } else if(option == "yes") {
             return (years + (months/12));
-        } else if(option == "some") {
-            return (years + ((months/12)/2));
+                } else if(option == "some") {
+            var val = (years + ((months/12)/2));
+            return val;
         } else {
             return 0;
         }
@@ -287,7 +288,9 @@ var scorer = function(userProfile) {
     function workExperienceScoreHelper(currentWorkDeed){
         
          var timeElapsed = timeElapsedHelper(currentWorkDeed['startYear'],currentWorkDeed['endYear'],currentWorkDeed['startMonth'],currentWorkDeed['endMonth']);
-        // //Scoring For Role
+        console.log("Year Score");
+         console.log(timeElapsed)
+         // //Scoring For Role
         workExpericeSubScorer(timeElapsed,'role',currentWorkDeed['role'],workDeedScoreValues,null);
         workExpericeSubScorer(timeElapsed, 'teamSize', currentWorkDeed['teamSize'],workDeedScoreValues,null);
         workExpericeSubScorer(timeElapsed,'multiDisciplinaryMakeup',currentWorkDeed['multiDisciplinaryMakeup'],workDeedScoreValues,null);
