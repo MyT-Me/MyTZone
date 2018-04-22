@@ -249,7 +249,7 @@ var scorer = function(userProfile) {
         } else if(option == "yes") {
             return (years + (months/12));
                 } else if(option == "some") {
-            var val = (years + ((months/12)/2));
+            var val = (years + (months/12))/2;
             return val;
         } else {
             return 0;
