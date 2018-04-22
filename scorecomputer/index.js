@@ -16,6 +16,8 @@ var topIter = [
     'Global understandng'
 ];
 
+
+
 var top = {
     PROJECT_MANAGEMENT: 'Project management',
     ORGANIZATIONAL_DESIGN: 'Organizational design',
@@ -95,7 +97,6 @@ var scorer = function(userProfile) {
         // try{
             var currentDeed = userProfile[allDeeds[deedIndex]].deedData;
             for(var index=0; index<currentDeed.length; index++) {
-                console.log(allDeeds[deedIndex])
                 deedScoreHelper(scorerValuesHelper,allDeeds[deedIndex],currentDeed[index], "specificActivity")
 
         }
@@ -130,10 +131,7 @@ var scorer = function(userProfile) {
 
     function deedScoreHelper(scoreValues,deedCategory, deed, identifier) {
         var currentContents = scoreValues[deedCategory].contents;
-        console.log(currentContents)
-        console.log(deed[identifier])
         if(currentContents.hasOwnProperty(deed[identifier])){
-            console.log(deed[identifier])
             var scoreArray =  currentContents[deed[identifier]].scores;
             var currentScore = deed['score'] * scoreArray[0]
 
@@ -199,9 +197,6 @@ var scorer = function(userProfile) {
                 unweightedScore = u3m*proficiencyPoints;  
             }
 
-            console.log("unweighted score in console before multiplying");
-            console.log(unweightedScore);
-            console.log(certiciation);
             //Adding Certification Weight
             if(certiciation===true) {
                 if(u3m==1){
@@ -211,8 +206,6 @@ var scorer = function(userProfile) {
                     unweightedScore = unweightedScore*1.25;
                 }
             }
-            console.log("unweighted score in console");
-            console.log(unweightedScore);
             //Adding LinkedIn
             if(endorsments>0) {
                 unweightedScore = unweightedScore + (endorsments/20);
@@ -256,7 +249,7 @@ var scorer = function(userProfile) {
         } else if(option == "yes") {
             return (years + (months/12));
         } else if(option == "some") {
-            return years + ((months/12)/2);
+            return (years + ((months/12)/2));
         } else {
             return 0;
         }
@@ -264,7 +257,6 @@ var scorer = function(userProfile) {
 
     function workExpericeSubScorer(timeElapsed,workDeed,currentWorkDeedValue,workDeedScoreValues,scoreOption) {
         if(workDeedScoreValues.hasOwnProperty(workDeed)) {
-            console.log(workDeed)
             var currentWorkDeed = workDeedScoreValues[workDeed]['contents'];
             if(currentWorkDeed.hasOwnProperty(currentWorkDeedValue)) {
                 var currentWorkDeedWithValue = currentWorkDeed[currentWorkDeedValue];
@@ -274,9 +266,7 @@ var scorer = function(userProfile) {
                 }
                 var currentScore = WorkIndividualScoreHelper(timeElapsed,scoreOption);
                 if(currentWorkDeedWithValue.hasOwnProperty('weight')){
-                    console.log("currentScore");
                     currentScore *= currentWorkDeedWithValue['weight'];
-                    console.log(currentScore)
 
                 }
                  if(scoreArray[2]!==null) {  
@@ -330,11 +320,11 @@ var scorer = function(userProfile) {
         var currentCriticalThinking = criticalThinking;
         var currentOperationsResponsibilities = operationsResponsibilities;
         function loopSelections(currentSelections,currentSelectionName,currentWorkDeed) {
-            var currentLength = 4;//currentSelections.length;
+            var currentLength = Object.keys(currentSelections).length;
             var selectionWorkDeedScoreValues = workDeedScoreValues[currentSelectionName]
             for(var index = 0; index < currentLength; index++) {
-                //console.log("calling",currentSelectionName);
-                workExpericeSubScorer(timeElapsed, currentSelectionName,currentSelections[index],workDeedScoreValues,currentWorkDeed[currentSelectionName][currentSelections[index]])
+                workExpericeSubScorer(timeElapsed, currentSelectionName,currentSelections[index],workDeedScoreValues,
+                    currentWorkDeed[currentSelectionName][currentSelections[index]]);
             }
         }
         loopSelections(currentSystemAndOperationInnovation,'systemAndOperationInnovation',currentWorkDeed);
@@ -345,7 +335,6 @@ var scorer = function(userProfile) {
 }
 
 scorer.prototype.buildJSON = function(){
-    console.log("Three");
     returnJSON = {
         My_T_Score: this.My_T_Score,
         My_T_Top: this.My_T_Top,
@@ -357,7 +346,6 @@ scorer.prototype.buildJSON = function(){
 
 module.exports = function( userProfile, callback ) {
     var userScore = new scorer(userProfile);
-    var returnJSON = userScore.buildJSON()
-    console.log(callback)
+    var returnJSON = userScore.buildJSON();
     callback(null,returnJSON)
 }

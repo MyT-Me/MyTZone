@@ -12,8 +12,8 @@ module.exports = function (app) {
             return;
         }
         var requestId = req.params.removalDeed;
-        console.log(requestId);
-        console.log(req.query.ids);
+        // console.log(requestId);
+        // console.log(req.query.ids);
         //Verifing if the id sent is correct
         if(!(verifier.has(requestId))) {
             //Inorrect Parameter Resource Tried to access

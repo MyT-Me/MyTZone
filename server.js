@@ -31,7 +31,9 @@ app.use(bodyParser.json({extend:true}));
 
 /*Setting Up Database*/
 mongoose.connect(dbconfig.getMongoUrl()).then(
-    () => {console.log("Connected To Database")},
+    () => {
+        console.log("Connected To Database");
+    },
     err => {
     console.log("Error in Connection -> " + err);
 });
