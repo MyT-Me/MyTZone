@@ -976,26 +976,6 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
         // console.log(returnValue);
         return returnValue;
     }
-<<<<<<< HEAD
-
-
-var skillsToolsJSONBuilder = function(receivedObject){
-    var returnJSON =  {
-        'category': receivedObject.category,
-        'software': receivedObject.software,
-        'vendor': receivedObject.vendor,
-        'linkedin': receivedObject.linkedin,
-        'basicyear': "",
-        'interyear': "",
-        'advancedyear': "",
-        'expertyear': "",
-        'formal': getFromBoolean(receivedObject.formal),
-        'usage':  receivedObject.usage,
-        'ind':receivedObject.ind,
-        'id': receivedObject.id
-
-=======
-
     var skillsToolsJSONBuilder = function(receivedObject) {
         var returnJSON = {
             'category': receivedObject.category,
@@ -1013,7 +993,7 @@ var skillsToolsJSONBuilder = function(receivedObject){
         }
         returnJSON[receivedObject.proficiencyType + 'year'] = receivedObject.proficiencyYear;
         return returnJSON;
->>>>>>> 0816085055eb704c79892e31263f896424becb49
+
     }
 
     //Skills Controller
@@ -1696,23 +1676,5 @@ console.log("tStem Ticks: ", tStemTicks)
 
 
     });
-
-    //charts
-
-    // Highcharts.chart('high-container', {
-    //     title: {
-    //       text: 'Temperature Data'
-    //     },
-
-    //     xAxis: {
-    //       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    //         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    //       ]
-    //     },
-
-    //     series: [{
-    //       data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-    //     }]
-    //   })
 
 }]);
