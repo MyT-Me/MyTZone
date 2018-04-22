@@ -976,6 +976,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
         // console.log(returnValue);
         return returnValue;
     }
+<<<<<<< HEAD
 
 
 var skillsToolsJSONBuilder = function(receivedObject){
@@ -993,6 +994,26 @@ var skillsToolsJSONBuilder = function(receivedObject){
         'ind':receivedObject.ind,
         'id': receivedObject.id
 
+=======
+
+    var skillsToolsJSONBuilder = function(receivedObject) {
+        var returnJSON = {
+            'category': receivedObject.category,
+            'software': receivedObject.software,
+            'vendor': receivedObject.vendor,
+            'linkedin': receivedObject.linkedin,
+            'basicyear': "",
+            'interyear': "",
+            'advancedyear': "",
+            'expertyear': "",
+            'formal': getFromBoolean(receivedObject.formal),
+            'usage': getFromBoolean(receivedObject.usage),
+            'ind': receivedObject.ind,
+            'id': receivedObject.id
+        }
+        returnJSON[receivedObject.proficiencyType + 'year'] = receivedObject.proficiencyYear;
+        return returnJSON;
+>>>>>>> 0816085055eb704c79892e31263f896424becb49
     }
 
     //Skills Controller
