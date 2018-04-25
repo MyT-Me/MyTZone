@@ -4,17 +4,12 @@
     <script type="text/javascript" src="chartshelper.js"></script>
 </head>
 
-<div class="control-group">
-<span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
-</div>
-
-
 <body ng-controller="myController">
-    <div class="container" ng-init="scoreRunner()" ng-init="dataTables()">
+    <div class="container customContainer" ng-init="scoreRunner()" ng-init="dataTables()">
         <div class="row">
-            <!-- <div class=" col-md-12 control-group">
+            <div class=" col-md-12 control-group">
                 <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
-            </div> -->
+            </div>
         </div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <div class="row">
@@ -26,7 +21,7 @@
                     <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.skills">Skills</a></li>
                     <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.tools">Tools</a></li>
                     <li class="current"><a href="#0" ui-sref-active="active" ui-sref="base.chart">T-Score</a></li>
-                    <h1>My T Score</h1>
+                    <!-- <h1>My T Score</h1> -->
                 </ol>
             </nav1>
         </div>
@@ -35,24 +30,37 @@
         <div id="headingmain" ng-app="FormlyApp"></div>
         <section class="mainContent">
             <div class="row">
-                <div class="col-xs-8  col-centered" style="padding-top: 50px;">
-                    <div class="ct-chart  quantChart tBackground" style="padding-top: 50px;"" id="tTopBreak"></div>
-                </div>
-                <div class="col-xs-8 col-centered">
-                    <div class="ct-chart totalChart tBackground" id="tTopQuant"></div>
-                </div>
-                <div class="row">
-
-                    <div class="tBackground">
-                        <div class="col-xs-offset-4 col-xs-2 ">
-                            <div class="ct-chart  quantChart tBackground" id="tStemBreak"></div>
-                        </div>
-                        <div class="col-xs-2 ">
-                            <div class="ct-chart totalChart tBackground" id="tStemQuant"></div>
-                        </div>
-                        </div>
+                <div class="col-xs-8 col-centered tOutline tBackground" style="margin-top: 40px;">
+                    <div class="col-xs-12  col-centered" style="padding-top: 40px;">
+                        <div class="ct-chart  quantChart"  id="tTopBreak"></div>
+                    </div>
+                    <div class="col-xs-12 col-centered">
+                        <div class="ct-chart totalChart" id="tTopQuant"></div>
                     </div>
                 </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4" style="padding-top: 40px;">
+                    <h2 class="textCenter">My T Score!</h2>
+                    <h3 class="textCenter">{{fulltScore}}</h3>
+                </div>
+                <div class=" col-xs-4 tBackground tOutlineStem">
+                    <div class=" col-xs-6 ">
+                        <div class="ct-chart  quantChart " id="tStemBreak"></div>
+                    </div>
+                    <div class="col-xs-6 ">
+                        <div class="ct-chart totalChart " id="tStemQuant"></div>
+                    </div>
+                 </div>
+                <div class="col-xs-4" style="padding-top: 40px;">
+                        <h2 class="textCenter">T Top Score</h2>
+                        <h3 class="textCenter">{{fulltTop}}</h3>
+
+                        <h2 class="textCenter">T Stem Score</h2>
+                        <h3 class="textCenter">{{fulltStem}}</h3>
+                    </div>
+            </div>
 
                 <div class="row">
                     <div class="col-md-4">

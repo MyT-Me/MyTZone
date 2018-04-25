@@ -16,7 +16,7 @@ $(function() {
     });
 
 });
-// var Highcharts = require('highcharts'); 
+// var Highcharts = require('highcharts');
 // import Highcharts from '../highcharts';
 
 // Load module after Highcharts is loaded
@@ -176,7 +176,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
     }
     $scope.years = range;
 
-    //Config Values 
+    //Config Values
     var config = {
         headers: { headers: { 'Content-Type': 'application/json' } },
         CERTIFICATES: 'certificates',
@@ -580,7 +580,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
             console.log("to send");
             console.log(toSend);
             $http.post('/api/deeds/workExperience', toSend, config.headers).then(function(response) {
-                //Positive 
+                //Positive
                 //alert("Worked Added");
                 console.log("Worked");
             }, function(response) {
@@ -751,7 +751,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
         console.log(category);
         var formDatadeed = $scope.formDatadeed;
         console.log($scope.formDatadeed);
-        //Loading the Common JSON parameters now 
+        //Loading the Common JSON parameters now
         var toSend = {
             specificActivity: this.formDatadeed.activity,
             month: this.formDatadeed.smonth,
@@ -778,9 +778,9 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
         }
         console.log("Trying to Print Sending JSON");
         console.log(toSend);
-        //Sending http POST request to the backend 
+        //Sending http POST request to the backend
         $http.post('/api/deeds/' + category, toSend, config.headers).then(function(response) {
-            //Positive 
+            //Positive
             // alert("Worked Added");
             console.log("Worked");
         }, function(response) {
@@ -1409,7 +1409,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
 
 
 
-                //String to hold all previous values 
+                //String to hold all previous values
                 $scope.fulltStemPreString = [$scope.roundMe($scope.fulltStemPrevious)];
                 $scope.fulltTopPreString = [$scope.roundMe($scope.fulltTopPrevious)];
                 $scope.fulltScorePreString = [$scope.roundMe($scope.fulltScorePrevious)];
@@ -1589,7 +1589,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
             }, {
                 stackBars: true,
                 high: 100,
-                height: 600,
+                height: 400,
                 axisY: {
 
                     showGrid: false,
@@ -1610,7 +1610,7 @@ console.log("tStem Ticks: ", tStemTicks)
                     [$scope.fulltStem],
                 ]
             }, {
-                height: 600,
+                height: 400,
                 high: $scope.tStemUpper,
                 axisX: {
                     showLabel: false,
