@@ -38,6 +38,34 @@ module.exports = {
             }
         }
     },
+   honors: {
+        contents: {
+            "Valedictorian": {
+                name: "Valedictorian",
+                scores: [4.0,
+                        null,
+                        Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS]
+            },
+            "Cum Laude" :{
+                name: "Cum Laude",
+                scores: [2.0,
+                        null,
+                        Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS]
+            },
+            "Magna Cum Laude":{
+                name: "Magna Cum Laude",
+                scores: [3.0,
+                        null,
+                        Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS]
+            },
+            "Summa Cum Laude":{
+                name: "Summa Cum Laude",
+                scores: [4.0,
+                        null,
+                        Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS]
+            }
+        }
+   },
     certificates: {
         value: apiString.CERTIFICATES,
         contents: {

@@ -72,7 +72,11 @@ var scorer = function(userProfile) {
     var eduData = userProfile[apiStrings.EDUCATION].deedData;
     
     for(var index= 0;index<eduData.length;index++) {
-        deedScoreHelper(scorerValuesHelper,apiStrings.EDUCATION,eduData[index],"degreeProgramStatus");
+        var curEduData = eduData[index];
+        deedScoreHelper(scorerValuesHelper,apiStrings.EDUCATION,curEduData,"degreeProgramStatus");
+        if(curEduData["honors"]!==undefined) {
+            deedScoreHelper(scorerValuesHelper,apiStrings.HONORS,curEduData,"honors")
+        }
     }
 
     //Deed Scoring
@@ -136,6 +140,9 @@ var scorer = function(userProfile) {
             var currentScore = deed['score'] * scoreArray[0]
 
             if(scoreArray[2]!==null) {
+                if(identifier=="honors") {
+                    console.log("It Worked");
+                }
                 parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
             }
             if(scoreArray[1]!==null){
@@ -288,8 +295,6 @@ var scorer = function(userProfile) {
     function workExperienceScoreHelper(currentWorkDeed){
         
          var timeElapsed = timeElapsedHelper(currentWorkDeed['startYear'],currentWorkDeed['endYear'],currentWorkDeed['startMonth'],currentWorkDeed['endMonth']);
-        console.log("Year Score");
-         console.log(timeElapsed)
          // //Scoring For Role
         workExpericeSubScorer(timeElapsed,'role',currentWorkDeed['role'],workDeedScoreValues,null);
         workExpericeSubScorer(timeElapsed, 'teamSize', currentWorkDeed['teamSize'],workDeedScoreValues,null);
@@ -342,7 +347,6 @@ scorer.prototype.buildJSON = function(){
         My_T_Score: this.My_T_Score,
         My_T_Top: this.My_T_Top,
         My_T_Stem: this.My_T_Stem,
-
     }
     return returnJSON; 
 }
