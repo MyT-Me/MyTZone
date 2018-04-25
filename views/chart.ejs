@@ -18,7 +18,7 @@
         </div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <div class="row">
-            <nav1 class="col-md-12 col-centered">
+            <nav1 class="col-md-12">
                 <ol class="cd-multi-steps text-bottom count" id="status-buttons">
                     <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.educate">Education</a></li>
                     <li class="visited"><a href="#0" ui-sref-active="active" ui-sref="base.work">Work</a></li>
@@ -35,19 +35,21 @@
         <div id="headingmain" ng-app="FormlyApp"></div>
         <section class="mainContent">
             <div class="row">
-                <div class="col-md-8  col-centered" style="padding-top: 40px;">
-                    <div class="ct-chart  quantChart" id="tTopBreak"></div>
+                <div class="col-xs-8  col-centered" style="padding-top: 50px;">
+                    <div class="ct-chart  quantChart tBackground" style="padding-top: 50px;"" id="tTopBreak"></div>
                 </div>
-                <div class="col-md-8 col-centered">
-                    <div class="ct-chart totalChart" id="tTopQuant"></div>
+                <div class="col-xs-8 col-centered">
+                    <div class="ct-chart totalChart tBackground" id="tTopQuant"></div>
                 </div>
                 <div class="row">
-                    <div class="col-centered">
-                        <div class="col-md-offset-4 col-md-2 ">
-                            <div class="ct-chart  quantChart" id="tStemBreak"></div>
+
+                    <div class="tBackground">
+                        <div class="col-xs-offset-4 col-xs-2 ">
+                            <div class="ct-chart  quantChart tBackground" id="tStemBreak"></div>
                         </div>
-                        <div class="col-md-2 ">
-                            <div class="ct-chart totalChart" id="tStemQuant"></div>
+                        <div class="col-xs-2 ">
+                            <div class="ct-chart totalChart tBackground" id="tStemQuant"></div>
+                        </div>
                         </div>
                     </div>
                 </div>
