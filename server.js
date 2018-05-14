@@ -42,7 +42,9 @@ mongoose.connect(dbconfig.getMongoUrl()).then(
 //Enabling CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
+  res.header("Access-Control-Allow-Credentials", "true")
   next();
 });
 
@@ -78,12 +80,15 @@ app.use(function(err, req, res, next){
     console.log(req.url);
     var url = req.url
     if (err.name === 'UnauthorizedError') {
-        if (url.startsWith('/sub')) {
+        
+        /*if (url.startsWith('/sub')) {
             res.redirect('../pages/login');
         } else {
             res.status(401);
             res.json({"message" : err.name + ": " + err.message});
-        }
+        } */
+        console.log(req.headers);
+        res.status(403).json();
     }
 });
 

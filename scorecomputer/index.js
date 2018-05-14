@@ -140,9 +140,6 @@ var scorer = function(userProfile) {
             var currentScore = deed['score'] * scoreArray[0]
 
             if(scoreArray[2]!==null) {
-                if(identifier=="honors") {
-                    console.log("It Worked");
-                }
                 parent['My_T_Stem'][scoreArray[2]] =  parent['My_T_Stem'][scoreArray[2]] + currentScore;
             }
             if(scoreArray[1]!==null){
