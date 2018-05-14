@@ -29,7 +29,7 @@
     <!--</button>
 </div>-->
 
-<div ng-app="FormlyApp" id="smallcon1" class="container col-md-10 col-md-offset-1">
+<div ng-app="FormlyApp" id="smallcon1" class="container customContainer col-md-10 col-md-offset-1">
 
     <div class="row">
         <div class="col-md-12 skill" >
@@ -103,12 +103,15 @@
                         <div ng-init = "personalDetail.formal = 'No'">
                             <input type="radio" name="tick3_{{$index}}" value="Yes" ng-model="personalDetail.formal"> Yes
                             <input type="radio" name="tick3_{{$index}}" value="No" ng-model="personalDetail.formal"> No<br>
-                        </div
+                        </div>
                         </td>
-                        <div ng-init = "personalDetail.usage = 'No'">                        
-                        <td style="width: 30px; margin-left:14px;">
-                            <input type="radio" name="tick4_{{$index}}" value="Yes" ng-model="personalDetail.usage"> Yes
-                            <input type="radio" name="tick4_{{$index}}" value="No" ng-model="personalDetail.usage"> No<br>
+                        <td style="width: auto; margin-left:14px;">
+                        <div style="width:250px; margin-left:14px" ng-init = "personalDetail.usage = 'No'">                        
+                            <input type="radio" name="tick4_{{$index}}" value="Often" ng-model="personalDetail.usage"> Often
+                            <input type="radio" name="tick4_{{$index}}" value="No" ng-model="personalDetail.usage"> No
+                            <input type="radio" name="tick4_{{$index}}" value="Rarely" ng-model="personalDetail.usage"> Rarely
+                            <input type="radio" name="tick4_{{$index}}" value="Sometimes" ng-model="personalDetail.usage"> Sometimes
+                            <br>
                         </td>
                         </div>
                         <!--<td>-->

@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-
-  <!-- CSS -->
-  <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">-->
-  <link rel="stylesheet" href="app.css">
-  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-  <!-- JS -->
-  <!-- load angular, nganimate, and ui-router -->
-  <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>-->
-
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/api-check/7.2.4/api-check.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-formly/6.11.0/formly.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-formly-templates-bootstrap/4.3.1/angular-formly-templates-bootstrap.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="/scripts/chart.js/dist/Chart.min.js"></script>
-  <script src="/scripts/angular-chart.js/dist/angular-chart.min.js"></script>
-  <script src="app1.js"></script>
-
+    <meta charset="utf-8">
+    <!-- CSS -->
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">-->
+    <!-- NO BAD. Why? Why have Bootstrap override custom CSS????? -->
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <link rel="stylesheet" href="better.css">
+    <!-- JS -->
+    <!-- load angular, nganimate, and ui-router -->
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/api-check/7.2.4/api-check.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-formly/6.11.0/formly.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-formly-templates-bootstrap/4.3.1/angular-formly-templates-bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="/scripts/chart.js/dist/Chart.min.js"></script>
+    <script src="/scripts/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script src="app1.js"></script>
 </head>
+
 <body ng-app="formlyApp">
-<h1 id="main_head">MyT-Me Worksheet</h1>
-<!-- views will be injected here -->
-<div class="container">
-  <div ui-view></div>
-</div>
-
-<!-- Application Scripts -->
-
+    <h1 style="text-align: center;" id="main_head">MyT-Me Worksheet</h1>
+    <!-- views will be injected here -->
+    <div class="customContainer fullHeight">
+        <div ui-view></div>
+    </div>
+    <!-- Application Scripts -->
+    <script type="text/javascript">
+    $('tStem2').DataTable();
+    </script>
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+        <script src="chartist-plugin-legend.js"></script>
 
 </body>
+
 </html>

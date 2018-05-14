@@ -12,14 +12,11 @@ var auth = require('../authentication/authjwt');
 module.exports = function (app) {
     app.post('/api/deeds/:id', auth, function (req, res) {
         if (!(req.params === 0)) {
-            console.log("Inside the Combined Addition");
             var requestId = req.params.id;
-            console.log("Request Id " + requestId)
             if (verifier.has(requestId)) {
                 if (JSONValidator(addJSONSchema[requestId], req.body)) {
                     adders.addDeed(req, requestId, function (err, sendJsonData){
                         if (err) {
-                            console.log("Error in Addition" + err);
                             res.status(500).send(err.message);
                         } else {
                             var sendJson = {
@@ -30,7 +27,6 @@ module.exports = function (app) {
                     });
                 //Failure Condition - Validation Failed
                 } else {
-                    console.log("INCORRECT JSON")
                     res.status(500).send(JSON.stringify({err:"Incorrect JSON"}));
                 }
             // Failure Condition - If 'REQUEST MADE OR PARAMETER IS WRONG' is Wrong
@@ -40,7 +36,6 @@ module.exports = function (app) {
             }
         // Failure Condition - If Params Not Present 
         } else {
-            console.log("Empty Parameter");
             res.status(404).send();
             return;
         }

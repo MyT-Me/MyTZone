@@ -4,7 +4,9 @@ var models = require('../models/schema');
 var User = models.User;
 var userJSONSchema = require('../jsonSchemas')('user');
 var JSONValidator = require('./commonMethods').JSONValidator;
-var validator = require('validator')
+var validator = require('validator');
+var auth = require('../authentication/authjwt');
+
 
 module.exports = function (app){
     app.post('/login', function (req, res){
@@ -42,5 +44,10 @@ module.exports = function (app){
         } else {
             res.status(500).json("");
         }
+    });
+
+    app.post('/isLoginValid' ,auth, function (req,res){
+        console.log("Inside the Login Authentication ");
+        res.status(200).json();
     });
 };  

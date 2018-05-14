@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <div ng-show="showTheFormWork" ng-cloak id="smallcon" class="container col-md-10 col-md-offset-1">
+    <div ng-show="showTheFormWork" ng-cloak id="smallcon" class="container customContainer col-md-10 col-md-offset-1">
 
         <form ng-show="showTheFormWork" ng-cloak ng-submit="addNewWork();" name="myForm" novalidate>
             <h3>Work Experience</h3>
@@ -118,13 +118,13 @@
                             <option value="Building & Construction">Building & Construction</option>
                             <option value="Education">Education</option>
                             <option value="Entertainment">Entertainment</option>
-                            <option value="Energy and Electric">Energy and Electric</option>
-                            <option value="Financial and Business consulting">Financial and Business consulting</option>
+                            <option value="Energy & Electric">Energy and Electric</option>
+                            <option value="Financial & Business Consulting">Financial and Business consulting</option>
                             <option value="Fitness and Well being">Fitness and Well being</option>
                             <option value="Government">Government</option>
                             <option value="Health care delivery">Health care delivery</option>
                             <option value="Hospitality">Hospitality</option>
-                            <option value="Information and Communication Technology">Information and Communication
+                            <option value="Information & Communications Technology">Information and Communication
                                 Technology
                             </option>
                             <option value="Manufacturing">Manufacturing</option>
@@ -234,13 +234,12 @@
                         <option value="Manager">Manager</option>
                         <option value="Executive/Founder">Executive/Founder</option>
                         <option value="Consultant/Subject matter expert">Consultant/Subject matter expert</option>
-                        <option value="Bd of Dir">Bd of Dir</option>
+                        <option value="Board of Dir">Board of Dir</option>
                         <option value="Member(Student or Full membership)">Member(Student or Full membership)</option>
                         <option value="Local or student committee">Local or student committee</option>
                         <option value="Local or student officer">Local or student officer</option>
                         <option value="National Committee">National Committee</option>
                         <option value="National Officer">National Officer</option>
-                        <option value="Fellow">Fellow</option>
                     </select>
                 </div>
 
@@ -264,7 +263,7 @@
                             <td class="question question1"><label for="Very low">Very low 0-15%</label><input type="radio"
                                                                                    ng-model="workData.multidis"
                                                                                    name="multidis" id="Very low"
-                                                                                   value="Very low"></td>
+                                                                                   value="Very Low"></td>
                             <td class="question question1"><label for="Low">Low 16-35%</label> <input type="radio" ng-model="workData.multidis"
                                                                            name="multidis" id="Low" value="Low"></td>
                             <td class="question question1"><label for="Moderate">Moderate 36-50%</label> <input type="radio"
@@ -289,20 +288,20 @@
                             <td class="question question1"><label for="Very loww">Very low 0-15%</label> <input type="radio"
                                                                                      ng-model="workData.multicul"
                                                                                      name="multicul" id="Very loww"
-                                                                                     value="Very loww"></td>
+                                                                                     value="Very Low"></td>
                             <td class="question question1"><label for="Loww">Low 16-35%</label> <input type="radio" ng-model="workData.multicul"
-                                                                            name="multicul" id="Loww" value="Loww"></td>
+                                                                            name="multicul" id="Loww" value="Low"></td>
                             <td class="question question1"><label for="Moderatee">Moderate 36-50%</label> <input type="radio"
                                                                                       ng-model="workData.multicul"
                                                                                       name="multicul" id="Moderatee"
-                                                                                      value="Moderatee"></td>
+                                                                                      value="Moderate"></td>
                             <td class="question question1"><label for="Highh">High 51-75%</label> <input type="radio" ng-model="workData.multicul"
-                                                                              name="multicul" id="Highh" value="Highh">
+                                                                              name="multicul" id="Highh" value="High">
                             </td>
                             <td class="question question1"><label for="VeryHighh">Very high >76%</label> <input type="radio"
                                                                                      ng-model="workData.multicul"
                                                                                      name="multicul" id="VeryHighh"
-                                                                                     value="VeryHighh"></td>
+                                                                                     value="VeryHigh"></td>
                         </tr>
                     </table>
                 </div>
@@ -338,8 +337,7 @@
                         <div>
                             <input type="radio" name="q1" id="yes" value="yes" ng-model="workData.q1">&nbsp<label
                                 class="labell" for="yes">Yes</label></li>
-                            <input type="radio" name="q1" id="no" value="no" ng-model="workData.q1"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q1" id="no" value="no" ng-model="workData.q1" checked="checked">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q1" id="some" value="some" ng-model="workData.q1">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -352,8 +350,7 @@
                         <div>
                             <input type="radio" name="q2" id="yes" value="yes" ng-model="workData.q2">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q2" id="no" value="no" ng-model="workData.q2"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q2" id="no" value="no" ng-model="workData.q2">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q2" id="some" value="some" ng-model="workData.q2">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -365,8 +362,7 @@
                         <div>
                             <input type="radio" name="q3" id="yes" value="yes" ng-model="workData.q3">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q3" id="no" value="no" ng-model="workData.q3"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q3" id="no" value="no" ng-model="workData.q3">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q3" id="some" value="some" ng-model="workData.q3">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -379,8 +375,7 @@
                         <div>
                             <input type="radio" name="q4" id="yes" value="yes" ng-model="workData.q4">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q4" id="no" value="no" ng-model="workData.q4"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q4" id="no" value="no" ng-model="workData.q4">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q4" id="some" value="some" ng-model="workData.q4">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -399,8 +394,7 @@
                         <div>
                             <input type="radio" name="q5" id="yes" value="yes" ng-model="workData.q5">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q5" id="no" value="no" ng-model="workData.q5"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q5" id="no" value="no" ng-model="workData.q5">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q5" id="some" value="some" ng-model="workData.q5">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -413,8 +407,7 @@
                         <div>
                             <input type="radio" name="q6" id="yes" value="yes" ng-model="workData.q6">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q6" id="no" value="no" ng-model="workData.q6"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q6" id="no" value="no" ng-model="workData.q6">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q6" id="some" value="some" ng-model="workData.q6">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -426,8 +419,7 @@
                         <div>
                             <input type="radio" name="q7" id="yes" value="yes" ng-model="workData.q7">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q7" id="no" value="no" ng-model="workData.q7"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q7" id="no" value="no" ng-model="workData.q7">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q7" id="some" value="some" ng-model="workData.q7">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -440,8 +432,7 @@
                         <div>
                             <input type="radio" name="q8" id="yes" value="yes" ng-model="workData.q8">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q8" id="no" value="no" ng-model="workData.q8"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q8" id="no" value="no" ng-model="workData.q8">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q8" id="some" value="some" ng-model="workData.q8">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -454,8 +445,7 @@
                         <div>
                             <input type="radio" name="q9" id="yes" value="yes" ng-model="workData.q9">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q9" id="no" value="no" ng-model="workData.q9"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q9" id="no" value="no" ng-model="workData.q9">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q9" id="some" value="some" ng-model="workData.q9">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -474,8 +464,7 @@
                         <div>
                             <input type="radio" name="q10" id="yes" value="yes" ng-model="workData.q10">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q10" id="no" value="no" ng-model="workData.q10"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q10" id="no" value="no" ng-model="workData.q10">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q10" id="some" value="some" ng-model="workData.q10">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -487,8 +476,7 @@
                         <div>
                             <input type="radio" name="q11" id="yes" value="yes" ng-model="workData.q11">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q11" id="no" value="no" ng-model="workData.q11"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q11" id="no" value="no" ng-model="workData.q11">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q11" id="some" value="some" ng-model="workData.q11">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -501,8 +489,7 @@
                         <div>
                             <input type="radio" name="q12" id="yes" value="yes" ng-model="workData.q12">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q12" id="no" value="no" ng-model="workData.q12"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q12" id="no" value="no" ng-model="workData.q12">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q12" id="some" value="some" ng-model="workData.q12">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -515,8 +502,7 @@
                         <div>
                             <input type="radio" name="q13" id="yes" value="yes" ng-model="workData.q13">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q13" id="no" value="no" ng-model="workData.q13"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q13" id="no" value="no" ng-model="workData.q13">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q13" id="some" value="some" ng-model="workData.q13">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -529,8 +515,7 @@
                         <div>
                             <input type="radio" name="q14" id="yes" value="yes" ng-model="workData.q14">&nbsp<label
                                 class="labell" for="yes">Yes</label> </li>
-                            <input type="radio" name="q14" id="no" value="no" ng-model="workData.q14"
-                                   ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
+                            <input type="radio" name="q14" id="no" value="no" ng-model="workData.q14">&nbsp<label class="labell" for="no">No</label> </li>
                             <input type="radio" name="q14" id="some" value="some" ng-model="workData.q14">&nbsp<label
                                 class="labell" for="some">Some</label> </li>
                         </div>
@@ -545,7 +530,7 @@
         </form>
     </div>
 
-    <div ng-show="showQuestionsWork" ng-cloak id="smallconq" class="container col-md-10 col-md-offset-1">
+    <div ng-show="showQuestionsWork" ng-cloak id="smallconq" class="container customContainer col-md-10 col-md-offset-1">
 
         <form ng-show="showQuestionsWork" ng-cloak ng-submit="addNewWork();" name="myForm1" novalidate>
             <div class="second">
@@ -773,7 +758,7 @@
     </div>
 
     <!--<a href="deeds.html"><input type="submit" class="btn btn-success addnew pull-right pull-button" value="Next"></a>-->
-
+    
 
     <!--<pre>-->
         <!--{{ model.user }}-->

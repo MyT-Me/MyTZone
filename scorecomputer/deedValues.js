@@ -38,6 +38,34 @@ module.exports = {
             }
         }
     },
+   honors: {
+        contents: {
+            "Valedictorian": {
+                name: "Valedictorian",
+                scores: [4.0,
+                        null,
+                        Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS]
+            },
+            "Cum Laude" :{
+                name: "Cum Laude",
+                scores: [2.0,
+                        null,
+                        Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS]
+            },
+            "Magna Cum Laude":{
+                name: "Magna Cum Laude",
+                scores: [3.0,
+                        null,
+                        Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS]
+            },
+            "Summa Cum Laude":{
+                name: "Summa Cum Laude",
+                scores: [4.0,
+                        null,
+                        Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS]
+            }
+        }
+   },
     certificates: {
         value: apiString.CERTIFICATES,
         contents: {
@@ -97,14 +125,14 @@ module.exports = {
                 name: 'Conduct 1 hour or longer Briefing/Invited lecture',
                 scores: [1.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null]
+                    Stem.EDUCATION_BRIEFINGS_TEACHING]
             },
             "Conduct 1 - 2 day briefing/workshop" : {
                 name: 'Conduct 1 - 2 day briefing/workshop',
                 scores: [
                     2.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null
+                    Stem.EDUCATION_BRIEFINGS_TEACHING
                 ]
             }, 
             "Conduct 3 - 5 day briefing/workshop" :{
@@ -112,7 +140,7 @@ module.exports = {
                 scores: [
                     3.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null
+                    Stem.EDUCATION_BRIEFINGS_TEACHING
                 ]
             },
             "Teaching Assistant/Lab Assistant for Sem/Qtr course" : {
@@ -120,7 +148,7 @@ module.exports = {
                 scores: [
                     3.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null
+                    Stem.EDUCATION_BRIEFINGS_TEACHING
                 ]
             },
             "Teacher for full Semester course" : {
@@ -128,7 +156,7 @@ module.exports = {
                 scores: [
                     5.0,
                     [3,0,10,3,0,0,2,2,0],
-                    null
+                    Stem.EDUCATION_BRIEFINGS_TEACHING
                 ]
             }
         },
@@ -224,9 +252,9 @@ module.exports = {
             "Fellow/Diplomate" : {
                 name: 'Fellow/Diplomate',
                 scores: [
-                    0,
-                    null,
-                    null
+                    3.0,
+                    [0,0,2,0,0,10,3,5,0],
+                    Stem.MEMBERSHIPS_AUTHORSHIPS_RECOGNITIONS
                 ]
             }
         }
@@ -409,20 +437,20 @@ module.exports = {
         contents: {
             "Fluent in 2nd language": {
                 name: 'Fluent in 2nd language',
-                scores: [2.0,
+                scores: [8.0,
                     [0,0,10,0,0,0,0,5,5],
                     null]
             },
             "Fluent in 3rd language": {
                 name: 'Fluent in 3rd language',
-                scores: [2.0,
+                scores: [8.0,
                     [0,0,10,0,0,0,0,5,5],
                     null
                 ]
             },
             "Fluent in 4th or more language" : {
                 name: 'Fluent in 4th or more language',
-                scores: [2.0,
+                scores: [8.0,
                     [0,0,10,0,0,0,0,5,5],
                     null
                 ]
@@ -463,7 +491,7 @@ module.exports = {
                         null]
             }
         }
-    }
+    },
 }
 
 
