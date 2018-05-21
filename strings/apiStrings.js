@@ -26,7 +26,8 @@ var apiStrings = {
     DEEDS: 'deeds',
     CHARTS: 'chart',
     SCORES: 'scores',
-    HONORS: 'honors'
+    HONORS: 'honors',
+    RULES: 'rules'
 };
 
 module.exports = apiStrings;
