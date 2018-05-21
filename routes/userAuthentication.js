@@ -6,8 +6,8 @@ var userJSONSchema = require('../jsonSchemas')('user');
 var JSONValidator = require('./commonMethods').JSONValidator;
 var validator = require('validator');
 var auth = require('../authentication/authjwt');
-
-
+var getters = require('../models/getMethods');
+var parameters = require('../strings/apiStrings');
 module.exports = function (app){
     app.post('/login', function (req, res){
         console.log("Inside the Login Module");
@@ -21,7 +21,13 @@ module.exports = function (app){
                     }
                     if(user){
                         token = user.generateJWT();
-                        res.status(200).json({"token":token});
+                        var response = {
+                            "token": token
+                        }
+                        getters.getRules(req, function(err, rules) {
+                            response[parameters.RULES]  = rules;
+                            res.status(200).json(response);
+                        })
                     } else {
                         res.status(401).json(info);
                     }
@@ -35,7 +41,13 @@ module.exports = function (app){
                     } 
                     if(user){
                         token = user.generateJWT();
-                        res.status(200).json({"token": token});
+                        var response = {
+                            "token": token
+                        }
+                        getters.getRules(req, function(err, rules) {
+                            response[parameters.RULES] = rules;
+                            res.status(200).json(response);
+                        });
                     } else {
                         res.status(401).json(info);
                     }
