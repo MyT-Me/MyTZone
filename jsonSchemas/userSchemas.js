@@ -36,7 +36,7 @@ module.exports = {
                 "type": "string"
             },
             "firstYear" : {
-                "type": "number"
+                "type": ["number","string"]
             },
             "dateOfBirth": {
                 "type": "string"
