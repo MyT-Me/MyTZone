@@ -353,7 +353,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
     $scope.registration = {}
 
     $scope.registerUser = function() {
-        console.log($scope.registration);
+        //console.log($scope.registration);
         //JSON For Registration
         registerUser = {
             "userName": $scope.registration.username,
@@ -364,6 +364,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
             "email": $scope.registration.email,
             "password": $scope.registration.password
         }
+        console.log(registerUser);
         //Calling Registration
         //Sending JSON to API - /signUp
         $http.post('/signUp', registerUser, config.headers).then(function(response) {

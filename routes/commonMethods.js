@@ -9,11 +9,12 @@ var JSONValidator = function (validationSchema, body) {
     var result = validator.validate(body, validationSchema);
     var validatorResult = result.valid;
     if(!validatorResult){
-        // console.log("Validation Schema");
-        // console.log(validationSchema);
-        // console.log("Body");
-        // console.log(body);
-        // console.log(result);
+        console.log("Error HERE ERROR HERE")
+        console.log("Validation Schema");
+        console.log(validationSchema);
+        console.log("Body");
+        console.log(body);
+        console.log(result);
     } else {
         //console.log("Vaidation Successful");
     }
