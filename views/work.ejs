@@ -1,5 +1,5 @@
 <div class="control-group">
-    <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
+    <span style="padding-left:50em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
 </div>
 <section>
     <nav1>
@@ -16,7 +16,7 @@
 
 
 <div id="headingmain" ng-app="FormlyApp">
-    <h1 id="heading_login">Work/Volunteer Segments</h1>
+    <h1 id="heading_login text-center">Work/Volunteer Segments</h1>
     <div id="inside_work">
         <button ng-show="showbutton" ng-click="showTheFormWork = !showTheFormWork; setSameEmployerTrue();" class="btn btn-default">
             <span class="glyphicon glyphicon-plus"></span> Add segment under same organization
@@ -550,7 +550,7 @@
                             <div>
                                 <input type="radio" name="q1" id="yes" value="yes" ng-model="workData.q1">&nbsp<label
                                     class="labell" for="yes">Yes</label></li>
-                                <input type="radio" name="q1" id="no" value="no" ng-model="workData.q1"
+                                <input type="radio" name="q1" id="no" value="no" ng-model="workData.q1" checked="checked"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q1" id="some" value="some" ng-model="workData.q1">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -564,7 +564,7 @@
                             <div>
                                 <input type="radio" name="q2" id="yes" value="yes" ng-model="workData.q2">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q2" id="no" value="no" ng-model="workData.q2"
+                                <input type="radio" name="q2" id="no" value="no" ng-model="workData.q2" checked="checked"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q2" id="some" value="some" ng-model="workData.q2">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -577,7 +577,7 @@
                             <div>
                                 <input type="radio" name="q3" id="yes" value="yes" ng-model="workData.q3">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q3" id="no" value="no" ng-model="workData.q3"
+                                <input type="radio" name="q3" id="no" value="no" checked="checked" ng-model="workData.q3"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q3" id="some" value="some" ng-model="workData.q3">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -591,7 +591,7 @@
                             <div>
                                 <input type="radio" name="q4" id="yes" value="yes" ng-model="workData.q4">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q4" id="no" value="no" ng-model="workData.q4"
+                                <input type="radio" name="q4" id="no" checked="checked" value="no" ng-model="workData.q4"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q4" id="some" value="some" ng-model="workData.q4">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -611,7 +611,7 @@
                             <div>
                                 <input type="radio" name="q5" id="yes" value="yes" ng-model="workData.q5">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q5" id="no" value="no" ng-model="workData.q5"
+                                <input type="radio" name="q5" id="no" checked="checked" value="no" ng-model="workData.q5"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q5" id="some" value="some" ng-model="workData.q5">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -625,7 +625,7 @@
                             <div>
                                 <input type="radio" name="q6" id="yes" value="yes" ng-model="workData.q6">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q6" id="no" value="no" ng-model="workData.q6"
+                                <input type="radio" name="q6" id="no" checked="checked" value="no" ng-model="workData.q6"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q6" id="some" value="some" ng-model="workData.q6">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -638,7 +638,7 @@
                             <div>
                                 <input type="radio" name="q7" id="yes" value="yes" ng-model="workData.q7">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q7" id="no" value="no" ng-model="workData.q7"
+                                <input type="radio" name="q7" id="no" checked="checked" value="no" ng-model="workData.q7"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q7" id="some" value="some" ng-model="workData.q7">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -652,7 +652,7 @@
                             <div>
                                 <input type="radio" name="q8" id="yes" value="yes" ng-model="workData.q8">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q8" id="no" value="no" ng-model="workData.q8"
+                                <input type="radio" name="q8" id="no" checked="checked" value="no" ng-model="workData.q8"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q8" id="some" value="some" ng-model="workData.q8">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -666,7 +666,7 @@
                             <div>
                                 <input type="radio" name="q9" id="yes" value="yes" ng-model="workData.q9">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q9" id="no" value="no" ng-model="workData.q9"
+                                <input type="radio" name="q9" id="no" checked="checked" value="no" ng-model="workData.q9"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q9" id="some" value="some" ng-model="workData.q9">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -686,7 +686,7 @@
                             <div>
                                 <input type="radio" name="q10" id="yes" value="yes" ng-model="workData.q10">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q10" id="no" value="no" ng-model="workData.q10"
+                                <input type="radio" name="q10" id="no" checked="checked" value="no" ng-model="workData.q10"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q10" id="some" value="some" ng-model="workData.q10">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -699,7 +699,7 @@
                             <div>
                                 <input type="radio" name="q11" id="yes" value="yes" ng-model="workData.q11">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q11" id="no" value="no" ng-model="workData.q11"
+                                <input type="radio" name="q11" id="no" checked value="no" ng-model="workData.q11"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q11" id="some" value="some" ng-model="workData.q11">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -713,7 +713,7 @@
                             <div>
                                 <input type="radio" name="q12" id="yes" value="yes" ng-model="workData.q12">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q12" id="no" value="no" ng-model="workData.q12"
+                                <input type="radio" name="q12" id="no" checked="checked" value="no" ng-model="workData.q12"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q12" id="some" value="some" ng-model="workData.q12">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -727,7 +727,7 @@
                             <div>
                                 <input type="radio" name="q13" id="yes" value="yes" ng-model="workData.q13">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q13" id="no" value="no" ng-model="workData.q13"
+                                <input type="radio" name="q13" id="no" checked="checked" value="no" ng-model="workData.q13"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q13" id="some" value="some" ng-model="workData.q13">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -741,7 +741,7 @@
                             <div>
                                 <input type="radio" name="q14" id="yes" value="yes" ng-model="workData.q14">&nbsp<label
                                     class="labell" for="yes">Yes</label> </li>
-                                <input type="radio" name="q14" id="no" value="no" ng-model="workData.q14"
+                                <input type="radio" name="q14" id="no" checked="checked" value="no" ng-model="workData.q14"
                                        ng-value="specialValue">&nbsp<label class="labell" for="no">No</label> </li>
                                 <input type="radio" name="q14" id="some" value="some" ng-model="workData.q14">&nbsp<label
                                     class="labell" for="some">Some</label> </li>
@@ -765,6 +765,10 @@
     <!--</pre>-->
 
 </div>
-<a ui-sref="base.deeds" class="btn btn-block btn-info" id="work-next">
+<div class="row">
+<div class="col-md-12">
+   <a ui-sref="base.deeds" class="btn btn-block btn-info" id="work-next">
     Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-</a>
+</a> 
+</div>
+</div>
