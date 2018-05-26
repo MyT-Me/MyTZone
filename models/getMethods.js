@@ -3,6 +3,7 @@ var strings = require('../strings')('api');
 var models = require('./schema');
 var getSchemas = require('../jsonSchemas/getSchemas');
 var User = models.User;
+var rulesOBJ = require('../strings/rules');
 
 var sorter = function(a, b){
     var keyA = new Date(a.timeStamp),
@@ -85,4 +86,9 @@ exports.getDeeds = function (req, deedName, callback) {
 
 exports.getScores = function(req, callback) {
     
+}
+
+exports.getRules = function(req,callback) {
+    var rules = rulesOBJ;
+    callback(null,rules);
 }

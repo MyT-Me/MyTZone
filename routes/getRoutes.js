@@ -15,12 +15,11 @@ module.exports = function (app) {
         }
         var requestId = req.params.id;
         if(verifier.has(requestId)){
-            console.log("Getter Request Received");
+            if(!req.user){
+                res.status(500).send(JSON.stringify({error: "No User Found"}));
+                return;
+            }
             if(requestId === parameters.SCORES) {
-                if(!req.user){
-                    res.status(500).send(JSON.stringify({error: "No User Found"}));
-                    return;
-                    }
                 var userEmail = req.user.email;
                 scoringMethods.scorer(req, userEmail, function (err, responseJson) {
                     console.log("Score Request Received");
@@ -30,6 +29,15 @@ module.exports = function (app) {
                         res.status(200).send(responseJson);
                     }
                 });
+            } else if( requestId === parameters.RULES) {
+                getters.getRules(req, function(err, rules){
+                    if(err!=null){
+                        console.log(err);
+                        res.status(500).send(JSON.stringify({error: err.toString()}));
+                    } else {
+                        res.status(200).send(rules);
+                    }
+                }); 
             } else {
                 getters.getDeeds(req, requestId, function (err, deedData) {
                     if(err !==null){
