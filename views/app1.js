@@ -1501,7 +1501,7 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
             console.log("T Stem Skills")
             console.log($scope.educationScorePerc, $scope.membershipScorePerc, $scope.methodsScorePerc, $scope.operationalScorePerc, $scope.proficiencyScorePerc);
 
-            //Calculate Upper Bounds for raw score charts
+         //Calculate Upper Bounds for raw score charts
             $scope.tTopUpper = Math.ceil($scope.fulltTop / 1000) * 1000;
             $scope.tStemUpper = Math.ceil($scope.fulltStem / 1000) * 1000;
 
@@ -1525,20 +1525,29 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
                 height: 70,
                 high: 100,
                 stackBars: true,
-        //         plugins: [
-        //     Chartist.plugins.legend()
-        // ],
+                //         plugins: [
+                //     Chartist.plugins.legend()
+                // ],
                 horizontalBars: true,
+                chartPadding: { 
+                left: 0,
+             //   top: 0,
+             //   bottom: 0,
+             // right: 0
+            },
 
                 axisX: {
                     showLabel: false,
                     showGrid: true,
+           offset: 0,
 
                 },
                 axisY: {
 
                     showLabel: false,
                     showGrid: true,
+                               offset: 0,
+
                 }
 
             })
@@ -1552,28 +1561,55 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
                 ]
             }, {
                 horizontalBars: true,
-                height: 0,
+                height: 100,
                 high: $scope.tTopUpper,
-                low: $scope.tTopUpper-1000,
+                low: $scope.tTopUpper - 1000,
+                chartPadding: { 
+          left: 0,
+      //     top: 0,
+      //     bottom: 0,
+          right: 50,
+      },
                 axisX: {
-                                        type: Chartist.FixedScaleAxis,
+                    type: Chartist.FixedScaleAxis,
                     ticks: tTopTicks,
 
                     showLabel: true,
                     showGrid: false,
+                    position: 'start',
+
                     labelOffset: {
-      x: -15,
-      y: 0
-    },
+                        x: 5,
+                        y: 20
+                    },
                 },
                 axisY: {
                     showGrid: false,
                     showLabel: false,
+           offset: 0,
 
 
 
                 }
             })
+
+            var elmnt = document.getElementById('tTopBreak');
+
+            // var elmnt2 = <HTMLElement>document.querySelector("g.ct-grids");
+
+            var txt = "Height with padding and border: " + elmnt.offsetHeight + "px<br>";
+            txt += "Width with padding and border: " + elmnt.offsetWidth + "px";
+
+            // var txt2 = "Height with padding and border: " + elmnt2.offsetHeight + "px<br>";
+            // txt2 += "Width with padding and border: " + elmnt2.offsetWidth + "px";
+            var chartHeight = elmnt.offsetWidth - 50;
+            $scope.chartWidth = elmnt.offsetWidth;
+            console.log("ChartWidth")
+            console.log($scope.chartWidth);
+            // console.log(txt2)
+
+            var topLegend = document.getElementById("topLegend");
+            topLegend.setAttribute("style", `width: ${$scope.chartWidth}px`);
             // Create a new line chart object where as first parameter we pass in a selector
             // that is resolving to our chart container element. The Second parameter
             // is the actual data object.
@@ -1589,7 +1625,15 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
             }, {
                 stackBars: true,
                 high: 100,
-                height: 400,
+                height: chartHeight,
+                fullWidth: true,
+
+                chartPadding: {
+                    left: 0,
+                    top: 10,
+                    bottom: 0,
+                    right: 0,
+                },
                 axisY: {
 
                     showGrid: false,
@@ -1604,24 +1648,29 @@ app.controller("Controller", ['$scope', '$http', '$location', 'authentication', 
             })
 
             var tStemTicks = [$scope.tStemUpper - 1000, $scope.tStemUpper];
-console.log("tStem Ticks: ", tStemTicks)
+            console.log("tStem Ticks: ", tStemTicks)
             new Chartist.Bar('#tStemQuant', {
                 series: [
                     [$scope.fulltStem],
                 ]
             }, {
-                height: 400,
+                height: chartHeight,
                 high: $scope.tStemUpper,
+                low: $scope.tStemUpper - 1000,
+
                 axisX: {
                     showLabel: false,
-
                     showGrid: false,
                 },
                 axisY: {
                     type: Chartist.FixedScaleAxis,
-                    position: 'end',
+                    position: 'start',
                     showGrid: false,
-                    ticks: tStemTicks
+                    ticks: tStemTicks,
+                    labelOffset: {
+                        x: 0,
+                        y: 20,
+                    },
 
                 },
 
@@ -1661,16 +1710,89 @@ console.log("tStem Ticks: ", tStemTicks)
     }
 
 
-    $scope.dataTables = function() {
-        $('tStem').DataTable();
-        $('tTop').DataTable();
-        $('total').DataTable();
-    }
 
+
+    console.log("TEST")
     //Load MightyT Chart once DOM elements are loaded!
     angular.element(document).ready(function() {
+
         console.log('page loading completed');
         console.log($scope.educationScorePerc)
+
+        setTimeout(function() {
+
+            $(document).ready(function() {
+                console.log("creating DataTable")
+                $('#topSkills').DataTable({
+                    "paging": false,
+                    "searching": false,
+                    "columnDefs": [
+                        { className: "dt-body-center", "targets": [1] },
+                        { "width": "20%", "targets": 1 }
+                    ]
+                });
+
+            });
+
+            $(document).ready(function() {
+                console.log("creating DataTable")
+                $('#stemSkills').DataTable({
+                    "paging": false,
+                    "searching": false,
+                    "columnDefs": [
+                        { className: "dt-body-center", "targets": [1] },
+                        { "width": "20%", "targets": 1 }
+                    ]
+
+                });
+
+            });
+
+            console.log("Value")
+            console.log($scope.communicationScore, $scope.criticalScore, $scope.empathyScore, $scope.globalUnderstandScore, $scope.networkingScore, $scope.designScore, $scope.perspectiveScore, $scope.managementScore, $scope.teamworkScore)
+            let topData = {
+                labels: ['Communications', 'Critical Thinking', 'Empathy', 'Global Understanding', 'Networking', 'Organizational Design', 'Perspective', 'Project Management', 'Teamwork'],
+                datasets: [{
+                    label: "Top Score",
+                    backgroundColor: "#00bcd4",
+                    borderColor: "#00bcd4",
+                    data: [$scope.communicationScore, $scope.criticalScore, $scope.empathyScore, $scope.globalUnderstandScore, $scope.networkingScore, $scope.designScore, $scope.perspectiveScore, $scope.managementScore, $scope.teamworkScore]
+                }]
+            }
+            let stemData = {
+                labels: ['Education', 'Memberships', 'Skills', 'Operations', 'Software'],
+                datasets: [{
+                    label: "Stem Score",
+                    backgroundColor: "#f44336",
+                    borderColor: "#f44336",
+                    data: [$scope.educationScore, $scope.membershipScore, $scope.methodsScore, $scope.operationalScore, $scope.proficiencyScore]
+                }]
+            }
+
+            let topOptions = {
+                label: "Top Score"
+            }
+
+            let stemOptions = {
+                label: "Stem Score"
+
+            }
+
+            var tTopSource = document.getElementById("tTopRadar");
+            console.log("Loading Radar Charts")
+            var tTopChart = new Chart(tTopSource, {
+                type: 'radar',
+                data: topData,
+                options: topOptions
+            });
+
+            var tStemSource = document.getElementById("tStemRadar");
+            var tStemChart = new Chart(tStemSource, {
+                type: 'radar',
+                data: stemData,
+                options: stemOptions
+            });
+        }, 500);
 
 
 
