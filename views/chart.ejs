@@ -5,10 +5,10 @@
 </head>
 
 <body ng-controller="myController">
-    <div class="container customContainer" ng-init="scoreRunner()" ng-init="dataTables()">
+    <div class="container-fluid customContainer" ng-init="scoreRunner()" ng-init="dataTables()">
         <div class="row">
             <div class=" col-md-12 control-group">
-                <span style="padding-left:73em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
+                <span style="padding-left:50em"><a id="logout" href="#" class="btn btn-danger" ng-click = "Logout()">Logout</a></span>
             </div>
         </div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -29,7 +29,168 @@
         <!-- What does the below line even do? -->
         <div id="headingmain" ng-app="FormlyApp"></div>
         <section class="mainContent">
-            <div class="row">
+             <div class="row">
+            <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-6 col-lg-offset-3">
+                <!-- <div class="col-xs-12 text-center">
+                <h3 style="margin-top: 0px;">My T Dashboard</h3>
+            </div> -->
+                <div class="row">
+                    <div class=" col-xs-offset-2 col-xs-8 tBackground  tOutline">
+                        <img src="images/tTopLegend2.png" id="topLegend" alt="Kiwi standing on oval">
+                        <div class="col-xs-12" style="padding-left: 0px !important ;padding-right: 0px !important;">
+                            <div class="ct-chart quantChart col-centered tBackground" id="tTopBreak"></div>
+                        </div>
+                        <div class="col-xs-12" style="padding-left: 0px !important ;padding-right: 0px !important;">
+                            <div class="ct-chart totalChart tBackground" id="tTopQuant"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 ">
+                        <div class="smallCard card-chart">
+                            <div class="card-content text-center">
+                                <h3 class="card-title">My TScore</h3>
+                                <p class="card-title">{{roundMe(fulltScore)}}</p>
+                            </div>
+                        </div>
+                        <div class="smallCard card-chart">
+                            <div class="card-content text-center">
+                                <h3 class="card-title">My Top Score</h3>
+                                <p class="card-title">{{roundMe(fulltTop)}}</p>
+                            </div>
+                        </div>
+                        <div class="smallCard card-chart">
+                            <div class="card-content text-center">
+                                <h3 class="card-title">My Stem Score</h3>
+                                <p class="card-title">{{roundMe(fulltStem)}}</p>
+                            </div>
+                        </div>
+                        <div class="smallCard card-chart">
+                            <img class="img-responsive" src="images/tBotLegend.png" id="topLegend" style="">
+                        </div>
+                    </div>
+                    <div class="tStemOutline  col-xs-4 ">
+                        <!--                     <span style="display: inline-block;" class="tBackground">
+ -->
+                        <div class=" col-xs-6 ">
+                            <div class="ct-chart  tBackground quantChart " id="tStemBreak"></div>
+                        </div>
+                        <div class="col-xs-6 ">
+                            <div class="ct-chart  tBackground totalChart " id="tStemQuant"></div>
+                        </div>
+                        <!--                 </span>
+ -->
+                    </div>
+                    <div class="col-xs-4 ">
+                        <div class="smallCard card-chart">
+                            <div class="card-content text-center">
+                                <canvas height="231px" id="tTopRadar"></canvas>
+                            </div>
+                        </div>
+                        <div class="smallCard card-chart">
+                            <div class="card-content text-center">
+                                <canvas height="231px" id="tStemRadar"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-offset-2 col-md-8 tOutline" style="margin-top: 20px;">
+                <h2 class="text-center">T Top Categories</h2>
+                <table id="topSkills" class="display">
+                    <thead>
+                        <tr>
+                            <th>Categories</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Communications</td>
+                            <td>{{roundMe(communicationScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Critical Thinking</td>
+                            <td>{{roundMe(criticalScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Empathy</td>
+                            <td>{{roundMe(empathyScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Global Understanding</td>
+                            <td>{{roundMe(globalUnderstandScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Networking</td>
+                            <td>{{roundMe(networkingScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Organizational Design</td>
+                            <td>{{roundMe(designScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Perspective</td>
+                            <td>{{roundMe(perspectiveScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Project Management</td>
+                            <td>{{roundMe(managementScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Teamwork</td>
+                            <td>{{roundMe(teamworkScore)}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Categories</th>
+                            <th>Value</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="col-xs-12 col-md-offset-2 col-md-8 tOutline" style="margin-top: 20px;">
+                <h2 class="text-center">T Stem Categories</h2>
+                <table id="stemSkills" class="display">
+                    <thead>
+                        <tr>
+                            <th>Categories</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Education, Briefings, and Teachings</td>
+                            <td>{{roundMe(educationScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Memberships, Authorships, and Recognitions</td>
+                            <td>{{roundMe(membershipScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Methods and Skills Proficiency</td>
+                            <td>{{roundMe(methodsScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Operational Responsibilities and Expertise</td>
+                            <td>{{roundMe(operationalScore)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Software and Device Proficiency</td>
+                            <td>{{roundMe(proficiencyScore)}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Categories</th>
+                            <th>Value</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+           <!--  <div class="row">
                 <div class="col-xs-8 col-centered tOutline tBackground" style="margin-top: 40px;">
                     <div class="col-xs-12  col-centered" style="padding-top: 40px;">
                         <div class="ct-chart  quantChart"  id="tTopBreak"></div>
@@ -39,8 +200,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
+ -->
+          <!--   <div class="row">
                 <div class="col-xs-4" style="padding-top: 40px;">
                     <h2 class="textCenter">My T Score!</h2>
                     <h3 class="textCenter">{{fulltScore}}</h3>
@@ -60,9 +221,9 @@
                         <h2 class="textCenter">T Stem Score</h2>
                         <h3 class="textCenter">{{fulltStem}}</h3>
                     </div>
-            </div>
+            </div> -->
 
-                <div class="row">
+<!--                 <div class="row">
                     <div class="col-md-4">
                         <h2 style="text-align: center;">Stem Skills</h2>
                         <table id="tStem2" class="display col-centered">
@@ -95,8 +256,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="col-md-4">
+                    </div> -->
+                   <!--  <div class="col-md-4">
                         <h2 style="text-align: center;">Totals</h2>
                         <table id="total" class="display col-centered">
                             <thead>
@@ -120,8 +281,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="col-md-4 ">
+                    </div> -->
+<!--                     <div class="col-md-4 ">
                         <h2 style="text-align: center;">Top Skills</h2>
                         <table id="tTop" class="display col-centered">
                             <thead>
@@ -169,7 +330,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
 
         </section>
         </div>
