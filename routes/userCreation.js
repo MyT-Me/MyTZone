@@ -23,7 +23,7 @@ module.exports = function(app){
             });
         //Failure Condition - JSON schema Mismatch
         } else {
-            console.log("INCORRECT FORMAT")
+            console.log("INCORRECT FORMAT");
             res.status(500).send(JSON.stringify({err: "Incorrect Format"}));
         }
     });
