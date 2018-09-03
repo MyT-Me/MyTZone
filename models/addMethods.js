@@ -102,6 +102,7 @@ exports.addDeed = function (req, deedName, callback){
             profile[deedName].deedData.push(newDeed);
             
             profile.save(function (err) {
+                console.log(err);
                 callback(err, newDeed.customId);
             });
         }

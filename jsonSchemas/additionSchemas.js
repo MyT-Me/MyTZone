@@ -593,7 +593,7 @@ module.exports = {
                ]
            }
         },
-        "required": ["employerSectionOfFocus","employerOrganizationName",],
+        "required": ["employerSectionOfFocus","employerOrganizationName"],
         "additionalProperties": false
     }
 }
