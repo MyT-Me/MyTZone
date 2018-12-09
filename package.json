@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "debug": "node server.js"
+    "debug": "node server.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -29,26 +31,28 @@
     "express-jwt": "^5.3.0",
     "express-session": "^1.15.3",
     "flash": "^1.1.0",
-    "highcharts": "^6.0.6",
+    "highcharts": "^6.1.0",
     "html": "^1.0.0",
     "jsonschema": "^1.1.1",
-    "jsonwebtoken": "^8.0.0",
+    "jsonwebtoken": "^8.2.0",
     "method-override": "^2.3.9",
-    "moment": "^2.18.1",
+    "moment": "^2.19.3",
     "moment-timezone": "^0.5.13",
     "moment-timezone-all": "^0.5.5",
     "mongoose": "^4.13.11",
     "mongoose-findorcreate": "^2.0.0",
     "mongoose-type-email": "^1.0.3",
     "mongoose-unique-validator": "^1.0.6",
-    "morgan": "^1.8.2",
-    "npm": "^5.8.0",
+    "morgan": "^1.9.1",
+    "npm": "^5.10.0",
     "passport": "^0.3.2",
     "passport-linkedin": "^1.0.0",
     "passport-local": "^1.0.0",
-    "validator": "^9.4.1"
+    "validator": "^9.4.1",
+    "snyk": "^1.116.2"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
-  }
+  },
+  "snyk": true
 }
